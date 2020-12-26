@@ -1,0 +1,47 @@
+
+<svg version="1.1" id="Layer_1" xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<linearGradient id="Oval_2_" gradientUnits="userSpaceOnUse" x1="-211.9194" y1="275.9326" x2="-211.9194" y2="276.9326" gradientTransform="matrix(60 0 0 -60 12747.1875 16617.9375)">
+	<stop  offset="0" style="stop-color:#FFA027"/>
+	<stop  offset="0.2723" style="stop-color:#FFC151"/>
+	<stop  offset="0.7633" style="stop-color:#FFC93F"/>
+	<stop  offset="1" style="stop-color:#FFE261"/>
+	<a:midPointStop  offset="0" style="stop-color:#FFA027"/>
+	<a:midPointStop  offset="0.5" style="stop-color:#FFA027"/>
+	<a:midPointStop  offset="0.2723" style="stop-color:#FFC151"/>
+	<a:midPointStop  offset="0.5" style="stop-color:#FFC151"/>
+	<a:midPointStop  offset="0.7633" style="stop-color:#FFC93F"/>
+	<a:midPointStop  offset="0.5" style="stop-color:#FFC93F"/>
+	<a:midPointStop  offset="1" style="stop-color:#FFE261"/>
+</linearGradient>
+<circle id="Oval_12_" fill="url(#Oval_2_)" cx="32" cy="32" r="30"/>
+<path id="Shape_13_" fill="#917524" d="M54.813,23.324c-3.188-4.168-8.718-7.32-12.318-7.269c-0.762,0.013-1.883,2.519-1.248,2.593
+	c4.875,0.557,9.777,2.756,12.966,6.411C54.639,25.551,55.291,23.951,54.813,23.324z"/>
+<path id="Shape_12_" fill="#917524" d="M9.189,23.328c3.186-4.172,8.715-7.322,12.316-7.271c0.76,0.01,1.883,2.52,1.248,2.592
+	c-4.875,0.56-9.779,2.756-12.966,6.412C9.361,25.555,8.709,23.953,9.189,23.328z"/>
+<circle id="Oval_11_" fill="#FFFFFF" cx="43.5" cy="31" r="8"/>
+<circle id="Oval_10_" fill="#302C3B" cx="43.502" cy="31" r="5.333"/>
+<ellipse id="Oval_9_" fill="#FFFFFF" cx="44.881" cy="34.971" rx="2.498" ry="2.891"/>
+<ellipse id="Oval_1_" fill="#FFFFFF" cx="41.526" cy="31" rx="1.462" ry="1.689"/>
+<circle id="Oval_5_" fill="#FFFFFF" cx="20.5" cy="31" r="8"/>
+<circle id="Oval_6_" fill="#302C3B" cx="20.502" cy="31" r="5.333"/>
+<ellipse id="Oval_7_" fill="#FFFFFF" cx="21.881" cy="34.971" rx="2.498" ry="2.891"/>
+<ellipse id="Oval_8_" fill="#FFFFFF" cx="18.526" cy="31" rx="1.462" ry="1.689"/>
+<path id="Shape_7_" fill="#302C3B" d="M22.77,50.408c5.623-3.562,12.845-3.562,18.464,0c0.797,0.504,0.896-0.459,0.647-0.885
+	c-4.561-7.964-15.199-7.964-19.762,0C21.873,49.949,21.971,50.912,22.77,50.408z"/>
+<radialGradient id="Shape_1_" cx="-189.4248" cy="246.248" r="0.9661" gradientTransform="matrix(10 0 0 -10 1905.3672 2509.6956)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0" style="stop-color:#75D6FF"/>
+	<stop  offset="0.272" style="stop-color:#72D5FE"/>
+	<stop  offset="0.4586" style="stop-color:#69D2FA"/>
+	<stop  offset="0.6195" style="stop-color:#5ACDF4"/>
+	<stop  offset="0.7658" style="stop-color:#44C6EA"/>
+	<stop  offset="0.9011" style="stop-color:#29BDDF"/>
+	<stop  offset="1" style="stop-color:#0FB4D4"/>
+	<a:midPointStop  offset="0" style="stop-color:#75D6FF"/>
+	<a:midPointStop  offset="0.7782" style="stop-color:#75D6FF"/>
+	<a:midPointStop  offset="1" style="stop-color:#0FB4D4"/>
+</radialGradient>
+<path id="Shape_6_" fill="url(#Shape_1_)" d="M15.172,41c-3.174,4.688-4.998,9.004-4.998,12.545c0,3.012,2.24,5.455,5,5.455
+	c2.762,0,5-2.443,5-5.455C20.174,50.004,18.295,45.612,15.172,41z"/>
+</svg>

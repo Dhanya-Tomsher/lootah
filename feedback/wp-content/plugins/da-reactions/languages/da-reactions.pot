@@ -1,0 +1,859 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DaReactions WordPress Plugin\n"
+"POT-Creation-Date: 2019-12-01 19:33+0100\n"
+"PO-Revision-Date: 2018-06-17 18:13+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+"X-Poedit-SearchPathExcluded-1: assets\n"
+
+#: classes/DaReactions/Admin.php:104
+msgid "Settings"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:113
+msgid "Newsletter"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:122 classes/DaReactions/Admin.php:123
+#: classes/DaReactions/Admin.php:192
+msgid "Help"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:155 classes/DaReactions/Admin.php:156
+#: classes/DaReactions/CustomColumn.php:83
+#: classes/DaReactions/MetaBox.php:70
+#: classes/DaReactions/Pages/ButtonsSettings.php:101
+#: classes/DaReactions/Widgets/DashboardWidget.php:203
+#: classes/DaReactions/Widgets/DashboardWidget.php:210
+msgid "Reactions"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:166 classes/DaReactions/Admin.php:167
+msgid "Reactions manager"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:175 classes/DaReactions/Admin.php:176
+#: classes/DaReactions/Pages/GeneralSettings.php:290
+#: classes/DaReactions/Pages/GeneralSettings.php:355
+#: classes/DaReactions/Pages/GeneralSettings.php:459
+#: classes/DaReactions/Pages/GeneralSettings.php:581
+msgid "General settings"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:184 classes/DaReactions/Admin.php:185
+msgid "Graphic settings"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:324
+msgid "This action will delete all saved data, continue?"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:325
+msgid "Are you sure to delete this row?"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:326
+msgid "Do you want to leave this page before saving?"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:327
+msgid "Unsupported file format"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:328
+msgid "Confirm"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:329
+msgid "Cancel"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:397
+msgid "Deactivate plugin?"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:401
+msgid "Warning!"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:403
+msgid ""
+"All data will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:406
+msgid ""
+"Want to deactivate without deleting all data? Change your preference "
+"first!"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:409
+msgid "Go to Preferences Page"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:416
+msgid "Please tell us why you are deactivating"
+msgstr ""
+
+#: classes/DaReactions/Admin.php:422
+msgid "I no longer need the plugin."
+msgstr ""
+
+#: classes/DaReactions/Admin.php:428
+msgid "The plugin does not work properly."
+msgstr ""
+
+#: classes/DaReactions/Admin.php:434
+msgid "I found a better plugin."
+msgstr ""
+
+#: classes/DaReactions/Admin.php:440
+msgid "Does not look good on my theme."
+msgstr ""
+
+#: classes/DaReactions/Admin.php:446
+msgid "I don’t want to tell you (no data will be sent)."
+msgstr ""
+
+#: classes/DaReactions/Admin.php:453
+msgid ""
+"Add your email and site url to feedback message, WordPress version and "
+"PHP version will be sent."
+msgstr ""
+
+#: classes/DaReactions/Ajax.php:81 classes/DaReactions/Ajax.php:179
+#: classes/DaReactions/Ajax.php:238
+msgid "Nonce error"
+msgstr ""
+
+#: classes/DaReactions/Ajax.php:121
+msgid "Generic error"
+msgstr ""
+
+#: classes/DaReactions/Archive.php:116 classes/DaReactions/Archive.php:168
+msgid "Archive by Reaction"
+msgstr ""
+
+#: classes/DaReactions/Archive.php:189
+#, php-format
+msgid "Archive for %s reaction"
+msgstr ""
+
+#: classes/DaReactions/FileSystem.php:176
+msgid "Unable to write file"
+msgstr ""
+
+#: classes/DaReactions/Frontend.php:507
+msgid "Add your reaction"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:121
+msgid "Global settings"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:122
+msgid "Modify global settings for all contents of the same type"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:133
+msgid "Enable reactions for all contents of this type globally?"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:149
+msgid ""
+"Enable reactions for all comments under contents of this type globally?"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:158
+msgid "Statistics for this content"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:171
+msgid "Local settings"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:174
+msgid "Reactions are enabled globally for this type of content"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:174
+msgid ""
+"Reactions are <strong>disabled</strong> globally for this type of content"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:175
+msgid "Disable reactions for this specific content?"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:175
+msgid "Enable reactions for this specific content?"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:195
+msgid "Reactions are enabled globally for comments on this type of content"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:195
+msgid ""
+"Reactions are <strong>disabled</strong> globally for comments on this "
+"type of content"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:196
+msgid "Disable reactions for comments on this specific content?"
+msgstr ""
+
+#: classes/DaReactions/MetaBox.php:196
+msgid "Enable reactions for comments on this specific content?"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:121
+#: classes/DaReactions/Pages/ButtonsSettings.php:140
+msgctxt "Table column heading"
+msgid "Sort"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:124
+#: classes/DaReactions/Pages/ButtonsSettings.php:143
+msgctxt "Table column heading"
+msgid "Icon"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:127
+#: classes/DaReactions/Pages/ButtonsSettings.php:146
+msgctxt "Table column heading"
+msgid "Color"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:130
+#: classes/DaReactions/Pages/ButtonsSettings.php:149
+msgctxt "Table column heading"
+msgid "Label"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:133
+#: classes/DaReactions/Pages/ButtonsSettings.php:152
+msgctxt "Table column heading"
+msgid "Tools"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:185
+msgid "Color"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:191
+msgid "Label"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:209
+msgid "There are no reactions"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:230
+msgid "Upload image"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:235
+msgid "Choose SVG from those available:"
+msgstr ""
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:271
+msgctxt "Button label"
+msgid "Add new"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:90
+msgid "General"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:94
+msgid "User"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:99
+msgid "Detail"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:104
+msgid "Performance"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:109
+msgid "Plugins"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:114
+msgid "Preferences"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:291
+msgid "These are BuddyPress specific integration settings."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:310
+msgid "Profiles"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:313
+msgid "Add reactions to BuddyPress’ profiles."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:321
+msgid "Activities"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:329
+msgid "Groups"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:340
+msgid "Buddypress is not installed."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:356
+msgid ""
+"Enable those options if you want to display details about user who added "
+"reactions"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:367
+msgid ""
+"Show a tooltip with most recent reactions and users when mouse move over "
+"the count badge?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:370
+msgid "Show detail tooltip on mouseover count badge . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:378
+msgid "How many results should be shown on tooltip?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:393
+msgid ""
+"Show a modal with most recent reactions and link to user’s page/profile "
+"when mouse move over the count badge?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:396
+msgid "Show detail modal on click on count badge . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:404
+msgid "How many results should be shown on modal?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:419
+msgid "Show toolbar on modal to filter results by reaction?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:422
+msgid "Show reaction filter on modal . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:430
+msgid "Display anonymous voters?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:433
+msgid "Show anonymous voters . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:441
+msgid "Anonymous voters default name"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:460
+msgid ""
+"These are general settings, you can select to enable or disable reactions "
+"for specific content types and views."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:471
+msgid "Add reactions to post types and comments"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:479
+msgid "Add reactions to single pages and/or archives too"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:487
+msgid "Use different colors for chart widgets?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:501
+msgid "Performance settings"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:502
+msgid "Use those settings to solve performances issues"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:513
+msgid "Use plugin own cache system to serve generated widgets from disk?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:516
+msgid "Enable internal plugin cache"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:527
+msgid "Enable asyncronous widget lazy load?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:530
+msgid "Enable lazy load . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:547
+msgid "Plugin settings"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:548
+msgid ""
+"These are plugin settings, select a method to identify unlogged users and "
+"check the delete option if you want to get rid of all data on plugin "
+"deactivation . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:559
+msgid "Which identification method should be used for unregistered users?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:567
+msgid "Remove all data when disable (Warning! Cannot be undone!)"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:582
+msgid "Users’ related settings."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:594
+msgid "Restrict reactions usage for user roles"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:597
+msgid "Enable restrictions."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:608
+msgid "Enable reactions for this kind of users"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:620
+msgid "Can users change their reactions?"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:623
+msgid "User can change reaction."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:641
+msgid ""
+"Sometimes icons’ colors are way too similar to be used also for Charts, "
+"so you may change colors here . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:644
+msgid "Chart color scheme: "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:647
+msgid "Use buttons’ colors"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:649
+msgid "Use random generated colors"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:651
+msgid "Use default rainbow palette"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:685
+msgid "Single pages and posts"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:689
+msgid "Archives"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:693
+msgid "Blog page"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:754
+msgid " and their comments."
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:782
+msgid ""
+"Delete all data when disable plugin . Warning! Lost data cannot be "
+"recovered . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:799
+msgid ""
+"This option is only available in main blog settings because may affect "
+"all blogs in this network . "
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:815
+msgid "Set cookie"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:818
+msgid "Save IP address"
+msgstr ""
+
+#: classes/DaReactions/Pages/GeneralSettings.php:869
+msgid "Unregistered"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:95
+msgid "Graphic Preferences"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:96
+msgid ""
+"These are the graphics settings of reactions on your site, use these "
+"settings to determine the appearance, size, and text to be displayed."
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:107
+msgid "Select size for reaction buttons"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:118
+msgid "None"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:119
+msgid "Transparence"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:120
+msgid "Desaturate"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:121
+msgid "Blur"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:125
+msgid "Select fade method for inactive buttons"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:135
+msgid "Fade effect value (0 - 100)"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:147
+msgid "Exposed: all buttons are immediately visible"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:148
+msgid ""
+" Reveal: only the most used reaction is visible, other icons are revealed "
+"on click"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:152
+msgid "Select a template for reactions"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:162
+msgid "Show reactions count"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:169
+msgid " Align left"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:170
+msgid " Center"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:171
+msgid " Align right"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:175
+msgid "Select widget alignment"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:185
+msgid "Text do display before reaction buttons"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:307
+msgid "Always"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:309
+msgid "Only if greater than zero"
+msgstr ""
+
+#: classes/DaReactions/Pages/GraphicSettings.php:311
+msgid "Never"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:66
+#: classes/DaReactions/Plugins/BuddyPress.php:78
+#: classes/DaReactions/Plugins/BuddyPress.php:105
+#: classes/DaReactions/Plugins/BuddyPress.php:137
+#: classes/DaReactions/Plugins/BuddyPress.php:218
+#: classes/DaReactions/Plugins/BuddyPress.php:274
+msgid "Someone"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:91
+#, php-format
+msgctxt "[current user] added a [reaction name] reaction to [post title]"
+msgid "%1$s added a %2$s reaction to %3$s"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:108
+#: classes/DaReactions/Plugins/BuddyPress.php:225
+msgid "Comment"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:116
+msgid "Read comment"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:122
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s "
+"[comment] on [post title]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s on %5$s"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:150
+msgid "a Reaction notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:153
+msgid "an Activity comment"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:156
+msgid "an Activity update"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:159
+msgid "a Group creation notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:162
+msgid "a Friendship notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:165
+msgid "a Group notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:168
+msgid "an Avatar update"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:171
+msgid "a Blog Comment notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:174
+msgid "a Blog Post notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:177
+msgid "a new Member notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:180
+msgid "a Profile update"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:183
+msgid "a Forum Topic notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:186
+msgid "a Forum Reply notice"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:189
+msgid "an Activity"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:204
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [an activity] on "
+"[user]’s Stream"
+msgid "%1$s added a %2$s reaction to %3$s on %4$s’s Stream"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:223
+msgid "Activity comment"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:230
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s "
+"[comment] on [activity]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s on %5$s"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:250
+msgid "Group"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:262
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to group [group name]"
+msgid "%1$s added a %2$s reaction to group %3$s"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:278
+msgid "Profile"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:282
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s "
+"[profile]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s"
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:466
+msgid "Add reactions to BuddyPress’ activities."
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:473
+msgid "Add reactions to BuddyPress’ activity comments too."
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:482
+msgid "Enable BuddyPress’ activities before adding reactions to them."
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:508
+msgid "Add reactions to BuddyPress’ groups."
+msgstr ""
+
+#: classes/DaReactions/Plugins/BuddyPress.php:517
+msgid "Enable BuddyPress’ groups before adding reactions to them."
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:34
+msgid "Content with most reactions"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:36
+msgid ""
+"Displays content with most reactions, can be filtered by content type and "
+"specific reaction"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:54
+msgid "Recent Posts"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:84
+msgid "No reactions found."
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:124
+msgid " on "
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:134
+msgid "(no title)"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:189
+msgid "Title:"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:196
+msgid "Reaction:"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:200
+msgid "All reactions"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:216
+msgid "Post type:"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:230
+#: classes/DaReactions/Widgets/DashboardWidget.php:123
+msgid "Comments"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:236
+msgid "Number of posts to show:"
+msgstr ""
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:246
+msgid "Display post reaction image?"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:57
+msgctxt "Dashboard widget title"
+msgid "Total reactions"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:64
+msgctxt "Dashboard widget title"
+msgid "Reactions by content type"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:79
+msgctxt "Dashboard widget title"
+msgid "Reactions by blog"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:202
+#: classes/DaReactions/Widgets/DashboardWidget.php:209
+msgid "Blog"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:204
+#: classes/DaReactions/Widgets/DashboardWidget.php:211
+msgid "Statistics"
+msgstr ""
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:271
+msgid "No data to display."
+msgstr ""
+
+#: da-reactions.php:54
+msgid ""
+"This plugin generates reactions to let your visitors rate content and "
+"comments."
+msgstr ""
+
+#: da-reactions.php:111 da-reactions.php:126
+msgid ""
+"Please disable the free version of this plugin to enable premium features."
+msgstr ""

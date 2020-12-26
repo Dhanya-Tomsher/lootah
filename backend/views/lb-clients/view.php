@@ -1,0 +1,74 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+
+/* @var $this yii\web\View */
+/* @var $model common\models\LbClients */
+
+$this->title = 'Create Lb Clients';
+$this->params['breadcrumbs'][] = ['label' => 'Lb Clients', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3><?= Html::encode($this->title) ?></h3>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <ul class="nav navbar-right panel_toolbox">
+                        <!--<li>---</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <ul class="nav navbar-right panel_toolbox">
+
+
+                            <?= Html::a('Back to Lb Clients', ['index'], ['class' => 'btn btn-success']) ?>
+
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div
+                    <div class="x_content">
+                        <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                                    'id',
+            'name',
+            'email:email',
+            'password',
+            'profile_image',
+            'current_month_govt_price',
+            'discount',
+            'current_month_display_price',
+            'payment_terms:ntext',
+            'contract_start',
+            'contract_expiry',
+            'created_at',
+            'updated_at',
+            'created_by',
+            'updated_by',
+            'created_by_type',
+            'updated_by_type',
+            'sort_order',
+            'status',
+                        ],
+                        ]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

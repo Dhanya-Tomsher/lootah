@@ -1,0 +1,1906 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-12-01 19:33+0100\n"
+"PO-Revision-Date: 2019-12-01 19:35+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: classes/DaReactions/Admin.php:104
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: classes/DaReactions/Admin.php:113
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: classes/DaReactions/Admin.php:122 classes/DaReactions/Admin.php:123
+#: classes/DaReactions/Admin.php:192
+msgid "Help"
+msgstr "Aiuto"
+
+#: classes/DaReactions/Admin.php:155 classes/DaReactions/Admin.php:156
+#: classes/DaReactions/CustomColumn.php:83 classes/DaReactions/MetaBox.php:70
+#: classes/DaReactions/Pages/ButtonsSettings.php:101
+#: classes/DaReactions/Widgets/DashboardWidget.php:203
+#: classes/DaReactions/Widgets/DashboardWidget.php:210
+msgid "Reactions"
+msgstr "Reazioni"
+
+#: classes/DaReactions/Admin.php:166 classes/DaReactions/Admin.php:167
+msgid "Reactions manager"
+msgstr "Gestore reazioni"
+
+#: classes/DaReactions/Admin.php:175 classes/DaReactions/Admin.php:176
+#: classes/DaReactions/Pages/GeneralSettings.php:290
+#: classes/DaReactions/Pages/GeneralSettings.php:355
+#: classes/DaReactions/Pages/GeneralSettings.php:459
+#: classes/DaReactions/Pages/GeneralSettings.php:581
+msgid "General settings"
+msgstr "Impostazioni generali"
+
+#: classes/DaReactions/Admin.php:184 classes/DaReactions/Admin.php:185
+msgid "Graphic settings"
+msgstr "Impostazioni grafiche"
+
+#: classes/DaReactions/Admin.php:324
+msgid "This action will delete all saved data, continue?"
+msgstr "Questo eliminerà tutti i dati salvati, procedere?"
+
+#: classes/DaReactions/Admin.php:325
+msgid "Are you sure to delete this row?"
+msgstr "Confermi di voler eliminare questa riga?"
+
+#: classes/DaReactions/Admin.php:326
+msgid "Do you want to leave this page before saving?"
+msgstr "Vuoi lasciare questa pagina senza salvare?"
+
+#: classes/DaReactions/Admin.php:327
+msgid "Unsupported file format"
+msgstr "Formato file non supportato"
+
+#: classes/DaReactions/Admin.php:328
+msgid "Confirm"
+msgstr "Conferma"
+
+#: classes/DaReactions/Admin.php:329
+msgid "Cancel"
+msgstr "Annulla"
+
+#: classes/DaReactions/Admin.php:397
+msgid "Deactivate plugin?"
+msgstr "Disattivare il plugin?"
+
+#: classes/DaReactions/Admin.php:401
+msgid "Warning!"
+msgstr "Attenzione!"
+
+#: classes/DaReactions/Admin.php:403
+msgid ""
+"All data will be permanently deleted and cannot be recovered. Are you sure?"
+msgstr ""
+"Tutti i dati saranno definitivamente cancellati e non potranno essere "
+"recuperati. Confermi?"
+
+#: classes/DaReactions/Admin.php:406
+msgid ""
+"Want to deactivate without deleting all data? Change your preference first!"
+msgstr ""
+"Vuoi disattivare il plugin mantenendo tutti i dati? Cambia le preferenze!"
+
+#: classes/DaReactions/Admin.php:409
+msgid "Go to Preferences Page"
+msgstr "Vai alla pagina delle preferenze"
+
+#: classes/DaReactions/Admin.php:416
+msgid "Please tell us why you are deactivating"
+msgstr "Per favore, raccontaci come mai stai disabilitando il plugin"
+
+#: classes/DaReactions/Admin.php:422
+msgid "I no longer need the plugin."
+msgstr "Non mi serve più."
+
+#: classes/DaReactions/Admin.php:428
+msgid "The plugin does not work properly."
+msgstr "Il plugin non funziona correttamente."
+
+#: classes/DaReactions/Admin.php:434
+msgid "I found a better plugin."
+msgstr "Ho trovato un plugin migliore."
+
+#: classes/DaReactions/Admin.php:440
+msgid "Does not look good on my theme."
+msgstr "Non ha un bell’aspetto sul mio tema."
+
+#: classes/DaReactions/Admin.php:446
+msgid "I don’t want to tell you (no data will be sent)."
+msgstr "Non viglio dirtelo (nessun dato sarà condiviso)."
+
+#: classes/DaReactions/Admin.php:453
+msgid ""
+"Add your email and site url to feedback message, WordPress version and PHP "
+"version will be sent."
+msgstr ""
+"Aggiungi l’indirizzo email e la url del sito al messaggio, la versione di "
+"WordPress e la versione PHP saranno comunque inviate."
+
+#: classes/DaReactions/Ajax.php:81 classes/DaReactions/Ajax.php:179
+#: classes/DaReactions/Ajax.php:238
+msgid "Nonce error"
+msgstr "Errore nonce"
+
+#: classes/DaReactions/Ajax.php:121
+msgid "Generic error"
+msgstr "Errore generico"
+
+#: classes/DaReactions/Archive.php:116 classes/DaReactions/Archive.php:168
+msgid "Archive by Reaction"
+msgstr "Archivio in base a reazione"
+
+#: classes/DaReactions/Archive.php:189
+#, php-format
+msgid "Archive for %s reaction"
+msgstr "Archivio per la reazione %s"
+
+#: classes/DaReactions/FileSystem.php:176
+msgid "Unable to write file"
+msgstr "Impossibile scrivere file su disco"
+
+#: classes/DaReactions/Frontend.php:507
+msgid "Add your reaction"
+msgstr "Aggiungi la tua reazione"
+
+#: classes/DaReactions/MetaBox.php:121
+msgid "Global settings"
+msgstr "Impostazioni globali"
+
+#: classes/DaReactions/MetaBox.php:122
+msgid "Modify global settings for all contents of the same type"
+msgstr ""
+"Modifica le impostazioni globali per tutti i contenuti dello stesso tipo"
+
+#: classes/DaReactions/MetaBox.php:133
+msgid "Enable reactions for all contents of this type globally?"
+msgstr "Abilita le Reaction per tutti i contenuti di questo tipo globalmente?"
+
+#: classes/DaReactions/MetaBox.php:149
+msgid "Enable reactions for all comments under contents of this type globally?"
+msgstr ""
+"Abilita Reactions per tutti i commenti sotto a contenuti di questo tipo "
+"globalmente?"
+
+#: classes/DaReactions/MetaBox.php:158
+msgid "Statistics for this content"
+msgstr "Statistiche per questo contenuto"
+
+#: classes/DaReactions/MetaBox.php:171
+msgid "Local settings"
+msgstr "Impostazioni locali"
+
+#: classes/DaReactions/MetaBox.php:174
+msgid "Reactions are enabled globally for this type of content"
+msgstr "Le Reaction sono abilitate globalmente per questo tipo di contenuto"
+
+#: classes/DaReactions/MetaBox.php:174
+msgid ""
+"Reactions are <strong>disabled</strong> globally for this type of content"
+msgstr ""
+"Le Reaction sono <strong>disabilitate</strong> globalmente per questo tipo "
+"di contenuto"
+
+#: classes/DaReactions/MetaBox.php:175
+msgid "Disable reactions for this specific content?"
+msgstr "Disabilitare le Reaction per questo specifico contenuto?"
+
+#: classes/DaReactions/MetaBox.php:175
+msgid "Enable reactions for this specific content?"
+msgstr "Abilita reazioni per questo specifico contenuto?"
+
+#: classes/DaReactions/MetaBox.php:195
+msgid "Reactions are enabled globally for comments on this type of content"
+msgstr "Le Reaction sono abilitate globalmente per questo tipo di contenuto"
+
+#: classes/DaReactions/MetaBox.php:195
+msgid ""
+"Reactions are <strong>disabled</strong> globally for comments on this type "
+"of content"
+msgstr ""
+"Le Reaction sono <strong>disabilitate</strong> globalmente per questo tipo "
+"di contenuto"
+
+#: classes/DaReactions/MetaBox.php:196
+msgid "Disable reactions for comments on this specific content?"
+msgstr "Disabilitare le Reaction per questo specifico contenuto?"
+
+#: classes/DaReactions/MetaBox.php:196
+msgid "Enable reactions for comments on this specific content?"
+msgstr "Abilita reazioni per i commenti a questo specifico contenuto?"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:121
+#: classes/DaReactions/Pages/ButtonsSettings.php:140
+msgctxt "Table column heading"
+msgid "Sort"
+msgstr "Ordina"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:124
+#: classes/DaReactions/Pages/ButtonsSettings.php:143
+msgctxt "Table column heading"
+msgid "Icon"
+msgstr "Icona"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:127
+#: classes/DaReactions/Pages/ButtonsSettings.php:146
+msgctxt "Table column heading"
+msgid "Color"
+msgstr "Colore"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:130
+#: classes/DaReactions/Pages/ButtonsSettings.php:149
+msgctxt "Table column heading"
+msgid "Label"
+msgstr "Etichetta"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:133
+#: classes/DaReactions/Pages/ButtonsSettings.php:152
+msgctxt "Table column heading"
+msgid "Tools"
+msgstr "Strumenti"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:185
+msgid "Color"
+msgstr "Colore"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:191
+msgid "Label"
+msgstr "Etichetta"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:209
+msgid "There are no reactions"
+msgstr "Non ci sono reazioni"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:230
+msgid "Upload image"
+msgstr "Carica immagine"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:235
+msgid "Choose SVG from those available:"
+msgstr "Scegli un file SVG tra quelli disponibili:"
+
+#: classes/DaReactions/Pages/ButtonsSettings.php:271
+msgctxt "Button label"
+msgid "Add new"
+msgstr "Aggiungi nuovo"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:90
+msgid "General"
+msgstr "Generali"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:94
+msgid "User"
+msgstr "Utente"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:99
+msgid "Detail"
+msgstr "Dettagli"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:104
+msgid "Performance"
+msgstr "Prestazioni"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:109
+msgid "Plugins"
+msgstr "Plugin"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:114
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:291
+msgid "These are BuddyPress specific integration settings."
+msgstr "Queste sono impostazioni specifiche di integrazione con BuddyPress."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:310
+msgid "Profiles"
+msgstr "Profili"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:313
+msgid "Add reactions to BuddyPress’ profiles."
+msgstr "Aggiungi reazioni ai profili di BuddyPress."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:321
+msgid "Activities"
+msgstr "Attività"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:329
+msgid "Groups"
+msgstr "Gruppi"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:340
+msgid "Buddypress is not installed."
+msgstr "Buddypress non è installato."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:356
+msgid ""
+"Enable those options if you want to display details about user who added "
+"reactions"
+msgstr ""
+"Abilita queste opzioni se vuoi mostrare dettagli sugli utenti che hanno "
+"aggiunto le loro reazioni"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:367
+msgid ""
+"Show a tooltip with most recent reactions and users when mouse move over the "
+"count badge?"
+msgstr "Mostrare un tooltip con le reazioni più recenti e i nomi degli utenti?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:370
+msgid "Show detail tooltip on mouseover count badge . "
+msgstr ""
+"Mostra un tooltip di dettagli quando si va con il puntatore sopra il badge "
+"del numero. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:378
+msgid "How many results should be shown on tooltip?"
+msgstr "Quanti risultati dovrebbero essere mostrati sul tooltip?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:393
+msgid ""
+"Show a modal with most recent reactions and link to user’s page/profile when "
+"mouse move over the count badge?"
+msgstr ""
+"Mostrare una finestra modale con l’elenco delle reazioni più recenti e il "
+"collegamento alla pagina o al profilo dell’utente quando il mouse viene "
+"mosso sopra il badge con il numero?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:396
+msgid "Show detail modal on click on count badge . "
+msgstr "Mostra una modale con dettagli quando si clicca sul badge del numero. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:404
+msgid "How many results should be shown on modal?"
+msgstr "Quanti risultati dovrebbero essere mostrati sulla modale?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:419
+msgid "Show toolbar on modal to filter results by reaction?"
+msgstr ""
+"Mostrare opzioni per filtrare i risultati all’interno della modale per "
+"singole reazioni?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:422
+msgid "Show reaction filter on modal . "
+msgstr "Mostra filtri per le reazioni dentro la modale. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:430
+msgid "Display anonymous voters?"
+msgstr "Mostrare utenti anonimi?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:433
+msgid "Show anonymous voters . "
+msgstr "Mostra utenti anonimi. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:441
+msgid "Anonymous voters default name"
+msgstr "Nome predefinito per i votanti anonimi"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:460
+msgid ""
+"These are general settings, you can select to enable or disable reactions "
+"for specific content types and views."
+msgstr ""
+"Queste sono le impostazioni generali, qui puoi scegliere di abilitare o "
+"disabilitare le reazioni per specifici tipi di contenuto e viste."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:471
+msgid "Add reactions to post types and comments"
+msgstr "Aggiungi reazioni ai tipi di contenuto e ai commenti"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:479
+msgid "Add reactions to single pages and/or archives too"
+msgstr "Aggiungi reazioni alle pagine singole o anche agli archivi"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:487
+msgid "Use different colors for chart widgets?"
+msgstr "Utilizzare colori differenti per i grafici nei widget?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:501
+msgid "Performance settings"
+msgstr "Impostazioni di prestazione"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:502
+msgid "Use those settings to solve performances issues"
+msgstr ""
+"Utilizza queste impostazioni per risolvere problemi legati alle prstazioni"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:513
+msgid "Use plugin own cache system to serve generated widgets from disk?"
+msgstr ""
+"Utilizzare il sistema di cache interno al plugin per caricare i widget da "
+"disco?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:516
+msgid "Enable internal plugin cache"
+msgstr "Abilita cache interna al plugin"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:527
+msgid "Enable asyncronous widget lazy load?"
+msgstr "Abilitare il lazy load per il caricamento dei widget?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:530
+msgid "Enable lazy load . "
+msgstr "Abilita lazy load. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:547
+msgid "Plugin settings"
+msgstr "Impostazioni del plugin"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:548
+msgid ""
+"These are plugin settings, select a method to identify unlogged users and "
+"check the delete option if you want to get rid of all data on plugin "
+"deactivation . "
+msgstr ""
+"Queste sono le impostazioni del plugin, selezione un metodo per identificare "
+"gli utenti non autenticati e attiva la spunta sulla casella di cancellazione "
+"se vuoi eliminare tutti i contenuti di questo plugin quando lo disattiverai. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:559
+msgid "Which identification method should be used for unregistered users?"
+msgstr ""
+"Che sistema di identificazione deve essere usato per gli utenti non "
+"registrati?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:567
+msgid "Remove all data when disable (Warning! Cannot be undone!)"
+msgstr ""
+"Cancella tutti i dati quando si disabilita il plugin (Attenzione! Questa "
+"operazione non potrà essere annullata!)"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:582
+msgid "Users’ related settings."
+msgstr "Impostazioni utente."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:594
+msgid "Restrict reactions usage for user roles"
+msgstr "Limita l'utilizza delle reazioni in base al ruolo utente"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:597
+msgid "Enable restrictions."
+msgstr "Abilita restrizioni."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:608
+msgid "Enable reactions for this kind of users"
+msgstr "Abilita reazioni per questi tipi di utente"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:620
+msgid "Can users change their reactions?"
+msgstr "Gli utenti possono modificare le loro reazioni?"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:623
+msgid "User can change reaction."
+msgstr "Gli utenti possono modificare le loro reazioni."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:641
+msgid ""
+"Sometimes icons’ colors are way too similar to be used also for Charts, so "
+"you may change colors here . "
+msgstr ""
+"Qualche volte i colori delle reazioni sono troppo simili per poter essere "
+"utilizzati anche all’interno dei grafici, qui è possibile cambiare i colori "
+"dei grafici. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:644
+msgid "Chart color scheme: "
+msgstr "Schema colori dei grafici: "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:647
+msgid "Use buttons’ colors"
+msgstr "Utilizza i colori dei pulsanti"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:649
+msgid "Use random generated colors"
+msgstr "Utilizza colori generati casualmente"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:651
+msgid "Use default rainbow palette"
+msgstr "Utilizza una tavolozza arcobaleno predefinita"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:685
+msgid "Single pages and posts"
+msgstr "Pagine e post singoli"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:689
+msgid "Archives"
+msgstr "Archivi"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:693
+msgid "Blog page"
+msgstr "Pagina blog"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:754
+msgid " and their comments."
+msgstr " e i loro commenti."
+
+#: classes/DaReactions/Pages/GeneralSettings.php:782
+msgid ""
+"Delete all data when disable plugin . Warning! Lost data cannot be "
+"recovered . "
+msgstr ""
+"Cancella tutti i dati quando si disabilita il plugin. Attenzione! Questa "
+"operazione non potrà essere annullata. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:799
+msgid ""
+"This option is only available in main blog settings because may affect all "
+"blogs in this network . "
+msgstr ""
+"Questa opzione è disponibile soltanto tra le impostazioni del blog "
+"principale poiché ha effetti sull’intero network. "
+
+#: classes/DaReactions/Pages/GeneralSettings.php:815
+msgid "Set cookie"
+msgstr "Imposta un cookie"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:818
+msgid "Save IP address"
+msgstr "Salva l'indirizzo IP"
+
+#: classes/DaReactions/Pages/GeneralSettings.php:869
+msgid "Unregistered"
+msgstr "Non registrati"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:95
+msgid "Graphic Preferences"
+msgstr "Impostazioni grafiche"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:96
+msgid ""
+"These are the graphics settings of reactions on your site, use these "
+"settings to determine the appearance, size, and text to be displayed."
+msgstr ""
+"Queste sono le impostazioni grafiche per le Reaction sul tuo sito, usa "
+"queste impostazioni per decidere l'aspetto, le dimensioni, e il testo da "
+"visualizzare."
+
+#: classes/DaReactions/Pages/GraphicSettings.php:107
+msgid "Select size for reaction buttons"
+msgstr "Selezione le dimensioni per il bottone reazione"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:118
+msgid "None"
+msgstr "Nessuno"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:119
+msgid "Transparence"
+msgstr "Trasparenza"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:120
+msgid "Desaturate"
+msgstr "Desaturare"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:121
+msgid "Blur"
+msgstr "Sfocare"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:125
+msgid "Select fade method for inactive buttons"
+msgstr "Seleziona il metodo per sbiadire i pulsanti inattivi"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:135
+msgid "Fade effect value (0 - 100)"
+msgstr "Valore dell’effetto (0 - 100)"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:147
+msgid "Exposed: all buttons are immediately visible"
+msgstr "Esposto: tutti i pulsanti sono immediatamente visibili"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:148
+msgid ""
+" Reveal: only the most used reaction is visible, other icons are revealed on "
+"click"
+msgstr ""
+" Rivela: solo la reazione principale è visibile, le altre icone vengono "
+"rivelate al click"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:152
+msgid "Select a template for reactions"
+msgstr "Seleziona un modello per le reazioni"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:162
+msgid "Show reactions count"
+msgstr "Mostra il conteggio delle reazioni"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:169
+msgid " Align left"
+msgstr " Allinea a sinistra"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:170
+msgid " Center"
+msgstr " Centrato"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:171
+msgid " Align right"
+msgstr " Allinea a destra"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:175
+msgid "Select widget alignment"
+msgstr "Seleziona l’allineamento del widget"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:185
+msgid "Text do display before reaction buttons"
+msgstr "Testo da visualizzare prima dei pulsanti Reaction"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:307
+msgid "Always"
+msgstr "Sempre"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:309
+msgid "Only if greater than zero"
+msgstr "Solo se superiore a zero"
+
+#: classes/DaReactions/Pages/GraphicSettings.php:311
+msgid "Never"
+msgstr "Mai"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:66
+#: classes/DaReactions/Plugins/BuddyPress.php:78
+#: classes/DaReactions/Plugins/BuddyPress.php:105
+#: classes/DaReactions/Plugins/BuddyPress.php:137
+#: classes/DaReactions/Plugins/BuddyPress.php:218
+#: classes/DaReactions/Plugins/BuddyPress.php:274
+msgid "Someone"
+msgstr "Qualcuno"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:91
+#, php-format
+msgctxt "[current user] added a [reaction name] reaction to [post title]"
+msgid "%1$s added a %2$s reaction to %3$s"
+msgstr "%1$s ha aggiunto una reazione %2$s a %3$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:108
+#: classes/DaReactions/Plugins/BuddyPress.php:225
+msgid "Comment"
+msgstr "Commento"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:116
+msgid "Read comment"
+msgstr "Leggi commento"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:122
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s [comment] "
+"on [post title]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s on %5$s"
+msgstr "%1$s ha aggiunto una reazione %2$s a %3$s per un %4$s a %5$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:150
+msgid "a Reaction notice"
+msgstr "una notifica di Reaction"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:153
+msgid "an Activity comment"
+msgstr "un commento a una Attività"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:156
+msgid "an Activity update"
+msgstr "un aggiornamento"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:159
+msgid "a Group creation notice"
+msgstr "una notifica di creazione Gruppo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:162
+msgid "a Friendship notice"
+msgstr "una notifica di Amicizia"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:165
+msgid "a Group notice"
+msgstr "una notifica relativa a un Gruppo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:168
+msgid "an Avatar update"
+msgstr "un aggiornamento di immagine Profilo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:171
+msgid "a Blog Comment notice"
+msgstr "una notifica di commento su Blog"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:174
+msgid "a Blog Post notice"
+msgstr "una notifica di Articolo su Blog"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:177
+msgid "a new Member notice"
+msgstr "una notifica di nuovo Membro"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:180
+msgid "a Profile update"
+msgstr "un aggiornamento di Profilo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:183
+msgid "a Forum Topic notice"
+msgstr "una notifica di nuovo Topic su Forum"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:186
+msgid "a Forum Reply notice"
+msgstr "una notifica di nuova risposta su Forum"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:189
+msgid "an Activity"
+msgstr "una Attività"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:204
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [an activity] on [user]’s "
+"Stream"
+msgid "%1$s added a %2$s reaction to %3$s on %4$s’s Stream"
+msgstr "%1$s ha aggiunto una reazione %2$s a %3$s sullo Stream di %4$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:223
+msgid "Activity comment"
+msgstr "Commento a una Attività"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:230
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s [comment] "
+"on [activity]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s on %5$s"
+msgstr "%1$s ha aggiunto una reazione %2$s a %3$s su un %4$s a %5$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:250
+msgid "Group"
+msgstr "Gruppo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:262
+#, php-format
+msgctxt "[current user] added a [reaction name] reaction to group [group name]"
+msgid "%1$s added a %2$s reaction to group %3$s"
+msgstr "%1$s ha aggiunto una reazione %2$s al gruppo %3$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:278
+msgid "Profile"
+msgstr "Profilo"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:282
+#, php-format
+msgctxt ""
+"[current user] added a [reaction name] reaction to [target user]’s [profile]"
+msgid "%1$s added a %2$s reaction to %3$s’s %4$s"
+msgstr "%1$s ha aggiunto una reazione %2$s sul %4$s di %3$s"
+
+#: classes/DaReactions/Plugins/BuddyPress.php:466
+msgid "Add reactions to BuddyPress’ activities."
+msgstr "Aggiungi reazioni alle attività di BuddyPress."
+
+#: classes/DaReactions/Plugins/BuddyPress.php:473
+msgid "Add reactions to BuddyPress’ activity comments too."
+msgstr "Aggiungi reazioni anche ai commenti alle attività di BuddyPress."
+
+#: classes/DaReactions/Plugins/BuddyPress.php:482
+msgid "Enable BuddyPress’ activities before adding reactions to them."
+msgstr "Abilita le attività di BuddyPress prima di assegnare le reazioni."
+
+#: classes/DaReactions/Plugins/BuddyPress.php:508
+msgid "Add reactions to BuddyPress’ groups."
+msgstr "Aggiungi reazioni ai gruppi di BuddyPress."
+
+#: classes/DaReactions/Plugins/BuddyPress.php:517
+msgid "Enable BuddyPress’ groups before adding reactions to them."
+msgstr "Abilita i gruppi di BuddyPress prima di assegnare le reazioni."
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:34
+msgid "Content with most reactions"
+msgstr "Contenti con più reazioni"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:36
+msgid ""
+"Displays content with most reactions, can be filtered by content type and "
+"specific reaction"
+msgstr ""
+"Mostra i contenuti con il maggior numero di reazioni, può essere filtrato "
+"per tipo di contenuto e per specifica reazione"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:54
+msgid "Recent Posts"
+msgstr "Post recenti"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:84
+msgid "No reactions found."
+msgstr "Nessuna reazione trovata."
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:124
+msgid " on "
+msgstr " su "
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:134
+msgid "(no title)"
+msgstr "(nessun titolo)"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:189
+msgid "Title:"
+msgstr "Titolo:"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:196
+msgid "Reaction:"
+msgstr "Reaction:"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:200
+msgid "All reactions"
+msgstr "Tutte le Reaction"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:216
+msgid "Post type:"
+msgstr "Tipo di contenuto:"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:230
+#: classes/DaReactions/Widgets/DashboardWidget.php:123
+msgid "Comments"
+msgstr "Commenti"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:236
+msgid "Number of posts to show:"
+msgstr "Numero di articoli da mostrare:"
+
+#: classes/DaReactions/Widgets/ContentsByReactionWidget.php:246
+msgid "Display post reaction image?"
+msgstr "Visualizzare l'icona della Reaction?"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:57
+msgctxt "Dashboard widget title"
+msgid "Total reactions"
+msgstr "Totale reazioni"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:64
+msgctxt "Dashboard widget title"
+msgid "Reactions by content type"
+msgstr "Reazioni per tipo di contenuto"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:79
+msgctxt "Dashboard widget title"
+msgid "Reactions by blog"
+msgstr "Reazioni per blog"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:202
+#: classes/DaReactions/Widgets/DashboardWidget.php:209
+msgid "Blog"
+msgstr "Blog"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:204
+#: classes/DaReactions/Widgets/DashboardWidget.php:211
+msgid "Statistics"
+msgstr "Statistiche"
+
+#: classes/DaReactions/Widgets/DashboardWidget.php:271
+msgid "No data to display."
+msgstr "Nessun dato da visualizzare."
+
+#: da-reactions.php:54
+msgid ""
+"This plugin generates reactions to let your visitors rate content and "
+"comments."
+msgstr ""
+"Questo plugin genera dei pulsanti per consentire ai tuoi visitatori di "
+"aggiungere reazioni a commenti e contenuti."
+
+#: da-reactions.php:111 da-reactions.php:126
+msgid ""
+"Please disable the free version of this plugin to enable premium features."
+msgstr ""
+"Per favore disabilita la versione gratuita di questo plugin per accedere "
+"alle funzionalità premium."
+
+#~ msgid "Reactions help"
+#~ msgstr "Aiuto per Reactions"
+
+#~ msgid ""
+#~ "These are user settings, you can give reaction permissions only to "
+#~ "specific user roles . "
+#~ msgstr ""
+#~ "Queste sono le impostazioni per gli utenti, puoi abilitare i permessi in "
+#~ "base ai ruoli degli utenti. "
+
+#~ msgid "Details settings"
+#~ msgstr "Impostazioni dettagli"
+
+#~ msgid "Preview"
+#~ msgstr "Anteprima"
+
+#~ msgid "Select fade type"
+#~ msgstr "Seleziona metodo di sfocatura"
+
+#~ msgid "Amount: "
+#~ msgstr "Quantità: "
+
+#~ msgid "Effect value"
+#~ msgstr "Valore dell’effetto"
+
+#~ msgid "Size: "
+#~ msgstr "Dimensioni: "
+
+#~ msgid "Activity"
+#~ msgstr "Attività"
+
+#~ msgctxt "[current user] added a [reaction name] reaction to"
+#~ msgid "%s added a %s reaction to "
+#~ msgstr "%s ha aggiunto una reazione %s a "
+
+#~ msgctxt ""
+#~ "[current user] added a [reaction name] reaction to [target user]’s "
+#~ "[comment] on Activity"
+#~ msgid "%s added a %s reaction to %s’s %s on Activity"
+#~ msgstr "%s ha aggiunto una reazione %s a %s sul %s a una Attività"
+
+#~ msgctxt "[current user] added a [reaction name] reaction to [group name]"
+#~ msgid "%s added a %s reaction to %s"
+#~ msgstr "%s ha aggiunto una reazione %s al gruppo %s"
+
+#~ msgctxt "Help page"
+#~ msgid "Table of Contents"
+#~ msgstr "Sommario"
+
+#~ msgctxt "Help page"
+#~ msgid "Installation"
+#~ msgstr "Installazione"
+
+#~ msgctxt "Help page"
+#~ msgid "Uninstall"
+#~ msgstr "Disinstallare"
+
+#~ msgctxt "Help page"
+#~ msgid "Remove all data"
+#~ msgstr "Rimuovere tutti i dati"
+
+#~ msgctxt "Help page"
+#~ msgid "Basic usage"
+#~ msgstr "Utilizzo di base"
+
+#~ msgctxt "Help page"
+#~ msgid "Customization"
+#~ msgstr "Personalizzazione"
+
+#~ msgctxt "Help page"
+#~ msgid "Change sort order"
+#~ msgstr "Cambiare l'ordinamento"
+
+#~ msgctxt "Help page"
+#~ msgid "Use your own images"
+#~ msgstr "Utilizzare immagini proprie"
+
+#~ msgctxt "Help page"
+#~ msgid "Change icon color"
+#~ msgstr "Cambiare colore all’icona"
+
+#~ msgctxt "Help page"
+#~ msgid "Rename reaction"
+#~ msgstr "Cambiare il nome della reazione"
+
+#~ msgctxt "Help page"
+#~ msgid "Delete reaction"
+#~ msgstr "Cancellare una reazione"
+
+#~ msgctxt "Help page"
+#~ msgid "Reaction settings"
+#~ msgstr "Impostazioni delle reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Enable or disable reactions for content"
+#~ msgstr "Abilita o disabilita reazioni per un contenuto"
+
+#~ msgctxt "Help page"
+#~ msgid "Enable or disable reactions for comments"
+#~ msgstr "Abilita o disabilita reazioni per i commenti"
+
+#~ msgctxt "Help page"
+#~ msgid "Enable or disable reactions for custom post types"
+#~ msgstr "Abilita o disabilita reazioni per tipi di post personali"
+
+#~ msgctxt "Help page"
+#~ msgid "Enable reactions for single page view and for archives"
+#~ msgstr "Abilitare reazioni per le pagine singole o anche per gli archivi"
+
+#~ msgctxt "Help page"
+#~ msgid "Enable user role restrictions"
+#~ msgstr "Abilita restrizioni in base al ruolo utente"
+
+#~ msgctxt "Help page"
+#~ msgid "User identification settings"
+#~ msgstr "Impostazioni di identificazione utente"
+
+#~ msgctxt "Help page"
+#~ msgid "Let users change their reactions"
+#~ msgstr "Consentire agli utenti di modificare le proprie reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Graphic settings"
+#~ msgstr "Impostazioni grafiche"
+
+#~ msgctxt "Help page"
+#~ msgid "Set reactions size"
+#~ msgstr "Impostare le dimensioni delle reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Choose effect for inactive reactions"
+#~ msgstr "Selezionare l’effetto per le reazioni inattive"
+
+#~ msgctxt "Help page"
+#~ msgid "Set a intro text to be displayed before reactions"
+#~ msgstr "Impostare un testo da visualizzare prima delle reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Widgets"
+#~ msgstr "Widget"
+
+#~ msgctxt "Help page"
+#~ msgid "Contents with most reactions"
+#~ msgstr "Contenti con più reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Total reactions dashboard widget"
+#~ msgstr "Widget della dashboard con il totale delle reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Content types with most reactions"
+#~ msgstr "Tipi di contenuto con più reazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Blog reaction summary"
+#~ msgstr "Riepilogo reazioni sui blog"
+
+#~ msgctxt "Help page"
+#~ msgid "Frontend"
+#~ msgstr "Frontend"
+
+#~ msgctxt "Help page"
+#~ msgid "Responsiveness"
+#~ msgstr "Responsività"
+
+#~ msgctxt "Help page"
+#~ msgid "Widget"
+#~ msgstr "Widget"
+
+#~ msgctxt "Help page"
+#~ msgid "Content features"
+#~ msgstr "Caratteristiche dei contenuti"
+
+#~ msgctxt "Help page"
+#~ msgid "Reaction graph in content list"
+#~ msgstr "Grafico delle reazioni nell’elenco dei contenuti"
+
+#~ msgctxt "Help page"
+#~ msgid "Global settings on content page"
+#~ msgstr "Impostazioni globali sulla pagina del contenuto"
+
+#~ msgctxt "Help page"
+#~ msgid "Local settings on content page"
+#~ msgstr "Impostazioni locali sulla pagina del contenuto"
+
+#~ msgctxt "Help page"
+#~ msgid "Statistics on content page"
+#~ msgstr "Statistiche sulla pagina del contenuto"
+
+#~ msgctxt "Help page"
+#~ msgid "Sources and Credits"
+#~ msgstr "Sorgenti e riconoscimenti"
+
+#~ msgctxt "Help page"
+#~ msgid "Advanced"
+#~ msgstr "Avanzate"
+
+#~ msgctxt "Help page"
+#~ msgid "PHP Classes"
+#~ msgstr "Classi PHP"
+
+#~ msgctxt "Help page"
+#~ msgid "HTML structure"
+#~ msgstr "Struttura HTML"
+
+#~ msgctxt "Help page"
+#~ msgid "Custom tables"
+#~ msgstr "Tabelle personalizzate"
+
+#~ msgctxt "Help page"
+#~ msgid "Add your own SVG"
+#~ msgstr "Aggiungere SVG propri"
+
+#~ msgctxt "Help page"
+#~ msgid "top"
+#~ msgstr "torna su"
+
+#~ msgctxt "Help page"
+#~ msgid "Follow these instruction to install plugin on your WordPress site:"
+#~ msgstr ""
+#~ "Segui queste istruzioni per installare il plugin sul tuo sito WordPress:"
+
+#~ msgctxt "Help page"
+#~ msgid "Download the plugin, find the <em>install.zip</em> file."
+#~ msgstr "Scarica il plugin, trova il file <em>install.zip</em>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Go to WordPress admin area and visit <strong>Plugins » Add New</strong> "
+#~ "page."
+#~ msgstr ""
+#~ "Accedi all’area di amministrazione di WordPress e visita la pagina "
+#~ "<strong>Plugin » Aggiungi Nuovo</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Click on the <strong>Upload Plugin</strong> button on top of the page, "
+#~ "choose <em>install.zip</em> file and confirm."
+#~ msgstr ""
+#~ "Fai click sul pulsante <strong>Carica Plugin</strong> in cima alla "
+#~ "pagina, seleziona il file <em>install.zip</em> e conferma."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "After installation enable plugin, reactions are active by default for "
+#~ "posts and comments."
+#~ msgstr ""
+#~ "Dopo l’installazione abilita il plugin, le reazioni sono attive per "
+#~ "impostazione predefinita su articoli e commenti."
+
+#~ msgctxt "Help page"
+#~ msgid "To remove the plugin from your site follow these steps:"
+#~ msgstr "Per rimuovere il plugin da tuo sito segui questi passi:"
+
+#~ msgctxt "Help page"
+#~ msgid "Go to WordPress admin area and visit <strong>Plugins</strong> page."
+#~ msgstr ""
+#~ "Accedi all’area di amministrazione di WordPress e visita la pagina "
+#~ "<strong>Plugin</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "On the plugin details row click <strong>Deactivate</strong> link, if the "
+#~ "[Delete all data when disable plugin] flag is set a confirm window will "
+#~ "appear, click “Confirm”."
+#~ msgstr ""
+#~ "Sulla riga di dettaglio del plugin fare click sul link <strong>Disattiva</"
+#~ "strong>, se l’opzione [Cancella tutti i dati quando si disabilita il "
+#~ "plugin] è attiva comparirà una finestra di conferma, fai click su “OK”."
+
+#~ msgctxt "Help page"
+#~ msgid "On the same row click the red link to delete plugin."
+#~ msgstr ""
+#~ "Sulla stessa riga fai click sul link rosso per cancellare il plugin."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin removes all data on deletion, however there is a way to "
+#~ "delete all data without deleting completely the plugin:"
+#~ msgstr ""
+#~ "Questo plugin rimuove tutti i suoi dati quando viene cancellato, tuttavia "
+#~ "c’è un modo per cancellare tutti i dati senza cancellare completamente il "
+#~ "plugin:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Go to WordPress admin area and visit <strong>Reactions » General "
+#~ "Settings</strong> page."
+#~ msgstr ""
+#~ "Accedi all’area di amministrazione di WordPress e visita la pagina "
+#~ "<strong>Reazioni » Impostazioni generali</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Enable check on <em>Delete all data when disable plugin</em>, should be "
+#~ "the last checkbox on bottom. On multisite installation this option is "
+#~ "available only on main site settings."
+#~ msgstr ""
+#~ "Abilita la spunta su <em>Cancella tutti i dati quando si disabilita il "
+#~ "plugin</em>, dovrebbe essere l’ultima casella di spunte in basso. Sulle "
+#~ "installazioni multisito questa opzione è disponibile soltanto sul sito "
+#~ "principale."
+
+#~ msgctxt "Help page"
+#~ msgid "Visit <strong>Plugins</strong> page."
+#~ msgstr "Visita la pagine <strong>Plugin</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "On the plugin details row click <strong>Deactivate</strong> link, a "
+#~ "confirm window will appear, click “Confirm”."
+#~ msgstr ""
+#~ "Sulla riga di dettaglio del plugin fai click sul link <strong>Disattiva</"
+#~ "strong>, una finestra di conferma comparirà, fai click su “OK”."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Now all plugin data is deleted, enable the plugin again to start from "
+#~ "scratch with defaults only."
+#~ msgstr ""
+#~ "Adesso tutti i dati del plugin sono stati cancellati, abilita nuovamente "
+#~ "il plugin per iniziare da zero con le impostazioni predefinite."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "By default this plugin on activation creates six different reactions and "
+#~ "enables voting for posts and comments, with no user restrictions."
+#~ msgstr ""
+#~ "Per impostazione predefinita questo plugin crea, al momento "
+#~ "dell’attivazione, sei differenti reazioni e abilita il voto per articoli "
+#~ "e commenti, senza restrizioni per gruppi di utenti."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Once enabled users may instantly start voting your content, and two "
+#~ "different widget appears on dashboard showing statistics about "
+#~ "<strong>Total Reactions</strong> and <strong>Reactions by content type</"
+#~ "strong>."
+#~ msgstr ""
+#~ "Una volta abilitato il plugin gli utenti possono iniziare a votare i "
+#~ "contenuti e due differenti widget compaiono sulla dashboard per mostrare "
+#~ "statistiche su <strong>Reazioni totali</strong> e <strong>Reazioni per "
+#~ "tipi di contenuto</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Those are most common settings for many sites, so you may leave default "
+#~ "values. If you need some customization continue reading next paragraph."
+#~ msgstr ""
+#~ "Quelle sono le impostazioni più comuni per molti siti, quindi puoi "
+#~ "lasciare i valori predefiniti. Se hai bisogno di maggiore "
+#~ "personalizzazione continua a leggere il prossimo paragrafo."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin offers some out of the box customization settings, the most "
+#~ "important is the first screen in which you may edit icons appearance and "
+#~ "properties. To access those settings navigate to <strong>Reactions » "
+#~ "Reactions Manager</strong> page."
+#~ msgstr ""
+#~ "Questo plugin offre alcune impostazioni di personalizzazione, la più "
+#~ "importante è la prima schermata in cui è possibile modificare l'aspetto e "
+#~ "le proprietà delle icone. Per accedere a tali impostazioni, vai alla "
+#~ "pagina <strong>Reazioni » Gestore reazioni</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid "A simple drag’n drop interface lets you sort reactions as you wish:"
+#~ msgstr ""
+#~ "Una semplice interfaccia drag’n drop ti consente di ordinare le reazioni "
+#~ "come desideri:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "There are 250 icons included in plugin package, all icons are provided "
+#~ "for free - with attribution - by <a href=\"https://www.flaticon.com/"
+#~ "\">Flaticon.com</a>."
+#~ msgstr ""
+#~ "Ci sono 250 icone incluse con il plugin, tutte le icone sono fornite "
+#~ "gratuitamente - previa attribuzione - da <a href=\"https://www.flaticon."
+#~ "com/\">Flaticon.com</a>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "To change image simply click on icon and choose one of the hundreds of "
+#~ "provided vector artworks."
+#~ msgstr ""
+#~ "Per cambiare immagine è sufficiente fare clic sull'icona e scegliere una "
+#~ "delle centinaia di illustrazioni vettoriali fornite."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "If you want you may use your own images from default WordPress media "
+#~ "uploader:"
+#~ msgstr ""
+#~ "Se lo desideri, puoi utilizzare le tue immagini dal caricatore di file "
+#~ "WordPress predefinito:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "You may change the color of provided SVG icons choosing one of 16 "
+#~ "millions RGB possible values."
+#~ msgstr ""
+#~ "Puoi cambiare il colore delle icone SVG fornite scegliendo uno dei 16 "
+#~ "milioni di valori possibili RGB."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "On Reaction Manager page click the Select Color button, use graphic "
+#~ "selector or digit a valid HEX color value."
+#~ msgstr ""
+#~ "Nella pagina Gestore reazioni fare clic sul pulsante Seleziona colore, "
+#~ "utilizzare il selettore grafico o digitare un valore di colore "
+#~ "esadecimale valido."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Every reaction have a name that is used as label on frontend. Changing "
+#~ "reactions label is as simple as typing the new label in a text field."
+#~ msgstr ""
+#~ "Ogni reazione ha un nome che viene usato come etichetta sul frontend. "
+#~ "Cambiare le etichette delle reazioni è semplice come digitare la nuova "
+#~ "etichetta in un campo di testo."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Under the reaction list there is a «Add new» button, every click on this "
+#~ "button creates a new reaction with a random icon and a random color."
+#~ msgstr ""
+#~ "Sotto la lista delle reazioni c'è un pulsante «Aggiungi nuovo», ogni clic "
+#~ "su questo pulsante crea una nuova reazione con un'icona casuale e un "
+#~ "colore casuale."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "To create your own reactions click on «Add new» button then set icon, "
+#~ "color and label."
+#~ msgstr ""
+#~ "Per creare le tue reazioni fai clic sul pulsante «Aggiungi nuovo», quindi "
+#~ "imposta l'icona, il colore e l'etichetta."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "To delete a reaction click on the trash icon on the right, then confirm "
+#~ "the action."
+#~ msgstr ""
+#~ "Per eliminare una reazione, fare clic sull'icona del cestino a destra, "
+#~ "quindi confermare l'azione."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The general settings page lets you customize the way in which reactions "
+#~ "should work in your site. To access those settings navigate "
+#~ "to <strong>Reactions » General settings</strong> page."
+#~ msgstr ""
+#~ "La pagina delle impostazioni generali ti consente di personalizzare il "
+#~ "modo in cui le reazioni dovrebbero funzionare nel tuo sito. Per accedere "
+#~ "a tali impostazioni, vai alla pagina <strong> Reazioni »Impostazioni "
+#~ "generali</strong>."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The first field set lets you enable reactions for all registered post "
+#~ "types and comment. On a default WordPress installation there are only "
+#~ "Post, Page and Media and their comments."
+#~ msgstr ""
+#~ "Il primo set di campi consente di abilitare le reazioni per tutti i tipi "
+#~ "di post e commenti registrati. Su un’installazione di WordPress "
+#~ "predefinita ci sono solo Post, Pagina e Media e i loro commenti."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "If a post type have comments enabled will be possible to enable comments "
+#~ "for them."
+#~ msgstr ""
+#~ "Se un tipo di post ha commenti abilitati sarà possibile abilitare i "
+#~ "commenti per loro."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "On more advanced installations, such as WooCommerce shop or a site with "
+#~ "many Custom Post Types will be possible enable reactions to these content "
+#~ "too."
+#~ msgstr ""
+#~ "Su installazioni più avanzate, come ad esempio un negozio WooCommerce o "
+#~ "un sito con molti tipi di post personalizzati, sarà possibile attivare "
+#~ "reazioni anche a questi contenuti."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Reaction buttons may appear on single page and on archive view, use these "
+#~ "checkbox to set your preferences."
+#~ msgstr ""
+#~ "I pulsanti di reazione possono apparire in una singola pagina e nella "
+#~ "vista archivio, utilizzare queste caselle di controllo per impostare le "
+#~ "proprie preferenze."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Reactions are visible to all site visitor but you may restrict the voting "
+#~ "functionality to specific roles."
+#~ msgstr ""
+#~ "Le reazioni sono visibili a tutti i visitatori del sito ma è possibile "
+#~ "limitare la funzionalità di voto a ruoli specifici."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "If you enable restrictions a list of all user roles will be visible to "
+#~ "pick one by one the roles enabled to vote."
+#~ msgstr ""
+#~ "Se abiliti le restrizioni, sarà visibile un elenco di tutti i ruoli "
+#~ "utente per scegliere uno per uno i ruoli abilitati a votare."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "According to previous settings there will be scenarios in which we need "
+#~ "to recognize unlogged user, this is necessary to avoid duplicates and to "
+#~ "let users change their vote (see next paragraph)."
+#~ msgstr ""
+#~ "In base alle impostazioni precedenti, ci saranno scenari in cui dobbiamo "
+#~ "riconoscere l'utente non autenticato, questo è necessario per evitare "
+#~ "duplicati e consentire agli utenti di modificare il proprio voto (vedere "
+#~ "il prossimo paragrafo)."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "To recognize unlogged users there are two ways: via IP address, via "
+#~ "cookie or both."
+#~ msgstr ""
+#~ "Per riconoscere gli utenti non autenticati ci sono due modi: tramite "
+#~ "l'indirizzo IP, tramite cookie oppure entrambi."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Remember that the plugin will not be able to recognize unlogged users "
+#~ "without one of these options set to “on” and that you have to mention "
+#~ "this on your privacy policy to fulfill privacy law requirements in some "
+#~ "countries."
+#~ msgstr ""
+#~ "Ricorda che il plugin non sarà in grado di riconoscere gli utenti non "
+#~ "autenticati senza una di queste opzioni impostate su “on” e che devi "
+#~ "menzionare questo sulla tua politica sulla privacy per soddisfare i "
+#~ "requisiti di legge sulla privacy in alcuni paesi."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "If you want your visitors to change their previous reactions enable this "
+#~ "check."
+#~ msgstr ""
+#~ "Se vuoi che i tuoi visitatori cambino le loro precedenti reazioni, "
+#~ "abilita questo controllo."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Graphic settings page contains some appearance features. A real time "
+#~ "preview helps with settings."
+#~ msgstr ""
+#~ "La pagina delle impostazioni grafiche contiene alcune caratteristiche di "
+#~ "aspetto. Un’anteprima in tempo reale aiuta con le impostazioni."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This is the size of reactions, set a value that best fit your layout."
+#~ msgstr ""
+#~ "Questa è la dimensione delle reazioni, imposta un valore che meglio si "
+#~ "adatta al tuo layout."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "When a visitor votes a reactions the other icons may be de-emphasized "
+#~ "using one of those effects: Transparence, Desaturate and Blur."
+#~ msgstr ""
+#~ "Quando un visitatore vota una reazione, le altre icone possono essere de-"
+#~ "enfatizzate usando uno di questi effetti: Trasparenza, Desaturazione e "
+#~ "Sfocatura."
+
+#~ msgctxt "Help page"
+#~ msgid "The “amount\" slider is used to choose the effect amount."
+#~ msgstr ""
+#~ "Il cursore “Quantità” viene utilizzato per scegliere la quantità "
+#~ "dell'effetto."
+
+#~ msgctxt "Help page"
+#~ msgid "You may set a text to be shown before reactions globally."
+#~ msgstr ""
+#~ "È possibile impostare un testo da mostrare prima delle reazioni a livello "
+#~ "globale."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin provides several useful widgets. Some widgets are specific "
+#~ "for frontend, others are useful in multisite installation."
+#~ msgstr ""
+#~ "Questo plugin fornisce diversi widget utili. Alcuni widget sono specifici "
+#~ "per frontend, altri sono utili nell'installazione multisito."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "To display a list of contents with most reactions navigate to Appearance "
+#~ "Widgets page."
+#~ msgstr ""
+#~ "Per visualizzare un elenco di contenuti con la maggior parte delle "
+#~ "reazioni, vai alla pagina Aspetti widget."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Find a widget named <strong>Content with most reactions</strong> and "
+#~ "attach it on a sidebar."
+#~ msgstr ""
+#~ "Trova un widget denominato <strong>Contenuti con più reazioni</strong> e "
+#~ "inseriscilo su una zona widget."
+
+#~ msgctxt "Help page"
+#~ msgid "Widgets settings lets you set some things:"
+#~ msgstr "Le impostazioni dei widget ti consentono di impostare alcune cose:"
+
+#~ msgctxt "Help page"
+#~ msgid "<strong>Title</strong>: the title to display above the list."
+#~ msgstr "<strong>Titolo</strong>: il titolo da visualizzare sopra l'elenco."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "<strong>Reaction</strong>: to filter results on a single reactions (most "
+#~ "loved, most liked, most grr-ed and so on.)"
+#~ msgstr ""
+#~ "<strong>Reazione</strong>: per filtrare i risultati su una singola "
+#~ "reazione (più amata, più apprezzata, più grrr-ata e così via)."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "<strong>Post Type</strong>: select between Post, Page, Media, Comment and "
+#~ "every custom post type in your blog."
+#~ msgstr ""
+#~ "<strong> Tipo di contenuto</strong>: seleziona Post, Pagina, Allegato, "
+#~ "Commento e ogni tipo di post personalizzato nel tuo blog."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "<strong>Number of posts to show</strong>: a limit number for the list."
+#~ msgstr ""
+#~ "<strong> Numero di post da mostrare</strong>: un numero limite per "
+#~ "l'elenco."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "<strong>Display post reaction image?</strong> Show the most used reaction "
+#~ "icon near the content title."
+#~ msgstr ""
+#~ "<strong>Visualizza l'immagine di reazione?</strong> Mostra l'icona della "
+#~ "reazione più utilizzata vicino al titolo del contenuto."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Total reactions is a widget for the dashboard that shows a real time "
+#~ "chart with reaction votes count."
+#~ msgstr ""
+#~ "Le reazioni totali sono un widget per la dashboard che mostra un grafico "
+#~ "in tempo reale con il conteggio delle reazioni."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Reactions by content type is another widget for the dashboard and "
+#~ "contains real time data about reactions grouped by content type."
+#~ msgstr ""
+#~ "Le reazioni per tipo di contenuto sono un altro widget per il dashboard e "
+#~ "contengono dati in tempo reale sulle reazioni raggruppate per tipo di "
+#~ "contenuto."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Reactions by blog is a widget available only on Network dashboard in "
+#~ "multisite installation. This widget shows real time statistics for all "
+#~ "blogs in the network."
+#~ msgstr ""
+#~ "Le reazioni per blog sono un widget disponibile solo nella dashboard di "
+#~ "rete nelle installazioni multiblog. Questo widget mostra le statistiche "
+#~ "in tempo reale per tutti i blog della rete."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "If enabled, the plugin displays reactions buttons under every content, "
+#~ "according to saved settings."
+#~ msgstr ""
+#~ "Se abilitato, il plugin visualizza i pulsanti delle reazioni sotto ogni "
+#~ "contenuto, in base alle impostazioni salvate."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "<strong>The buttons are lazy loaded</strong> to avoid slow loading of the "
+#~ "site, especially if several buttons should be displayed, this happens "
+#~ "typically on comments and archives."
+#~ msgstr ""
+#~ "<strong>I pulsanti sono caricati in modo “lazy”</strong> per evitare il "
+#~ "caricamento lento del sito, soprattutto se devono essere visualizzati più "
+#~ "pulsanti, in genere ciò avviene su commenti e archivi."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Under the buttons there is a number that represent the total count of "
+#~ "every reaction for every specific item."
+#~ msgstr ""
+#~ "Questo è il numero totale di ogni reazione per un articolo specifico."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "On small displays the buttons are hidden ad are shown using the hamburger "
+#~ "button navigation. This solution is compatible even with dozens of "
+#~ "reactions buttons."
+#~ msgstr ""
+#~ "Su piccoli display i pulsanti sono nascosti e gli annunci vengono "
+#~ "visualizzati utilizzando il tasto di navigazione dell'hamburger. Questa "
+#~ "soluzione è compatibile anche con dozzine di pulsanti di reazione."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The frontend widget shows the contents with most reactions according to "
+#~ "some settings. View <a href=\"#widgets\">widget section</a> for further "
+#~ "informations"
+#~ msgstr ""
+#~ "Il widget di frontend mostra i contenuti con la maggior parte delle "
+#~ "reazioni in base ad alcune impostazioni. Visualizza la <a href=\"#widgets"
+#~ "\"> sezione widget </a> per ulteriori informazioni"
+
+#~ msgctxt "Help page"
+#~ msgid "Content"
+#~ msgstr "Contenuto"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin adds some functionalities to default WordPress editors too."
+#~ msgstr ""
+#~ "Questo plugin aggiunge alcune funzionalità anche agli editor di WordPress "
+#~ "predefiniti."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "In content list (for example navigate to Posts » All posts page) there is "
+#~ "one more column named reactions that shows a small chart with reactions "
+#~ "statistics."
+#~ msgstr ""
+#~ "Nell'elenco dei contenuti (ad esempio, vai alla pagina Post »Tutti i "
+#~ "post) c'è un'altra colonna chiamata reazioni che mostra un piccolo "
+#~ "grafico con le statistiche delle reazioni."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Inside the edit page (every time you edit a content) there is a very "
+#~ "useful section in which you may change global settings for all contents "
+#~ "of the same type. These setting will affect the entire site, not only the "
+#~ "current content."
+#~ msgstr ""
+#~ "All'interno della pagina di modifica (ogni volta che si modifica un "
+#~ "contenuto) c'è una sezione molto utile in cui è possibile modificare le "
+#~ "impostazioni globali per tutti i contenuti dello stesso tipo. Queste "
+#~ "impostazioni influenzeranno l'intero sito, non solo il contenuto corrente."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Even if reactions are disabled for a specific type of content or for the "
+#~ "comments to this type of content, inside the edit page there is a widget "
+#~ "that allows you to activate reactions for one specific post, or custom "
+#~ "type, or whatever you are editing. Those local settings does not affect "
+#~ "other contents and are limited to the one you are editing."
+#~ msgstr ""
+#~ "Anche se le reazioni sono disabilitate per un tipo specifico di contenuto "
+#~ "o per i commenti a questo tipo di contenuto, all'interno della pagina di "
+#~ "modifica c'è un widget che consente di attivare reazioni per un post "
+#~ "specifico, o un tipo personalizzato, o qualsiasi cosa si stia "
+#~ "modificando. Quelle impostazioni locali non influenzano altri contenuti e "
+#~ "sono limitate a quella che stai modificando."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "There is also a chart with real time statistics on reactions for this "
+#~ "specific content."
+#~ msgstr ""
+#~ "C'è anche un grafico con statistiche in tempo reale sulle reazioni per "
+#~ "questo specifico contenuto."
+
+#~ msgctxt "Help page"
+#~ msgid "This plugin is distributed under GPL 2 license."
+#~ msgstr "Questo plugin è distribuito sotto licenza GPL 2."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Charts are made with <strong>ChartJS</strong>, a open source JavaScript "
+#~ "library. See <a href=\"https://www.chartjs.org/\">Chart.js</a>"
+#~ msgstr ""
+#~ "I grafici sono creati con <strong>ChartJS</strong>, una libreria "
+#~ "JavaScript open source. Vedi <a href=\"https://www.chartjs.org/\">Chart."
+#~ "js</a>"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "All vector icons are provided by <strong>Flaticon</strong>, and are free "
+#~ "even for commercial use. See <a href=\"https://www.flaticon.com/"
+#~ "\">Flaticon</a>"
+#~ msgstr ""
+#~ "Tutte le icone vettoriali sono fornite da <strong>Flaticon</strong> e "
+#~ "sono gratuite anche per uso commerciale. Vedi <a href=\"https://www."
+#~ "flaticon.com/\">Flaticon</a>"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This section is reserved to advanced users, if you need to customize this "
+#~ "plugin in some ways that are not mentioned above you may find useful the "
+#~ "lecture of next paragraphs."
+#~ msgstr ""
+#~ "Questa sezione è riservata agli utenti esperti, se è necessario "
+#~ "personalizzare questo plug-in in modi che non sono menzionati sopra, si "
+#~ "potrebbe trovare utile la lezione dei paragrafi successivi."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin is entirely written using object oriented approach with PSR0 "
+#~ "convention. All PHP classes are under /classes/, that is PSR0 root for "
+#~ "autoload features."
+#~ msgstr ""
+#~ "Questo plugin è interamente scritto utilizzando un approccio orientato "
+#~ "agli oggetti con la convenzione PSR0. Tutte le classi PHP sono sotto /"
+#~ "classes/, che è la root PSR0 per la funzione di caricamento automatico."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "A complete documentation, autogenerated with PHPDoc is included in "
+#~ "archive, look for /documentation/ folder."
+#~ msgstr ""
+#~ "Una documentazione completa, autogenerata con PHPDoc è inclusa "
+#~ "nell'archivio, cerca la cartella /documentation/."
+
+#~ msgctxt "Help page"
+#~ msgid "Frontend markup for this plugin is very simple:"
+#~ msgstr "Il markup del frontend per questo plugin è molto semplice:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This div is the container for the asynchronous loaded buttons, in this "
+#~ "way pages are smaller and easier to load and debug."
+#~ msgstr ""
+#~ "Questo div è il contenitore per i pulsanti caricati in modo asincrono, in "
+#~ "questo modo le pagine sono più piccole e più facili da caricare e "
+#~ "esaminare."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The lazy loading function inject inside the previous div something like "
+#~ "this:"
+#~ msgstr ""
+#~ "La funzione di lazy load inietta all'interno del precedente div qualcosa "
+#~ "di simile:"
+
+#~ msgctxt "Help page"
+#~ msgid "The final markup depends on settings and may vary from site to site."
+#~ msgstr ""
+#~ "Il markup finale dipende dalle impostazioni e può variare da sito a sito."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin works with two custom tables, all database related functions "
+#~ "are in /DaReactions/Data."
+#~ msgstr ""
+#~ "Questo plugin funziona con due tabelle personalizzate, tutte le funzioni "
+#~ "relative al database sono nella classe /DaReactions/Data."
+
+#~ msgctxt "Help page"
+#~ msgid "The table structure is this:"
+#~ msgstr "La struttura della tabella è questa:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The choice to use own tables for this plugin is functional to some "
+#~ "features:"
+#~ msgstr ""
+#~ "La scelta di utilizzare le proprie tabelle per questo plugin è utile ad "
+#~ "alcune funzionalità:"
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The queries to pick most voted reactions, most liked posts and things "
+#~ "like those are more simple and less time-consuming for the database."
+#~ msgstr ""
+#~ "Le query SQL per scegliere le reazioni più votate, i post più graditi e "
+#~ "cose simili sono più semplici e impiegano meno tempo del database."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "In multisite installations every blog has its own tables that are "
+#~ "independent from other blogs."
+#~ msgstr ""
+#~ "Nelle installazioni multiblog ogni blog ha le proprie tabelle "
+#~ "indipendenti da altri blog."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "When delete all plugin data, on deactivate or uninstall, those table are "
+#~ "dropped and there is no garbage left in database."
+#~ msgstr ""
+#~ "Quando si eliminano tutti i dati del plug-in, disattivandolo o "
+#~ "disinstallandolo, la tabella viene eliminata e nel database non rimane "
+#~ "traccia residua."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin comes with 250 included SVG monochromatic vector icons, those "
+#~ "kind of icons could be colored in real time using color picker; all other "
+#~ "image types, such as JPG, GIF or PNG, cannot be colored in real time, and "
+#~ "are not vector."
+#~ msgstr ""
+#~ "Questo plugin viene fornito con 250 icone vettoriali monocromatiche "
+#~ "incluse in formato SVG, questo tipo di icone possono essere colorate in "
+#~ "tempo reale utilizzando il selettore di colori; tutti gli altri tipi di "
+#~ "immagine, come JPG, GIF o PNG, non possono essere colorati in tempo reale "
+#~ "e non sono vettoriali."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "WordPress blocks SVG upload for <a href=\"https://bjornjohansen.no/svg-in-"
+#~ "wordpress\">very important security reasons</a>, so it is impossible to "
+#~ "use your own SVGs, but if you are a graphic designer or a developer and "
+#~ "you know that your SVG files are 100 percent safe and don’t contain "
+#~ "malicious script you may add your own graphic to this plugin."
+#~ msgstr ""
+#~ "WordPress blocca il caricamento SVG per <a href=\"https://bjornjohansen."
+#~ "no/svg-in-wordpress\">motivi di sicurezza molto importanti</a>, quindi è "
+#~ "impossibile utilizzare i propri SVG, ma se sei un grafico designer o uno "
+#~ "sviluppatore e sai che i tuoi file SVG sono sicuri al cento per cento e "
+#~ "non contengono script dannosi, puoi aggiungere le tue grafiche a questo "
+#~ "plugin."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Inside the plugin folder find /assets/icons/svg/ and create your own "
+#~ "folder here. This folder name should not start with a underscore _ "
+#~ "because files and folder which names begins with this character will be "
+#~ "ignored."
+#~ msgstr ""
+#~ "All'interno della cartella del plugin trova /assets/icons/svg/ e crea qui "
+#~ "la tua cartella. Il nome di questa cartella non dovrebbe iniziare con un "
+#~ "carattere di sottolineatura _ poiché i file e la cartella i cui nomi "
+#~ "iniziano con questo carattere saranno ignorati."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Inside your own folder copy all your SVG files, just like all other "
+#~ "plugin-provided files."
+#~ msgstr ""
+#~ "All'interno della tua cartella copia tutti i tuoi file SVG, proprio come "
+#~ "tutti gli altri file forniti da plugin."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Navigate to Reactions » Reactions manager page and click on one of the "
+#~ "icons to change graphic."
+#~ msgstr ""
+#~ "Naviga alla pagina a Reazioni » Gestore reazioni e fai clic su una delle "
+#~ "icone per modificare la grafica."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "You SVGs will be listed belong the others, and the colorize function "
+#~ "should work too."
+#~ msgstr ""
+#~ "Gli SVG saranno elencati appartengono agli altri e anche la funzionalità "
+#~ "di colorazione dovrebbe funzionare."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "This plugin is entirely written in english, but it is one hudred percent "
+#~ "compatible with translations using the common WordPress procedure that "
+#~ "involves the use of PO and MO files."
+#~ msgstr ""
+#~ "Questo plugin è interamente scritto in inglese, ma è compatibile al cento "
+#~ "per cento con le traduzioni utilizzando la comune procedura WordPress che "
+#~ "prevede l'uso di file PO e MO."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "The main POT file can be found inside /languages/ along with a complete "
+#~ "italian translation that can be used as model."
+#~ msgstr ""
+#~ "Il file POT principale può essere trovato all'interno di /languages/ "
+#~ "insieme a una traduzione italiana completa che può essere utilizzata come "
+#~ "modello."
+
+#~ msgctxt "Help page"
+#~ msgid ""
+#~ "Once again, thank you so much for purchasing this plugin. As I said at "
+#~ "the beginning, I’d be glad to help you if you have any questions relating "
+#~ "to this plugin. No guarantees, but I’ll do my best to assist. If you have "
+#~ "a more general question relating to the plugin on CodeCanyon, you might "
+#~ "consider visiting the forums and asking your question in the \"Item "
+#~ "Discussion\" section."
+#~ msgstr ""
+#~ "Ancora una volta, grazie mille per aver acquistato questo plugin. Come ho "
+#~ "detto all'inizio, sarei felice di aiutarti se hai domande relative a "
+#~ "questo plugin. Nessuna garanzia, ma farò del mio meglio per aiutare. Se "
+#~ "hai una domanda più generale relativa al plug-in su CodeCanyon, potresti "
+#~ "prendere in considerazione l'idea di visitare i forum e porre la tua "
+#~ "domanda nella sezione \"Item Discussion\"."
+
+#~ msgctxt "Help page"
+#~ msgid "Daniele Alessandra"
+#~ msgstr "Daniele Alessandra"
+
+#~ msgctxt "Help page"
+#~ msgid "Go To Table of Contents"
+#~ msgstr "Torna all’indice"

@@ -1,0 +1,138 @@
+.features-area:nth-child(even) {
+    background-position: left !important;
+}
+.features-area:nth-child(odd) {
+    background-position: right !important;
+}
+li.flan a {
+    border-left: none !important;
+    border-right: 2px solid #1f223e !important;
+}
+
+
+
+.lar {
+    margin-right: 10px !important;
+    margin-left: 0px !important;
+}
+.len {
+    margin-right: 0px !important;
+}
+
+.slick-slider .slick-track, .slick-slider .slick-list { direction: ltr; }
+
+.slick-prev::before {
+
+
+    content: "\f0a8"  !important;
+}
+
+.slick-next::before {
+    /*    color: #002b52;
+        font-size: 28px !important;
+        font-weight: bold;
+        font: normal normal normal 14px/1 FontAwesome;*/
+    content: "\f0a9" !important;
+    /*content: "\f0a8";*/
+}
+.fet_slider .slick-prev {
+    left: 0px;
+    right: auto;
+}
+
+.sticky-logo{
+    float: right;
+}
+
+
+
+.amenities-list > li {
+
+    padding-right: 20px;
+    padding-left: 0px;
+}
+
+.amenities-list > li:before {
+    right: 0 !important;
+
+}
+
+@media (min-width: 1200px){
+    .header-info .main-menu > li > a {
+        font-size: 18px !important;
+    }
+}
+@media (max-width: 991px){
+    .header-info .main-menu > li > a {
+        font-size: 18px !important;
+    }
+    .fl.row {
+
+        flex-direction: column-reverse;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.author-quote > p {
+    padding-right: 30px;
+}
+
+.author-quote > p:before {
+    content: "\f046";
+    font-family: fontawesome;
+    left: auto;
+    right: 0px;
+
+}
+
+.sticky .main-menu > li > a {
+    color: #303030;
+    /* font-size: 14px; */
+    font-size: 18px;
+    padding: 18px 5px;
+}
+
+p {
+    font-size: 17px;
+    direction: rtl;
+
+}
+
+.fright {
+    float: left !important;
+}
+.mtop-first {
+    margin-top: 50px !important;
+}
+a.view.btn.btn-bro {
+    float: left;
+}
+
+.contact-address-info span {
+    direction: ltr;
+}
+
+[dir='rtl'] .slick-slide {
+    float: left;
+}
+.widget > h5 {
+
+    text-transform: capitalize;
+}
+
+@media (max-width: 991px) and (min-width: 768px){
+    .main-menu > li > a {
+        font-size: 16px !important;
+    }
+    .main-menu > li + li {
+        margin-left: 20px !important;
+        margin-right: 20px;
+    }
+}
+
+
+.contact-address-info {
+    float: right;
+    padding-left: 10px;
+}

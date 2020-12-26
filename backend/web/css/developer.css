@@ -1,0 +1,373 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 6 Dec, 2018, 10:50:01 AM
+    Author     : latha
+*/
+
+.qstn-ident {
+    cursor: pointer;
+}
+.qstn-ident-inner{
+
+}
+.qstn-ident-inner {
+    border: 10px solid #ccc;
+    height: 200px;
+    border-radius: 15px;
+    position: relative;
+    margin: 20px 0px;
+    overflow: hidden;
+}
+.fcs {
+    border: 10px solid #1e7280;
+}
+.pattern_det {
+    position: absolute;
+    right: 2px;
+    padding: 4px;
+    background-color: #cccccc;
+    color: #fff;
+    top: -34px;
+    width: 70px;
+    text-align: center;
+    border-radius: 6px 6px 0px 0px;
+    font-weight: normal;
+}
+
+.pattern_det a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: normal;
+    cursor: pointer;
+}
+.qstn-ident-inner:hover{
+    border: 10px solid #1e7280;
+}
+.qstn_fiels {
+    padding: 20px 20px;
+    /*border: 1px solid;*/
+}
+
+.q_page>li>a {
+    position: relative;
+    display: block;
+    padding: 13px 15px 7px;
+    font-size: 15px;
+}
+
+.genarate_shape {
+    font-size: 13px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    /*padding: 5px 10px;*/
+    padding: 5px 20px;
+    /*margin-top: 10px;*/
+    border-radius: 3px;
+    text-decoration: none;
+}
+.genarate_shape:hover, .genarate_shape:active, .genarate_shape:focus {
+    font-size: 13px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    /*    padding: 5px 10px;*/
+    padding: 5px 20px;
+    /*margin-top: 10px;*/
+    border-radius: 3px;
+    text-decoration: none;
+}
+.add-btn {
+
+    font-weight: normal;
+}
+
+.draggable-box {
+    max-width: 1170px;
+    padding: 0px;
+    width: 100%;
+    display: block;
+    margin: 15px 0 25px 0;
+
+    padding: 12px;
+}
+.dr_img {
+    width: 13%;
+    float: left;
+    padding: 5px;
+    /*border: 1px solid #ccc;*/
+    margin: 4px 15px;
+}
+.images-drag{
+    border: 1px solid #1e7280;
+    min-height: 300px;
+}
+
+.h_link {
+    background-color: #1e7280;
+    height: 40px;
+    border: 1px solid #1e7280;
+}
+.upld_img {
+    border: none;
+    border-radius: 3px;
+    font-size: 13px;
+    background-color: #fff;
+    float: right;
+    margin: 4px 10px;
+    width: 120px;
+    padding: 5px 5px;
+    color: #1d7280;
+    font-weight: normal;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #fff;
+    cursor: default;
+    background-color: #1e7280;
+    border: 1px solid #1e7280;
+    border-bottom-color: transparent;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+    /*background-color: #1e7280;*/
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #fff;
+}
+.nav-tabs {
+    border-bottom: 1px solid #1e7280;
+}
+
+.tab-content {
+    margin-top: 0px !important;
+    margin-bottom: 30px;
+    border: 1px solid #1e7280;
+    border-top: none;
+}
+h5.upld_success {
+    text-align: center;
+    color: #03ff83;
+}
+.qstn-canvas {
+    padding: 30px 0px 50px 0px!important;
+}
+.qstn-type4_grid {
+    width: 100% ;
+
+}
+
+.gal_image {
+    height: 240px;
+    overflow-y: scroll;
+}
+
+.non_colrd_btn, .non_colrd_btn:active, .non_colrd_btn:focus{
+    border: 2px solid #1e7280;
+    /*padding: 5px;*/
+    font-weight: 600;
+    padding: 5px 15px;
+    font-weight: 600;
+    margin: 15px;
+    cursor: default;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.colrd_btn, .colrd_btn:active, .colrd_btn:focus{
+    border: 2px solid #1e7280;
+    background-color: #1e7280;
+    color:#fff;
+    padding: 5px 15px;
+    font-weight: 600;
+    /*margin: 15px;*/
+    cursor: default;
+    text-decoration: none;
+    border-radius: 3px;
+
+}
+.non_colrd_btna, .non_colrd_btn:hover , .non_colrd_btna:hover, .non_colrd_btna:active, .non_colrd_btna:focus{
+    /*    border: 1px solid #1e7280;*/
+    /*    padding: 5px;*/
+    font-weight: 600;
+    padding: 5px 15px;
+    font-weight: 600;
+    margin: 15px;
+    cursor: default;
+    text-decoration: none;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+}
+
+.colrd_btna, .colrd_btn:hover, .colrd_btna:hover, .colrd_btna:active, .colrd_btna:focus{
+    /*border: 1px solid #ccc;*/
+    background-color: #1e7280;
+    color:#fff;
+    padding: 5px 15px;
+    font-weight: 600;
+    /*    margin: 15px;*/
+    cursor: default;
+    text-decoration: none;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+
+}
+
+.no_line, .no_line:active,  .no_line:hover, .no_line:focus
+{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    text-decoration: none;
+}
+
+.no_box, .no_box:active,  .no_box:hover, .no_box:focus
+{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    text-decoration: none;
+}
+
+.sv_btn{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.sv_btn:hover,.sv_btn:active,.sv_btn:focus{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.append_add_btn{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.append_add_btn:hover,.append_add_btn:active,.append_add_btn:focus{
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 40px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.append_add_btn_tab{
+    font-size: 12px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 3px 15px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.append_add_btn_tab:hover,.append_add_btn_tab:active,.append_add_btn_tab:focus{
+    font-size: 12px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 3px 15px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.clr_pckr_btn{
+    background-color: #1d7280;
+    border: 1px solid #1d7280;
+}
+
+.add_mr_btn{
+    font-size: 15px;
+    text-transform: capitalize;
+    color: #1e7280;
+    border: none;
+    background: transparent;
+    text-decoration: none;
+    font-weight: 700;
+}
+.help_border{
+    border-color: #1d7280 !important;
+    color: #1d7280 !important;
+    font-size: 15px !important;
+}
+
+.grd_tn{
+    font-size: 13px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 10px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.grd_tn, .grd_tn:active ,.grd_tn:focus, .grd_tn:hover{
+    font-size: 13px;
+    text-transform: capitalize;
+    background-color: #1e7280;
+    padding: 5px 10px;
+    color: #fff;
+    border: 1px solid #1d7280;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.in_clr{
+    padding: 0px;
+}
+.in_clr_tex{
+    padding-right: 0px;
+}
+.append_text{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.append_remove{
+    margin: 15px 0px;
+}
+.tab_pad{
+    padding: 15px;
+    min-height: 200px;
+}
+.qstn-frame input.upld_img {
+    width: auto;
+    height: 33px;
+    border: 1px solid #cccccc;
+    padding: 7px 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    float: right;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+
+    outline: none;
+}

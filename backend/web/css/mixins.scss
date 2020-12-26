@@ -1,0 +1,143 @@
+@mixin transition_all($dur : 0.3s){
+    transition:all $dur;
+    -moz-transition:all $dur;
+    -webkit-transition:all $dur;
+    -o-transition:all $dur;
+}
+@mixin transition_opacity($dur : 0.3s){
+    transition:opacity $dur;
+    -moz-transition:opacity $dur;
+    -webkit-transition:opacity $dur;
+    -o-transition:opacity $dur;
+}
+
+@mixin scale($scal : 1.2){
+    transform:scale($scal);
+    -moz-transform:scale($scal);
+    -o-transform:scale($scal);
+    -webkit-transform:scale($scal);
+}
+@mixin translate_x($amount:10px){
+    -webkit-transform-origin: 50% 0%;
+    -o-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -moz-transform: translateX($amount);
+    -ms-transform: translateX($amount);
+    -webkit-transform: translateX($amount);
+    transform: translateX($amount);
+}
+@mixin translate_y($amount:10px){
+    -moz-transform: translateY($amount);
+    -ms-transform: translateY($amount);
+    -webkit-transform: translateY($amount);
+    transform: translateY($amount);
+}
+@mixin rotate_y($amount:10deg){
+    -webkit-transform-origin: 50% 0%;
+    -o-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -moz-transform: rotateY($amount);
+    -ms-transform: rotateY($amount);
+    -webkit-transform: rotateY($amount);
+    transform: rotateY($amount);
+}
+@mixin rotate($amount:10deg){
+    -moz-transform: rotate($amount);
+    -ms-transform: rotate($amount);
+    -webkit-transform: rotate($amount);
+    transform: rotate($amount);
+}
+@mixin slider-nav(){
+    font-size: 15px;
+    color: #bc6907;
+    position: absolute;
+    top: 26%;
+    margin: auto;
+    z-index: 1;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out 0s;
+    -webkit-transition: background-color 300ms ease-in-out 0s;
+    -moz-transition: background-color 300ms ease-in-out 0s;
+    -o-transition: background-color 300ms ease-in-out 0s;
+}
+@mixin flex(){
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex; 
+}
+@mixin inline-flex(){
+    display: -webkit-box;    
+    display: -moz-box;       
+    display: -ms-inline-flexbox;     
+    display: -webkit-inline-flex;     
+    display: inline-flex; 
+}
+@mixin flex-align(){
+    -webkit-align-items: center;
+    align-items: center;
+}
+@mixin flex-justify(){
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+@mixin placeholder {
+    &:-moz-placeholder { @content }
+    &::-moz-placeholder { @content }
+    &::-webkit-input-placeholder { @content }
+    &:-ms-input-placeholder  { @content }
+
+}
+
+
+/*
+::-webkit-input-placeholder {  Chrome/Opera/Safari 
+  color: pink;
+}
+::-moz-placeholder {  Firefox 19+ 
+  color: pink;
+}
+:-ms-input-placeholder {  IE 10+ 
+  color: pink;
+}
+:-moz-placeholder {  Firefox 18- 
+  color: pink;
+}*/
+
+
+
+@mixin transition($transitions...) {
+    $unfoldedTransitions: ();
+    @each $transition in $transitions {
+        $unfoldedTransitions: append($unfoldedTransitions, unfoldTransition($transition), comma);
+    }
+
+    -webkit-transition: $unfoldedTransitions;
+    transition: $unfoldedTransitions;
+}
+
+@function unfoldTransition ($transition) {
+    // Default values
+    $property: all;
+    $duration: .3s;
+    $easing: null; // Browser default is ease, which is what we want
+    $delay: null; // Browser default is 0, which is what we want
+    $defaultProperties: ($property, $duration, $easing, $delay);
+
+    // Grab transition properties if they exist
+    $unfoldedTransition: ();
+    @for $i from 1 through length($defaultProperties) {
+        $p: null;
+        @if $i <= length($transition) {
+            $p: nth($transition, $i)
+        } @else {
+            $p: nth($defaultProperties, $i)
+        }
+        $unfoldedTransition: append($unfoldedTransition, $p);
+    }
+
+    @return $unfoldedTransition;
+}
+

@@ -1,0 +1,1 @@
+O:8:"stdClass":7:{s:2:"ID";s:2:"21";s:11:"resource_id";s:1:"9";s:13:"resource_type";s:4:"post";s:10:"emotion_id";s:1:"1";s:7:"user_id";s:1:"0";s:10:"user_token";s:32:"91a47bb3b4bc0faf1fe40f0398551d9f";s:10:"created_at";s:19:"2019-12-29 13:37:18";}
