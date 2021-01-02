@@ -1,7 +1,7 @@
 Options +FollowSymlinks
 RewriteEngine on
 # deal with admin first
-RewriteCond %{REQUEST_URI} ^/biofuels/(admin)
+RewriteCond %{REQUEST_URI} ^/lootah/(admin)
 RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
 RewriteRule ^admin/font-awesome/(.*)$ backend/web/font-awesome/$1 [L]
@@ -11,7 +11,7 @@ RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
 RewriteRule ^admin/images/(.*)$ backend/web/images/$1 [L]
 RewriteRule ^admin/vendor/(.*)$ backend/web/vendor/$1 [L]
 
-RewriteCond %{REQUEST_URI} ^/biofuels/(agentaccess)
+RewriteCond %{REQUEST_URI} ^/lootah/(agentaccess)
 RewriteRule ^agentaccess/assets/(.*)$ agentend/web/assets/$1 [L]
 RewriteRule ^agentaccess/css/(.*)$ agentend/web/css/$1 [L]
 RewriteRule ^agentaccess/font-awesome/(.*)$ agentend/web/font-awesome/$1 [L]
@@ -21,7 +21,7 @@ RewriteRule ^agentaccess/js/(.*)$ agentend/web/js/$1 [L]
 RewriteRule ^agentaccess/images/(.*)$ agentend/web/images/$1 [L]
 RewriteRule ^agentaccess/vendor/(.*)$ agentend/web/vendor/$1 [L]
 
-RewriteCond %{REQUEST_URI} ^/biofuels/(client)
+RewriteCond %{REQUEST_URI} ^/lootah/(client)
 RewriteRule ^client/assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^client/css/(.*)$ frontend/web/css/$1 [L]
 RewriteRule ^client/font-awesome/(.*)$ frontend/web/font-awesome/$1 [L]
@@ -32,21 +32,21 @@ RewriteRule ^client/images/(.*)$ frontend/web/images/$1 [L]
 RewriteRule ^client/vendor/(.*)$ frontend/web/vendor/$1 [L]
 
 
-RewriteCond %{REQUEST_URI} ^/biofuels/(uploads)
+RewriteCond %{REQUEST_URI} ^/lootah/(uploads)
 RewriteRule ^(uploads)($|/) - [L]
-RewriteCond %{REQUEST_URI} ^/biofuels/(feedback)
+RewriteCond %{REQUEST_URI} ^/lootah/(feedback)
 RewriteRule ^(feedback)($|/) - [L]
 
 
-RewriteCond %{REQUEST_URI} !^/biofuels/backend/web/(assets|css|plugins|js|images|fonts)/
-RewriteCond %{REQUEST_URI} ^/biofuels/(admin)
+RewriteCond %{REQUEST_URI} !^/lootah/backend/web/(assets|css|plugins|js|images|fonts)/
+RewriteCond %{REQUEST_URI} ^/lootah/(admin)
 RewriteRule ^.*$ backend/web/index.php [L]
 
-RewriteCond %{REQUEST_URI} !^/biofuels/agentend/web/(assets|css|plugins|js|images|fonts)/
-RewriteCond %{REQUEST_URI} ^/biofuels/(agentaccess)
+RewriteCond %{REQUEST_URI} !^/lootah/agentend/web/(assets|css|plugins|js|images|fonts)/
+RewriteCond %{REQUEST_URI} ^/lootah/(agentaccess)
 RewriteRule ^.*$ agentend/web/index.php [L]
 
-RewriteCond %{REQUEST_URI} ^/biofuels/(assets|css|js|images|img|fonts|map)
+RewriteCond %{REQUEST_URI} ^/lootah/(assets|css|js|images|img|fonts|map)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
 RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
@@ -55,7 +55,7 @@ RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
 RewriteRule ^img/(.*)$ frontend/web/img/$1 [L]
 
 
-RewriteCond %{REQUEST_URI} !^/biofuels/(frontend|backend|agentend)/web/(assets|css|images|fonts|map|js)/
+RewriteCond %{REQUEST_URI} !^/lootah/(frontend|backend|agentend)/web/(assets|css|images|fonts|map|js)/
 RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d

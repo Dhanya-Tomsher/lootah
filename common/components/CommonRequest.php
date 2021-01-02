@@ -42,6 +42,13 @@ class CommonRequest extends \yii\web\Request {
         }
     }
 
+    public function getconfig() {
+        $get_data = \common\models\Configuration::find()->where(['platform' => "APP"])->one();
+        if ($get_data != NULL) {
+            return $get_data;
+        }
+    }
+
     public function resolvePathInfo() {
         if ($this->getUrl() === $this->adminUrl) {
             return "";

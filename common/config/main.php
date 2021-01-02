@@ -37,5 +37,8 @@ return [
         'ApiManager' => [
             'class' => 'common\components\ApiManager'
         ],
+        'CommonRequest' => [
+            'class' => 'common\components\CommonRequest'
+        ],
     ],
 ];

@@ -34,6 +34,13 @@ class Request extends \yii\web\Request {
         }
     }
 
+    public function getconfig() {
+        $get_data = \common\models\Configuration::find()->where(['platform' => "APP"])->one();
+        if ($get_data != NULL) {
+            return $get_data;
+        }
+    }
+
     function getMessage($message, $lang) {
         $get_message = \common\models\MobileStrings::find()->where(['string_key' =>
                     $message])->one();
