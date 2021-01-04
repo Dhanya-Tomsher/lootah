@@ -129,13 +129,11 @@ class CrmManagerController extends Controller {
             $method = $model->method;
             $url = $module_key;
             $make_call = $this->callAPI($method, $url, json_encode($params));
-            if ($make_call != NULL && $make_call['status'] == 'success') {
+            if ($make_call != NULL) {
 
-                $datas = $make_call['data']['records'];
+                $datas = $make_call;
                 $module_function = $model->module_function;
                 $updation = Yii::$app->ApiManager->$module_function($datas);
-
-
                 if ($updation['errors'] == null) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
@@ -200,8 +198,7 @@ class CrmManagerController extends Controller {
     function callAPI($method, $url, $data) {
 
         $access_token = $this->GetAccessToken();
-        echo $access_token;
-        exit;
+
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
             $post_url = $site_url . $url . '?access_token=' . $access_token;
@@ -248,17 +245,17 @@ class CrmManagerController extends Controller {
         date_default_timezone_set('Asia/Qatar');
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
-        if ($get_token->crm_access_token == '' || $get_token->token_last_updated_on == '0000-00-00 00:00:00') {
+        if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
             $token = $this->generateToken();
             if ($token != NULL) {
                 if (isset($token['sessionId']) && $token['sessionId'] != "") {
-                    $get_token->crm_access_token = $token["sessionId"];
-                    $get_token->token_last_updated_on = $token["expire"];
+                    $get_token->dms_access_token = $token["sessionId"];
+                    $get_token->dms_token_last_updated_on = $token["expire"];
                     $get_token->save(FALSE);
                 }
             }
         } else {
-            $last_updated = $get_token->token_last_updated_on;
+            $last_updated = $get_token->dms_token_last_updated_on;
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
@@ -266,13 +263,13 @@ class CrmManagerController extends Controller {
                 $token = $this->generateToken();
                 if ($token != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
-                        $get_token->crm_access_token = $token["sessionId"];
-                        $get_token->token_last_updated_on = $token["expire"];
+                        $get_token->dms_access_token = $token["sessionId"];
+                        $get_token->dms_token_last_updated_on = $token["expire"];
                         $get_token->save(FALSE);
                     }
                 }
             } else {
-                $token = $get_token->crm_access_token;
+                $token = $get_token->dms_access_token;
             }
         }
 

@@ -29,24 +29,27 @@
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-container' ?>"><i class="fa fa-user"></i>Client Container</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-payment-type' ?>"><i class="fa fa-user"></i>Client Payment Type</a></li>
                 </ul>
-            </li>  
+            </li>
             <li>
                 <a><i class="fa fa-users"></i>Stations <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station' ?>"><i class="fa fa-user"></i>Stations</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/dispenser' ?>"><i class="fa fa-user"></i>Dispenser</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/nozzle' ?>"><i class="fa fa-user"></i>Nozzle</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/device' ?>"><i class="fa fa-user"></i>Device</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-station-collection' ?>"><i class="fa fa-user"></i>Daily Collection</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-monthly-details' ?>"><i class="fa fa-user"></i>Monthly Details</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-daily-data-for-verification' ?>"><i class="fa fa-user"></i>Daily Data Verification</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-filling' ?>"><i class="fa fa-user"></i>Filling</a></li>
                 </ul>
-            </li> 
+            </li>
             <li>
                 <a><i class="fa fa-users"></i>Station Operator <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-operator' ?>"><i class="fa fa-user"></i>Station Operator</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-station-assignment' ?>"><i class="fa fa-user"></i>Operator Station Assignment</a></li>
                 </ul>
-            </li>  
+            </li>
             <li>
                 <a><i class="fa fa-users"></i>Tankers <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
@@ -54,14 +57,14 @@
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-tanker-collection' ?>"><i class="fa fa-user"></i>Tanker Daily Collection</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-tanker-filling' ?>"><i class="fa fa-user"></i>Tanker Filling</a></li>
                 </ul>
-            </li> 
+            </li>
             <li>
                 <a><i class="fa fa-users"></i>Tanker Operator <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-tanker-operator' ?>"><i class="fa fa-user"></i>Tanker Operator</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-tanker-assignment' ?>"><i class="fa fa-user"></i>Operator Tanker Assignment</a></li>
                 </ul>
-            </li>  
+            </li>
             <li>
                 <a><i class="fa fa-users"></i>Supervisor <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
@@ -97,6 +100,17 @@
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/site/todays' ?>"><i class="fa fa-user"></i>Todays Collection</a></li>
                 </ul>
+            </li>
+
+            <li>
+                <a><i class="fa fa-globe"></i>Settings  <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/configuration' ?>"><i class=" fa fa-globe"></i>Configuration</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/crm-manager' ?>"><i class=" fa fa-globe"></i>API Manager</a></li>
+
+
+                </ul>
+
             </li>
         </ul>
     </div>

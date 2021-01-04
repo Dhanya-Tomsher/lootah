@@ -10,6 +10,77 @@ use common\components\NotificationManager;
 
 class ApiManager extends \yii\base\Component {
 
+    public function GetDevices($datas) {
+        $result = [];
+        $error_list = [];
+        if ($datas != NULL) {
+
+            foreach ($datas as $data) {
+                $device_id = $data['id'];
+                $device_ref_id = $data['description'];
+                $exp_items = explode('-', $device_ref_id);
+                $station = 0;
+                $dispenser = 0;
+                $nozzle = 0;
+                $dispenser_exist = [];
+                if ($exp_items != NULL) {
+                    if (isset($exp_items[0])) {
+                        $station = $exp_items[0];
+                    }
+                    if (isset($exp_items[1])) {
+
+                        $dispenser = $exp_items[1];
+                    }
+                    if (isset($exp_items[2])) {
+
+                        $nozzle = $exp_items[2];
+                    }
+                }
+
+                if ($dispenser != 0) {
+                    $dispenser_id = str_replace($dispenser, "", "D");
+                    $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
+                }
+                $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
+
+                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
+
+                    $check_device_exist = \common\models\Device::find()->where(['device_id' => $device_id])->one();
+                    if ($check_device_exist != NULL) {
+                        $check_device_exist->name = $data['name'];
+                        $check_device_exist->uid = $data['uid'];
+                        $check_device_exist->description = $data['description'];
+                        $check_device_exist->status = $data['status'];
+                        $check_device_exist->updated = $data['updated'];
+                        $check_device_exist->mobile = $data['mobile'];
+                        $check_device_exist->timestamp = $data['timestamp'];
+                        $check_device_exist->save();
+                    } else {
+                        $model = new \common\models\Device();
+
+                        $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
+                        if ($check_nozzle_exist != NULL) {
+                            $model->name = $data['name'];
+                            $model->uid = $data['uid'];
+                            $model->description = $data['description'];
+                            $model->device_ref_id = $data['description'];
+                            $model->status = $data['status'];
+                            $model->updated = $data['updated'];
+                            $model->mobile = $data['mobile'];
+                            $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                            $model->station_id = $check_nozzle_exist->station_id;
+                            $model->nozle_id = $check_nozzle_exist->id;
+                            $model->timestamp = $data['timestamp'];
+                            $model->save();
+                        }
+                    }
+                }
+            }
+        }
+        $result['errors'] = $error_list;
+        return $result;
+    }
+
     public function updateagent($params, $master) {
         $name = "Update agent details-" . $master;
         $url = "/rest/modules/v1.0/Agent/" . $master;
@@ -20,8 +91,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return $response['id'];
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return 0;
@@ -38,8 +108,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return $response['id'];
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return 0;
@@ -50,8 +119,7 @@ class ApiManager extends \yii\base\Component {
         $get_value = \common\models\CrmMaster::find()->where(['can_name' => $param, 'status' => 1])->one();
         if ($get_value != NULL) {
             return $get_value->val;
-        }
-        else {
+        } else {
             return "";
         }
     }
@@ -66,8 +134,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return TRUE;
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return TRUE;
@@ -111,8 +178,7 @@ class ApiManager extends \yii\base\Component {
             if ($user->master_id != '') {
                 $name = "Update User details-" . $user->master_id;
                 $url = "/rest/modules/v1.0/Account/" . $user->master_id;
-            }
-            else {
+            } else {
                 $name = "Create User details";
                 $url = "/rest/modules/v1.0/Account";
             }
@@ -138,14 +204,12 @@ class ApiManager extends \yii\base\Component {
             if ($response['errors'] == null) {
                 $array = $this->errorCode(2000, $name, $lang, $params);
                 return $response['id'];
-            }
-            else {
+            } else {
 
                 $array = $this->errorCode(1000, $name, $lang, $make_call);
                 return 0;
             }
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -157,8 +221,7 @@ class ApiManager extends \yii\base\Component {
             if ($user->master_id != 0) {
                 $name = "Update Tenant details-" . $user->master_id;
                 $url = "/rest/modules/v1.0/Tenant/" . $user->master_id;
-            }
-            else {
+            } else {
                 $name = "Create User details";
                 $url = "/rest/modules/v1.0/Tenant";
             }
@@ -182,14 +245,12 @@ class ApiManager extends \yii\base\Component {
             if ($response['errors'] == null) {
                 $array = $this->errorCode(2000, $name, $lang, $params);
                 return $response['id'];
-            }
-            else {
+            } else {
 
                 $array = $this->errorCode(1000, $name, $lang, $make_call);
                 return $response;
             }
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -213,8 +274,7 @@ class ApiManager extends \yii\base\Component {
 //                    $frn = $this->getfur($check_unit_code_exist, $furnished);
 //                    $check_unit_code_exist->furnished_status = $frn;
 //                    $check_unit_code_exist->save(FALSE);
-                }
-                else {
+                } else {
                     $new_property = new \common\models\Property();
                     $new_property->property_id = $unit_type_code;
                     $new_property->view_type = $this->getViewType($data["UnitView__name"]);
@@ -235,14 +295,11 @@ class ApiManager extends \yii\base\Component {
 
                     if ($data['UnitStatus__name'] == "Booked") {
                         $check_unit_exist->booking_status = 1;
-                    }
-                    else if ($data["UnitStatus__name"] == "Reserved") {
+                    } else if ($data["UnitStatus__name"] == "Reserved") {
                         $check_unit_exist->booking_status = 2;
-                    }
-                    else if ($data["UnitStatus__name"] == "Occupied") {
+                    } else if ($data["UnitStatus__name"] == "Occupied") {
                         $check_unit_exist->booking_status = 1;
-                    }
-                    else {
+                    } else {
                         $check_unit_exist->booking_status = 0;
                     }
 
@@ -266,15 +323,13 @@ class ApiManager extends \yii\base\Component {
                     $check_unit_exist->area = $data["Area"];
                     if ($check_unit_exist->save(FALSE)) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['tower'] = $datas["PropertyId__code"];
                         $err['error_details'] = $check_unit_exist->errors;
                         $error_list[] = $err;
                     }
-                }
-                else {
+                } else {
                     $model = new \common\models\PropertyUnits();
                     $model->property_id = $property_id;
                     $model->tower_no = $data["PropertyId__code"];
@@ -287,14 +342,11 @@ class ApiManager extends \yii\base\Component {
 
                     if ($data['UnitStatus__name'] == "Booked") {
                         $model->booking_status = 1;
-                    }
-                    else if ($data["UnitStatus__name"] == "Reserved") {
+                    } else if ($data["UnitStatus__name"] == "Reserved") {
                         $model->booking_status = 2;
-                    }
-                    else if ($data["UnitStatus__name"] == "Occupied") {
+                    } else if ($data["UnitStatus__name"] == "Occupied") {
                         $model->booking_status = 1;
-                    }
-                    else {
+                    } else {
                         $model->booking_status = 0;
                     }
                     $model->parking_no = $data["ParkingNo"];
@@ -313,8 +365,7 @@ class ApiManager extends \yii\base\Component {
 
                     if ($model->save()) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['error_details'] = $model->errors;
                         $error_list[] = $err;
@@ -400,14 +451,12 @@ class ApiManager extends \yii\base\Component {
                     $check_tower_exist->company_address_ar = $data['Address'];
                     if ($check_tower_exist->save()) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['error_details'] = $check_tower_exist->errors;
                         $error_list[] = $err;
                     }
-                }
-                else {
+                } else {
                     $new_tower = new \common\models\Tower();
                     $new_tower->name = $data['Name'];
                     $new_tower->code = $data['Code'];
@@ -425,8 +474,7 @@ class ApiManager extends \yii\base\Component {
                     $check_tower_exist->company_address_ar = $data['Address'];
                     if ($new_tower->save()) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['tower'] = $data["Code"];
                         $err['error_details'] = $new_tower->errors;
@@ -464,14 +512,12 @@ class ApiManager extends \yii\base\Component {
                     $check_agent_exist->master_id = $master_id;
                     if ($check_agent_exist->save()) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['error_details'] = $check_agent_exist->errors;
                         $error_list[] = $err;
                     }
-                }
-                else {
+                } else {
                     $model = new \common\models\Users();
                     $model->name = $data["Name"];
                     $model->address1 = $data["Address"];
@@ -491,8 +537,7 @@ class ApiManager extends \yii\base\Component {
 
                     if ($model->save()) {
 
-                    }
-                    else {
+                    } else {
                         $err['master_id'] = $data["MasterId"];
                         $err['error_details'] = $model->errors;
                         $error_list[] = $err;
@@ -514,8 +559,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $make_call);
             return TRUE;
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return TRUE;
@@ -532,8 +576,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return $response['records'];
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return $response['records'];
@@ -547,8 +590,7 @@ class ApiManager extends \yii\base\Component {
             $name = "Create new Contract request " . json_encode($params);
 
             $url = "/rest/modules/v1.0/PMSContract";
-        }
-        else {
+        } else {
             $name = "Create new Contract request" . $master . " - " . json_encode($params);
 
 
@@ -564,8 +606,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return $response['TransId'];
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $params);
             return 0;
@@ -578,8 +619,7 @@ class ApiManager extends \yii\base\Component {
             $name = "Create new maintenance request... " . json_encode($params);
 
             $url = "/rest/modules/v1.0/Calls";
-        }
-        else {
+        } else {
             $name = "Create new maintenance request" . $master;
 
             $url = "/rest/modules/v1.0/Calls/" . $master;
@@ -591,8 +631,7 @@ class ApiManager extends \yii\base\Component {
         if ($response['errors'] == null) {
             $array = $this->errorCode(2000, $name, $lang, $params);
             return $response;
-        }
-        else {
+        } else {
 
             $array = $this->errorCode(1000, $name, $lang, $make_call);
             return $response;
@@ -640,8 +679,7 @@ class ApiManager extends \yii\base\Component {
             }
             curl_close($curl);
             return $result;
-        }
-        else {
+        } else {
             return 'Access token not getting';
         }
     }
@@ -658,8 +696,7 @@ class ApiManager extends \yii\base\Component {
 
             if ($method == "GET") {
                 $url = $post_url;
-            }
-            else {
+            } else {
                 return 0;
             }
 
@@ -678,8 +715,7 @@ class ApiManager extends \yii\base\Component {
             }
             curl_close($curl);
             return $result;
-        }
-        else {
+        } else {
             return 'Access token not getting';
         }
     }
@@ -695,8 +731,7 @@ class ApiManager extends \yii\base\Component {
                 $get_token->token_last_updated_on = date('Y-m-d H:i:s');
                 $get_token->save(FALSE);
             }
-        }
-        else {
+        } else {
             $last_updated = $get_token->token_last_updated_on;
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
@@ -708,8 +743,7 @@ class ApiManager extends \yii\base\Component {
                     $get_token->token_last_updated_on = date('Y-m-d H:i:s');
                     $get_token->save(FALSE);
                 }
-            }
-            else {
+            } else {
                 $token = $get_token->crm_access_token;
             }
         }
@@ -733,8 +767,7 @@ class ApiManager extends \yii\base\Component {
         $result = json_decode($response, true);
         if (isset($result['errors']) && $result['errors'] != null) {
             return '';
-        }
-        else {
+        } else {
             return $result['accessToken'];
         }
     }
@@ -743,8 +776,7 @@ class ApiManager extends \yii\base\Component {
         $check_view_type = \common\models\ViewType::find()->where(['label' => $type])->one();
         if ($check_view_type != NULL) {
             return $check_view_type->id;
-        }
-        else {
+        } else {
             $model = new \common\models\ViewType();
             $model->label = $type;
             $model->name_en = $type;
@@ -764,8 +796,7 @@ class ApiManager extends \yii\base\Component {
         $check_fur = \common\models\FurnishedStatus::find()->where(['title' => $type])->one();
         if ($check_fur != NULL) {
             return $check_fur->key;
-        }
-        else {
+        } else {
             $model = new \common\models\FurnishedStatus();
             $model->title = $type;
             $model->label_en = $type;
@@ -781,8 +812,7 @@ class ApiManager extends \yii\base\Component {
         $check_view_type = \common\models\PropertyType::find()->where(['name_en' => $type])->one();
         if ($check_view_type != NULL) {
             return $check_view_type->id;
-        }
-        else {
+        } else {
             $model = new \common\models\PropertyType();
             $model->name_en = $type;
             $model->name_ar = $type;
@@ -800,29 +830,21 @@ class ApiManager extends \yii\base\Component {
     function getFur($exist_status, $post_status) {
         if ($exist_status == $post_status) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 1) {
+        } else if ($exist_status = 0 && $post_status == 1) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 3) {
+        } else if ($exist_status = 0 && $post_status == 3) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 4) {
+        } else if ($exist_status = 0 && $post_status == 4) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 5) {
+        } else if ($exist_status = 0 && $post_status == 5) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 1) {
+        } else if ($exist_status = 0 && $post_status == 1) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 3) {
+        } else if ($exist_status = 0 && $post_status == 3) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 4) {
+        } else if ($exist_status = 0 && $post_status == 4) {
             $st = $post_status;
-        }
-        else if ($exist_status = 0 && $post_status == 5) {
+        } else if ($exist_status = 0 && $post_status == 5) {
             $st = $post_status;
         }
 
@@ -857,15 +879,13 @@ class ApiManager extends \yii\base\Component {
         $status = 6;
         if ($sf_count > 0 && $ff_count > 0 && ($uf_count > 0 || $fif_count > 0)) {
             $status = 6;
-        }
-        else if ($sf_count > 0 && $ff_count > 0 && ($uf_count > 0 || $fif_count > 0)) {
+        } else if ($sf_count > 0 && $ff_count > 0 && ($uf_count > 0 || $fif_count > 0)) {
             $status = 6;
         }
         $check_view_type = \common\models\PropertyType::find()->where(['name_en' => $type])->one();
         if ($check_view_type != NULL) {
             return $check_view_type->id;
-        }
-        else {
+        } else {
             $model = new \common\models\PropertyType();
             $model->name_en = $type;
             $model->name_ar = $type;
@@ -890,15 +910,13 @@ class ApiManager extends \yii\base\Component {
             $new_name = Yii::$app->basePath . "/../uploads/logs/crm_app_log" . date('Y-m-d') . ".txt";
             rename($old_name, $new_name);
             $fp = fopen(Yii::$app->basePath . '/../uploads/logs/crm_app_log.txt', "a") or die("Unable to open file!");
-        }
-        else {
+        } else {
             $fp = fopen(Yii::$app->basePath . '/../uploads/logs/crm_app_log.txt', "a") or die("Unable to open file!");
         }
 
         if ($code != 2000) {
             $write_data = date('Y-m-d H:i:s A') . ' - ' . $name . ' - Error code : ' . $code;
-        }
-        else {
+        } else {
 
             $write_data = date('Y-m-d H:i:s A') . ' - ' . $name . ' - Success : ' . $code;
         }
@@ -909,8 +927,7 @@ class ApiManager extends \yii\base\Component {
         if ($value != '') {
             if (is_array($value)) {
                 $imp = json_encode($value);
-            }
-            else {
+            } else {
                 $imp = $value;
             }
         }

@@ -25,6 +25,8 @@ $(document).ready(function () {
             });
         }
     });
+
+
     $('#targetnotification-tower').change(function () {
         var tower = $(this).val();
         if (tower != '') {
@@ -44,8 +46,25 @@ $(document).ready(function () {
             });
         }
     });
+    $('#nozzle-station_id').change(function () {
+        var station_id = $(this).val();
+        if (station_id != '') {
+            $.ajax({
+                url: basepath + "/nozzle/get-dispenser",
+                type: "POST",
+                data: {station_id: station_id},
+                success: function (data)
+                {
+                    var obj = JSON.parse(data);
 
-
+                    $('#nozzle-dispenser_id').html(obj.data);
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+    });
 
 
 });

@@ -172,8 +172,8 @@ body.nav-md .container.body .col-md-3.left_col {
     padding: 0;
     position: absolute;
     display: flex;
-   /* background-color: #1a173f; */
-   background-color: #433d2f;
+    /* background-color: #1a173f; */
+    background-color: #433d2f;
 }
 body .container.body .right_col {
     background: #F7F7F7;
@@ -582,7 +582,7 @@ li.current-page a {
     margin-left: 0 !important;
     line-height: 59px;
     display: block;
-   /* height: 55px;*/
+    /* height: 55px;*/
     margin: 0;
     padding-left: 10px;
     padding-right: 10px;
@@ -5608,4 +5608,28 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 .green {
     background-color: #376f37 !important;
     border-color: #376f37 !important;
+}
+
+.bootstrap-select > .dropdown-toggle:hover {
+    background-color: #fff !important;
+    outline: none !important;
+}
+.bootstrap-select > .dropdown-toggle:focus {
+    background-color: #fff !important;
+    outline: none !important;
+}
+.bootstrap-select > .dropdown-toggle:active {
+    background-color: #fff !important;
+    outline: none !important;
+}
+.bootstrap-select > .dropdown-toggle {
+    height: 25px !important;
+    line-height: 16px !important;
+
+    padding: 0px 10px !important;
+}
+
+.open > .dropdown-toggle.btn-default {
+    background-color: #fff !important;
+
 }

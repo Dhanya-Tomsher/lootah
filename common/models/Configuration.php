@@ -47,7 +47,7 @@ class Configuration extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'email', 'phone', 'latitude', 'lonigtude', 'platform', 'status'], 'required'],
+            [['name', 'email', 'platform', 'status'], 'required'],
             [['additional_email', 'additional_phone', 'seo_keyword', 'seo_description'], 'string'],
             [['phone', 'office', 'fax', 'status'], 'integer'],
 //            [['latitude', 'lonigtude'], 'number'],

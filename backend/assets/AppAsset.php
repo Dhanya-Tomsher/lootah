@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle {
         'css/bootstrap-slider.min.css',
         'fonts/all/stylesheet.css',
         'css/style.css',
+        'css/bootstrap-select.css',
         'css/developer.css',
         'css/bootstrap-colorpicker.min.css',
         'css/jquery-ui.css',
@@ -42,7 +43,7 @@ class AppAsset extends AssetBundle {
         //'js/bootstrap-select.min.js',
         //'js/bootstrap.min.html',
         'js/main.js',
-       // 'js/highcharts.js',
+        // 'js/highcharts.js',
         'js/bootstrap.min.js',
         'js/jquery-clockpicker.min.js',
         'js/nicescroll/jquery.nicescroll.min.js',
@@ -91,7 +92,9 @@ class AppAsset extends AssetBundle {
         'js/developer.js',
 //        'js/bootstrap-colorpicker.js',
         'js/jquery-ui.js',
-        'js/jquery.tagsinput/src/jquery.tagsinput.js'
+        'js/jquery.tagsinput/src/jquery.tagsinput.js',
+        'js/bootstrap-select.js'
+
             // 'js/bootstrap-slider.min.js',
     ];
     public $depends = [
