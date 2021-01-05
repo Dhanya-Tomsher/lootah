@@ -99,7 +99,7 @@ class NozzleController extends Controller {
 
             if ($model->save()) {
                 $device_ref_id = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $model->id;
-                $model->device_ref_id = $device_ref_id;
+                $model->device_ref_no = $device_ref_id;
                 $model->save();
                 Yii::$app->session->setFlash('success', "Data created successfully.");
                 return $this->redirect(['index']);
