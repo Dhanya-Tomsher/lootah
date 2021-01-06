@@ -237,6 +237,8 @@ class CrmManagerController extends Controller {
                 die("Connection Failure");
             }
             curl_close($curl);
+            echo $result;
+            exit;
             return $result;
         } else {
             return 'Access token not getting';
