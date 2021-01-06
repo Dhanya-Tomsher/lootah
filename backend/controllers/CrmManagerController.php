@@ -222,7 +222,7 @@ class CrmManagerController extends Controller {
                     if ($data != NULL)
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-                        $url = '';
+                        $url = $post_url;
             }
 
             // OPTIONS:
@@ -235,6 +235,12 @@ class CrmManagerController extends Controller {
 
             // EXECUTE:
             $result = curl_exec($curl);
+            $final_result["result"] = $result;
+            $final_result["method"] = $method;
+            $final_result["url"] = $post_url;
+            echo "<pre/>";
+            print_r($final_result);
+            exit;
             if (!$result) {
                 die("Connection Failure");
             }
