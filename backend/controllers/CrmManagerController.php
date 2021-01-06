@@ -132,9 +132,7 @@ class CrmManagerController extends Controller {
             if ($make_call != NULL) {
 
                 $datas = $make_call;
-                echo "<pre/>";
-                print_r($datas);
-                exit;
+
                 $module_function = $model->module_function;
                 $updation = Yii::$app->ApiManager->$module_function($datas);
                 if ($updation['errors'] == null) {
@@ -200,34 +198,11 @@ class CrmManagerController extends Controller {
 
     function callAPI($method, $url, $data) {
 
-
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://www.smetron.com/casper/api/Devices?access_token=SID-VXPH04WRFZETQTR8VM05Y8QSPCNKJAT06012021111742317U24',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-        exit;
-        //$result = json_decode($response, true);
-
-
         $access_token = $this->GetAccessToken();
 
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
-            $post_url = $site_url . $url . '?access_token=' . $access_token;
+            $post_url = $site_url . $url . '?key=' . $access_token;
             $curl = curl_init();
 
             switch ($method) {
@@ -245,7 +220,7 @@ class CrmManagerController extends Controller {
                     if ($data != NULL)
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-                        $url = $post_url;
+                        $url = '';
             }
 
             // OPTIONS:
@@ -258,12 +233,6 @@ class CrmManagerController extends Controller {
 
             // EXECUTE:
             $result = curl_exec($curl);
-            $final_result["result"] = $result;
-            $final_result["method"] = $method;
-            $final_result["url"] = $post_url;
-            echo "<pre/>";
-            print_r($final_result);
-            exit;
             if (!$result) {
                 die("Connection Failure");
             }
