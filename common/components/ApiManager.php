@@ -63,7 +63,7 @@ class ApiManager extends \yii\base\Component {
                     } else {
                         $model = new \common\models\Device();
                         $model->name = $data['name'];
-                        $model->device_id = $data['device_id'];
+                        $model->device_id = $data['id'];
                         $model->uid = $data['uid'];
                         $model->description = $data['description'];
                         $model->device_ref_id = $data['name'];
