@@ -89,9 +89,9 @@ class ApiManager extends \yii\base\Component {
         $result['errors'] = $error_list;
         $result['result_all'] = $result_all;
         $result['result_selected'] = $result_selected;
-        echo "<pre/>";
-        print_r($result);
-        exit;
+//        echo "<pre/>";
+//        print_r($result);
+//        exit;
         return $result;
     }
 
