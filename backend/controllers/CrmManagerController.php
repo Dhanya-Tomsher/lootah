@@ -199,6 +199,9 @@ class CrmManagerController extends Controller {
     }
 
     function callAPI($method, $url, $data) {
+
+
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -210,9 +213,6 @@ class CrmManagerController extends Controller {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
         ));
 
         $response = curl_exec($curl);
@@ -220,6 +220,9 @@ class CrmManagerController extends Controller {
         curl_close($curl);
         echo $response;
         exit;
+        //$result = json_decode($response, true);
+
+
         $access_token = $this->GetAccessToken();
 
         if ($access_token != '') {
