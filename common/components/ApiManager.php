@@ -58,6 +58,7 @@ class ApiManager extends \yii\base\Component {
                         $check_device_exist->updated = $data['updated'];
                         $check_device_exist->mobile = $data['mobile'];
                         $check_device_exist->timestamp = $data['timestamp'];
+                        $check_device_exist->softwareId = $data['softwareId'];
                         $check_device_exist->save();
                     } else {
                         $model = new \common\models\Device();
@@ -72,6 +73,7 @@ class ApiManager extends \yii\base\Component {
                         $model->dispenser_id = $check_nozzle_exist->dispenser_id;
                         $model->station_id = $check_nozzle_exist->station_id;
                         $model->nozle_id = $check_nozzle_exist->id;
+                        $model->softwareId = $check_nozzle_exist->softwareId;
                         $model->timestamp = $data['timestamp'];
                         if ($model->save(FALSE)) {
 
