@@ -232,13 +232,13 @@ class CrmManagerController extends Controller {
             curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
             // EXECUTE:
-            $result = curl_exec($curl);
-            if (!$result) {
+            $response = curl_exec($curl);
+            $result = json_decode($response, true);
+
+            if (!$response) {
                 die("Connection Failure");
             }
-            curl_close($curl);
-            echo $result;
-            exit;
+
             return $result;
         } else {
             return 'Access token not getting';
