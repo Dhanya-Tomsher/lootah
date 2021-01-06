@@ -300,12 +300,12 @@ class CrmManagerController extends Controller {
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        //  echo $response;
 
         $result = json_decode($response, true);
-        print_r($result);
+        // print_r($result);
         // echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
-        exit;
+        // exit;
         return $result;
     }
 
