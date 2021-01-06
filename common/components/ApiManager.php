@@ -73,7 +73,7 @@ class ApiManager extends \yii\base\Component {
                         $model->dispenser_id = $check_nozzle_exist->dispenser_id;
                         $model->station_id = $check_nozzle_exist->station_id;
                         $model->nozle_id = $check_nozzle_exist->id;
-                        $model->softwareId = $check_nozzle_exist->softwareId;
+                        $model->softwareId = $data["softwareId"];
                         $model->timestamp = $data['timestamp'];
                         if ($model->save(FALSE)) {
 
