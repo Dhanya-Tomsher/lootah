@@ -132,6 +132,9 @@ class CrmManagerController extends Controller {
             if ($make_call != NULL) {
 
                 $datas = $make_call;
+                echo "<pre/>";
+                print_r($datas);
+                exit;
                 $module_function = $model->module_function;
                 $updation = Yii::$app->ApiManager->$module_function($datas);
                 if ($updation['errors'] == null) {
