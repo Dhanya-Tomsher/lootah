@@ -291,7 +291,7 @@ class CrmManagerController extends Controller {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
+            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
