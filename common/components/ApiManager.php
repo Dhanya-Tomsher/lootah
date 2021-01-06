@@ -63,7 +63,7 @@ class ApiManager extends \yii\base\Component {
                             $model->name = $data['name'];
                             $model->uid = $data['uid'];
                             $model->description = $data['description'];
-                            $model->device_ref_id = $data['description'];
+                            $model->device_ref_id = $data['name'];
                             $model->status = $data['status'];
                             $model->updated = $data['updated'];
                             $model->mobile = $data['mobile'];
@@ -71,7 +71,11 @@ class ApiManager extends \yii\base\Component {
                             $model->station_id = $check_nozzle_exist->station_id;
                             $model->nozle_id = $check_nozzle_exist->id;
                             $model->timestamp = $data['timestamp'];
-                            $model->save();
+                            if ($model->save()) {
+
+                            } else {
+                                $error_list[] = $model->errors;
+                            }
                         }
                     }
                 }
