@@ -77,7 +77,7 @@ class Device extends \yii\db\ActiveRecord {
     }
 
     public function getNozzle() {
-        return $this->hasOne(Dispenser::className(), ['device_ref_no' => 'device_ref_id']);
+        return $this->hasOne(Nozzle::className(), ['device_ref_no' => 'device_ref_id']);
     }
 
 }
