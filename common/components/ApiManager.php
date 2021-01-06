@@ -42,9 +42,13 @@ class ApiManager extends \yii\base\Component {
                     $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
                 }
                 $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
+                $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
 
-                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
+//                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
 
+                if ($check_nozzle_exist != NULL) {
+
+                    $result_selected[] = $data;
                     $check_device_exist = \common\models\Device::find()->where(['device_id' => $device_id])->one();
                     if ($check_device_exist != NULL) {
                         $check_device_exist->name = $data['name'];
@@ -57,31 +61,35 @@ class ApiManager extends \yii\base\Component {
                         $check_device_exist->save();
                     } else {
                         $model = new \common\models\Device();
+                        $model->name = $data['name'];
+                        $model->device_id = $data['device_id'];
+                        $model->uid = $data['uid'];
+                        $model->description = $data['description'];
+                        $model->device_ref_id = $data['name'];
+                        $model->status = $data['status'];
+                        $model->updated = $data['updated'];
+                        $model->mobile = $data['mobile'];
+                        $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                        $model->station_id = $check_nozzle_exist->station_id;
+                        $model->nozle_id = $check_nozzle_exist->id;
+                        $model->timestamp = $data['timestamp'];
+                        if ($model->save(FALSE)) {
 
-                        $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
-                        if ($check_nozzle_exist != NULL) {
-                            $model->name = $data['name'];
-                            $model->uid = $data['uid'];
-                            $model->description = $data['description'];
-                            $model->device_ref_id = $data['name'];
-                            $model->status = $data['status'];
-                            $model->updated = $data['updated'];
-                            $model->mobile = $data['mobile'];
-                            $model->dispenser_id = $check_nozzle_exist->dispenser_id;
-                            $model->station_id = $check_nozzle_exist->station_id;
-                            $model->nozle_id = $check_nozzle_exist->id;
-                            $model->timestamp = $data['timestamp'];
-                            if ($model->save()) {
-
-                            } else {
-                                $error_list[] = $model->errors;
-                            }
+                        } else {
+                            $error_list[] = $model->errors;
                         }
                     }
+                } else {
+                    $result_all[] = $data;
                 }
             }
         }
         $result['errors'] = $error_list;
+        $result['result_all'] = $result_all;
+        $result['result_selected'] = $result_selected;
+        echo "<pre/>";
+        print_r($result);
+        exit;
         return $result;
     }
 
