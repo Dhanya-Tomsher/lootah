@@ -220,7 +220,7 @@ class CrmManagerController extends Controller {
                     if ($data != NULL)
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-                        $url = '';
+                        $url = $post_url;
             }
 
             // OPTIONS:
