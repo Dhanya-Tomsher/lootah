@@ -17,7 +17,7 @@ class ApiManager extends \yii\base\Component {
 
             foreach ($datas as $data) {
                 $device_id = $data['id'];
-                $device_ref_id = $data['description'];
+                $device_ref_id = $data['name'];
                 $exp_items = explode('-', $device_ref_id);
                 $station = 0;
                 $dispenser = 0;
