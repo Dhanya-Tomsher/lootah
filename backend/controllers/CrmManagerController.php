@@ -220,9 +220,9 @@ class CrmManagerController extends Controller {
 //            'cow' => 'milk',
 //            'php' => 'hypertext processor'
 //        );
-        print_r($data);
-        echo http_build_query($data);
-        exit;
+//        print_r($data);
+//        echo http_build_query($data);
+//        exit;
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
             $post_url = $site_url . $url . '?key=' . $access_token;
@@ -241,7 +241,7 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = $post_url . "/" . http_build_query($data);
+                        $url = $post_url . "/" . http_build_query(json_decode($data));
                     else
                         $url = $post_url;
 
