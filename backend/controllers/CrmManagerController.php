@@ -302,6 +302,8 @@ class CrmManagerController extends Controller {
             echo $last_timestamp . "--" . $current_time . '==' . $new_time;
             if ($current_time >= $new_time) {
                 $token_result = $this->generateToken();
+                print_r($token_result);
+                exit;
                 if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
                         $token = $token['sessionId'];
@@ -350,6 +352,8 @@ class CrmManagerController extends Controller {
         // print_r($result);
         // echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
         // exit;
+        print_r($result);
+        exit;
         return $result;
     }
 
