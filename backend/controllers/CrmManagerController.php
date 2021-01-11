@@ -121,24 +121,7 @@ class CrmManagerController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-        exit;
         $model = $this->findModel($id);
         $params = [];
         if ($model != NULL) {
@@ -236,9 +219,12 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                    else
                         $url = $post_url;
+
+//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                // $url = $post_url;
             }
 
             // OPTIONS:
@@ -274,6 +260,7 @@ class CrmManagerController extends Controller {
                     $get_token->dms_access_token = $token["sessionId"];
                     $get_token->dms_token_last_updated_on = $token["expire"];
                     $get_token->save(FALSE);
+                    $token = $token['sessionId'];
                 }
             }
         } else {
@@ -282,12 +269,14 @@ class CrmManagerController extends Controller {
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
             if ($current_time >= $new_time) {
-                $token = $this->generateToken();
-                if ($token != NULL) {
+                $token_result = $this->generateToken();
+                if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
                         $get_token->dms_access_token = $token["sessionId"];
                         $get_token->dms_token_last_updated_on = $token["expire"];
                         $get_token->save(FALSE);
+
+                        $token = $token['sessionId'];
                     }
                 }
             } else {
@@ -299,15 +288,10 @@ class CrmManagerController extends Controller {
     }
 
     public function generateToken() {
-
-        $config = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
-        $name = "Get Lootah Access token";
+        $curl = curl_init();
         $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
         $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
         $password = Yii::$app->CommonRequest->getconfig()->dms_password;
-
-        $curl = curl_init();
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
             CURLOPT_RETURNTRANSFER => true,
@@ -322,12 +306,9 @@ class CrmManagerController extends Controller {
         $response = curl_exec($curl);
 
         curl_close($curl);
-        //  echo $response;
 
         $result = json_decode($response, true);
-        // print_r($result);
-        // echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
-        // exit;
+
         return $result;
     }
 
