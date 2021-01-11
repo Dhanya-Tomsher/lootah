@@ -100,6 +100,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ['class' => 'yii\grid\ActionColumn',
                                     'header' => 'Delete',
                                     'template' => '{delete}'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Transaction',
+                                    'template' => '{my_button_signature}',
+                                    'buttons' => [
+                                        'my_button_signature' => function ($url, $model, $key) {
+                                            $class = 'done';
+
+                                            return Html::a('<span class="' . $class . ' glyphicon glyphicon-plus"></span>', ['//transaction/index', 'dispenser_id' => $model->id]);
+                                            //return Html::a('<span class="' . $class . ' glyphicon glyphicon-plus"></span>', []);
+                                        },
+                                    ]
+                                ],
                             ],
                         ]);
                         ?>

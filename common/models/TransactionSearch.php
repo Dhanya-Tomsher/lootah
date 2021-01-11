@@ -55,6 +55,18 @@ class TransactionSearch extends Transaction {
             return $dataProvider;
         }
 
+        if (isset($_GET['dispenser_id'])) {
+            $query->andFilterWhere(['dispenser_id' => $_GET['dispenser_id']]);
+        }
+        if (isset($_GET['station_id'])) {
+            $query->andFilterWhere(['station_id' => $_GET['station_id']]);
+        }
+        if (isset($_GET['nozle_id'])) {
+            $query->andFilterWhere(['nozle_id' => $_GET['nozle_id']]);
+        }
+        if (isset($_GET['transaction_no'])) {
+            $query->andFilterWhere(['transaction_no' => $_GET['transaction_no']]);
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'transaction_no' => $this->transaction_no,

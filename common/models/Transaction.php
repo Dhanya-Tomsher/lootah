@@ -101,7 +101,7 @@ class Transaction extends \yii\db\ActiveRecord {
     }
 
     public function getNozzle() {
-        return $this->hasOne(Nozzle::className(), ['device_ref_no' => 'Meter']);
+        return $this->hasOne(Nozzle::className(), ['id' => 'nozle_id']);
     }
 
     public function getDevice() {

@@ -29,24 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="x_title">
 
                         <?php if (Yii::$app->session->hasFlash("success")): ?>
-                                <div class="alert alert-success alert-dismissable">
-                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                   
-                                     <?= Yii::$app->session->getFlash("success") ?>
-                                </div>
-                            <?php endif; ?>
+                            <div class="alert alert-success alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 
-                            <?php if (Yii::$app->session->hasFlash("error")): ?>
-                                <div class="alert alert-danger alert-dismissable">
-                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <?= Yii::$app->session->getFlash("success") ?>
+                            </div>
+                        <?php endif; ?>
 
-                                     <?= Yii::$app->session->getFlash("error") ?>
-                                </div>
-                            <?php endif; ?>
+                        <?php if (Yii::$app->session->hasFlash("error")): ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+
+                                <?= Yii::$app->session->getFlash("error") ?>
+                            </div>
+                        <?php endif; ?>
 
                         <ul class="nav navbar-right panel_toolbox">
-                                                                                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                            
+                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
                             <?= Html::a('Create Lb Station', ['create'], ['class' => 'btn btn-success']) ?>
 
 
@@ -55,39 +55,52 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="x_content">
 
-                                                    <?= GridView::widget([
+                        <?=
+                        GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
-        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
+                            'columns' => [
+                                ['class' => 'yii\grid\SerialColumn'],
+                                'id',
+                                'station_name',
+                                'location',
+                                //  'email:email',
+                                //   'phone',
+                                // 'address:ntext',
+                                // 'created_at',
+                                // 'updated_at',
+                                // 'created_by',
+                                // 'updated_by',
+                                // 'created_by_type',
+                                // 'updated_by_type',
+                                // 'sort_order',
+                                // 'status',
+                                ['class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Update',
+                                    'template' => '{update}'],
+                                ['class' => 'yii\grid\ActionColumn',
+                                    'header' => 'View',
+                                    'template' => '{view}'],
+                                ['class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Delete',
+                                    'template' => '{delete}'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Transaction',
+                                    'template' => '{my_button_signature}',
+                                    'buttons' => [
+                                        'my_button_signature' => function ($url, $model, $key) {
+                                            $class = 'done';
 
-                                        'id',
-            'station_name',
-            'location',
-          //  'email:email',
-         //   'phone',
-            // 'address:ntext',
-            // 'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
-            // 'created_by_type',
-            // 'updated_by_type',
-            // 'sort_order',
-            // 'status',
-
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'Update',
-                            'template' => '{update}'],
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'View',
-                            'template' => '{view}'],
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'Delete',
-                            'template' => '{delete}'],
+                                            return Html::a('<span class="' . $class . ' glyphicon glyphicon-plus"></span>', ['//transaction/index', 'station_id' => $model->id]);
+                                            //return Html::a('<span class="' . $class . ' glyphicon glyphicon-plus"></span>', []);
+                                        },
+                                    ]
+                                ],
                             ],
-                            ]); ?>
-                                                                    </div>
+                        ]);
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
