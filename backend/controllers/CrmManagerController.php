@@ -256,13 +256,13 @@ class CrmManagerController extends Controller {
 
         if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
 
-            $token = $this->generateToken();
-            if ($token != NULL) {
-                if (isset($token['sessionId']) && $token['sessionId'] != "") {
-                    $get_token->dms_access_token = $token["sessionId"];
-                    $get_token->dms_token_last_updated_on = $token["expire"];
+            $token_result = $this->generateToken();
+            if ($token_result != NULL) {
+                if (isset($token_result['sessionId']) && $token_result['sessionId'] != "") {
+                    $get_token->dms_access_token = $token_result["sessionId"];
+                    $get_token->dms_token_last_updated_on = $token_result["expire"];
                     $get_token->save(FALSE);
-                    $token = $token['sessionId'];
+                    $token = $token_result['sessionId'];
                 }
             }
         } else {
@@ -276,12 +276,12 @@ class CrmManagerController extends Controller {
                 $token_result = $this->generateToken();
 
                 if ($token_result != NULL) {
-                    if (isset($token['sessionId']) && $token['sessionId'] != "") {
-                        $get_token->dms_access_token = $token["sessionId"];
-                        $get_token->dms_token_last_updated_on = $token["expire"];
+                    if (isset($token_result['sessionId']) && $token_result['sessionId'] != "") {
+                        $get_token->dms_access_token = $token_result["sessionId"];
+                        $get_token->dms_token_last_updated_on = $token_result["expire"];
                         $get_token->save(FALSE);
 
-                        $token = $token['sessionId'];
+                        $token = $token_result['sessionId'];
                     }
                 }
             } else {
@@ -299,8 +299,8 @@ class CrmManagerController extends Controller {
         $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
         $password = Yii::$app->CommonRequest->getconfig()->dms_password;
         curl_setopt_array($curl, array(
-//            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
-            CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
+            CURLOPT_URL => $site_url . "Auth?username=" . $user_name . "&password=" . $password,
+//            CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -315,11 +315,8 @@ class CrmManagerController extends Controller {
         curl_close($curl);
 
         $result = json_decode($response, true);
-        echo $site_url . "?username=" . $user_name . "&password=" . $password;
-        echo 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215';
-        print_r($result);
-        exit;
-        //return $result;
+
+        return $result;
     }
 
     /**
