@@ -274,8 +274,7 @@ class CrmManagerController extends Controller {
             if ($current_time >= $new_time) {
 
                 $token_result = $this->generateToken();
-                print_r($token_result);
-                exit;
+
                 if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
                         $get_token->dms_access_token = $token["sessionId"];
@@ -315,8 +314,10 @@ class CrmManagerController extends Controller {
         curl_close($curl);
 
         $result = json_decode($response, true);
-
-        return $result;
+        echo 66;
+        print_r($result);
+        exit;
+        //return $result;
     }
 
     /**
