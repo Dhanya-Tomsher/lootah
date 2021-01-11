@@ -142,6 +142,7 @@ class ApiManager extends \yii\base\Component {
                         $model->station_id = $check_nozzle_exist->station_id;
                         $model->nozle_id = $check_nozzle_exist->id;
                         $model->UUID = uniqid('LOOTAH');
+                        $model->DeviceId = $data['DeviceId'];
 
                         $model->transaction_no = $data['Id'];
                         $model->ReferenceId = $data['ReferenceId'];
