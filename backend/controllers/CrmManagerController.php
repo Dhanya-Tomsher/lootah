@@ -129,39 +129,58 @@ class CrmManagerController extends Controller {
             $module_key = $model->module_key;
             $method = $model->method;
             $make_call = [];
+            $error_list = [];
             if ($model->can_name == "import-device") {
                 $url = $module_key;
 
                 $params = [];
                 $make_call = $this->callAPI($method, $url, json_encode($params));
+
+                if ($make_call != NULL) {
+
+                    $datas = $make_call;
+
+                    $module_function = $model->module_function;
+                    $updation = Yii::$app->ApiManager->$module_function($datas);
+                    if ($updation['errors'] == null) {
+                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        echo '<pre/>';
+                        print_r($updation);
+                        exit;
+
+//                    Yii::$app->session->setFlash('success', $module_name . "Data Not Updated.Error is " . serialize($updation));
+//                    return $this->redirect(['index']);
+                    }
+                }
             } else if ($model->can_name == "import-transactions") {
                 $url = 'FCS/' . $module_key;
 
                 $params = array(
                     'deviceId' => 58,
-                    'start' => $model->updated_at,
+                    'start' => $model->last_updated,
                     'end' => date("Y-m-d h:i:s"),
                     'reportId' => 1
                 );
                 $make_call = $this->callAPI($method, $url, json_encode($params));
-            }
+                if ($make_call != NULL) {
+                    $get_last_item = end($make_call);
+                    if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
+                        $model->last_updated;
+                        $model->save(false);
+                    }
 
-            if ($make_call != NULL) {
+                    $module_function = $model->module_function;
+                    $updation = Yii::$app->ApiManager->$module_function($datas);
+                    if ($updation['errors'] != null) {
+                        $error_list[] = $updation['errors'];
+                    }
+                }
 
-                $datas = $make_call;
-
-                $module_function = $model->module_function;
-                $updation = Yii::$app->ApiManager->$module_function($datas);
-                if ($updation['errors'] == null) {
+                if ($error_list != NULL) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
-                } else {
-                    echo '<pre/>';
-                    print_r($updation);
-                    exit;
-
-//                    Yii::$app->session->setFlash('success', $module_name . "Data Not Updated.Error is " . serialize($updation));
-//                    return $this->redirect(['index']);
                 }
             }
         }
@@ -252,8 +271,7 @@ class CrmManagerController extends Controller {
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
                 // $url = $post_url;
             }
-            echo $url;
-            exit;
+
             // OPTIONS:
             curl_setopt($curl, CURLOPT_URL, $post_url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(

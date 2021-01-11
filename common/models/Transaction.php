@@ -32,23 +32,21 @@ use Yii;
  * @property string $ServerTimestamp
  * @property string $UpdateTimestamp
  */
-class Transaction extends \yii\db\ActiveRecord
-{
+class Transaction extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'lb_transaction';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['UUID', 'transaction_no', 'SequenceId', 'DeviceId', 'Meter', 'SecondaryTag', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Accumulator', 'Volume', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp'], 'required'],
+            [['UUID', 'transaction_no', 'SequenceId', 'DeviceId', 'Meter', 'SecondaryTag', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Accumulator', 'Volume', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id'], 'required'],
             [['transaction_no', 'ReferenceId', 'SequenceId', 'DeviceId', 'Accumulator'], 'integer'],
             [['Volume'], 'number'],
             [['UUID'], 'string', 'max' => 254],
@@ -65,8 +63,7 @@ class Transaction extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'UUID' => 'Uuid',
             'transaction_no' => 'Transaction No',
@@ -94,4 +91,21 @@ class Transaction extends \yii\db\ActiveRecord
             'UpdateTimestamp' => 'Update Timestamp',
         ];
     }
+
+    public function getStation() {
+        return $this->hasOne(LbStation::className(), ['id' => 'station_id']);
+    }
+
+    public function getDispenser() {
+        return $this->hasOne(Dispenser::className(), ['id' => 'dispenser_id']);
+    }
+
+    public function getNozzle() {
+        return $this->hasOne(Nozzle::className(), ['device_ref_no' => 'Meter']);
+    }
+
+    public function getDevice() {
+        return $this->hasOne(Device::className(), ['device_id' => 'DeviceId']);
+    }
+
 }

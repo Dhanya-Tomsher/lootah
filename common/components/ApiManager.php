@@ -95,6 +95,99 @@ class ApiManager extends \yii\base\Component {
         return $result;
     }
 
+    public function GetTransactions($datas) {
+        $result = [];
+        $error_list = [];
+        if ($datas != NULL) {
+
+            foreach ($datas as $data) {
+
+                $device_ref_id = $data['Meter'];
+                $exp_items = explode('-', $device_ref_id);
+                $station = 0;
+                $dispenser = 0;
+                $nozzle = 0;
+                $dispenser_exist = [];
+                if ($exp_items != NULL) {
+                    if (isset($exp_items[0])) {
+                        $station = $exp_items[0];
+                    }
+                    if (isset($exp_items[1])) {
+
+                        $dispenser = $exp_items[1];
+                    }
+                    if (isset($exp_items[2])) {
+
+                        $nozzle = $exp_items[2];
+                    }
+                }
+
+                if ($dispenser != 0) {
+                    $dispenser_id = str_replace($dispenser, "", "D");
+                    $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
+                }
+                $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
+                $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
+
+//                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
+
+                if ($check_nozzle_exist != NULL) {
+
+                    $result_selected[] = $data;
+                    $check_transaction_exist = \common\models\Transaction::find()->where(['transaction_no' => $data->Id])->one();
+                    if ($check_device_exist == NULL) {
+
+                        $model = new \common\models\Transaction();
+                        $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                        $model->station_id = $check_nozzle_exist->station_id;
+                        $model->nozle_id = $check_nozzle_exist->id;
+                        $model->UUID = uniqid('LOOTAH');
+
+                        $model->transaction_no = $data['Id'];
+                        $model->ReferenceId = $data['ReferenceId'];
+                        $model->SequenceId = $data['SequenceId'];
+
+                        $model->Meter = $data['Meter'];
+                        $model->SecondaryTag = $data['SecondaryTag'];
+                        $model->Category = $data['Category'];
+                        $model->Operator = $data['Operator'];
+                        $model->Asset = $data['Asset'];
+                        $model->AccumulatorType = $data['AccumulatorType'];
+                        $model->Sitecode = $data['Sitecode'];
+                        $model->Project = $data['Project'];
+                        $model->PlateNo = $data['PlateNo'];
+                        $model->Master = $data['Master'];
+                        $model->Accumulator = $data['Accumulator'];
+                        $model->Volume = $data['Volume'];
+                        $model->Allowance = $data['Allowance'];
+                        $model->Type = $data['Type'];
+                        $model->StartTime = $data['StartTime'];
+                        $model->EndTime = $data['EndTime'];
+                        $model->Status = $data['Status'];
+                        $model->ServerTimestamp = $data['ServerTimestamp'];
+                        $model->UpdateTimestamp = $data['UpdateTimestamp'];
+
+
+                        if ($model->save(FALSE)) {
+
+                        } else {
+                            $error_list[] = $model->errors;
+                        }
+                    }
+                } else {
+                    $result_all[] = $data;
+                }
+            }
+        }
+        $result['errors'] = $error_list;
+        $result['result_all'] = $result_all;
+        $result['result_selected'] = $result_selected;
+//        echo "<pre/>";
+//        print_r($result);
+//        exit;
+        return $result;
+    }
+
     public function updateagent($params, $master) {
         $name = "Update agent details-" . $master;
         $url = "/rest/modules/v1.0/Agent/" . $master;

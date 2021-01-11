@@ -10,15 +10,14 @@ use common\models\Transaction;
 /**
  * TransactionSearch represents the model behind the search form of `common\models\Transaction`.
  */
-class TransactionSearch extends Transaction
-{
+class TransactionSearch extends Transaction {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp'], 'safe'],
+            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id'], 'safe'],
             [['transaction_no', 'ReferenceId', 'SequenceId', 'DeviceId', 'Accumulator'], 'integer'],
             [['Volume'], 'number'],
         ];
@@ -27,8 +26,7 @@ class TransactionSearch extends Transaction
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,8 +38,7 @@ class TransactionSearch extends Transaction
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Transaction::find();
 
         // add conditions that should always apply here
@@ -69,24 +66,25 @@ class TransactionSearch extends Transaction
         ]);
 
         $query->andFilterWhere(['like', 'UUID', $this->UUID])
-            ->andFilterWhere(['like', 'Meter', $this->Meter])
-            ->andFilterWhere(['like', 'SecondaryTag', $this->SecondaryTag])
-            ->andFilterWhere(['like', 'Category', $this->Category])
-            ->andFilterWhere(['like', 'Operator', $this->Operator])
-            ->andFilterWhere(['like', 'Asset', $this->Asset])
-            ->andFilterWhere(['like', 'AccumulatorType', $this->AccumulatorType])
-            ->andFilterWhere(['like', 'Sitecode', $this->Sitecode])
-            ->andFilterWhere(['like', 'Project', $this->Project])
-            ->andFilterWhere(['like', 'PlateNo', $this->PlateNo])
-            ->andFilterWhere(['like', 'Master', $this->Master])
-            ->andFilterWhere(['like', 'Allowance', $this->Allowance])
-            ->andFilterWhere(['like', 'Type', $this->Type])
-            ->andFilterWhere(['like', 'StartTime', $this->StartTime])
-            ->andFilterWhere(['like', 'EndTime', $this->EndTime])
-            ->andFilterWhere(['like', 'Status', $this->Status])
-            ->andFilterWhere(['like', 'ServerTimestamp', $this->ServerTimestamp])
-            ->andFilterWhere(['like', 'UpdateTimestamp', $this->UpdateTimestamp]);
+                ->andFilterWhere(['like', 'Meter', $this->Meter])
+                ->andFilterWhere(['like', 'SecondaryTag', $this->SecondaryTag])
+                ->andFilterWhere(['like', 'Category', $this->Category])
+                ->andFilterWhere(['like', 'Operator', $this->Operator])
+                ->andFilterWhere(['like', 'Asset', $this->Asset])
+                ->andFilterWhere(['like', 'AccumulatorType', $this->AccumulatorType])
+                ->andFilterWhere(['like', 'Sitecode', $this->Sitecode])
+                ->andFilterWhere(['like', 'Project', $this->Project])
+                ->andFilterWhere(['like', 'PlateNo', $this->PlateNo])
+                ->andFilterWhere(['like', 'Master', $this->Master])
+                ->andFilterWhere(['like', 'Allowance', $this->Allowance])
+                ->andFilterWhere(['like', 'Type', $this->Type])
+                ->andFilterWhere(['like', 'StartTime', $this->StartTime])
+                ->andFilterWhere(['like', 'EndTime', $this->EndTime])
+                ->andFilterWhere(['like', 'Status', $this->Status])
+                ->andFilterWhere(['like', 'ServerTimestamp', $this->ServerTimestamp])
+                ->andFilterWhere(['like', 'UpdateTimestamp', $this->UpdateTimestamp]);
 
         return $dataProvider;
     }
+
 }

@@ -18,7 +18,7 @@ class CrmManagerSearch extends CrmManager {
     public function rules() {
         return [
             [['id', 'status', 'update_by'], 'integer'],
-            [['module_name', 'created_at', 'updated_at', 'can_name', 'module_key', 'module_function', 'params'], 'safe'],
+            [['module_name', 'created_at', 'updated_at', 'can_name', 'module_key', 'module_function', 'params', 'last_updated'], 'safe'],
         ];
     }
 

@@ -30,7 +30,7 @@ class CrmManager extends \yii\db\ActiveRecord {
         return [
             [['module_name', 'status', 'update_by', 'module_key'], 'required'],
             [['status', 'update_by'], 'integer'],
-            [['created_at', 'updated_at', 'can_name', 'module_function', 'params'], 'safe'],
+            [['created_at', 'updated_at', 'can_name', 'module_function', 'params', 'last_updated'], 'safe'],
             [['can_name', 'module_name'], 'unique'],
         ];
     }
