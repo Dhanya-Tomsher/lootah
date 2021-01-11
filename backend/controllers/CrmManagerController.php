@@ -201,8 +201,7 @@ class CrmManagerController extends Controller {
     function callAPI($method, $url, $data) {
 
         $access_token = $this->GetAccessToken();
-        print_r($access_token);
-        exit;
+
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
             $post_url = $site_url . $url . '?key=' . $access_token;
@@ -256,6 +255,8 @@ class CrmManagerController extends Controller {
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
         if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
+            echo 12;
+            exit;
             $token = $this->generateToken();
             if ($token != NULL) {
                 if (isset($token['sessionId']) && $token['sessionId'] != "") {
@@ -266,6 +267,8 @@ class CrmManagerController extends Controller {
                 }
             }
         } else {
+            echo 13;
+            exit;
             $last_updated = $get_token->dms_token_last_updated_on;
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
