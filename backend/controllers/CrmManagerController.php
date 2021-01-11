@@ -299,6 +299,7 @@ class CrmManagerController extends Controller {
         $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
         $password = Yii::$app->CommonRequest->getconfig()->dms_password;
         curl_setopt_array($curl, array(
+//            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
             CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -314,7 +315,8 @@ class CrmManagerController extends Controller {
         curl_close($curl);
 
         $result = json_decode($response, true);
-        echo 66;
+        echo $site_url . "?username=" . $user_name . "&password=" . $password;
+        echo 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215';
         print_r($result);
         exit;
         //return $result;
