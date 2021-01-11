@@ -121,6 +121,39 @@ class CrmManagerController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
+
+        $config = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
+        $name = "Get Lootah Access token";
+        $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
+        $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
+        $password = Yii::$app->CommonRequest->getconfig()->dms_password;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        //  echo $response;
+        $final['url'] = $site_url . "?username=" . $user_name . "&password=" . $password;
+        $final['result'] = $response;
+        $result = json_decode($response, true);
+
+        echo $response;
+        echo "<pre/>";
+        print_r($final);
+        exit;
+
         $model = $this->findModel($id);
 
         if ($model != NULL) {
@@ -229,36 +262,6 @@ class CrmManagerController extends Controller {
     }
 
     function callAPI($method, $url, $data) {
-        $config = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
-        $name = "Get Lootah Access token";
-        $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
-        $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
-        $password = Yii::$app->CommonRequest->getconfig()->dms_password;
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        //  echo $response;
-        $final['url'] = $site_url . "?username=" . $user_name . "&password=" . $password;
-        $final['result'] = $response;
-        $result = json_decode($response, true);
-        echo $response;
-        print_r($final);
-        exit;
-        die('999');
 
 
         $access_token = $this->GetAccessToken();
