@@ -220,6 +220,7 @@ class CrmManagerController extends Controller {
 //            'cow' => 'milk',
 //            'php' => 'hypertext processor'
 //        );
+        print_r($data);
         echo http_build_query($data);
         exit;
         if ($access_token != '') {
