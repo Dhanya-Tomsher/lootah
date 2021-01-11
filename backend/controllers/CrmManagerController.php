@@ -214,13 +214,13 @@ class CrmManagerController extends Controller {
     function callAPI($method, $url, $data) {
 
         $access_token = $this->GetAccessToken();
-        $dataa = array(
-            'foo' => 'bar',
-            'baz' => 'boom',
-            'cow' => 'milk',
-            'php' => 'hypertext processor'
-        );
-        echo http_build_query($dataa);
+//        $dataa = array(
+//            'foo' => 'bar',
+//            'baz' => 'boom',
+//            'cow' => 'milk',
+//            'php' => 'hypertext processor'
+//        );
+        echo http_build_query($data);
         exit;
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
