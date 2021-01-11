@@ -301,9 +301,10 @@ class CrmManagerController extends Controller {
             $new_time = strtotime('+24 hours', $last_timestamp);
             echo $last_timestamp . "--" . $current_time . '==' . $new_time;
             if ($current_time >= $new_time) {
-                $token = $this->generateToken();
-                if ($token != NULL) {
+                $token_result = $this->generateToken();
+                if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
+                        $token = $token['sessionId'];
                         $get_token->dms_access_token = $token["sessionId"];
                         $get_token->dms_token_last_updated_on = $token["expire"];
                         $get_token->save(FALSE);
