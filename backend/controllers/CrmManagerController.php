@@ -183,6 +183,8 @@ class CrmManagerController extends Controller {
                 if ($error_list != NULL) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
+                } else {
+                    print_r($error_list);
                 }
             }
         }
@@ -286,7 +288,7 @@ class CrmManagerController extends Controller {
             $final['url'] = $url;
             $final['result'] = $result;
 
-//            print_r($final);
+            print_r(json_encode($final));
 //            exit;
             return $result;
         } else {
