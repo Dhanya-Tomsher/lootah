@@ -322,7 +322,7 @@ class CrmManagerController extends Controller {
             exit;
         }
 
-        return $token;
+        //return $token;
     }
 
     public function generateToken() {
@@ -353,11 +353,12 @@ class CrmManagerController extends Controller {
 
         $result = json_decode($response, true);
         // print_r($result);
-        // echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
+        echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
         // exit;
+
         print_r($result);
         exit;
-        return $result;
+        // return $result;
     }
 
     /**
