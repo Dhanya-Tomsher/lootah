@@ -129,16 +129,17 @@ class CrmManagerController extends Controller {
             $module_key = $model->module_key;
             $method = $model->method;
             $url = $module_key;
-            $params = [];
+
             if ($model->can_name == "import-device") {
 
             } else if ($model->can_name == "import-device") {
 
-                array_push($params, ["deviceId" => 58]);
-
-                //$params['start'] = $model->updated_at;
-                //$params['end'] = date("Y-m-d h:i:s");
-                //$params['reportId'] = 1;
+                $params = array(
+                    'deviceId' => 58,
+                    'start' => $model->updated_at,
+                    'end' => date("Y-m-d h:i:s"),
+                    'reportId' => 1
+                );
             }
             $make_call = $this->callAPI($method, $url, json_encode($params));
 
@@ -231,7 +232,7 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                        $url = $post_url . "/" . http_build_query($data);
                     else
                         $url = $post_url;
 
