@@ -128,12 +128,14 @@ class CrmManagerController extends Controller {
             $module_name = $model->module_name;
             $module_key = $model->module_key;
             $method = $model->method;
-            $url = $module_key;
             $make_call = [];
             if ($model->can_name == "import-device") {
+                $url = $module_key;
+
                 $params = [];
                 $make_call = $this->callAPI($method, $url, json_encode($params));
             } else if ($model->can_name == "import-transactions") {
+                $url = 'FCS/' . $module_key;
 
                 $params = array(
                     'deviceId' => 58,
@@ -241,7 +243,7 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = sprintf("%s?%s", $post_url, http_build_query(json_decode($data)));
+                        $url = sprintf("", $post_url, http_build_query(json_decode($data)));
 
                     //$url = $post_url . "/" . http_build_query(json_decode($data));
                     else
