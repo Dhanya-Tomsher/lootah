@@ -130,6 +130,8 @@ class CrmManagerController extends Controller {
             $method = $model->method;
             $url = $module_key;
             $make_call = $this->callAPI($method, $url, json_encode($params));
+            print_r($make_call);
+            exit;
             if ($make_call != NULL) {
 
                 $datas = $make_call;
