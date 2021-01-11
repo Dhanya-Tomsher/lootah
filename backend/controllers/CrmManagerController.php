@@ -156,7 +156,7 @@ class CrmManagerController extends Controller {
                 if ($get_devices != NULL) {
                     foreach ($get_devices as $get_device) {
                         $params['deviceId'] = $get_device->device_id;
-                        $params['start'] = $get_device->updated_at;
+                        $params['start'] = $model->updated_at;
                         $params['end'] = date("Y-m-d h:i:s");
                         $params['reportId'] = $get_device->device_id;
                         $make_call = $this->callAPI($method, $url, json_encode($params));
