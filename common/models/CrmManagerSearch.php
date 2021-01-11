@@ -10,24 +10,22 @@ use common\models\CrmManager;
 /**
  * CrmManagerSearch represents the model behind the search form of `common\models\CrmManager`.
  */
-class CrmManagerSearch extends CrmManager
-{
+class CrmManagerSearch extends CrmManager {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'status', 'update_by'], 'integer'],
-            [['module_name', 'created_at', 'updated_at', 'can_name', 'module_key', 'module_function'], 'safe'],
+            [['module_name', 'created_at', 'updated_at', 'can_name', 'module_key', 'module_function', 'params'], 'safe'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class CrmManagerSearch extends CrmManager
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = CrmManager::find();
 
         // add conditions that should always apply here
@@ -67,10 +64,11 @@ class CrmManagerSearch extends CrmManager
         ]);
 
         $query->andFilterWhere(['like', 'module_name', $this->module_name])
-            ->andFilterWhere(['like', 'can_name', $this->can_name])
-            ->andFilterWhere(['like', 'module_key', $this->module_key])
-            ->andFilterWhere(['like', 'module_function', $this->module_function]);
+                ->andFilterWhere(['like', 'can_name', $this->can_name])
+                ->andFilterWhere(['like', 'module_key', $this->module_key])
+                ->andFilterWhere(['like', 'module_function', $this->module_function]);
 
         return $dataProvider;
     }
+
 }

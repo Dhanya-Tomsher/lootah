@@ -122,29 +122,61 @@ class CrmManagerController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        $params = [];
+
         if ($model != NULL) {
             $module_name = $model->module_name;
             $module_key = $model->module_key;
             $method = $model->method;
             $url = $module_key;
-            $make_call = $this->callAPI($method, $url, json_encode($params));
-            if ($make_call != NULL) {
+            $error_list = [];
+            if ($model->can_name == "import-device") {
+                $params = [];
 
-                $datas = $make_call;
+                $make_call = $this->callAPI($method, $url, json_encode($params));
+                if ($make_call != NULL) {
 
-                $module_function = $model->module_function;
-                $updation = Yii::$app->ApiManager->$module_function($datas);
-                if ($updation['errors'] == null) {
-                    Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
-                    return $this->redirect(['index']);
-                } else {
-                    echo '<pre/>';
-                    print_r($updation);
-                    exit;
+                    $datas = $make_call;
+
+                    $module_function = $model->module_function;
+                    $updation = Yii::$app->ApiManager->$module_function($datas);
+                    if ($updation['errors'] == null) {
+                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        echo '<pre/>';
+                        print_r($updation);
+                        exit;
 
 //                    Yii::$app->session->setFlash('success', $module_name . "Data Not Updated.Error is " . serialize($updation));
 //                    return $this->redirect(['index']);
+                    }
+                }
+            } else if ($model->can_name == "import-transactions") {
+                $get_devices = \common\models\Device::find()->where(['status' => 1])->all();
+                if ($get_devices != NULL) {
+                    foreach ($get_devices as $get_device) {
+                        $params['deviceId'] = $get_device->device_id;
+                        $params['start'] = $get_device->updated_at;
+                        $params['end'] = date("Y-m-d h:i:s");
+                        $params['reportId'] = $get_device->device_id;
+                        $make_call = $this->callAPI($method, $url, json_encode($params));
+                        if ($make_call != NULL) {
+                            $error_list[] = $updation['errors'];
+                            $datas = $make_call;
+                            $module_function = $model->module_function;
+                            $updation = Yii::$app->ApiManager->$module_function($datas);
+                        }
+                    }
+
+                    if ($error_list != NULL) {
+
+                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        echo '<pre/>';
+                        print_r($updation);
+                        exit;
+                    }
                 }
             }
         }
@@ -218,11 +250,12 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-                        $url = $post_url;
+                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+//                        //$url = sprintf("%s?%s", $post_url, http_build_query($data));
+                // $url = $post_url;
             }
-
+            echo $url;
+            exit;
             // OPTIONS:
             curl_setopt($curl, CURLOPT_URL, $post_url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
