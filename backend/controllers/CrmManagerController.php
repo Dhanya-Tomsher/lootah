@@ -130,8 +130,7 @@ class CrmManagerController extends Controller {
             $method = $model->method;
             $url = $module_key;
             $make_call = $this->callAPI($method, $url, json_encode($params));
-            print_r($make_call);
-            exit;
+
             if ($make_call != NULL) {
 
                 $datas = $make_call;
@@ -202,7 +201,8 @@ class CrmManagerController extends Controller {
     function callAPI($method, $url, $data) {
 
         $access_token = $this->GetAccessToken();
-
+        print_r($access_token);
+        exit;
         if ($access_token != '') {
             $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
             $post_url = $site_url . $url . '?key=' . $access_token;
