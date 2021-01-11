@@ -129,6 +129,15 @@ class CrmManagerController extends Controller {
             $module_key = $model->module_key;
             $method = $model->method;
             $url = $module_key;
+
+            if ($model->import - device == "import-device") {
+                $params = [];
+            } else if ($model->import - device == "import-device") {
+                $params['deviceId'] = 58;
+                $params['start'] = $model->updated_at;
+                $params['end'] = date("Y-m-d h:i:s");
+                $params['reportId'] = 1;
+            }
             $make_call = $this->callAPI($method, $url, json_encode($params));
 
             if ($make_call != NULL) {
