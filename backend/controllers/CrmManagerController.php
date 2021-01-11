@@ -241,7 +241,9 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = $post_url . "/" . http_build_query(json_decode($data));
+                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+
+                    //$url = $post_url . "/" . http_build_query(json_decode($data));
                     else
                         $url = $post_url;
 
