@@ -167,7 +167,11 @@ class CrmManagerController extends Controller {
                 );
                 $make_call = $this->callAPI($method, $url, json_encode($params));
                 if ($make_call != NULL) {
+                    echo "Ok AAAyi";
+
                     $get_last_item = end($make_call);
+                    print_r($get_last_item);
+                    exit;
                     if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
                         $model->last_updated;
                         $model->save(false);
@@ -180,11 +184,12 @@ class CrmManagerController extends Controller {
                     }
                 }
 
-                if ($error_list != NULL) {
+                if ($error_list == NULL) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
                 } else {
                     print_r($error_list);
+                    exit;
                 }
             }
         }
@@ -288,7 +293,7 @@ class CrmManagerController extends Controller {
             $final['url'] = $url;
             $final['result'] = $result;
 
-            print_r(json_encode($final));
+            //print_r(json_encode($final));
 //            exit;
             return $result;
         } else {
