@@ -130,9 +130,9 @@ class CrmManagerController extends Controller {
             $method = $model->method;
             $url = $module_key;
 
-            if ($model->import - device == "import-device") {
+            if ($model->can_name == "import-device") {
                 $params = [];
-            } else if ($model->import - device == "import-device") {
+            } else if ($model->can_name == "import-device") {
                 $params['deviceId'] = 58;
                 $params['start'] = $model->updated_at;
                 $params['end'] = date("Y-m-d h:i:s");
