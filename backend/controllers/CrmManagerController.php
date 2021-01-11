@@ -121,95 +121,30 @@ class CrmManagerController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
-
-        $config = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
-        $name = "Get Lootah Access token";
-        $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
-        $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
-        $password = Yii::$app->CommonRequest->getconfig()->dms_password;
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $site_url . "?username=" . $user_name . "&password=" . $password,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        //  echo $response;
-        $final['url'] = $site_url . "?username=" . $user_name . "&password=" . $password;
-        $final['result'] = $response;
-        $result = json_decode($response, true);
-
-        echo $response;
-        echo "<pre/>";
-        print_r($final);
-        exit;
-
         $model = $this->findModel($id);
-
+        $params = [];
         if ($model != NULL) {
             $module_name = $model->module_name;
             $module_key = $model->module_key;
             $method = $model->method;
             $url = $module_key;
-            $error_list = [];
-            if ($model->can_name == "import-device") {
-                $params = [];
+            $make_call = $this->callAPI($method, $url, json_encode($params));
+            if ($make_call != NULL) {
 
-                $make_call = $this->callAPI($method, $url, json_encode($params));
-                if ($make_call != NULL) {
+                $datas = $make_call;
 
-                    $datas = $make_call;
-
-                    $module_function = $model->module_function;
-                    $updation = Yii::$app->ApiManager->$module_function($datas);
-                    if ($updation['errors'] == null) {
-                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
-                        return $this->redirect(['index']);
-                    } else {
-                        echo '<pre/>';
-                        print_r($updation);
-                        exit;
+                $module_function = $model->module_function;
+                $updation = Yii::$app->ApiManager->$module_function($datas);
+                if ($updation['errors'] == null) {
+                    Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                    return $this->redirect(['index']);
+                } else {
+                    echo '<pre/>';
+                    print_r($updation);
+                    exit;
 
 //                    Yii::$app->session->setFlash('success', $module_name . "Data Not Updated.Error is " . serialize($updation));
 //                    return $this->redirect(['index']);
-                    }
-                }
-            } else if ($model->can_name == "import-transactions") {
-                $get_devices = \common\models\Device::find()->where(['status' => 1])->all();
-                if ($get_devices != NULL) {
-                    foreach ($get_devices as $get_device) {
-                        $params['deviceId'] = $get_device->device_id;
-                        $params['start'] = $model->updated_at;
-                        $params['end'] = date("Y-m-d h:i:s");
-                        $params['reportId'] = $get_device->device_id;
-                        $make_call = $this->callAPI($method, $url, json_encode($params));
-                        if ($make_call != NULL) {
-                            $error_list[] = $updation['errors'];
-                            $datas = $make_call;
-                            $module_function = $model->module_function;
-                            $updation = Yii::$app->ApiManager->$module_function($datas);
-                        }
-                    }
-
-                    if ($error_list != NULL) {
-
-                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
-                        return $this->redirect(['index']);
-                    } else {
-                        echo '<pre/>';
-                        print_r($updation);
-                        exit;
-                    }
                 }
             }
         }
@@ -263,7 +198,6 @@ class CrmManagerController extends Controller {
 
     function callAPI($method, $url, $data) {
 
-
         $access_token = $this->GetAccessToken();
 
         if ($access_token != '') {
@@ -284,14 +218,11 @@ class CrmManagerController extends Controller {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
-//                        //$url = sprintf("%s?%s", $post_url, http_build_query($data));
-                // $url = $post_url;
+//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                        $url = $post_url;
             }
-            echo http_build_query($data);
-            echo 23;
-            echo $url;
-            exit;
+
             // OPTIONS:
             curl_setopt($curl, CURLOPT_URL, $post_url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
@@ -315,8 +246,6 @@ class CrmManagerController extends Controller {
     }
 
     public function GetAccessToken() {
-
-
         date_default_timezone_set('Asia/Qatar');
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
@@ -334,15 +263,10 @@ class CrmManagerController extends Controller {
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
-            echo $last_timestamp . "--" . $current_time . '==' . $new_time;
             if ($current_time >= $new_time) {
-                $token_result = $this->generateToken();
-                print_r($token_result);
-                echo 12;
-                exit;
-                if ($token_result != NULL) {
+                $token = $this->generateToken();
+                if ($token != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
-                        $token = $token['sessionId'];
                         $get_token->dms_access_token = $token["sessionId"];
                         $get_token->dms_token_last_updated_on = $token["expire"];
                         $get_token->save(FALSE);
@@ -350,14 +274,10 @@ class CrmManagerController extends Controller {
                 }
             } else {
                 $token = $get_token->dms_access_token;
-                echo 14;
-                exit;
             }
-            echo $token;
-            exit;
         }
 
-        //return $token;
+        return $token;
     }
 
     public function generateToken() {
@@ -387,14 +307,10 @@ class CrmManagerController extends Controller {
         //  echo $response;
 
         $result = json_decode($response, true);
-        echo $response;
-        echo 33;
-        echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
+        // print_r($result);
+        // echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
         // exit;
-
-        print_r($result);
-        exit;
-        // return $result;
+        return $result;
     }
 
     /**
