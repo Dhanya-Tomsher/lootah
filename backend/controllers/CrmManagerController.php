@@ -123,16 +123,17 @@ class CrmManagerController extends Controller {
     public function actionUpdate($id) {
 
         $model = $this->findModel($id);
-        $params = [];
+
         if ($model != NULL) {
             $module_name = $model->module_name;
             $module_key = $model->module_key;
             $method = $model->method;
             $url = $module_key;
-
+            $make_call = [];
             if ($model->can_name == "import-device") {
-
-            } else if ($model->can_name == "import-device") {
+                $params = [];
+                $make_call = $this->callAPI($method, $url, json_encode($params));
+            } else if ($model->can_name == "import-transactions") {
 
                 $params = array(
                     'deviceId' => 58,
@@ -140,8 +141,8 @@ class CrmManagerController extends Controller {
                     'end' => date("Y-m-d h:i:s"),
                     'reportId' => 1
                 );
+                $make_call = $this->callAPI($method, $url, json_encode($params));
             }
-            $make_call = $this->callAPI($method, $url, json_encode($params));
 
             if ($make_call != NULL) {
 
