@@ -286,8 +286,8 @@ class CrmManagerController extends Controller {
             $final['url'] = $url;
             $final['result'] = $result;
 
-            print_r($final);
-            exit;
+//            print_r($final);
+//            exit;
             return $result;
         } else {
             return 'Access token not getting';
