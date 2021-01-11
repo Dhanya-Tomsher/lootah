@@ -299,6 +299,7 @@ class CrmManagerController extends Controller {
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
+            echo $last_timestamp . "--" . $current_time . '==' . $new_time;
             if ($current_time >= $new_time) {
                 $token = $this->generateToken();
                 if ($token != NULL) {
@@ -311,6 +312,8 @@ class CrmManagerController extends Controller {
             } else {
                 $token = $get_token->dms_access_token;
             }
+            echo $token;
+            exit;
         }
 
         return $token;
