@@ -272,9 +272,10 @@ class CrmManagerController extends Controller {
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
             if ($current_time >= $new_time) {
-                echo 34;
-                exit;
+
                 $token_result = $this->generateToken();
+                print_r($token_result);
+                exit;
                 if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
                         $get_token->dms_access_token = $token["sessionId"];
@@ -285,8 +286,7 @@ class CrmManagerController extends Controller {
                     }
                 }
             } else {
-                echo 35;
-                exit;
+
                 $token = $get_token->dms_access_token;
             }
         }
