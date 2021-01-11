@@ -121,6 +121,8 @@ class CrmManagerController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
+        ini_set('memory_limit', '-1');
+
 
         $model = $this->findModel($id);
 
@@ -233,6 +235,8 @@ class CrmManagerController extends Controller {
     }
 
     function callAPI($method, $url, $data) {
+        ini_set('memory_limit', '-1');
+
 
         $access_token = $this->GetAccessToken();
 
