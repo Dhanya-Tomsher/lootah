@@ -248,7 +248,8 @@ class CrmManagerController extends Controller {
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
                 // $url = $post_url;
             }
-
+            echo $url;
+            exit;
             // OPTIONS:
             curl_setopt($curl, CURLOPT_URL, $post_url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
