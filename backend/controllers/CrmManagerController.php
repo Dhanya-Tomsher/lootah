@@ -167,18 +167,18 @@ class CrmManagerController extends Controller {
                 );
                 $make_call = $this->callAPI($method, $url, json_encode($params));
                 if ($make_call != NULL) {
-                    echo "Ok AAAyi";
+                    //echo "Ok AAAyi";
 
                     $get_last_item = end($make_call);
-                    print_r($get_last_item);
-                    exit;
+//                    print_r($get_last_item);
+//                    exit;
                     if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
-                        $model->last_updated;
+                        $model->last_updated = $get_last_item['EndTime'];
                         $model->save(false);
                     }
 
                     $module_function = $model->module_function;
-                    $updation = Yii::$app->ApiManager->$module_function($datas);
+                    $updation = Yii::$app->ApiManager->$module_function($make_call);
                     if ($updation['errors'] != null) {
                         $error_list[] = $updation['errors'];
                     }
