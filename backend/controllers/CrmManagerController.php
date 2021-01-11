@@ -255,8 +255,7 @@ class CrmManagerController extends Controller {
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
         if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
-            echo 12;
-            exit;
+
             $token = $this->generateToken();
             if ($token != NULL) {
                 if (isset($token['sessionId']) && $token['sessionId'] != "") {
@@ -267,13 +266,14 @@ class CrmManagerController extends Controller {
                 }
             }
         } else {
-            echo 13;
-            exit;
+
             $last_updated = $get_token->dms_token_last_updated_on;
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
             if ($current_time >= $new_time) {
+                echo 34;
+                exit;
                 $token_result = $this->generateToken();
                 if ($token_result != NULL) {
                     if (isset($token['sessionId']) && $token['sessionId'] != "") {
@@ -285,6 +285,8 @@ class CrmManagerController extends Controller {
                     }
                 }
             } else {
+                echo 35;
+                exit;
                 $token = $get_token->dms_access_token;
             }
         }
