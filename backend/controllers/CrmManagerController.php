@@ -353,6 +353,7 @@ class CrmManagerController extends Controller {
 
         $result = json_decode($response, true);
         print_r($response);
+        echo 33;
         echo $site_url . "Auth?username=" . $user_name . "&password=" . $password;
         // exit;
 
