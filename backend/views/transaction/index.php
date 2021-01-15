@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'header' => 'Device',
                                     'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'device_id', 'name'),
                                     //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Device", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                     'value' => function($data) {
                                         return $data->device->name;
                                     },
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'header' => 'Station',
                                     'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
                                     //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                     'value' => function($data) {
                                         return $data->station->station_name;
                                     },
@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'header' => 'Dispenser',
                                     'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
                                     //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                     'value' => function($data) {
                                         return $data->dispenser->label;
                                     },
@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'header' => 'Nozzle',
                                     'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
                                     //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                     'value' => function($data) {
                                         return $data->nozzle->label;
                                     },
