@@ -55,27 +55,27 @@ class TransactionSearch extends Transaction {
             return $dataProvider;
         }
 
-        if (isset($_GET['date_from']) && $_GET['date_from'] != "") {
-            $query->andFilterWhere("EndTime >=  '" . $_GET['date_from'] . "'");
-        }
-        if (isset($_GET['date_to']) && $_GET['date_to'] != "") {
-            $query->andFilterWhere("EndTime <=  '" . $_GET['date_to'] . "'");
-        }
-        if (isset($_GET['device_type']) && $_GET['device_type'] != "") {
-            $query->andFilterWhere(['device_type' => $_GET['device_type']]);
-        }
-        if (isset($_GET['dispenser_id']) && $_GET['dispenser_id'] != "") {
-            $query->andFilterWhere(['dispenser_id' => $_GET['dispenser_id']]);
-        }
-        //  if (isset($_GET['station_id']) && $_GET['station_id'] != "") {
-        $query->andFilterWhere(['station_id' => $_GET['station_id']]);
-        // }
-        if (isset($_GET['nozle_id']) && $_GET['nozle_id'] != "") {
-            $query->andFilterWhere(['nozle_id' => $_GET['nozle_id']]);
-        }
-        if (isset($_GET['transaction_no']) && $_GET['transaction_no'] != "") {
-            $query->andFilterWhere(['transaction_no' => $_GET['transaction_no']]);
-        }
+//        if (isset($_GET['date_from']) && $_GET['date_from'] != "") {
+//            $query->andFilterWhere("EndTime >=  '" . $_GET['date_from'] . "'");
+//        }
+//        if (isset($_GET['date_to']) && $_GET['date_to'] != "") {
+//            $query->andFilterWhere("EndTime <=  '" . $_GET['date_to'] . "'");
+//        }
+//        if (isset($_GET['device_type']) && $_GET['device_type'] != "") {
+//            $query->andFilterWhere(['device_type' => $_GET['device_type']]);
+//        }
+//        if (isset($_GET['dispenser_id']) && $_GET['dispenser_id'] != "") {
+//            $query->andFilterWhere(['dispenser_id' => $_GET['dispenser_id']]);
+//        }
+//        if (isset($_GET['station_id']) && $_GET['station_id'] != "") {
+//            $query->andFilterWhere(['station_id' => $_GET['station_id']]);
+//        }
+//        if (isset($_GET['nozle_id']) && $_GET['nozle_id'] != "") {
+//            $query->andFilterWhere(['nozle_id' => $_GET['nozle_id']]);
+//        }
+//        if (isset($_GET['transaction_no']) && $_GET['transaction_no'] != "") {
+//            $query->andFilterWhere(['transaction_no' => $_GET['transaction_no']]);
+//        }
         // grid filtering conditions
         $query->andFilterWhere([
             'transaction_no' => $this->transaction_no,
@@ -83,11 +83,15 @@ class TransactionSearch extends Transaction {
             'SequenceId' => $this->SequenceId,
             'DeviceId' => $this->DeviceId,
             'Accumulator' => $this->Accumulator,
+            'station_id' => $this->station_id,
+            'dispenser_id' => $this->dispenser_id,
+            'nozle_id' => $this->nozle_id,
             'Volume' => $this->Volume,
         ]);
 
         $query->andFilterWhere(['like', 'UUID', $this->UUID])
                 ->andFilterWhere(['like', 'Meter', $this->Meter])
+                ->andFilterWhere(['like', 'device_type', $this->device_type])
                 ->andFilterWhere(['like', 'SecondaryTag', $this->SecondaryTag])
                 ->andFilterWhere(['like', 'Category', $this->Category])
                 ->andFilterWhere(['like', 'Operator', $this->Operator])
