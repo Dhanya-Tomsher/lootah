@@ -72,11 +72,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'attribute' => 'DeviceId',
                                     'header' => 'Device',
-                                    'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'id', 'name'),
+                                    'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'device_id', 'name'),
                                     //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                     'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                     'value' => function($data) {
-                                        return $data->deviec->Name;
+                                        return $data->device->name;
                                     },
                                     'format' => 'html',
                                 ],
