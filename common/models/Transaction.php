@@ -37,6 +37,9 @@ class Transaction extends \yii\db\ActiveRecord {
     /**
      * {@inheritdoc}
      */
+    public $date_from;
+    public $date_to;
+
     public static function tableName() {
         return 'lb_transaction';
     }
@@ -46,7 +49,7 @@ class Transaction extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['UUID', 'transaction_no', 'SequenceId', 'DeviceId', 'Meter', 'SecondaryTag', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Accumulator', 'Volume', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id'], 'required'],
+            [['UUID', 'transaction_no', 'SequenceId', 'DeviceId', 'Meter', 'SecondaryTag', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Accumulator', 'Volume', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id', 'device_type'], 'required'],
             [['transaction_no', 'ReferenceId', 'SequenceId', 'DeviceId', 'Accumulator'], 'integer'],
             [['Volume'], 'number'],
             [['UUID'], 'string', 'max' => 254],

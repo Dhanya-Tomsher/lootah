@@ -17,7 +17,7 @@ class TransactionSearch extends Transaction {
      */
     public function rules() {
         return [
-            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id'], 'safe'],
+            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id', 'device_type', 'date_from', 'date_to'], 'safe'],
             [['transaction_no', 'ReferenceId', 'SequenceId', 'DeviceId', 'Accumulator'], 'integer'],
             [['Volume'], 'number'],
         ];
@@ -55,6 +55,15 @@ class TransactionSearch extends Transaction {
             return $dataProvider;
         }
 
+        if (isset($_GET['date_from'])) {
+            $query->andFilterWhere("EndTime >=  '" . $_GET['date_from'] . "'");
+        }
+        if (isset($_GET['date_to'])) {
+            $query->andFilterWhere("EndTime <=  '" . $_GET['date_to'] . "'");
+        }
+        if (isset($_GET['device_type'])) {
+            $query->andFilterWhere(['device_type' => $_GET['device_type']]);
+        }
         if (isset($_GET['dispenser_id'])) {
             $query->andFilterWhere(['dispenser_id' => $_GET['dispenser_id']]);
         }
@@ -91,7 +100,7 @@ class TransactionSearch extends Transaction {
                 ->andFilterWhere(['like', 'Allowance', $this->Allowance])
                 ->andFilterWhere(['like', 'Type', $this->Type])
                 ->andFilterWhere(['like', 'StartTime', $this->StartTime])
-                ->andFilterWhere(['like', 'EndTime', $this->EndTime])
+//                ->andFilterWhere(['like', 'EndTime', $this->EndTime])
                 ->andFilterWhere(['like', 'Status', $this->Status])
                 ->andFilterWhere(['like', 'ServerTimestamp', $this->ServerTimestamp])
                 ->andFilterWhere(['like', 'UpdateTimestamp', $this->UpdateTimestamp]);

@@ -10,24 +10,22 @@ use common\models\Device;
 /**
  * DeviceSearch represents the model behind the search form of `common\models\Device`.
  */
-class DeviceSearch extends Device
-{
+class DeviceSearch extends Device {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'device_id', 'softwareId', 'status', 'station_id', 'dispenser_id', 'nozle_id'], 'integer'],
-            [['name', 'uid', 'description', 'updated', 'mobile', 'timestamp', 'device_ref_id'], 'safe'],
+            [['name', 'uid', 'description', 'updated', 'mobile', 'timestamp', 'device_ref_id', 'device_type'], 'safe'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class DeviceSearch extends Device
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Device::find();
 
         // add conditions that should always apply here
@@ -69,13 +66,14 @@ class DeviceSearch extends Device
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'uid', $this->uid])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'updated', $this->updated])
-            ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'timestamp', $this->timestamp])
-            ->andFilterWhere(['like', 'device_ref_id', $this->device_ref_id]);
+                ->andFilterWhere(['like', 'uid', $this->uid])
+                ->andFilterWhere(['like', 'description', $this->description])
+                ->andFilterWhere(['like', 'updated', $this->updated])
+                ->andFilterWhere(['like', 'mobile', $this->mobile])
+                ->andFilterWhere(['like', 'timestamp', $this->timestamp])
+                ->andFilterWhere(['like', 'device_ref_id', $this->device_ref_id]);
 
         return $dataProvider;
     }
+
 }

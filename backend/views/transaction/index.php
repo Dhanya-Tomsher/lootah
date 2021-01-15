@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TransactionSearch */
@@ -54,7 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <div class="search_data">
 
+                            <?php echo $this->render('_search', array('model' => $searchModel)); ?>
+                        </div>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
@@ -95,9 +99,39 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'EndTime',
                                 // 'Status',
                                 'ServerTimestamp',
-                                'station_id',
-                                'dispenser_id',
-                                'nozle_id',
+                                [
+                                    'attribute' => 'station_id',
+                                    'header' => 'Station',
+                                    'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
+                                    //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'value' => function($data) {
+                                        return $data->station->station_name;
+                                    },
+                                    'format' => 'html',
+                                ],
+                                [
+                                    'attribute' => 'dispenser_id',
+                                    'header' => 'Dispenser',
+                                    'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
+                                    //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'value' => function($data) {
+                                        return $data->dispenser->label;
+                                    },
+                                    'format' => 'html',
+                                ],
+                                [
+                                    'attribute' => 'nozle_id',
+                                    'header' => 'Nozzle',
+                                    'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
+                                    //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'value' => function($data) {
+                                        return $data->nozzle->label;
+                                    },
+                                    'format' => 'html',
+                                ],
                                 // 'UpdateTimestamp',
 //                            ['class' => 'yii\grid\ActionColumn',
 //                            'header' => 'Update',

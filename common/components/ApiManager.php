@@ -18,6 +18,7 @@ class ApiManager extends \yii\base\Component {
             foreach ($datas as $data) {
                 $device_id = $data['id'];
                 $device_ref_id = $data['name'];
+                $device_type = $data['description'];
                 $exp_items = explode('-', $device_ref_id);
                 $station = 0;
                 $dispenser = 0;
@@ -36,53 +37,75 @@ class ApiManager extends \yii\base\Component {
                         $nozzle = $exp_items[2];
                     }
                 }
-
-                if ($dispenser != 0) {
-                    $dispenser_id = str_replace($dispenser, "", "D");
-                    $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
-                }
-                $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
-                $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
+                if ($device_type == "Lootah-S") {
+                    if ($dispenser != 0) {
+                        $dispenser_id = str_replace($dispenser, "", "D");
+                        $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
+                    }
+                    $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
+                    $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
 
 //                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
 
-                if ($check_nozzle_exist != NULL) {
+                    if ($check_nozzle_exist != NULL) {
 
-                    $result_selected[] = $data;
-                    $check_device_exist = \common\models\Device::find()->where(['device_id' => $device_id])->one();
-                    if ($check_device_exist != NULL) {
-                        $check_device_exist->name = $data['name'];
-                        $check_device_exist->uid = $data['uid'];
-                        $check_device_exist->description = $data['description'];
-                        $check_device_exist->status = $data['status'];
-                        $check_device_exist->updated = $data['updated'];
-                        $check_device_exist->mobile = $data['mobile'];
-                        $check_device_exist->timestamp = $data['timestamp'];
-                        $check_device_exist->softwareId = $data['softwareId'];
-                        $check_device_exist->save();
+                        $result_selected[] = $data;
+                        $check_device_exist = \common\models\Device::find()->where(['device_id' => $device_id])->one();
+                        if ($check_device_exist != NULL) {
+                            $check_device_exist->name = $data['name'];
+                            $check_device_exist->uid = $data['uid'];
+                            $check_device_exist->description = $data['description'];
+                            $check_device_exist->device_type = $data['description'];
+                            $check_device_exist->status = $data['status'];
+                            $check_device_exist->updated = $data['updated'];
+                            $check_device_exist->mobile = $data['mobile'];
+                            $check_device_exist->timestamp = $data['timestamp'];
+                            $check_device_exist->softwareId = $data['softwareId'];
+                            $check_device_exist->save();
+                        } else {
+                            $model = new \common\models\Device();
+                            $model->name = $data['name'];
+                            $model->device_id = $data['id'];
+                            $model->uid = $data['uid'];
+                            $model->description = $data['description'];
+                            $model->device_type = $data['description'];
+                            $model->device_ref_id = $data['name'];
+                            $model->status = $data['status'];
+                            $model->updated = $data['updated'];
+                            $model->mobile = $data['mobile'];
+                            $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                            $model->station_id = $check_nozzle_exist->station_id;
+                            $model->nozle_id = $check_nozzle_exist->id;
+                            $model->softwareId = $data["softwareId"];
+                            $model->timestamp = $data['timestamp'];
+                            if ($model->save(FALSE)) {
+
+                            } else {
+                                $error_list[] = $model->errors;
+                            }
+                        }
                     } else {
+                        $result_all[] = $data;
+                    }
+                } else if ($device_type == "Lootah-T") {
+                    if ($station_exist != NULL) {
                         $model = new \common\models\Device();
                         $model->name = $data['name'];
                         $model->device_id = $data['id'];
                         $model->uid = $data['uid'];
                         $model->description = $data['description'];
+                        $model->device_type = $data['device_type'];
                         $model->device_ref_id = $data['name'];
                         $model->status = $data['status'];
                         $model->updated = $data['updated'];
                         $model->mobile = $data['mobile'];
-                        $model->dispenser_id = $check_nozzle_exist->dispenser_id;
                         $model->station_id = $check_nozzle_exist->station_id;
-                        $model->nozle_id = $check_nozzle_exist->id;
                         $model->softwareId = $data["softwareId"];
                         $model->timestamp = $data['timestamp'];
                         if ($model->save(FALSE)) {
 
-                        } else {
-                            $error_list[] = $model->errors;
                         }
                     }
-                } else {
-                    $result_all[] = $data;
                 }
             }
         }
@@ -134,45 +157,49 @@ class ApiManager extends \yii\base\Component {
                 if ($check_nozzle_exist != NULL) {
 
                     $result_selected[] = $data;
+                    $check_device_exist = \common\models\Device::find()->where(['device_id' => $data['DeviceId']])->one();
                     $check_transaction_exist = \common\models\Transaction::find()->where(['transaction_no' => $data->Id])->one();
                     if ($check_device_exist == NULL) {
+                        if ($check_transaction_exist == NULL) {
 
-                        $model = new \common\models\Transaction();
-                        $model->dispenser_id = $check_nozzle_exist->dispenser_id;
-                        $model->station_id = $check_nozzle_exist->station_id;
-                        $model->nozle_id = $check_nozzle_exist->id;
-                        $model->UUID = uniqid('LOOTAH');
-                        $model->DeviceId = $data['DeviceId'];
+                            $model = new \common\models\Transaction();
+                            $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                            $model->station_id = $check_nozzle_exist->station_id;
+                            $model->nozle_id = $check_nozzle_exist->id;
+                            $model->UUID = uniqid('LOOTAH');
+                            $model->DeviceId = $data['DeviceId'];
+                            $model->DeviceId = $check_device_exist->device_type;
 
-                        $model->transaction_no = $data['Id'];
-                        $model->ReferenceId = $data['ReferenceId'];
-                        $model->SequenceId = $data['SequenceId'];
+                            $model->transaction_no = $data['Id'];
+                            $model->ReferenceId = $data['ReferenceId'];
+                            $model->SequenceId = $data['SequenceId'];
 
-                        $model->Meter = $data['Meter'];
-                        $model->SecondaryTag = $data['SecondaryTag'];
-                        $model->Category = $data['Category'];
-                        $model->Operator = $data['Operator'];
-                        $model->Asset = $data['Asset'];
-                        $model->AccumulatorType = $data['AccumulatorType'];
-                        $model->Sitecode = $data['Sitecode'];
-                        $model->Project = $data['Project'];
-                        $model->PlateNo = $data['PlateNo'];
-                        $model->Master = $data['Master'];
-                        $model->Accumulator = $data['Accumulator'];
-                        $model->Volume = $data['Volume'];
-                        $model->Allowance = $data['Allowance'];
-                        $model->Type = $data['Type'];
-                        $model->StartTime = $data['StartTime'];
-                        $model->EndTime = $data['EndTime'];
-                        $model->Status = $data['Status'];
-                        $model->ServerTimestamp = $data['ServerTimestamp'];
-                        $model->UpdateTimestamp = $data['UpdateTimestamp'];
+                            $model->Meter = $data['Meter'];
+                            $model->SecondaryTag = $data['SecondaryTag'];
+                            $model->Category = $data['Category'];
+                            $model->Operator = $data['Operator'];
+                            $model->Asset = $data['Asset'];
+                            $model->AccumulatorType = $data['AccumulatorType'];
+                            $model->Sitecode = $data['Sitecode'];
+                            $model->Project = $data['Project'];
+                            $model->PlateNo = $data['PlateNo'];
+                            $model->Master = $data['Master'];
+                            $model->Accumulator = $data['Accumulator'];
+                            $model->Volume = $data['Volume'];
+                            $model->Allowance = $data['Allowance'];
+                            $model->Type = $data['Type'];
+                            $model->StartTime = $data['StartTime'];
+                            $model->EndTime = $data['EndTime'];
+                            $model->Status = $data['Status'];
+                            $model->ServerTimestamp = $data['ServerTimestamp'];
+                            $model->UpdateTimestamp = $data['UpdateTimestamp'];
 
 
-                        if ($model->save(FALSE)) {
+                            if ($model->save(FALSE)) {
 
-                        } else {
-                            $error_list[] = $model->errors;
+                            } else {
+                                $error_list[] = $model->errors;
+                            }
                         }
                     }
                 } else {

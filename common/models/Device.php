@@ -36,7 +36,7 @@ class Device extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['device_id', 'name', 'uid', 'description', 'softwareId', 'status', 'updated', 'mobile', 'timestamp', 'station_id', 'dispenser_id', 'nozle_id', 'device_ref_id'], 'required'],
+            [['device_id', 'name', 'uid', 'description', 'softwareId', 'status', 'updated', 'mobile', 'timestamp', 'station_id', 'dispenser_id', 'nozle_id', 'device_ref_id', 'device_type'], 'required'],
             [['device_id', 'softwareId', 'status', 'station_id', 'dispenser_id', 'nozle_id'], 'integer'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],

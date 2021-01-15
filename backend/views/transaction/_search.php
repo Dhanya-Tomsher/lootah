@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\TransactionSearch */
@@ -10,20 +11,55 @@ use yii\widgets\ActiveForm;
 
 <div class="transaction-search">
 
-    <?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
-        ]); ?>
+    <?php
+    $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+    ]);
+    ?>
 
-        <?= $form->field($model, 'UUID') ?>
+    <?php //form->field($model, 'UUID') ?>
+    <div class="col-xs-12 col-sm-3">
+        <?php
+        echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+        ?>
 
-    <?= $form->field($model, 'transaction_no') ?>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <?php
+        echo $form->field($model, 'dispenser_id')->dropDownList(ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'), ['prompt' => 'Choos a Dispenser', 'class' => 'form-control']);
+        ?>
 
-    <?= $form->field($model, 'ReferenceId') ?>
+    </div>
 
-    <?= $form->field($model, 'SequenceId') ?>
+    <div class="col-xs-12 col-sm-3">
+        <?php
+        echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'), ['prompt' => 'Choos a Nozzle', 'class' => 'form-control']);
+        ?>
 
-    <?= $form->field($model, 'DeviceId') ?>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <?php
+        $payment_method["Lootah-T"] = 'Tanker';
+        $payment_method["Lootah-S"] = 'Station';
+        ?>
+
+        <?php
+        echo $form->field($model, 'device_type')->dropDownList($payment_method, ['prompt' => 'Choos a Device Type', 'class' => 'form-control']);
+        ?>
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <?= $form->field($model, 'transaction_no') ?>
+
+    </div>
+    <?php // $form->field($model, 'transaction_no') ?>
+
+    <?php // $form->field($model, 'ReferenceId') ?>
+
+    <?php // $form->field($model, 'SequenceId') ?>
+
+    <?php // $form->field($model, 'DeviceId') ?>
 
     <?php // echo $form->field($model, 'Meter') ?>
 
@@ -61,7 +97,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'ServerTimestamp') ?>
 
-    <?php // echo $form->field($model, 'UpdateTimestamp') ?>
+    <?php // echo $form->field($model, 'UpdateTimestamp')  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
