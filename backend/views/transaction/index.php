@@ -29,24 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="x_title">
 
                         <?php if (Yii::$app->session->hasFlash("success")): ?>
-                                <div class="alert alert-success alert-dismissable">
-                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                   
-                                     <?= Yii::$app->session->getFlash("success") ?>
-                                </div>
-                            <?php endif; ?>
+                            <div class="alert alert-success alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 
-                            <?php if (Yii::$app->session->hasFlash("error")): ?>
-                                <div class="alert alert-danger alert-dismissable">
-                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <?= Yii::$app->session->getFlash("success") ?>
+                            </div>
+                        <?php endif; ?>
 
-                                     <?= Yii::$app->session->getFlash("error") ?>
-                                </div>
-                            <?php endif; ?>
+                        <?php if (Yii::$app->session->hasFlash("error")): ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+
+                                <?= Yii::$app->session->getFlash("error") ?>
+                            </div>
+                        <?php endif; ?>
 
                         <ul class="nav navbar-right panel_toolbox">
-                                                                                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                            
+                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
                             <?= Html::a('Create Transaction', ['create'], ['class' => 'btn btn-success']) ?>
 
 
@@ -55,49 +55,63 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="x_content">
 
-                                                    <?= GridView::widget([
+                        <?=
+                        GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
-        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                                        'UUID',
-            'transaction_no',
-            'ReferenceId',
-            'SequenceId',
-            'DeviceId',
-            // 'Meter',
-            // 'SecondaryTag',
-            // 'Category',
-            // 'Operator',
-            // 'Asset',
-            // 'AccumulatorType',
-            // 'Sitecode',
-            // 'Project',
-            // 'PlateNo',
-            // 'Master',
-            // 'Accumulator',
-            // 'Volume',
-            // 'Allowance',
-            // 'Type',
-            // 'StartTime',
-            // 'EndTime',
-            // 'Status',
-            // 'ServerTimestamp',
-            // 'UpdateTimestamp',
-
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'Update',
-                            'template' => '{update}'],
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'View',
-                            'template' => '{view}'],
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'Delete',
-                            'template' => '{delete}'],
+                            'columns' => [
+                                ['class' => 'yii\grid\SerialColumn'],
+//                                'UUID',
+                                'transaction_no',
+//                                'ReferenceId',
+//                                'SequenceId',
+                                [
+                                    'attribute' => 'DeviceId',
+                                    'header' => 'Device',
+                                    'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'id', 'Name'),
+                                    //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                    'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                    'value' => function($data) {
+                                        return $data->deviec->Name;
+                                    },
+                                    'format' => 'html',
+                                ],
+//                                'DeviceId',
+//                                'Meter',
+                                'SecondaryTag',
+//                                'Category',
+                                'Operator',
+                                // 'Asset',
+                                // 'AccumulatorType',
+//                                 'Sitecode',
+                                // 'Project',
+                                'PlateNo',
+                                'Master',
+                                // 'Accumulator',
+                                'Volume',
+                                // 'Allowance',
+                                // 'Type',
+                                'StartTime',
+                                'EndTime',
+                                // 'Status',
+                                'ServerTimestamp',
+                                'station_id',
+                                'dispenser_id',
+                                'nozle_id',
+                                // 'UpdateTimestamp',
+//                            ['class' => 'yii\grid\ActionColumn',
+//                            'header' => 'Update',
+//                            'template' => '{update}'],
+                                ['class' => 'yii\grid\ActionColumn',
+                                    'header' => 'View',
+                                    'template' => '{view}'],
+//                            ['class' => 'yii\grid\ActionColumn',
+//                            'header' => 'Delete',
+//                            'template' => '{delete}'],
                             ],
-                            ]); ?>
-                                                                    </div>
+                        ]);
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
