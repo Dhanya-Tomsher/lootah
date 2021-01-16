@@ -132,7 +132,7 @@ class TransactionController extends Controller {
 //                ->setCellValue('A4', 'Miscellaneous glyphs')
 //                ->setCellValue('A5', 'saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas');
 // Rename worksheet
-            $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . md5(time()));
+            $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . date('Ymd'));
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
