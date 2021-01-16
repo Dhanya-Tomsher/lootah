@@ -44,11 +44,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= Yii::$app->session->getFlash("error") ?>
                             </div>
                         <?php endif; ?>
-
-                        <ul class="nav navbar-right panel_toolbox">
-                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                        <?php
+                        if ($condition != '') {
+                            $url = "?" . $condition;
+                        } else {
+                            $url = "";
+                        }
+                        ?> 
+                        <ul class = "nav navbar-right panel_toolbox">
+                            <?php // echo $this->render('_search', ['model' => $searchModel]);
+                            ?>
 
                             <?= Html::a('Create Transaction', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success green']) ?>
 
 
                         </ul>
