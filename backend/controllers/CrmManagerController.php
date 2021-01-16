@@ -132,7 +132,30 @@ class CrmManagerController extends Controller {
             $method = $model->method;
             $make_call = [];
             $error_list = [];
-            if ($model->can_name == "import-device") {
+            if ($model->can_name == "import-asset") {
+                $url = 'FCS/' . $module_key;
+                $params = [];
+                $make_call = $this->callAPI($method, $url, json_encode($params));
+
+                if ($make_call != NULL) {
+
+                    $datas = $make_call;
+
+                    $module_function = $model->module_function;
+                    $updation = Yii::$app->ApiManager->$module_function($datas);
+                    if ($updation['errors'] == null) {
+                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        echo '<pre/>';
+                        print_r($updation);
+                        exit;
+
+//                    Yii::$app->session->setFlash('success', $module_name . "Data Not Updated.Error is " . serialize($updation));
+//                    return $this->redirect(['index']);
+                    }
+                }
+            } else if ($model->can_name == "import-device") {
                 $url = $module_key;
 
                 $params = [];
@@ -157,30 +180,31 @@ class CrmManagerController extends Controller {
                     }
                 }
             } else if ($model->can_name == "import-transactions") {
+                $get_devices = \common\models\Device::find()->all();
+
                 $url = 'FCS/' . $module_key;
+                if ($get_devices != NULL) {
+                    foreach ($get_devices as $get_device) {
+                        $params = array(
+                            'deviceId' => $get_device->device_id,
+                            'start' => $model->last_updated,
+                            'end' => date("Y-m-d h:i:s"),
+                            'reportId' => 1
+                        );
+                        $make_call = $this->callAPI($method, $url, json_encode($params));
+                        if ($make_call != NULL) {
+                            $get_last_item = end($make_call);
+                            if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
+                                $model->last_updated = $get_last_item['EndTime'];
+                                $model->save(false);
+                            }
 
-                $params = array(
-                    'deviceId' => 58,
-                    'start' => $model->last_updated,
-                    'end' => date("Y-m-d h:i:s"),
-                    'reportId' => 1
-                );
-                $make_call = $this->callAPI($method, $url, json_encode($params));
-                if ($make_call != NULL) {
-                    //echo "Ok AAAyi";
-
-                    $get_last_item = end($make_call);
-//                    print_r($get_last_item);
-//                    exit;
-                    if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
-                        $model->last_updated = $get_last_item['EndTime'];
-                        $model->save(false);
-                    }
-
-                    $module_function = $model->module_function;
-                    $updation = Yii::$app->ApiManager->$module_function($make_call);
-                    if ($updation['errors'] != null) {
-                        $error_list[] = $updation['errors'];
+                            $module_function = $model->module_function;
+                            $updation = Yii::$app->ApiManager->$module_function($make_call);
+                            if ($updation['errors'] != null) {
+                                $error_list[] = $updation['errors'];
+                            }
+                        }
                     }
                 }
 

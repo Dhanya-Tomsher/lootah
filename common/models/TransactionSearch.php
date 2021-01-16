@@ -67,9 +67,9 @@ class TransactionSearch extends Transaction {
 //        if (isset($_GET['dispenser_id']) && $_GET['dispenser_id'] != "") {
 //            $query->andFilterWhere(['dispenser_id' => $_GET['dispenser_id']]);
 //        }
-//        if (isset($_GET['station_id']) && $_GET['station_id'] != "") {
-//            $query->andFilterWhere(['station_id' => $_GET['station_id']]);
-//        }
+        if (isset($_GET['station_id']) && $_GET['station_id'] != "") {
+            $query->andFilterWhere(['station_id' => $_GET['station_id']]);
+        }
 //        if (isset($_GET['nozle_id']) && $_GET['nozle_id'] != "") {
 //            $query->andFilterWhere(['nozle_id' => $_GET['nozle_id']]);
 //        }

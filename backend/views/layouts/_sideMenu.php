@@ -37,6 +37,7 @@
                     <li><a href="<?= Yii::$app->request->baseUrl . '/dispenser' ?>"><i class="fa fa-user"></i>Dispenser</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/nozzle' ?>"><i class="fa fa-user"></i>Nozzle</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/device' ?>"><i class="fa fa-user"></i>Device</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/transaction' ?>"><i class="fa fa-user"></i>Transaction</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-station-collection' ?>"><i class="fa fa-user"></i>Daily Collection</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-monthly-details' ?>"><i class="fa fa-user"></i>Monthly Details</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-daily-data-for-verification' ?>"><i class="fa fa-user"></i>Daily Data Verification</a></li>

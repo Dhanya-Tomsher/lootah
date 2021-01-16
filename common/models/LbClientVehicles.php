@@ -21,24 +21,22 @@ use Yii;
  * @property int $sort_order
  * @property int $status
  */
-class LbClientVehicles extends \yii\db\ActiveRecord
-{
+class LbClientVehicles extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'lb_client_vehicles';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['client_id', 'department_id', 'vehicle_type', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'rfid'], 'safe'],
             [['vehicle_number'], 'string', 'max' => 45],
         ];
     }
@@ -46,8 +44,7 @@ class LbClientVehicles extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'client_id' => 'Client ID',
@@ -64,16 +61,17 @@ class LbClientVehicles extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
-    public function getClient()
-    {
+
+    public function getClient() {
         return $this->hasOne(LbClients::className(), ['id' => 'client_id']);
     }
-    public function getDepartment()
-    {
+
+    public function getDepartment() {
         return $this->hasOne(LbClientDepartments::className(), ['id' => 'department_id']);
     }
-    public function getVehicletype()
-    {
+
+    public function getVehicletype() {
         return $this->hasOne(LbVehicleType::className(), ['id' => 'vehicle_type']);
     }
+
 }

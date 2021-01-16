@@ -10,24 +10,22 @@ use common\models\LbClientVehicles;
 /**
  * LbClientVehiclesSearch represents the model behind the search form of `common\models\LbClientVehicles`.
  */
-class LbClientVehiclesSearch extends LbClientVehicles
-{
+class LbClientVehiclesSearch extends LbClientVehicles {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'client_id', 'department_id', 'vehicle_type', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
-            [['vehicle_number', 'created_at', 'updated_at'], 'safe'],
+            [['vehicle_number', 'created_at', 'updated_at', 'rfid'], 'safe'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class LbClientVehiclesSearch extends LbClientVehicles
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = LbClientVehicles::find();
 
         // add conditions that should always apply here
@@ -77,4 +74,5 @@ class LbClientVehiclesSearch extends LbClientVehicles
 
         return $dataProvider;
     }
+
 }

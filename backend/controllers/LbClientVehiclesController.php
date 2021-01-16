@@ -13,8 +13,8 @@ use yii\filters\AccessControl;
 /**
  * LbClientVehiclesController implements the CRUD actions for LbClientVehicles model.
  */
-class LbClientVehiclesController extends Controller
-{
+class LbClientVehiclesController extends Controller {
+
     /**
      * {@inheritdoc}
      */
@@ -65,42 +65,40 @@ class LbClientVehiclesController extends Controller
      * Lists all LbClientVehicles models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new LbClientVehiclesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
-public function actionGetDept()
-{
-if (!empty($_POST["client_id"])) {
-$st=$_POST["client_id"];
-$qry= \common\models\LbClientDepartments::find()->where(['client_id' => $st])->all();
-?>
-<option value disabled selected>Select Department</option>
-<?php
-foreach ($qry as $city) {
-?>
-<option value="<?php echo $city["id"]; ?>"><?php echo $city["department"]; ?></option>
-<?php
-}
-}
-}
+    public function actionGetDept() {
+        if (!empty($_POST["client_id"])) {
+            $st = $_POST["client_id"];
+            $qry = \common\models\LbClientDepartments::find()->where(['client_id' => $st])->all();
+            ?>
+            <option value disabled selected>Select Department</option>
+            <?php
+            foreach ($qry as $city) {
+                ?>
+                <option value="<?php echo $city["id"]; ?>"><?php echo $city["department"]; ?></option>
+                <?php
+            }
+        }
+    }
+
     /**
      * Displays a single LbClientVehicles model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -109,11 +107,10 @@ foreach ($qry as $city) {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new LbClientVehicles();
 
-       if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', "Data created successfully.");
@@ -123,7 +120,7 @@ foreach ($qry as $city) {
 
 
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -134,11 +131,10 @@ foreach ($qry as $city) {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-       if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
@@ -147,7 +143,7 @@ foreach ($qry as $city) {
         }
 
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -158,8 +154,7 @@ foreach ($qry as $city) {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -172,12 +167,12 @@ foreach ($qry as $city) {
      * @return LbClientVehicles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = LbClientVehicles::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

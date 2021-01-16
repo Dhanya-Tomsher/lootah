@@ -66,9 +66,9 @@ class TransactionController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+        date_default_timezone_set('Asia/Dubai');
         $searchModel = new TransactionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        date_default_timezone_set('Asia/Dubai');
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,

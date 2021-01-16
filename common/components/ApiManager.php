@@ -10,6 +10,28 @@ use common\components\NotificationManager;
 
 class ApiManager extends \yii\base\Component {
 
+    public function GetAsset($datas) {
+        $result = [];
+        $error_list = [];
+        if ($datas != NULL) {
+
+            foreach ($datas as $data) {
+                $plate_no = $data['plateNo'];
+                $vehicle_exist = \common\models\LbClientVehicles::find()->where(['vehicle_number' => $plate_no])->one();
+
+                if ($vehicle_exist != NULL) {
+                    $model = new \common\models\LbClientVehicles();
+                    $model->rfid = $data['rfid'];
+                    if ($model->save(FALSE)) {
+
+                    }
+                }
+            }
+        }
+        $result['errors'] = $error_list;
+        return $result;
+    }
+
     public function GetDevices($datas) {
         $result = [];
         $error_list = [];
