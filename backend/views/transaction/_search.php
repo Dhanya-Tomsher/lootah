@@ -54,11 +54,11 @@ use yii\helpers\ArrayHelper;
 
     </div>
     <div class="col-xs-12 col-sm-3">
-        <?= $form->field($model, 'date_from') ?>
+        <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
 
     </div>
     <div class="col-xs-12 col-sm-3">
-        <?= $form->field($model, 'date_to') ?>
+        <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
 
     </div>
     <?php // $form->field($model, 'transaction_no') ?>
