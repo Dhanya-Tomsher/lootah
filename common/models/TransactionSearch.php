@@ -57,11 +57,15 @@ class TransactionSearch extends Transaction {
 
         if (isset($this->date_from) && $this->date_from != "") {
             $date_from = date('Y-m-d H:i:s', strtotime($this->date_from));
+            echo $date_from;
             $query->andFilterWhere("EndTime >=  '" . $date_from . "'");
         }
         if (isset($this->date_to) && $this->date_to != "") {
             $date_to = date('Y-m-d H:i:s', strtotime($this->date_to));
+            echo $date_to;
+            echo "...";
             $query->andFilterWhere("EndTime <=  '" . $date_to . "'");
+            exit;
         }
 //        if (isset($_GET['device_type']) && $_GET['device_type'] != "") {
 //            $query->andFilterWhere(['device_type' => $_GET['device_type']]);
