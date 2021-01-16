@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
 
     <div class="col-xs-12 col-sm-3">
         <?php
-        echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'), ['prompt' => 'Choos a Nozzle', 'class' => 'form-control']);
+        echo $form->field($model, 'nozle_id')->dropDownList(ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'), ['prompt' => 'Choos a Nozzle', 'class' => 'form-control']);
         ?>
 
     </div>
@@ -51,6 +51,14 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="col-xs-12 col-sm-3">
         <?= $form->field($model, 'transaction_no') ?>
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <?= $form->field($model, 'date_from') ?>
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <?= $form->field($model, 'date_to') ?>
 
     </div>
     <?php // $form->field($model, 'transaction_no') ?>
