@@ -871,6 +871,11 @@ class ApiManager extends \yii\base\Component {
 
             //print_r(json_encode($final));
 //            exit;
+            if ($method == "GET") {
+                echo "<pre/>";
+                print_r($input);
+                die("date get");
+            }
             return $result;
         } else {
             return 'Access token not getting';

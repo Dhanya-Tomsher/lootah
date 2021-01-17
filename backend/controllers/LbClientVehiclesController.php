@@ -129,8 +129,7 @@ class LbClientVehiclesController extends Controller {
                 $result = Yii::$app->ApiManager->vehiclemanagement($params, "POST");
                 if ($result == 1) {
                     $newparams = array(
-                        'label' => $model->vehicle_number,
-                        'id' => 0
+                        'label' => $model->vehicle_number
                     );
                     $nextresult = Yii::$app->ApiManager->vehiclemanagement($newparams, "GET");
                     print_r($nextresult);
