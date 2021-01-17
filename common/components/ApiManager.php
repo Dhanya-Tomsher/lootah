@@ -872,6 +872,8 @@ class ApiManager extends \yii\base\Component {
             //print_r(json_encode($final));
 //            exit;
             if ($method == "GET") {
+                $input['response'] = $result;
+
                 echo "<pre/>";
                 print_r($input);
                 die("date get");
