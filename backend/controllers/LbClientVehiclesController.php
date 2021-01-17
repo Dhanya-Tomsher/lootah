@@ -132,7 +132,7 @@ class LbClientVehiclesController extends Controller {
                         'label' => $model->vehicle_number
                     );
                     $nextresult = Yii::$app->ApiManager->vehiclemanagement($newparams, "GET");
-                    print_r($nextresult);
+//                    print_r($nextresult);
                     if ($nextresult != NULL) {
                         if ($nextresult[0] != NULL) {
                             $model->SecondaryTagId = $nextresult[0]["id"];
@@ -140,8 +140,8 @@ class LbClientVehiclesController extends Controller {
                         }
                     }
                     Yii::$app->session->setFlash('success', "Data created successfully.");
-                    // return $this->redirect(['index']);
-                    exit;
+                    return $this->redirect(['index']);
+                    //  exit;
                 } else {
                     $model->delete(FALSE);
                     Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
