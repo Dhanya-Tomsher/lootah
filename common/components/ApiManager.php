@@ -840,12 +840,8 @@ class ApiManager extends \yii\base\Component {
                         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                     break;
                 default:
-                    if ($data != NULL)
-                        $post_url = sprintf("%s&%s", $post_url, http_build_query(json_decode($data)));
+                    $post_url = sprintf("%s&%s", $post_url, http_build_query(json_decode($data)));
 
-                    //$url = $post_url . "/" . http_build_query(json_decode($data));
-                    else
-                        $url = $post_url;
 
 //                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
                 // $url = $post_url;
