@@ -124,8 +124,8 @@ class LbClientVehiclesController extends Controller {
                     'accumulator' => 1,
                     'allowance' => 1,
                     'flag' => 1,
-                    'timestamp' => date("Y-m-d H:i:s"),
-                    'updateTimestamp' => date("Y-m-d H:i:s")
+                    'timestamp' => date("Y-m-dTH:i:s.uZ"),
+                    'updateTimestamp' => date("Y-m-dTH:i:s.uZ")
                 );
 
                 $result = Yii::$app->ApiManager->vehiclemanagement($params, "POST");
