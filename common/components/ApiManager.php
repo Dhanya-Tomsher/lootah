@@ -874,12 +874,12 @@ class ApiManager extends \yii\base\Component {
             $final['url'] = $url;
             $final['result'] = $result;
 
-//            if ($method == "GET") {
-//
-//                echo "<pre/>";
-//                print_r($input);
-//                die("date get");
-//            }
+            if ($method == "GET") {
+
+                echo "<pre/>";
+                print_r($input);
+                die("date get");
+            }
             return $result;
         } else {
             return 'Access token not getting';
