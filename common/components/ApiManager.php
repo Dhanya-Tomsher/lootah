@@ -240,10 +240,11 @@ class ApiManager extends \yii\base\Component {
 
     public function vehiclemanagement($params, $method) {
         $name = "Manage veichle details-" . $method;
-        $url = "FCS/SecondaryTag";
-        $make_call = $this->callAPI($method, $url, json_encode($params));
 
         if ($method == "POST" || $method == "PUT") {
+            $url = "FCS/SecondaryTag";
+            $make_call = $this->callAPI($method, $url, json_encode($params));
+
             if ($make_call == 1) {
 
                 return $make_call;
@@ -253,6 +254,8 @@ class ApiManager extends \yii\base\Component {
                 return 0;
             }
         } else {
+            $url = "FCS/SecondaryTag/key";
+            $make_call = $this->callAPI($method, $url, json_encode($params));
             $response = json_decode($make_call, true);
             $array = $this->errorCode(1000, $name, 1, $make_call);
 
@@ -861,6 +864,8 @@ class ApiManager extends \yii\base\Component {
             $input['url'] = $post_url;
             $input['access_token'] = $access_token;
             $input['data'] = $data;
+            $input['response'] = $result;
+
             if (!$response) {
                 echo "<pre/>";
                 print_r($input);
@@ -869,15 +874,45 @@ class ApiManager extends \yii\base\Component {
             $final['url'] = $url;
             $final['result'] = $result;
 
-            //print_r(json_encode($final));
-//            exit;
-            if ($method == "GET") {
-                $input['response'] = $result;
+//            if ($method == "GET") {
+//
+//                echo "<pre/>";
+//                print_r($input);
+//                die("date get");
+//            }
+            return $result;
+        } else {
+            return 'Access token not getting';
+        }
+    }
 
-                echo "<pre/>";
-                print_r($input);
-                die("date get");
-            }
+    function getcallAPI($method, $url, $data) {
+        ini_set('memory_limit', '-1');
+
+
+        $access_token = $this->GetAccessToken();
+
+        if ($access_token != '') {
+            $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
+            $post_url = $site_url . $url . '?key=' . $access_token;
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://www.smetron.com/casper/api/FCS/SecondaryTag/key?key=SID-VHRF39ZXZAP3EL5U2QNU6CJ7GVSONHT17012021075821176U24&label=499',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            $result = json_decode($response, true);
+
             return $result;
         } else {
             return 'Access token not getting';
