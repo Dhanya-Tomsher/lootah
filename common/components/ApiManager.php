@@ -255,8 +255,8 @@ class ApiManager extends \yii\base\Component {
             }
         } else {
             $url = "FCS/SecondaryTag/key";
-            $make_call = $this->callAPI($method, $url, json_encode($params));
-            $response = json_decode($make_call, true);
+            $response = $this->callAPI($method, $url, json_encode($params));
+            //$response = json_decode($make_call, true);
             $array = $this->errorCode(1000, $name, 1, $make_call);
 
             return $response;
@@ -874,12 +874,12 @@ class ApiManager extends \yii\base\Component {
             $final['url'] = $url;
             $final['result'] = $result;
 
-            if ($method == "GET") {
-
-                echo "<pre/>";
-                print_r($input);
-                die("date get");
-            }
+//            if ($method == "GET") {
+//
+//                echo "<pre/>";
+//                print_r($input);
+//                die("date get");
+//            }
             return $result;
         } else {
             return 'Access token not getting';
