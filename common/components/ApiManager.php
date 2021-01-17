@@ -841,7 +841,7 @@ class ApiManager extends \yii\base\Component {
                     break;
                 default:
                     if ($data != NULL)
-                        $url = sprintf("%s&%s", $post_url, http_build_query(json_decode($data)));
+                        $post_url = sprintf("%s&%s", $post_url, http_build_query(json_decode($data)));
 
                     //$url = $post_url . "/" . http_build_query(json_decode($data));
                     else
@@ -852,7 +852,7 @@ class ApiManager extends \yii\base\Component {
             }
 
             // OPTIONS:
-            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_URL, $post_url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
             ));
