@@ -172,10 +172,21 @@ class LbClientVehiclesController extends Controller {
                 if ($current_plate_no != $model->vehicle_number) {
 
                 }
+//                $params = array(
+//                    'label' => $model->vehicle_number,
+//                    'id' => $model->SecondaryTagId,
+//                    'updateTimestamp' => date("Y-m-d H:i:s")
+//                );
+
                 $params = array(
-                    'label' => $model->vehicle_number,
                     'id' => $model->SecondaryTagId,
-                    'updateTimestamp' => date("Y-m-d H:i:s")
+                    'label' => $model->vehicle_number,
+                    'asset' => $model->asset,
+                    'rfid' => $model->rfid,
+                    'type' => "O",
+                    'accumulator' => 1,
+                    'allowance' => 1,
+                    'flag' => 1
                 );
 
                 $result = Yii::$app->ApiManager->vehiclemanagement($params, "PUT");
