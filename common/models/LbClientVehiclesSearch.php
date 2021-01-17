@@ -18,7 +18,7 @@ class LbClientVehiclesSearch extends LbClientVehicles {
     public function rules() {
         return [
             [['id', 'client_id', 'department_id', 'vehicle_type', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
-            [['vehicle_number', 'created_at', 'updated_at', 'rfid'], 'safe'],
+            [['vehicle_number', 'created_at', 'updated_at', 'rfid', 'asset', 'SecondaryTagId'], 'safe'],
         ];
     }
 
@@ -67,6 +67,8 @@ class LbClientVehiclesSearch extends LbClientVehicles {
             'created_by_type' => $this->created_by_type,
             'updated_by_type' => $this->updated_by_type,
             'sort_order' => $this->sort_order,
+            'asset' => $this->asset,
+            'SecondaryTagId' => $this->SecondaryTagId,
             'status' => $this->status,
         ]);
 

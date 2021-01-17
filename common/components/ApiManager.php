@@ -238,6 +238,28 @@ class ApiManager extends \yii\base\Component {
         return $result;
     }
 
+    public function vehiclemanagement($params, $method) {
+        $name = "Manage veichle details-" . $method;
+        $url = "FCS/SecondaryTag";
+        $make_call = $this->callAPI($method, $url, json_encode($params));
+
+        if ($method == "POST" || $method == "PUT") {
+            if ($make_call == 1) {
+
+                return $make_call;
+            } else {
+
+                $array = $this->errorCode(1000, $name, 1, $make_call);
+                return 0;
+            }
+        } else {
+            $response = json_decode($make_call, true);
+            $array = $this->errorCode(1000, $name, 1, $make_call);
+
+            return $response;
+        }
+    }
+
     public function updateagent($params, $master) {
         $name = "Update agent details-" . $master;
         $url = "/rest/modules/v1.0/Agent/" . $master;
@@ -796,13 +818,14 @@ class ApiManager extends \yii\base\Component {
     }
 
     function callAPI($method, $url, $data) {
+        ini_set('memory_limit', '-1');
+
 
         $access_token = $this->GetAccessToken();
 
         if ($access_token != '') {
-            $site_url = "http://192.169.154.166:8080/crmservices";
-
-            $post_url = $site_url . $url . '?access_token=' . $access_token;
+            $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
+            $post_url = $site_url . $url . '?key=' . $access_token;
             $curl = curl_init();
 
             switch ($method) {
@@ -817,12 +840,19 @@ class ApiManager extends \yii\base\Component {
                         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                     break;
                 default:
-                    if ($data)
+                    if ($data != NULL)
+                        $url = sprintf("%s&%s", $post_url, http_build_query(json_decode($data)));
+
+                    //$url = $post_url . "/" . http_build_query(json_decode($data));
+                    else
                         $url = $post_url;
+
+//                        $url = sprintf("%s?%s", $post_url, http_build_query($data));
+                // $url = $post_url;
             }
 
             // OPTIONS:
-            curl_setopt($curl, CURLOPT_URL, $post_url);
+            curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
             ));
@@ -830,11 +860,17 @@ class ApiManager extends \yii\base\Component {
             curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
             // EXECUTE:
-            $result = curl_exec($curl);
-            if (!$result) {
+            $response = curl_exec($curl);
+            $result = json_decode($response, true);
+
+            if (!$response) {
                 die("Connection Failure");
             }
-            curl_close($curl);
+            $final['url'] = $url;
+            $final['result'] = $result;
+
+            //print_r(json_encode($final));
+//            exit;
             return $result;
         } else {
             return 'Access token not getting';

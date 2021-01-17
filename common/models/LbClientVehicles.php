@@ -36,7 +36,7 @@ class LbClientVehicles extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['client_id', 'department_id', 'vehicle_type', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
-            [['created_at', 'updated_at', 'rfid'], 'safe'],
+            [['created_at', 'updated_at', 'rfid', 'asset', 'SecondaryTagId'], 'safe'],
             [['vehicle_number'], 'string', 'max' => 45],
         ];
     }

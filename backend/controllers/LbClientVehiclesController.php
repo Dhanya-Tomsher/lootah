@@ -109,12 +109,44 @@ class LbClientVehiclesController extends Controller {
      */
     public function actionCreate() {
         $model = new LbClientVehicles();
+        date_default_timezone_set('UTC');
 
         if ($model->load(Yii::$app->request->post())) {
-
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', "Data created successfully.");
-                return $this->redirect(['index']);
+                $model->rfid = "LTRFID" . $model->id;
+                $model->asset = "LTASST" . $model->id;
+                $model->save(FALSE);
+                $params = array(
+                    'label' => $model->vehicle_number,
+                    'asset' => $model->asset,
+                    'rfid' => $model->rfid,
+                    'type' => "O",
+                    'accumulator' => 1,
+                    'allowance' => 1,
+                    'flag' => 1,
+                    'timestamp' => date("Y-m-d H:i:s"),
+                    'updateTimestamp' => date("Y-m-d H:i:s")
+                );
+
+                $result = Yii::$app->ApiManager->vehiclemanagement($params, "POST");
+                if ($result == 1) {
+                    $newparams = array(
+                        'label' => $model->vehicle_number,
+                        'id' => 0
+                    );
+                    $nextresult = Yii::$app->ApiManager->vehiclemanagement($newparams, "GET");
+                    if ($nextresult != NULL) {
+                        if ($nextresult[0] != NULL) {
+                            $model->SecondaryTagId = $nextresult[0]["id"];
+                            $model->save(FALSE);
+                        }
+                    }
+                    Yii::$app->session->setFlash('success', "Data created successfully.");
+                    return $this->redirect(['index']);
+                } else {
+                    $model->delete(FALSE);
+                    Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
+                }
             }
         }
 
@@ -133,12 +165,29 @@ class LbClientVehiclesController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
+        $current_plate_no = $model->vehicle_number;
         if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', "Data updated successfully.");
-                return $this->redirect(['index']);
+
+                if ($current_plate_no != $model->vehicle_number) {
+
+                }
+                $params = array(
+                    'label' => $model->vehicle_number,
+                    'id' => $model->SecondaryTagId,
+                    'updateTimestamp' => date("Y-m-d H:i:s")
+                );
+
+                $result = Yii::$app->ApiManager->vehiclemanagement($params, "PUT");
+                if ($result == 1) {
+
+                    Yii::$app->session->setFlash('success', "Data created successfully.");
+                    return $this->redirect(['index']);
+                } else {
+                    $model->delete(FALSE);
+                    Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
+                }
             }
         }
 
