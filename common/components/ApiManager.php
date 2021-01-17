@@ -862,8 +862,12 @@ class ApiManager extends \yii\base\Component {
             // EXECUTE:
             $response = curl_exec($curl);
             $result = json_decode($response, true);
-
+            $input['url'] = $post_url;
+            $input['access_token'] = $access_token;
+            $input['data'] = $data;
             if (!$response) {
+                echo "<pre/>";
+                print_r($input);
                 die("Connection Failure");
             }
             $final['url'] = $url;
@@ -917,27 +921,39 @@ class ApiManager extends \yii\base\Component {
         date_default_timezone_set('Asia/Qatar');
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
-        if ($get_token->crm_access_token == '' || $get_token->token_last_updated_on == '0000-00-00 00:00:00') {
-            $token = $this->generateToken();
-            if ($token != "") {
-                $get_token->crm_access_token = $token;
-                $get_token->token_last_updated_on = date('Y-m-d H:i:s');
-                $get_token->save(FALSE);
+        if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
+
+            $token_result = $this->generateToken();
+            if ($token_result != NULL) {
+                if (isset($token_result['sessionId']) && $token_result['sessionId'] != "") {
+                    $get_token->dms_access_token = $token_result["sessionId"];
+                    $get_token->dms_token_last_updated_on = $token_result["expire"];
+                    $get_token->save(FALSE);
+                    $token = $token_result['sessionId'];
+                }
             }
         } else {
-            $last_updated = $get_token->token_last_updated_on;
+
+            $last_updated = $get_token->dms_token_last_updated_on;
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
             if ($current_time >= $new_time) {
-                $token = $this->generateToken();
-                if ($token != "") {
-                    $get_token->crm_access_token = $token;
-                    $get_token->token_last_updated_on = date('Y-m-d H:i:s');
-                    $get_token->save(FALSE);
+
+                $token_result = $this->generateToken();
+
+                if ($token_result != NULL) {
+                    if (isset($token_result['sessionId']) && $token_result['sessionId'] != "") {
+                        $get_token->dms_access_token = $token_result["sessionId"];
+                        $get_token->dms_token_last_updated_on = $token_result["expire"];
+                        $get_token->save(FALSE);
+
+                        $token = $token_result['sessionId'];
+                    }
                 }
             } else {
-                $token = $get_token->crm_access_token;
+
+                $token = $get_token->dms_access_token;
             }
         }
 
@@ -945,24 +961,29 @@ class ApiManager extends \yii\base\Component {
     }
 
     public function generateToken() {
-        $config = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
-        $name = "Get CRM Access token";
-//        $this->layout = false;
-//        header('Content-type:appalication/json');
-        $site_url = "http://192.169.154.166:8080/crmservices";
-        $ch = curl_init($site_url . "/rest/oauth/authorize?grant_type=password&client_id=" . $config->crm_client_id . "&client_secret=" . $config->crm_secret . "&username=" . $config->crm_username . "&password=" . $config->crm_password . "&companycode=020");
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-//        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($userData));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-        $response = curl_exec($ch);
+        $curl = curl_init();
+        $site_url = Yii::$app->CommonRequest->getconfig()->dms_base_url;
+        $user_name = Yii::$app->CommonRequest->getconfig()->dms_user_name;
+        $password = Yii::$app->CommonRequest->getconfig()->dms_password;
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $site_url . "Auth?username=" . $user_name . "&password=" . $password,
+//            CURLOPT_URL => 'https://www.smetron.com/casper/api/Auth?username=tutorial&password=1215',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
 
         $result = json_decode($response, true);
-        if (isset($result['errors']) && $result['errors'] != null) {
-            return '';
-        } else {
-            return $result['accessToken'];
-        }
+
+        return $result;
     }
 
     function getViewType($type) {
