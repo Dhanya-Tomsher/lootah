@@ -981,7 +981,8 @@ class ApiManager extends \yii\base\Component {
     }
 
     public function GetAccessToken() {
-        date_default_timezone_set('Asia/Qatar');
+        date_default_timezone_set('UTC');
+
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
 
         if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
@@ -1001,7 +1002,8 @@ class ApiManager extends \yii\base\Component {
             $last_timestamp = strtotime($last_updated);
             $current_time = strtotime(date('Y-m-d H:i:s'));
             $new_time = strtotime('+24 hours', $last_timestamp);
-            if ($current_time >= $new_time) {
+            $exp_time = strtotime($last_updated);
+            if ($current_time > $exp_time) {
 
                 $token_result = $this->generateToken();
 
