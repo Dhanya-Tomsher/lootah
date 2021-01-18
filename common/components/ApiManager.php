@@ -884,12 +884,21 @@ class ApiManager extends \yii\base\Component {
             curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
             // EXECUTE:
+
+            date_default_timezone_set('UTC');
+
+            $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
+            $last_updated = $get_token->dms_token_last_updated_on;
             $response = curl_exec($curl);
             $result = json_decode($response, true);
             $input['url'] = $post_url;
             $input['access_token'] = $access_token;
             $input['data'] = $data;
             $input['response'] = $result;
+            $input['current_time_st'] = date('Y-m-d H:i:s');
+            $input['current_time_timestamp'] = strtotime(date('Y-m-d H:i:s'));
+            $input['expiry_time_st'] = $last_updated;
+            $input['expiry_time_timestamp'] = strtotime($last_updated);
 
             if (!$response) {
                 echo "<pre/>";
@@ -984,7 +993,6 @@ class ApiManager extends \yii\base\Component {
         date_default_timezone_set('UTC');
 
         $get_token = \common\models\Configuration::find()->where(['platform' => 'APP'])->one();
-
         if ($get_token->dms_access_token == '' || $get_token->dms_token_last_updated_on == '0000-00-00 00:00:00') {
 
             $token_result = $this->generateToken();
