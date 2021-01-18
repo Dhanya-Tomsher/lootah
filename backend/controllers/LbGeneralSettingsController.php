@@ -102,7 +102,19 @@ class LbGeneralSettingsController extends Controller
             $model->govt_price=$_REQUEST['LbGeneralSettings']['govt_price'];
             $model->discount=$_REQUEST['LbGeneralSettings']['discount'];
             $model->customer_price=$_REQUEST['LbGeneralSettings']['customer_price'];
+            
             if ($model->save(false)) {
+            $cl=\common\models\LbClients::find()->where(['status' => 1])->all();
+            foreach($cl as $cls){
+                $lbcp=new \common\models\LbClientMonthlyPrice();
+                $lbcp->client_id        =$cls->id;
+                $lbcp->discount         =$cls->discount;
+                $lbcp->govt_price       =$model->govt_price;
+                $lbcp->customer_price   =$model->govt_price - $cls->discount;
+                $lbcp->month            =$model->month;
+                $lbcp->year             =$model->year;
+                $lbcp->save(false);
+            }
                 Yii::$app->session->setFlash('success', "Data created successfully.");
                 return $this->redirect(['index']);
             }
@@ -130,7 +142,17 @@ class LbGeneralSettingsController extends Controller
             $model->discount=$_REQUEST['LbGeneralSettings']['discount'];
             $model->customer_price=$_REQUEST['LbGeneralSettings']['customer_price'];
             if ($model->save(false)) {
-               
+             $cl=\common\models\LbClients::find()->where(['status' => 1])->all();
+                foreach($cl as $cls){
+                $lbcp=new \common\models\LbClientMonthlyPrice();
+                $lbcp->client_id        =$cls->id;
+                $lbcp->discount         =$cls->discount;
+                $lbcp->govt_price       =$model->govt_price;
+                $lbcp->customer_price   =$model->govt_price - $cls->discount;
+                $lbcp->month            =$model->month;
+                $lbcp->year             =$model->year;
+                $lbcp->save(false);
+            }  
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
                 return $this->redirect(['index']);
             }

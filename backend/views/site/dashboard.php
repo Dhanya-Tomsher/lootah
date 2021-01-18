@@ -1,27 +1,4 @@
 <?php
-//$get_total_bookings = common\models\ClientBookingForm::find()->where(['status' => 1])->andWhere('contract_status =13 OR contract_status =14')->all();
-//$get_total_requests = common\models\Booking::find()->where(['status' => 1])->all();
-//$get_total_users = common\models\Users::find()->where(['status' => 10])->andWhere('account_type_id =1 OR account_type_id =2')->all();
-?>
-<!--<div class = "right_col" role = "main" style = "min-height: 675px;">
-    <div class = "clearfix"></div>
-
-    <div id = "w0" class = "x_panel"><div class = "x_title"><h2><i class = "fa fa-windows"></i> Dashboard</h2><div class = "clearfix"></div></div><div class = "x_content"><div class = "row">
-
-                <div class = "col-xs-12 col-md-4">
-                    <div class = "tile-stats"><div class = "icon"><i class = "fa fa-list-alt"></i></div><div class = "count"><?php //echo count($get_total_bookings); ?></div><h3>Bookings</h3><p>All Booking list</p></div> </div>
-                <div class = "col-xs-12 col-md-4">
-                    <div class = "tile-stats"><div class = "icon"><i class = "fa fa-pie-chart"></i></div><div class = "count"><?php //echo count($get_total_requests); ?></div><h3>Requests</h3><p>See All List</p></div> </div>
-                <div class = "col-xs-12 col-md-4">
-                    <div class = "tile-stats"><div class = "icon"><i class = "fa fa-users"></i></div><div class = "count"><?php //echo count($get_total_users); ?></div><h3>Users</h3><p>Count of registered users</p></div> </div>
-            </div>
-        </div>
-    </div>-->
-
-
-
-</div>
-<?php
 $gal= \common\models\LbGallonLitre::find()->where(['id'=>1])->one();
 $tlmt=0;
 $tlms=0;
@@ -291,8 +268,12 @@ $lastDayCurrentMonth = date("Y-m-t");
                     </div>		
 			<?php
                         $max = \common\models\LbClientMonthlyPrice::find()->where(['status'=>1,'month'=>$mn,'year'=>$yr])->select('max(total_purchase_litre)')->scalar(); 
+                        if($max){
                         $maxusr = \common\models\LbClientMonthlyPrice::find()->where(['status'=>1,'month'=>$mn,'year'=>$yr,'total_purchase_litre'=>$max])->one()->client_id; 
                         $maxusrnme=\common\models\LbClients::find()->where(['id'=>$maxusr])->one()->name;
+                        }else{
+                          $maxusrnme="";  
+                        }
                         ?>
 					 <div class="col-md-4 col-lg-4 col-xl-4">
 
@@ -325,9 +306,12 @@ $lastDayCurrentMonth = date("Y-m-t");
                     </div>
 			<?php
                         $maxst = \common\models\LbStationMonthlyDetails::find()->where(['status'=>1,'month'=>$mn,'year'=>$yr])->select('max(total_sale_litre)')->scalar(); 
+                        if($maxst){
                         $maxstn = \common\models\LbStationMonthlyDetails::find()->where(['status'=>1,'month'=>$mn,'year'=>$yr,'total_sale_litre'=>$maxst])->one()->station_id; 
                         $maxstnme=\common\models\LbStation::find()->where(['id'=>$maxstn])->one()->station_name;
-                        ?>		
+                        }else{
+                        $maxstnme="";
+                        }?>		
 					<div class="col-md-4 col-lg-4 col-xl-4">
 
                         <div class="card card-stats">
@@ -703,9 +687,22 @@ $tands=$sqtyz+$lcmssz;
 $sttn= \common\models\LbStation::find()->where(['status' => 1])->all();
 foreach($sttn as $sttnz){
 $lms= \common\models\LbStationMonthlyDetails::find()->where(['status' => 1,'month'=>$thism,'year'=>$thisy,'station_id'=>$sttnz->id])->one();
+$qtysz="";
+$statnz="";  
 if($lms){
 $qtysz=$lms->total_sale_litre;
-$statnz= $sttnz->station_name;      
+$statnz= $sttnz->station_name; 
+if($statnz){
+    $statnz=$statnz;
+}
+}else{
+  $statnz="";  
+}
+if($qtysz){
+    $qtysz=$qtysz;
+}
+else{
+  $qtysz="";  
 }
 }
 ?>		
