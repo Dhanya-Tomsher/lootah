@@ -108,8 +108,8 @@ class LbStationOperatorController extends Controller {
                 );
 
                 $result = Yii::$app->ApiManager->operatormanagement($params, "POST");
-                print_r($result);
-                exit;
+//                print_r($result);
+//                exit;
                 if ($result == 1) {
                     $newparams = array(
                         'rfid' => $model->rfid

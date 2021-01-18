@@ -908,12 +908,12 @@ class ApiManager extends \yii\base\Component {
             $final['url'] = $url;
             $final['result'] = $result;
 
-            if ($method == "POST") {
-
-                echo "<pre/>";
-                print_r($input);
-                die("data get");
-            }
+//            if ($method == "POST") {
+//
+//                echo "<pre/>";
+//                print_r($input);
+//                die("data get");
+//            }
             return $result;
         } else {
             return 'Access token not getting';
