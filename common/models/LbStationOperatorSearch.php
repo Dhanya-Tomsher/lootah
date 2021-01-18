@@ -10,25 +10,23 @@ use common\models\LbStationOperator;
 /**
  * LbStationOperatorSearch represents the model behind the search form of `common\models\LbStationOperator`.
  */
-class LbStationOperatorSearch extends LbStationOperator
-{
+class LbStationOperatorSearch extends LbStationOperator {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['username'], 'unique'],
             [['id', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
-            [['name', 'username', 'password', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'username', 'password', 'created_at', 'updated_at', 'PrimaryTagId', 'rfid'], 'safe'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,8 +38,7 @@ class LbStationOperatorSearch extends LbStationOperator
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = LbStationOperator::find();
 
         // add conditions that should always apply here
@@ -72,9 +69,10 @@ class LbStationOperatorSearch extends LbStationOperator
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password]);
+                ->andFilterWhere(['like', 'username', $this->username])
+                ->andFilterWhere(['like', 'password', $this->password]);
 
         return $dataProvider;
     }
+
 }

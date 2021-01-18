@@ -13,8 +13,8 @@ use yii\filters\AccessControl;
 /**
  * LbStationOperatorController implements the CRUD actions for LbStationOperator model.
  */
-class LbStationOperatorController extends Controller
-{
+class LbStationOperatorController extends Controller {
+
     /**
      * {@inheritdoc}
      */
@@ -65,14 +65,13 @@ class LbStationOperatorController extends Controller
      * Lists all LbStationOperator models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new LbStationOperatorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -82,10 +81,9 @@ class LbStationOperatorController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -94,20 +92,47 @@ class LbStationOperatorController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new LbStationOperator();
 
-       if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save(false)) {
-                Yii::$app->session->setFlash('success', "Data created successfully.");
-                return $this->redirect(['index']);
+                $model->rfid = "LTOPRRFID" . $model->id;
+                $model->save(FALSE);
+                $params = array(
+                    'label' => $model->name,
+                    'rfid' => $model->rfid,
+                    'type' => "O",
+                    'appId' => 0,
+                    'flag' => 0
+                );
+
+                $result = Yii::$app->ApiManager->operatormanagement($params, "POST");
+                if ($result == 1) {
+                    $newparams = array(
+                        'rfid' => $model->rfid
+                    );
+                    $nextresult = Yii::$app->ApiManager->operatormanagement($newparams, "GET");
+//                    print_r($nextresult);
+                    if ($nextresult != NULL) {
+                        if ($nextresult[0] != NULL) {
+                            $model->PrimaryTagId = $nextresult[0]["id"];
+                            $model->save(FALSE);
+                        }
+                    }
+                    Yii::$app->session->setFlash('success', "Data created successfully.");
+                    return $this->redirect(['index']);
+                    //  exit;
+                } else {
+                    $model->delete(FALSE);
+                    Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
+                }
             }
         }
 
 
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -118,19 +143,18 @@ class LbStationOperatorController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-       if ($model->load(Yii::$app->request->post())) {
-            if ($model->save(false)) {                
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save(false)) {
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
                 return $this->redirect(['index']);
             }
         }
 
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -141,8 +165,7 @@ class LbStationOperatorController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -155,12 +178,12 @@ class LbStationOperatorController extends Controller
      * @return LbStationOperator the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = LbStationOperator::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

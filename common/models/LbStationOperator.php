@@ -20,24 +20,22 @@ use Yii;
  * @property int $sort_order
  * @property int $status
  */
-class LbStationOperator extends \yii\db\ActiveRecord
-{
+class LbStationOperator extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'lb_station_operator';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['created_at', 'updated_at'], 'safe'],
-            [['name', 'username','password'], 'required'],
+            [['created_at', 'updated_at', 'PrimaryTagId', 'rfid'], 'safe'],
+            [['name', 'username', 'password'], 'required'],
             [['created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
             [['name', 'username', 'password'], 'string', 'max' => 45],
         ];
@@ -46,8 +44,7 @@ class LbStationOperator extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'name' => 'Name',
@@ -63,7 +60,8 @@ class LbStationOperator extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
-    public function uploadFile($file, $name, $id){
+
+    public function uploadFile($file, $name, $id) {
 
         $targetFolder = \yii::$app->basePath . '/../uploads/stationoperator/' . $id . '/';
         if (!file_exists($targetFolder)) {
@@ -71,10 +69,9 @@ class LbStationOperator extends \yii\db\ActiveRecord
         }
         if ($file->saveAs($targetFolder . $name . '.' . $file->extension)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
-   
+
 }

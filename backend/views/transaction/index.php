@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         } else {
                             $url = "";
                         }
-                        ?> 
+                        ?>
                         <ul class = "nav navbar-right panel_toolbox">
                             <?php // echo $this->render('_search', ['model' => $searchModel]);
                             ?>
@@ -152,9 +152,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'Status',
 //                                'ServerTimestamp',
                                 // 'UpdateTimestamp',
-//                            ['class' => 'yii\grid\ActionColumn',
-//                            'header' => 'Update',
-//                            'template' => '{update}'],
+                                ['class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Update',
+                                    'template' => '{update}'],
                                 ['class' => 'yii\grid\ActionColumn',
                                     'header' => 'View',
                                     'template' => '{view}'],

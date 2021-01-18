@@ -263,6 +263,31 @@ class ApiManager extends \yii\base\Component {
         }
     }
 
+    public function operatormanagement($params, $method) {
+        $name = "Manage Operator details-" . $method;
+
+        if ($method == "POST" || $method == "PUT") {
+            $url = "FCS/PrimaryTag";
+            $make_call = $this->callAPI($method, $url, json_encode($params));
+
+            if ($make_call == 1) {
+
+                return $make_call;
+            } else {
+
+                $array = $this->errorCode(1000, $name, 1, $make_call);
+                return 0;
+            }
+        } else {
+            $url = "FCS/PrimaryTag/key";
+            $response = $this->callAPI($method, $url, json_encode($params));
+            //$response = json_decode($make_call, true);
+            $array = $this->errorCode(1000, $name, 1, $make_call);
+
+            return $response;
+        }
+    }
+
     public function updateagent($params, $master) {
         $name = "Update agent details-" . $master;
         $url = "/rest/modules/v1.0/Agent/" . $master;
