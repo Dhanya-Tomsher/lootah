@@ -118,7 +118,7 @@ class LbStationOperatorController extends Controller {
 //                    print_r($nextresult);
                     if ($nextresult != NULL) {
                         if ($nextresult[0] != NULL) {
-                            $model->PrimaryTagId = $nextresult[0]["id"];
+                            $model->PrimaryTagId = $nextresult["id"];
                             $model->save(FALSE);
                         }
                     }

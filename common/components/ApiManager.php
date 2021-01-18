@@ -284,6 +284,9 @@ class ApiManager extends \yii\base\Component {
             //$response = json_decode($make_call, true);
             $array = $this->errorCode(1000, $name, 1, $make_call);
 
+//            echo "<pre/>";
+//            print_r($response);
+//            die('hope');
             return $response;
         }
     }
