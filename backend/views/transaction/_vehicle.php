@@ -7,8 +7,9 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\ServiceProducts */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<option value="">Choose a Vehicle</option>
+
 <?php if ($data != NULL) { ?>
-    <option value="">Choose a Vehicle</option>
 
     <?php foreach ($data as $dat) { ?>
         <option value="<?php echo $dat->vehicle_number; ?>"><?php echo $dat->vehicle_number; ?></option>
