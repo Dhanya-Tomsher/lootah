@@ -100,7 +100,7 @@ class LbStationOperatorController extends Controller {
                 $model->rfid = "LTOPRRFID" . $model->id;
                 $model->save(FALSE);
                 $params = array(
-                    'label' => $model->name,
+                    'label' => $model->username,
                     'rfid' => $model->rfid,
                     'type' => "O",
                     'appId' => 0,

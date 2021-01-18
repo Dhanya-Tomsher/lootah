@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use moonland\phpexcel\Excel;
+use yii\web\Response;
+use yii\helpers\Json;
+use yii\filters\Cors;
 
 /**
  * TransactionController implements the CRUD actions for Transaction model.
@@ -223,12 +226,29 @@ class TransactionController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionGetVehicle() {
+        if (isset($_POST['client_id'])) {
+            $client_id = $_POST['client_id'];
+        }
+
+        $get_vehicle = \common\models\LbClientVehicles::find()->where(['client_id' => $client_id])->all();
+        $get_form = '';
+        if ($get_vehicle != NULL) {
+            $get_form = $this->renderPartial('_vehicle', ['data' => $get_vehicle]);
+        }
+        $array['data'] = $get_form;
+        $array['new'] = -1;
+        $array['error'] = '';
+        echo json_encode($array);
+        exit;
+    }
+
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if ($model->save()) {
+            if ($model->save(false)) {
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
                 return $this->redirect(['index']);
             }

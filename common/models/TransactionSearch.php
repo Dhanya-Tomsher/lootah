@@ -17,7 +17,7 @@ class TransactionSearch extends Transaction {
      */
     public function rules() {
         return [
-            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id', 'device_type', 'date_from', 'date_to'], 'safe'],
+            [['UUID', 'Meter', 'SecondaryTag', 'Category', 'Operator', 'Asset', 'AccumulatorType', 'Sitecode', 'Project', 'PlateNo', 'Master', 'Allowance', 'Type', 'StartTime', 'EndTime', 'Status', 'ServerTimestamp', 'UpdateTimestamp', 'dispenser_id', 'station_id', 'nozle_id', 'device_type', 'date_from', 'date_to', 'client_id'], 'safe'],
             [['transaction_no', 'ReferenceId', 'SequenceId', 'DeviceId', 'Accumulator'], 'integer'],
             [['Volume'], 'number'],
         ];
@@ -55,6 +55,24 @@ class TransactionSearch extends Transaction {
             return $dataProvider;
         }
 
+        if (isset($this->client_id) && $this->client_id != "") {
+            if ($this->PlateNo != "") {
+                $query->andWhere("PlateNo =  '" . $this->PlateNo . "'");
+            } else {
+                $get_vehicle_list = LbClientVehicles::find()->where(['client_id' => $this->client_id])->all();
+
+                $get_veh_list = [];
+
+                if ($get_vehicle_list != NULL) {
+                    foreach ($get_vehicle_list as $get_vehicle_li) {
+                        $get_veh_list[] = $get_vehicle_li->vehicle_number;
+                    }
+                }
+
+
+                $query->andWhere(['IN', 'PlateNo', $get_veh_list]);
+            }
+        }
         if (isset($this->date_from) && $this->date_from != "") {
             $date_from = date('Y-m-d H:i:s', strtotime($this->date_from));
             //echo $date_from;

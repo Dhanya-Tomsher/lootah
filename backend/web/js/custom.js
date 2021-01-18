@@ -3,8 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function () {
 
+$(document).ready(function () {
+    $('.select_client').change(function () {
+
+        var client_id = $(this).val();
+
+        if (client_id != '') {
+            $.ajax({
+                url: basepath + "/transaction/get-vehicle",
+                type: "POST",
+                data: {client_id: client_id},
+                success: function (data)
+                {
+                    var obj = JSON.parse(data);
+                    $('.result').html(obj.data);
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+    });
     $('.service_type').change(function () {
         var service_type = $(this).val();
         var pid = $(this).attr('pid');

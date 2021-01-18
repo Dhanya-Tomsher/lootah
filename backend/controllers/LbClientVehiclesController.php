@@ -66,6 +66,8 @@ class LbClientVehiclesController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+
+
         $searchModel = new LbClientVehiclesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -171,32 +173,33 @@ class LbClientVehiclesController extends Controller {
 
                 if ($current_plate_no != $model->vehicle_number) {
 
-                }
-//                $params = array(
-//                    'label' => $model->vehicle_number,
-//                    'id' => $model->SecondaryTagId,
-//                    'updateTimestamp' => date("Y-m-d H:i:s")
-//                );
 
-                $params = array(
-                    'id' => $model->SecondaryTagId,
-                    'label' => $model->vehicle_number,
-                    'asset' => $model->asset,
-                    'rfid' => $model->rfid,
-                    'type' => "O",
-                    'accumulator' => 1,
-                    'allowance' => 1,
-                    'flag' => 1
-                );
+                    $params = array(
+                        'label' => $model->vehicle_number,
+                        'id' => $model->SecondaryTagId,
+                        'updateTimestamp' => date("Y-m-d H:i:s")
+                    );
 
-                $result = Yii::$app->ApiManager->vehiclemanagement($params, "PUT");
-                if ($result == 1) {
+                    $params = array(
+                        'id' => $model->SecondaryTagId,
+                        'label' => $model->vehicle_number,
+                        'asset' => $model->asset,
+                        'rfid' => $model->rfid,
+                        'type' => "O",
+                        'accumulator' => 1,
+                        'allowance' => 1,
+                        'flag' => 1
+                    );
 
-                    Yii::$app->session->setFlash('success', "Data created successfully.");
-                    return $this->redirect(['index']);
-                } else {
-                    $model->delete(FALSE);
-                    Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
+                    $result = Yii::$app->ApiManager->vehiclemanagement($params, "PUT");
+                    if ($result == 1) {
+
+                        Yii::$app->session->setFlash('success', "Data created successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        $model->delete(FALSE);
+                        Yii::$app->session->setFlash('success', "Some error Occured on updating asset details.");
+                    }
                 }
             }
         }
