@@ -115,7 +115,8 @@ class LbStationOperatorController extends Controller {
                         'rfid' => $model->rfid
                     );
                     $nextresult = Yii::$app->ApiManager->operatormanagement($newparams, "GET");
-//                    print_r($nextresult);
+                    print_r($nextresult);
+                    exit;
                     if ($nextresult != NULL) {
                         if ($nextresult[0] != NULL) {
                             $model->PrimaryTagId = $nextresult["id"];
