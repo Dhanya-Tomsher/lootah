@@ -15,32 +15,32 @@ $mnm= date('M',strtotime('-1 month'));
 
 $yr= date('Y',strtotime('-1 month'));
 
-$firstDayLastMonth= date("Y-m-01",strtotime('-1 month'));
-$lastDayLastMonth = date("Y-m-t",strtotime('-1 month'));
+$firstDayLastMonth= date("Y-m-01T00:00:00",strtotime('-1 month'));
+$lastDayLastMonth = date("Y-m-tT23:59:59",strtotime('-1 month'));
 $mnt= date('m');
 $mntm= date('M');
 $cus= \common\models\LbGeneralSettings::find()->where(['month'=>$mn])->one();
 $cur= \common\models\LbGeneralSettings::find()->where(['month'=>$mnt])->one(); 
 
-$firstDayCurrentMonth= date("Y-m-01");
-$lastDayCurrentMonth = date("Y-m-t");
+$firstDayCurrentMonth= date("Y-m-01T00:00:00");
+$lastDayCurrentMonth = date("Y-m-tT23:59:59");
 //Last month total collection
-                                        $lmt= \common\models\LbDailyTankerCollection::find()->where(['status' => 1])->andWhere(['between', 'purchase_date', $firstDayLastMonth, $lastDayLastMonth])->all();
+                                        $lmt= \common\models\Transaction::find()->where(['status' => 1,'device_type'=>'Lootah-T'])->andWhere(['between', 'StartTime', $firstDayLastMonth, $lastDayLastMonth])->all();
                                         foreach($lmt as $lmts){
                                             $tlmt +=$lmts->quantity_litre;
                                         }
-                                        $lms= \common\models\LbDailyStationCollection::find()->where(['status' => 1])->andWhere(['between', 'purchase_date', $firstDayLastMonth, $lastDayLastMonth])->all();
+                                        $lms= \common\models\Transaction::find()->where(['status' => 1,'device_type'=>'Lootah-S'])->andWhere(['between', 'StartTime', $firstDayLastMonth, $lastDayLastMonth])->all();
                                         foreach($lms as $lmss){
                                             $tlms +=$lmss->quantity_litre;
                                         }
                                         $tlmm=$tlmt+$tlms;
                                         
 //Current month total collection
-                                        $cmt= \common\models\LbDailyTankerCollection::find()->where(['status' => 1])->andWhere(['between', 'purchase_date', $firstDayCurrentMonth, $lastDayCurrentMonth])->all();
+                                        $cmt= \common\models\Transaction::find()->where(['status' => 1,'device_type'=>'Lootah-T'])->andWhere(['between', 'StartTime', $firstDayCurrentMonth, $lastDayCurrentMonth])->all();
                                         foreach($cmt as $cmts){
                                             $tcmt +=$cmts->quantity_litre;
                                         }
-                                        $cms= \common\models\LbDailyStationCollection::find()->where(['status' => 1])->andWhere(['between', 'purchase_date', $firstDayCurrentMonth, $lastDayCurrentMonth])->all();
+                                        $cms= \common\models\Transaction::find()->where(['status' => 1,'device_type'=>'Lootah-S'])->andWhere(['between', 'StartTime', $firstDayCurrentMonth, $lastDayCurrentMonth])->all();
                                         foreach($cms as $cmss){
                                             $tcms +=$cmss->quantity_litre;
                                         }
@@ -311,7 +311,8 @@ $lastDayCurrentMonth = date("Y-m-t");
                         $maxstnme=\common\models\LbStation::find()->where(['id'=>$maxstn])->one()->station_name;
                         }else{
                         $maxstnme="";
-                        }?>		
+                        }
+                        ?>		
 					<div class="col-md-4 col-lg-4 col-xl-4">
 
                         <div class="card card-stats">

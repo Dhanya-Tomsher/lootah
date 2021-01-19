@@ -27,17 +27,18 @@
                                     
                                         $mn= date('m',strtotime('-1 month'));
                                         $mnt= date('M',strtotime('-1 month'));
-                                        $firstDayLastMonth= date("Y-$mn-01",strtotime('-1 month'));
-                                        $lastDayLastMonth = date("Y-m-t",strtotime('-1 month'));
+                                        $firstDayLastMonth= date("Y-$mn-01T00:00:00",strtotime('-1 month'));
+                                        $lastDayLastMonth = date("Y-m-tT23:59:59",strtotime('-1 month'));
                                         $t= date('m');
-                                        $firstDayThisMonth= date("Y-m-01");
-                                        $lastDayThisMonth = date("Y-m-d");
+                                        $firstDayThisMonth= date("Y-m-01T00:00:00");
+                                        $lastDayThisMonth = date("Y-m-dT23:59:59");
                                         
                                         $l7= date('Y-m-d',strtotime('-7 days'));
-                                        $cus= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$mn])->one();
+                                        $cus= \common\models\LbGeneralSettings::find()->where(['month'=>$mn])->one();
+                                        $tanker= \common\models\LbTankerOperator::find()->where(['id'=>Yii::$app->session->get('tanopid')])->one();
                                         
                                         //Today's total collection
-                                        $custod= \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
+                                        $custod= \common\models\Transaction::find()->where(['station_id' => $tanker->station_id,'purchase_date'=>date('Y-m-d')])->all();
                                         foreach($custod as $custods){
                                             $ql +=$custods->quantity_litre;
                                         }
@@ -363,31 +364,7 @@
                   <?php
                     }
                     ?>
-
-
-               
-
-
-  
-             
-                
-               
-                
-
-
-            </div>
-
-              <!-- footer
-               ================================================== -->
-               <!--<div class="footer">
-                <div class="uk-grid-collapse" uk-grid>
-                    <div class="uk-width-expand@s uk-first-column">
-                        <p>© 2020 <strong>Lootah Biofuel System</strong>. All Rights Reserved. </p>
-                    </div>
-                    
-                </div>
-            </div>-->
-
+            </div>             
         </div>
 
     </div>

@@ -63,7 +63,7 @@ class StationoperatorController extends \yii\web\Controller
     {
         if(Yii::$app->session->get('stopid')){
             return $this->render('dashboard');
-        }else if(!empty($_REQUEST['LbStationOperator']['email'])){
+        }else if(!empty($_REQUEST['LbStationOperator']['username'])){
         $username=$_REQUEST['LbStationOperator']['username'];
         $password=$_REQUEST['LbStationOperator']['password'];
         $userr = \common\models\LbStationOperator::find()->where(['username' => $username,'password' => $password])->one();
