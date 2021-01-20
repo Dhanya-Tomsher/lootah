@@ -10,8 +10,7 @@ use yii\widgets\ActiveForm;
 <?= $this->render('_leftmenu') ?>
 <div class="box-gradient-home"></div>
 <?php
-$deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get('clid')])->one();
-                  
+$deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get('clid')])->one();                  
 ?>
         <!-- content -->
         <div class="page-content">
@@ -24,8 +23,6 @@ $deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get
                         <li> Profile </li>
                     </ul>
                 </nav>
-
-
                <div class="row">
                     <div class="col-12">
                         <div class="card min-box">
@@ -36,12 +33,11 @@ $deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get
                             <div class="card-body">
                                 <div class="row">
                                     <div class="users-view-image ml-lg-2">
-                                        <?php
+                                    <?php
                                         if($deps->profile_image){
                                         ?>
                                         <img src="<?= Yii::$app->request->baseUrl . '/uploads/clients/' . $deps->id . '/' . $deps->profile_image; ?>"
-                                        class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
-                                    
+                                        class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">                                    
                                     <?php
                                         }else{
                                         ?>
@@ -49,8 +45,7 @@ $deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get
                                         class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
                                     <?php
                                         }
-                                        ?>
- 
+                                        ?> 
                                     </div>
                                     <div class="col-12 col-sm-9 col-md-6 col-lg-5">
                                         <table class="table table-borderless  table-sm">
@@ -97,21 +92,9 @@ $deps = \common\models\LbClients::find()->where(['id' => Yii::$app->session->get
                                             </tbody>
                                         </table>
                                     </div>
-
-                                  
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    
-
-                      
-
                 </div>
-
-           
             </div>

@@ -25,14 +25,14 @@ use yii\widgets\ActiveForm;
                             <div class="card-header">
                                 <h4>Add Details</h4>
                             </div>
-                            <?php if (Yii::$app->session->hasFlash('success')): ?>
+                            <?php if (Yii::$app->session->hasFlash('swapsuccess')): ?>
                             <div class="alert alert-success alert-dismissable">
-                            <?= Yii::$app->session->getFlash('success') ?>
+                            <?= Yii::$app->session->getFlash('swapsuccess') ?>
                             </div>
                         <?php endif; ?>
-                        <?php if (Yii::$app->session->hasFlash('error')): ?>
+                        <?php if (Yii::$app->session->hasFlash('swaperror')): ?>
                             <div class="alert alert-danger alert-dismissable">
-                            <?= Yii::$app->session->getFlash('error') ?>
+                            <?= Yii::$app->session->getFlash('swaperror') ?>
                             </div>
                         <?php endif; ?>
                             <div class="card-body">
@@ -130,10 +130,35 @@ use yii\widgets\ActiveForm;
                                         <p class="font-weight-semi-bold mb-0 text-500"><?= \common\models\LbClientDepartments::find()->where(['id' =>$depts->old_department])->one()->department; ?></p>
                                     </div>                                    
                                      <div class="media-body ml-3">
-                                        <p class="font-weight-semi-bold mb-0 text-500"><?php if($depts->old_vehicle){ echo \common\models\LbClientVehicles::find()->where(['id' =>$depts->old_vehicle])->one()->vehicle_number; }else{echo "N/A"; }?></p>                                        
+                                        <p class="font-weight-semi-bold mb-0 text-500">
+                                            <?php 
+                                            if($depts->old_vehicle){ 
+                                                $chk=\common\models\LbClientVehicles::find()->where(['id' =>$depts->old_vehicle])->one();//->vehicle_number; 
+                                                 if(!empty($chk->vehicle_number)){
+                                                     echo $chk->vehicle_number;
+                                                 }else{
+                                                echo "N/A";                                                 
+                                            }
+                                            }else{
+                                                echo "N/A";                                                 
+                                            }
+                                            ?></p>                                        
                                     </div>
 				     <div class="media-body ml-3">
-                                         <p class="font-weight-semi-bold mb-0 text-500"><?php if($depts->new_vehicle){ echo \common\models\LbClientVehicles::find()->where(['id' =>$depts->new_vehicle])->one()->vehicle_number; }else{echo "N/A"; } ?></p>                                       
+                                        <p class="font-weight-semi-bold mb-0 text-500">
+                                        <?php 
+                                         if($depts->new_vehicle){ 
+                                             $oll= \common\models\LbClientVehicles::find()->where(['id' =>$depts->new_vehicle])->one();//->vehicle_number; 
+                                                if(!empty($oll->vehicle_number)){
+                                                     echo $oll->vehicle_number;
+                                                 }else{
+                                                echo "N/A";                                                 
+                                            }                                             
+                                         }else{
+                                             echo "N/A";                                             
+                                         } 
+                                         ?>
+                                         </p>                                       
                                     </div>
                                      <div class="media-body ml-3">
                                          <p class="font-weight-semi-bold mb-0 text-500"><?= date('d M-Y H:i:s',strtotime($depts->date_replacement)); ?></p>                                       

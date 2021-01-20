@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <form name="frm" action="search" method="POST">
+                                    <form name="frm" action="transactionsearch" method="GET">
                         <div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 mb-4">
                             <div class="section-headline margin-top-25 margin-bottom-12">
                                 <h5>Department</h5>
@@ -39,12 +39,12 @@ use yii\widgets\ActiveForm;
                                 $de_types = \common\models\LbClientDepartments::find()->where(['status' => 1,'client_id'=>Yii::$app->session->get('clid')])->all();
                                 if ($de_types != NULL) {
                                 foreach ($de_types as $de_type) {
-                                    ?>
-                                 <option value="<?= $de_type->id; ?>"> <?= $de_type->department; ?></option>
-                                <?php
-                                }
-                                }
-                                  ?> 
+                            ?>
+                                <option value="<?= $de_type->id; ?>"> <?= $de_type->department; ?></option>
+                            <?php
+                                    }
+                                    }
+                            ?> 
                             </select>
                         </div>                
                         <div class="col-xl-3 col-md-3 col-sm-6 col-xs-12  mb-4">
@@ -139,19 +139,27 @@ use yii\widgets\ActiveForm;
                                         <tbody>
                                             <?php
                                             $i=1;
-                                            $deps = \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->orderBy(['id' => SORT_DESC])->limit(10)->all();
+                                            $mn=date('m');
+                                            $yr=date('Y');
+                                            $customerprice= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$mn,'year'=>$yr])->one();
+                                            $me= \common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
+                                            foreach($me as $mes){                                            
+                                            $deps = \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number])->limit(10)->all();
                                             foreach($deps as $dib){
                                             ?>
                                             <tr>                                               
                                                 <td class="name"><?= $i; ?></td>
-                                                <td><?= date('m-d-Y',strtotime($dib->purchase_date)); ?></td>
-                                                <td><?php echo \common\models\LbStation::find()->where(['id' => $dib->station_id])->one()->station_name; ?></td>
-                                                <td><?php echo \common\models\LbClientVehicles::find()->where(['id' => $dib->vehicle_id])->one()->vehicle_number; ?></td>
-						<td><?php echo $dib->odometer_reading; ?></td>
-						<td><?php echo $dib->quantity_litre; ?></td>
-						<td><?php echo $dib->amount; ?> AED</td>
+                                                <td><?= date('m-d-Y',strtotime($dib->StartTime)); ?></td>
+                                                <td><?php $stn= \common\models\LbStation::find()->where(['id' => $dib->station_id])->one();//
+                                                if(!empty($stn->station_name)){echo $stn->station_name;}else{echo "N/A";} ?></td>
+                                                <td><?php $pl= \common\models\LbClientVehicles::find()->where(['id' => $dib->PlateNo])->one();//
+                                                if(!empty($pl->vehicle_number)){echo $pl->vehicle_number;}else{echo "N/A";} ?></td>
+						<td><?php echo $dib->Meter; ?></td>
+						<td><?php echo $dib->Volume; ?></td>
+						<td><?php ($dib->Volume * $customerprice->customer_price);  ?> AED</td>
                                             </tr>
                                             <?php
+                                            }
                                             $i=$i+1;
                                             }
                                             ?>
@@ -161,21 +169,7 @@ use yii\widgets\ActiveForm;
                             </div>
                         </div>
 						 
-<!--<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>-->
+
                     </div>
             </div>
             </div>
