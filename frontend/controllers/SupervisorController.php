@@ -163,7 +163,7 @@ public function actionForgotpwdsub() {
             if ($file) {
                 $model1->image = $name . '.' . $file->extension;
             }
-        $img=$_REQUEST['LbSupervisor']['image'];
+            
         $model1->name=$_REQUEST['LbSupervisor']['name'];
         $model1->email=$_REQUEST['LbSupervisor']['email'];
         $model1->phone=$_REQUEST['LbSupervisor']['phone'];

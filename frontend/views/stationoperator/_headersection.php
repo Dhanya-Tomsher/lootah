@@ -12,8 +12,8 @@
 					<span>Welcome
                                         <?php 
                                         $uid=Yii::$app->session->get('stopid');
-                                        $name= \common\models\LbStationOperator::find()->where(['id' => $uid])->one()->name;
-                                        echo $name;
+                                        $name= \common\models\LbStationOperator::find()->where(['id' => $uid])->one();
+                                        echo $name->name;
                                         ?></span>
 					<small>
                                             Station Operator
@@ -39,7 +39,19 @@
                         </div>
                     </div>
                     <!-- profile -image -->
-                    <a class="opts_account"> <img src="<?= Yii::$app->request->baseUrl; ?>/images/team/team-1.jpg" alt=""></a>
+                    <a class="opts_account">
+                    <?php
+                        if($name->image){
+                    ?>
+                    <img src="<?= Yii::$app->request->baseUrl . '/uploads/stationoperator/' . $name->id . '/' . $name->image; ?>">
+                    <?php
+                        }else{
+                    ?>
+                    <img src="<?= Yii::$app->request->baseUrl; ?>/images/team/team-1.jpg" alt="">
+                    <?php
+                        }
+                    ?>
+                    </a>
 
                     <!-- profile dropdown-->
                     <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
@@ -50,10 +62,20 @@
 
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-avatar">
+                                    <?php
+                                        if($name->image){
+                                    ?>
+                                        <img src="<?= Yii::$app->request->baseUrl . '/uploads/stationoperator/' . $name->id . '/' . $name->image; ?>">
+                                    <?php
+                                        }else{
+                                    ?>
                                     <img src="<?= Yii::$app->request->baseUrl; ?>/images/team/team-1.jpg" alt="">
+                                    <?php
+                                        }
+                                    ?>
                                 </div>
                                 <div class="dropdown-user-name">
-                                    <?= $name; ?> <i class="uil-check"></i> </span>
+                                    <?= $name->name; ?> <i class="uil-check"></i> </span>
                                 </div>
                             </div>
 

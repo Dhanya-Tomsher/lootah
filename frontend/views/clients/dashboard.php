@@ -25,59 +25,55 @@
                                     $qseventhisq=0;
                                     
                                         $mn= date('m',strtotime('-1 month'));
-                                        $mnt= date('M',strtotime('-1 month'));
-                                        $firstDayLastMonth= date("Y-$mn-01",strtotime('-1 month'));
-                                        $lastDayLastMonth = date("Y-m-t",strtotime('-1 month'));
+                                        $mnm= date('M',strtotime('-1 month'));
+                                        $yr= date('Y',strtotime('-1 month'));
+                                        $tyr=date('Y');
+                                        $firstDayLastMonth= date("Y-$mn-01T00:00:00",strtotime('-1 month'));
+                                        $lastDayLastMonth = date("Y-$mn-tT23:59:59",strtotime('-1 month'));
+                                        $mnt= date('m');
+                                        $mntm= date('M');
                                         $t= date('m');
-                                        $firstDayThisMonth= date("Y-m-01");
-                                        $lastDayThisMonth = date("Y-m-d");
-                                        
-                                        $l7= date('Y-m-d',strtotime('-7 days'));
-                                        $cus= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$mn])->one();
-                                        $custhis= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$t])->one();
+                                        $firstDayCurrentMonth= date("Y-m-01T00:00:00");
+                                        $lastDayCurrentMonth = date("Y-m-tTH:i:s");
+                                        $tsrt=date('Y-m-dT00:00:00');
+                                        $now=date('Y-m-dTH:i:s');
+                                        $l7= date('Y-m-dT00:00:00',strtotime('-7 days'));
+                                        $cus= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$mn,'year'=>$yr])->one();
+                                        $custhis= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$t,'year'=>$tyr])->one();
                                         
                                         //Today's total collection
-                                        $custod= \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
+                                        $me= \common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
+                                        foreach($me as $mes){
+                                        $custod= \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number])->where(['status' => 'E'])->andWhere(['between', 'StartTime', $tsrt, $now])->all();
+                                        $q=0;
+                                        $ql=0;
+                                        $qlta=0;
+                                        $qlts=0;
                                         foreach($custod as $custods){
-                                            $ql +=$custods->quantity_litre;
+                                            $ql +=$custods->Volume;
                                         }
-                                        $custodt= \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                                        foreach($custodt as $custodst){
-                                            $qlt +=$custodst->quantity_litre;
-                                        }
-                                        $q=$ql+$qlt; 
+                                        $q=$ql;
                                         
                                         //Last month total collection
-                                        $custodtlm= \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $firstDayLastMonth, $lastDayLastMonth])->all();
+                                        $custodtlm= \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number])->andWhere(['between', 'StartTime', $firstDayLastMonth, $lastDayLastMonth])->all();
                                         foreach($custodtlm as $custodtlms){
-                                            $qlts +=$custodtlms->quantity_litre;
-                                        }
-                                        $custodtlmse= \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $firstDayLastMonth, $lastDayLastMonth])->all();
-                                        foreach($custodtlmse as $custodtlmss){
-                                            $qltss +=$custodtlmss->quantity_litre;
-                                        }
-                                        $qlta=$qltss+$qlts;
-                                        //This month total collection
-                                        $custodtlmthis= \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $firstDayThisMonth, $lastDayThisMonth])->all();
-                                        foreach($custodtlmthis as $custodtlmthiss){
-                                            $qltsthis +=$custodtlmthiss->quantity_litre;
-                                        }
-                                        $custodtlmsethis= \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $firstDayThisMonth, $lastDayThisMonth])->all();
-                                        foreach($custodtlmsethis as $custodtlmsethiss){
-                                            $qltssthis +=$custodtlmsethiss->quantity_litre;
-                                        }
-                                        $qltathis=$qltsthis+$qltssthis;
+                                            $qlts +=$custodtlms->Volume;
+                                        }                                        
+                                        $qlta=$qlts;
                                         
+                                        //This month total collection
+                                        $custodtlmthis= \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number])->andWhere(['between', 'StartTime', $firstDayCurrentMonth, $lastDayCurrentMonth])->all();
+                                        foreach($custodtlmthis as $custodtlmthiss){
+                                            $qltsthis +=$custodtlmthiss->Volume;
+                                        }                                        
+                                        $qltathis=$qltsthis;
+                                        }
                                         //Last 7 days total collection
-                                        $seventhis= \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $l7, $lastDayThisMonth])->all();
+                                        $seventhis= \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number])->andWhere(['between', 'StartTime', $l7, $now])->all();
                                         foreach($seventhis as $seventhiss){
-                                            $qseventhis +=$seventhiss->quantity_litre;
+                                            $qseventhis +=$seventhiss->Volume;
                                         }
-                                        $sevensethis= \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid')])->andWhere(['between', 'purchase_date', $l7, $lastDayThisMonth])->all();
-                                        foreach($sevensethis as $sevensethiss){
-                                            $qseventhisq +=$sevensethiss->quantity_litre;
-                                        }
-                                        $qallseven=$qseventhis+$qseventhisq;
+                                        $qallseven=$qseventhis;
                                             
                                     ?>                                      
                                         <h6 class="card-title text-uppercase text-muted mb-2"> <?= $mnt; ?> Price/ Ltr </h6>                                        
@@ -293,11 +289,7 @@
                 </div>
 
               <div class="row">	
-                  <?php
-                  $deps = \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                   $depsp = \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                    if(count($deps) >0 || count($depsp) >0){                                                         
-                  ?>
+                  
 			<div class="col-lg-12 col-md-12 mt-30">
                         <div class="card">
                             <div
@@ -320,34 +312,23 @@
                                         <tbody>
                                             <?php
                                             $i=1;
-                                                foreach($deps as $depts){
+                                            $me= \common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
+                                            foreach($me as $mes){
+                                            $deps = \common\models\Transaction::find()->where(['status' => 'E','PlateNo'=>$mes->vehicle_number])->andWhere(['between', 'StartTime', $tsrt, $now])->all();                                                
+                                            foreach($deps as $depts){
                                             ?>
                                             <tr>                                               
                                                 <td class="name"><?= $i; ?></td>
                                                 <td><?= date('d-m-Y',strtotime($depts->purchase_date)); ?></td>
                                                 <td><?php echo \common\models\LbStation::find()->where(['id' => $depts->station_id])->one()->station_name; ?></td>
-                                                <td><?php echo \common\models\LbClientVehicles::find()->where(['id' => $depts->vehicle_id])->one()->vehicle_number; ?></td>
-						<td><?php echo $depts->odometer_reading; ?></td>
-						<td><?php echo $depts->quantity_litre; ?></td>
+                                                <td><?php echo $depts->PlateNo; ?></td>
+						<td><?php echo $depts->Accumulator; ?></td>
+						<td><?php echo $depts->Volume; ?></td>
                                             </tr>
                                             <?php
                                             $i=$i+1;
-                                                }
-                                            
-                                            $j=$i+1;
-                                                foreach($depsp as $deptsp){
-                                            ?>
-                                            <tr>                                               
-                                                <td class="name"><?= $j; ?></td>
-                                                <td><?= date('d-m-Y',strtotime($deptsp->purchase_date)); ?></td>
-                                                <td><?php echo \common\models\LbTanker::find()->where(['id' => $deptsp->tanker_id])->one()->tanker_number; ?></td>
-                                                <td><?php echo \common\models\LbClientVehicles::find()->where(['id' => $deptsp->vehicle_id])->one()->vehicle_number; ?></td>
-						<td><?php echo $deptsp->odometer_reading; ?></td>
-						<td><?php echo $deptsp->quantity_litre; ?></td>
-                                            </tr>
-                                            <?php
-                                            $i=$i+1;
-                                                }
+                                                } 
+                                        }
                                             ?>
                                         </tbody>
                                     </table>
@@ -355,9 +336,7 @@
                             </div>
                         </div>
                     </div>
-                  <?php
-                    }
-                    ?>
+                 
 
             </div>
 
@@ -441,15 +420,17 @@ for($j=1;$j<=$lmnth;$j++){
         $da=31;
     }
     $tot[$j]=0;
-    $det= \common\models\LbClientMonthlyDetails::find()->where(['client_id'=>Yii::$app->session->get('clid'),'status'=>1,'month'=>$j,'year'=>$year])->all();
+    $me= \common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
+    foreach($me as $mes){
+    $det= \common\models\Transaction::find()->where(['PlateNo'=>$mes->vehicle_number,'status'=>'E'])->all();
     foreach($det as $dts){   
-        $tot[$j] =$tot[$j]+$dts->total_purchase_litre;
+        $tot[$j] =$tot[$j]+$dts->Volume;
         }    
         echo $avg=floor($tot[$j]/$da).",";
     }
+}
 ?>
-        ]
-    
+        ]    
     }]
 });
 </script>
@@ -495,21 +476,19 @@ for($j=1;$j<=$lmnth;$j++){
 <?php	
 $lm=date('m',strtotime('-1 month'));
 $ly=date('Y',strtotime('-1 month'));
+$firstDayLastMonth= date("Y-$mn-01T00:00:00",strtotime('-1 month'));
+$lastDayLastMonth = date("Y-$mn-tT23:59:59",strtotime('-1 month'));                                        
 $comp=\common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
 foreach($comp as $comps){
 $sqtyz=0;
 $lcmssz=0;
 $tands=0;
 $compz=$comps->vehicle_number;
-$lcms= \common\models\LbDailyStationCollection::find()->where(['status' => 1,'purchase_month'=>$lm,'purchase_year'=>$ly,'vehicle_id'=>$comps->id,'client_id'=>Yii::$app->session->get('clid')])->all();
+$lcms = \common\models\Transaction::find()->where(['status' => 'E','PlateNo'=>$mes->vehicle_number])->andWhere(['between', 'StartTime', $firstDayLastMonth, $lastDayLastMonth])->all();                                                
 foreach($lcms as $lcmss){
-$sqtyz=$sqtyz+$lcmss->quantity_litre;
+$sqtyz=$sqtyz+$lcmss->Volume;
 }
-$lcmst= \common\models\LbDailyTankerCollection::find()->where(['status' => 1,'purchase_month'=>$lm,'purchase_year'=>$ly,'vehicle_id'=>$comps->id,'client_id'=>Yii::$app->session->get('clid')])->all();
-foreach($lcmst as $lcmsts){
-$lcmssz=$lcmssz+$lcmsts->quantity_litre;
-}
-$tands=$sqtyz+$lcmssz;
+$tands=$sqtyz;
 ?>
             ['<?= $compz; ?>', <?= $tands; ?>],
          <?php

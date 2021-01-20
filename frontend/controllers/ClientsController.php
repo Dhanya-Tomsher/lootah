@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 use Yii;
+use common\models\Transaction;
+use common\models\TransactionSearch;
 use yii\web\Controller;
 use frontend\models\LoginForm;
 use yii\web\Response;
@@ -84,7 +86,7 @@ class ClientsController extends \yii\web\Controller
                     $model1->uploadFile($file, $name,$model1->id);
                 }
         }
-        Yii::$app->session->setFlash('success', "You have successfully updated the profile");
+        Yii::$app->session->setFlash('edpsuccess', "You have successfully updated the profile");
         }
         return $this->render('dashboard');
     }
@@ -110,7 +112,7 @@ class ClientsController extends \yii\web\Controller
       $model->client_id=Yii::$app->session->get('clid');
       $model->department=$_REQUEST['LbClientDepartments']['department'];
       $model->save(false);
-      Yii::$app->session->setFlash('success', "You have successfully added the department");
+      Yii::$app->session->setFlash('depsuccess', "You have successfully added the department");
       }
         return $this->render('add-department');
     }
@@ -123,7 +125,7 @@ class ClientsController extends \yii\web\Controller
       $model1->department=$_REQUEST['LbClientDepartments']['department'];
       $model1->status=$_REQUEST['LbClientDepartments']['status'];
       $model1->save(false);
-      Yii::$app->session->setFlash('success', "You have successfully updated the department");
+      Yii::$app->session->setFlash('updsuccess', "You have successfully updated the department");
       }
         return $this->render('add-department');
     }
@@ -138,7 +140,7 @@ class ClientsController extends \yii\web\Controller
             $model->new_vehicle=$_REQUEST['LbClientVehicleSwapRecords']['new_vehicle'];
             $model->date_replacement=date('Y-m-d H:i:s');
             $model->save(false);
-            Yii::$app->session->setFlash('success', "You have successfully swaped the vehicle");
+            Yii::$app->session->setFlash('swapsuccess', "You have successfully swaped the vehicle");
         }
         return $this->render('swap-vehicle');
     }
@@ -151,7 +153,7 @@ class ClientsController extends \yii\web\Controller
         $model->vehicle_type=$_REQUEST['LbClientVehicles']['vehicle_type'];
         $model->vehicle_number=$_REQUEST['LbClientVehicles']['vehicle_number'];
         $model->save(false);
-        Yii::$app->session->setFlash('success', "You have successfully changed the vehicle status");
+        Yii::$app->session->setFlash('vehstsuccess', "You have successfully changed the vehicle status");
         }
         return $this->render('vehicle-status');
     }
@@ -167,7 +169,7 @@ class ClientsController extends \yii\web\Controller
         $model1->vehicle_number=$_REQUEST['LbClientVehicles']['vehicle_number'];
         $model1->status=$_REQUEST['LbClientVehicles']['status'];
         $model1->save(false);
-        Yii::$app->session->setFlash('success', "You have successfully added the vehicle<br />
+        Yii::$app->session->setFlash('updvehsuccess', "You have successfully added the vehicle<br />
         Please collect your access card from the lootah office<br />
         Contact Details: +971 5034325345");
         }
@@ -194,89 +196,104 @@ class ClientsController extends \yii\web\Controller
         if(Yii::$app->session->get('clid')){
             return $this->render('dashboard');
         }else if(!empty($_REQUEST['LbClients']['email'])){
-        $username=$_REQUEST['LbClients']['email'];
-        $password=$_REQUEST['LbClients']['password'];
-        $userr = \common\models\LbClients::find()->where(['email' => $username,'password' => $password])->one();
-        if ($userr != NULL) {
-            $userrs = \common\models\LbClients::find()->where(['email' => $username,'password' => $password,'status'=>1])->one();
-            if ($userrs != NULL) { 
-                $session = Yii::$app->session;
-                Yii::$app->session->set('clid', $userrs->id);
-                Yii::$app->session->setFlash('success', "You have successfully logged in");
-                $userrs->last_login=date('Y-m-d H:i:s');
-                $userrs->save(false);
-                return $this->render('dashboard');
+            $username=$_REQUEST['LbClients']['email'];
+            $password=$_REQUEST['LbClients']['password'];
+            $userr = \common\models\LbClients::find()->where(['email' => $username,'password' => $password])->one();
+            if ($userr != NULL) {
+                $userrs = \common\models\LbClients::find()->where(['email' => $username,'password' => $password,'status'=>1])->one();
+                if ($userrs != NULL) { 
+                    $session = Yii::$app->session;
+                    Yii::$app->session->set('clid', $userrs->id);
+                    Yii::$app->session->setFlash('logsuccess', "You have successfully logged in");
+                    $userrs->last_login=date('Y-m-d H:i:s');
+                    $userrs->save(false);
+                    return $this->render('dashboard');
+                }else{
+                    Yii::$app->session->setFlash('logerror', "Your Account is not Active");
+                    return $this->render('index');
+                }
             }else{
-                Yii::$app->session->setFlash('error', "Your Account is not Active");
-                return $this->render('index');
+                Yii::$app->session->setFlash('logerror', "Invalid Username or Password");
+                return $this->render('index');  
             }
-        }else{
-            Yii::$app->session->setFlash('error', "Invalid Username or Password");
-            return $this->render('index');  
-        }
         }else{
              return $this->render('index');  
         }
     }
-    
-    
+    public function actionTransactionsearch()
+    {
+    date_default_timezone_set('Asia/Dubai');
+        $searchModel = new TransactionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $exp_url_refer = explode('?', \yii\helpers\Url::current());
+
+        if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+            $condition = $exp_url_refer[1];
+        }
+        return $this->render('index', [
+                    'searchModel'   => $searchModel,
+                    'dataProvider'  => $dataProvider,
+                    'condition'     => $condition,
+        ]);
+        
+        }
     public function actionGetDept()
-{
-if (!empty($_POST["client_id"])) {
-$st=$_POST["client_id"];
-$qry= \common\models\LbClientDepartments::find()->where(['client_id' => $st])->all();
-?>
-<option value disabled selected>Select Department</option>
-<?php
-foreach ($qry as $city) {
-?>
-<option value="<?php echo $city["id"]; ?>"><?php echo $city["department"]; ?></option>
-<?php
-}
-}
-}
-
-public function actionGetAllveh()
-{
-if (!empty($_POST["client_id"])) {
-$st=$_POST["client_id"];
-$qry= \common\models\LbClientVehicles::find()->where(['client_id' => $st])->all();
-?>
-<option value disabled selected>Select Vehicle</option>
-<?php
-foreach ($qry as $city) {
-?>
-<option value="<?php echo $city["id"]; ?>"><?php echo $city["vehicle_number"]; ?></option>
-<?php
-}
-}
-}
-
-
-public function actionGetVeh()
-{
-if (!empty($_POST["dept_id"])) {
-$dept=$_POST["dept_id"];
-$qry= \common\models\LbClientVehicles::find()->where(['department_id' => $dept])->all();
-?>
-<option value disabled selected>Select Vehicle</option>
-<?php
-foreach ($qry as $city) {
-?>
-<option value="<?php echo $city["id"]; ?>"><?php echo $city["vehicle_number"]; ?></option>
-<?php
-}
-}
-}
-public function actionFindemail(){
-    $email=$_REQUEST['email'];
-    $user=count(\common\models\LBClients::find()->where(['email' => $email])->all());
-    if($user > 0){
-        echo 1;exit;
-    }else{
-        echo 0;exit;
+    {
+        if (!empty($_POST["client_id"])) {
+        $st=$_POST["client_id"];
+        $qry= \common\models\LbClientDepartments::find()->where(['client_id' => $st])->all();
+        ?>
+        <option value disabled selected>Select Department</option>
+        <?php
+        foreach ($qry as $city) {
+        ?>
+        <option value="<?php echo $city["id"]; ?>"><?php echo $city["department"]; ?></option>
+        <?php
+        }
+        }
     }
-}
+
+    public function actionGetAllveh()
+    {
+        if (!empty($_POST["client_id"])) {
+        $st=$_POST["client_id"];
+        $qry= \common\models\LbClientVehicles::find()->where(['client_id' => $st])->all();
+        ?>
+        <option value disabled selected>Select Vehicle</option>
+        <?php
+        foreach ($qry as $city) {
+        ?>
+        <option value="<?php echo $city["id"]; ?>"><?php echo $city["vehicle_number"]; ?></option>
+        <?php
+        }
+        }
+    }
+
+
+    public function actionGetVeh()
+    {
+        if (!empty($_POST["dept_id"])) {
+        $dept=$_POST["dept_id"];
+        $qry= \common\models\LbClientVehicles::find()->where(['department_id' => $dept])->all();
+        ?>
+        <option value disabled selected>Select Vehicle</option>
+        <?php
+        foreach ($qry as $city) {
+        ?>
+        <option value="<?php echo $city["id"]; ?>"><?php echo $city["vehicle_number"]; ?></option>
+        <?php
+        }
+        }
+    }
+    public function actionFindemail(){
+        $email=$_REQUEST['email'];
+        $user=count(\common\models\LBClients::find()->where(['email' => $email])->all());
+        if($user > 0){
+            echo 1;exit;
+        }else{
+            echo 0;exit;
+        }
+    }
 
 public function actionForgotpwdsub() {
     $eml=$_REQUEST['email'];

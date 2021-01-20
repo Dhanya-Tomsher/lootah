@@ -47,8 +47,6 @@ class TankeroperatorController extends \yii\web\Controller
             }
         $img=$_REQUEST['LbTankerOperator']['image'];
         $model1->name=$_REQUEST['LbTankerOperator']['name'];
-        $model1->email=$_REQUEST['LbTankerOperator']['email'];
-        $model1->phone=$_REQUEST['LbTankerOperator']['phone'];
           if($model1->save(false)){
             if ($file) {
                 $model->image = $name . '.' . $file->extension;
@@ -63,12 +61,12 @@ class TankeroperatorController extends \yii\web\Controller
     {
         if(Yii::$app->session->get('tanopid')){
             return $this->render('dashboard');
-        }else if(!empty($_REQUEST['LbTankerOperator']['email'])){
-        $username=$_REQUEST['LbTankerOperator']['email'];
+        }else if(!empty($_REQUEST['LbTankerOperator']['username'])){
+        $username=$_REQUEST['LbTankerOperator']['username'];
         $password=$_REQUEST['LbTankerOperator']['password'];
-        $userr = \common\models\LbTankerOperator::find()->where(['email' => $username,'password' => $password])->one();
+        $userr = \common\models\LbTankerOperator::find()->where(['username' => $username,'password' => $password])->one();
         if ($userr != NULL) {
-            $userrs = \common\models\LbTankerOperator::find()->where(['email' => $username,'password' => $password,'status'=>1])->one();
+            $userrs = \common\models\LbTankerOperator::find()->where(['username' => $username,'password' => $password,'status'=>1])->one();
             if ($userrs != NULL) { 
                 $session = Yii::$app->session;
                 Yii::$app->session->set('tanopid', $userrs->id);

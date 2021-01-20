@@ -42,27 +42,27 @@ use yii\widgets\ActiveForm;
                                         </thead>
 
                                         <tbody>
-                                            <?php
-                                                $i=1;
+                                           <?php  
+                                            $tsrt=date('Y-m-dT00:00:00');
+                                            $now=date('Y-m-dTH:i:s');
                                                 $sel= \common\models\LbStation::find()->where(['status' => 1,'supervisor'=>Yii::$app->session->get('supid')])->all();
-                                                foreach($sel as $sels){
-                                                $deps = \common\models\LbDailyStationCollection::find()->where(['status' => 1,'station_id'=>$sels->id,'purchase_date'=>date('Y-m-d')])->all();                                                
-                                                foreach($deps as $depts){
+                                                $i=1;
+                                                foreach($sel as $sels){                                                                                       
+                                                    $j=1;                                                  
+                                                    $depsp = \common\models\Transaction::find()->where(['status' => 1,'station_id'=>$sels->id])->andWhere(['between', 'StartTime', $tsrt, $now])->all();                                                              
+                                                        foreach($depsp as $deptsp){
                                             ?>
                                             <tr>                                               
-                                                <td class="name"><?= $i; ?></td>
-                                                <td><?php echo \common\models\LbStation::find()->where(['id' => $depts->station_id])->one()->station_name; ?></td>
-                                                <td><?php echo $depts->quantity_litre; ?></td>
-						<td><?php echo $depts->amount; ?></td>
+                                                <td class="name"><?= $j; ?></td>
+                                                <td><?php echo \common\models\LbTanker::find()->where(['id' => $deptsp->tanker_id])->one()->tanker_number; ?></td>
+                                                <td><?php echo $deptsp->quantity_litre; ?></td>
+						<td><?php echo $deptsp->amount; ?></td>
                                             </tr>
-                                            <?php                                         
-                                               
-                                            $i=$i+1;
-                                                }
-                                            }                                                                                                                                                
-                                            ?>
-                                            
-											
+                                            <?php
+                                            $j=$j+1;                                                
+                                               }
+                                              } 
+                                            ?>											
                                         </tbody>
                                     </table>
                                 </div>

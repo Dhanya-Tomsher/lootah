@@ -114,7 +114,7 @@ $this->title = "Lootah Biofuels"
                         <div class="navbar nav_title" style="border: 0;background:#433d2f ! important;">
                             <a href="<?= Yii::$app->request->baseUrl ?>" class="site_title">
 
-                                <img src="<?= Yii::$app->request->baseUrl . '/images/lootah.png' ?>" style="width:100px; !important"/>
+                                <img src="<?= Yii::$app->request->baseUrl . '/images/lootah.png' ?>" style="width:100px !important;"/>
                             </a>
                         </div>
                         <div class="clearfix"></div>

@@ -45,10 +45,7 @@ class StationoperatorController extends \yii\web\Controller
             if ($file) {
                 $model1->image = $name . '.' . $file->extension;
             }
-        $img=$_REQUEST['LbStationOperator']['image'];
         $model1->name=$_REQUEST['LbStationOperator']['name'];
-        $model1->username=$_REQUEST['LbStationOperator']['username'];
-        $model1->phone=$_REQUEST['LbStationOperator']['phone'];
           if($model1->save(false)){
             if ($file) {
                 $model->image = $name . '.' . $file->extension;
@@ -63,7 +60,7 @@ class StationoperatorController extends \yii\web\Controller
     {
         if(Yii::$app->session->get('stopid')){
             return $this->render('dashboard');
-        }else if(!empty($_REQUEST['LbStationOperator']['email'])){
+        }else if(!empty($_REQUEST['LbStationOperator']['username'])){
         $username=$_REQUEST['LbStationOperator']['username'];
         $password=$_REQUEST['LbStationOperator']['password'];
         $userr = \common\models\LbStationOperator::find()->where(['username' => $username,'password' => $password])->one();

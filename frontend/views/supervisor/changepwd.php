@@ -113,6 +113,7 @@ $deps = \common\models\LbSupervisor::find()->where(['id' => Yii::$app->session->
 
             if (pass != confirm) {
                 $('#error').html(" Password doesn't match");
+                return false;
                 if (e != '') {
                     e.preventDefault();
                 }

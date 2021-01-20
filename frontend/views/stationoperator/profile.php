@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 <?= $this->render('_leftmenu') ?>
 <div class="box-gradient-home"></div>
 <?php
-$deps = \common\models\LbStationOperator::find()->where(['id' => Yii::$app->session->get('armid')])->one();
+$deps = \common\models\LbStationOperator::find()->where(['id' => Yii::$app->session->get('stopid')])->one();
                   
 ?>
         <!-- content -->
@@ -58,15 +58,7 @@ $deps = \common\models\LbStationOperator::find()->where(['id' => Yii::$app->sess
                                                 <tr>
                                                     <td class="font-weight-bold"><strong>Name:</strong></td>
                                                     <td><?= $deps->name; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold"><strong>Email:</strong></td>
-                                                    <td><?= $deps->email; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold"><strong>Phone:</strong></td>
-                                                    <td><?= $deps->phone; ?></td>
-                                                </tr>
+                                                </tr>                                                                                           
                                                 <tr>
                                                     <td class="font-weight-bold"><strong>Last Login:</strong></td>
                                                     <td><?= date('d M-Y H:i:s',strtotime($deps->last_login)); ?></td>

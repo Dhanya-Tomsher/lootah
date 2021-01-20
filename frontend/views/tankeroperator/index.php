@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
                 <!-- column two -->
                 <div class="uk-card-default py-4 px-5">
                     <div class="mt-4 mb-2 uk-text-center">
-                        <h3 class="mb-0"> Areamanager Login</h3>
+                        <h3 class="mb-0"> Tanker Operator Login</h3>
                         <p class="my-2">Login to manage your account.</p>
                     </div>
                     <?php $form = ActiveForm::begin(['enableClientScript' => false,'class'=>'uk-grid-small uk-grid','action'=>'login']); 
-                    $userr = new \common\models\LbAreaManager();
+                    $userr = new \common\models\LbTankerOperator();
                     ?>
                     <?php if (Yii::$app->session->hasFlash('success')): ?>
                             <div class="alert alert-success alert-dismissable">

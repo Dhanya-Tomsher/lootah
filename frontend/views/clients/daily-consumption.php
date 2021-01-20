@@ -20,11 +20,7 @@ use yii\widgets\ActiveForm;
                     </ul>
                 </nav>
                 <div class="row">
-                    <?php
-                  $deps = \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                   $depsp = \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                    if(count($deps) >0 || count($depsp) >0){                                                         
-                  ?>
+                    
 			<div class="col-lg-12 col-md-12 mt-30">
                         <div class="card">
                             <div
@@ -45,23 +41,30 @@ use yii\widgets\ActiveForm;
 						<th>Price</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <?php
+                                          <?php
+                                            $mn=date('m');
+                                            $yr=date('Y');
+                                            $customerprice= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => Yii::$app->session->get('clid'),'month'=>$mn,'year'=>$yr])->one();
                                             $i=1;
-                                            $dis = \common\models\LbDailyStationCollection::find()->where(['status' => 1,'client_id'=>Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                                            foreach($dis as $dib){
-                                            ?>
+                                            $tsrt=date('Y-m-dT00:00:00');
+                                            $now=date('Y-m-dTH:i:s');                                        
+                                            $me= \common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all();
+                                            foreach($me as $mes){
+                                                $dis= \common\models\Transaction::find()->where(['PlateNo' => $mes->vehicle_number,'status' => 'E'])->andWhere(['between', 'StartTime', $tsrt, $now])->all();
+                                                foreach($dis as $dib){
+                                          ?>
                                             <tr>                                               
                                                 <td class="name"><?= $i; ?></td>
-                                                <td><?= date('m-d-Y',strtotime($dib->purchase_date)); ?></td>
+                                                <td><?= date('m-d-Y',strtotime($dib->StartTime)); ?></td>
                                                 <td><?php echo \common\models\LbStation::find()->where(['id' => $dib->station_id])->one()->station_name; ?></td>
-                                                <td><?php echo \common\models\LbClientVehicles::find()->where(['id' => $dib->vehicle_id])->one()->vehicle_number; ?></td>
-						<td><?php echo $dib->odometer_reading; ?></td>
-						<td><?php echo $dib->quantity_litre; ?></td>
-						<td><?php echo $dib->amount; ?> AED</td>												
+                                                <td><?php echo $dib->PlateNo; ?></td>
+						<td><?php echo $dib->Meter; ?></td>
+						<td><?php echo $dib->Volume; ?></td>
+						<td><?php echo ($dib->Volume * $customerprice->customer_price); ?> AED</td>												
                                             </tr>
-                                            <?php                                          
+                                            <?php                                                                                   
+                                            }
                                             $i=$i+1;
                                             }
                                             ?>                                            
@@ -121,36 +124,6 @@ use yii\widgets\ActiveForm;
                             <?php
                              }
                              ?>
-						 
-						<!-- <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>-->
-                    </div>
-                    <?php
-                    }else{
-                    ?>
-                    <div class="col-lg-12 col-md-12 mt-30">
-                        <div class="card">
-                            <div
-                                class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
-                                <h4>No data available.</h4>
-                            </div>
-                            </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
+                    </div>                    
             </div>
             </div>

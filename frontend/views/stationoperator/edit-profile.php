@@ -66,14 +66,7 @@ $deps = \common\models\LbStationOperator::find()->where(['id' => Yii::$app->sess
                                 </div>
                                 <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
                                     <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
-                                </div>
-                                <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                                    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
-                                </div>
-                            <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
-                                </div>
-                            
+                                </div>                                
                             <hr class="mb-0">
                             <div class="uk-flex uk-flex-right p-3">
                                 <a href="#" class="btn btn-soft-primary btn-sm mr-2">Cancel</a>
