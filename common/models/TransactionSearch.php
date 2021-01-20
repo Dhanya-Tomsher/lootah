@@ -59,7 +59,7 @@ class TransactionSearch extends Transaction {
             if ($this->PlateNo != "") {
                 $query->andWhere("PlateNo =  '" . $this->PlateNo . "'");
             } else {
-                $get_vehicle_list = LbClientVehicles::find()->where(['client_id' => $this->client_id])->all();
+                $get_vehicle_list = LbClientVehicles::find()->where(['id' => $this->client_id])->all();
 
                 $get_veh_list = [];
 
