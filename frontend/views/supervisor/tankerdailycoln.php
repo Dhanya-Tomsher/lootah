@@ -42,15 +42,17 @@ use yii\widgets\ActiveForm;
                                         </thead>
 
                                         <tbody>
-                                            <?php            
+                                            <?php  
+                                            $tsrt=date('Y-m-dT00:00:00');
+                                            $now=date('Y-m-dTH:i:s');
                                                 $sel= \common\models\LbStation::find()->where(['status' => 1,'supervisor'=>Yii::$app->session->get('supid')])->all();
                                                 $i=1;
                                                 foreach($sel as $sels){                                                                                       
-                                            $j=1;
-                                            $tank = \common\models\LbTanker::find()->where(['status' => 1,'station_id'=>$sels->id])->all();
-                                            foreach($tank as $tanker){ 
-                                            $depsp = \common\models\LbDailyTankerCollection::find()->where(['status' => 1,'tanker_id'=>$tanker->id,'purchase_date'=>date('Y-m-d')])->all();                                                              
-                                                foreach($depsp as $deptsp){
+                                                    $j=1;
+                                                    $tank = \common\models\LbTanker::find()->where(['status' => 1,'station_id'=>$sels->id])->all();
+                                                    foreach($tank as $tanker){ 
+                                                    $depsp = \common\models\Transaction::find()->where(['status' => 1,'Meter'=>$tanker->tanker_number])->andWhere(['between', 'StartTime', $tsrt, $now])->all();                                                              
+                                                        foreach($depsp as $deptsp){
                                             ?>
                                             <tr>                                               
                                                 <td class="name"><?= $j; ?></td>
@@ -60,14 +62,10 @@ use yii\widgets\ActiveForm;
                                             </tr>
                                             <?php
                                             $j=$j+1;
-                                            
                                                 }
-                                                 }
-                                                }                                                
-                                                
-                                            ?>
-                                            
-											
+                                               }
+                                              } 
+                                            ?>					
                                         </tbody>
                                     </table>
                                 </div>

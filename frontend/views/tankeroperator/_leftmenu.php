@@ -7,14 +7,14 @@
 
             <!-- logo -->
             <div class="logo uk-visible@s">
-                <a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/dashboard"> <img src="<?= Yii::$app->request->baseUrl; ?>/images/lootahimg.png" alt=""> </a>
+                <a href="<?= Yii::$app->request->baseUrl; ?>/tankeroperator/dashboard"> <img src="<?= Yii::$app->request->baseUrl; ?>/images/lootahimg.png" alt=""> </a>
             </div>
             <div class="page-menu-inner" data-simplebar>
                 <ul>
-                    <li class="active"><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/dashboard"><i class="uil-home-alt"></i> <span> Dashboard </span></a> </li>
+                    <li class="active"><a href="<?= Yii::$app->request->baseUrl; ?>/tankeroperator/dashboard"><i class="uil-home-alt"></i> <span> Dashboard </span></a> </li>
                 </ul>
                 <ul>                    
-                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/profile"><i class="fa fa-male"></i> <span>Profile</span> </a></li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/tankeroperator/profile"><i class="fa fa-male"></i> <span>Profile</span> </a></li>
 		</ul>         
             </div>
         </div>

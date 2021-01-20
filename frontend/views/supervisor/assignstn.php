@@ -101,20 +101,20 @@ use dosamigos\ckeditor\CKEditor;
                                         <thead>
                                             <tr>
                                                 <th>Sl.No.</th>
-                                                <th>Station Name</th>
 						<th>Operator</th>
+                                                <th>Station Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                             $i=1;
-                                            $operatr= \common\models\LbStation::find()->where(['status'=>1])->all();
+                                            $operatr= \common\models\LbStationOperator::find()->where(['status'=>1])->all();
                                             foreach($operatr as $operatrs){
                                         ?>
                                             <tr>                                               
                                                 <td class="name"><?= $i; ?></td>												
-                                                <td><?= $operatrs->station_name; ?></td>
-                                                <td><?php if($operatrs->operator){ echo \common\models\LbStationOperator::find()->where(['id'=>$operatrs->operator])->one()->name;} ?></td>
+                                                <td><?php echo $operatrs->name; ?></td>
+                                                <td><?php if($operatrs->station){echo \common\models\LbStation::find()->where(['id'=>$operatrs->station])->one()->station_name;}else{echo "N/A";} ?></td>
                                             </tr>                                                                                        			
 					<?php
                                            $i=$i+1;

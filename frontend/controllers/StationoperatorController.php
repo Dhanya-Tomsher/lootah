@@ -45,10 +45,7 @@ class StationoperatorController extends \yii\web\Controller
             if ($file) {
                 $model1->image = $name . '.' . $file->extension;
             }
-        $img=$_REQUEST['LbStationOperator']['image'];
         $model1->name=$_REQUEST['LbStationOperator']['name'];
-        $model1->username=$_REQUEST['LbStationOperator']['username'];
-        $model1->phone=$_REQUEST['LbStationOperator']['phone'];
           if($model1->save(false)){
             if ($file) {
                 $model->image = $name . '.' . $file->extension;

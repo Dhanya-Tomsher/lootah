@@ -60,14 +60,6 @@ $deps = \common\models\LbTankerOperator::find()->where(['id' => Yii::$app->sessi
                                                     <td><?= $deps->name; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-weight-bold"><strong>Email:</strong></td>
-                                                    <td><?= $deps->email; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold"><strong>Phone:</strong></td>
-                                                    <td><?= $deps->phone; ?></td>
-                                                </tr>
-                                                <tr>
                                                     <td class="font-weight-bold"><strong>Last Login:</strong></td>
                                                     <td><?= date('d M-Y H:i:s',strtotime($deps->last_login)); ?></td>
                                                 </tr>

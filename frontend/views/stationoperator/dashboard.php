@@ -29,7 +29,10 @@
                                        // $mnt= date('M',strtotime('-1 month'));
                                         $mn= date('m');
                                         $mnt= date('M');
-                                        $firstDayLastMonth= date("Y-$mn-01T00:00:00",strtotime('-1 month'));
+                                        $tsrt=date('Y-m-dT00:00:00');
+                                        $now=date('Y-m-dTH:i:s');
+                                        $mnl= date('m',strtotime('-1 month'));
+                                        $firstDayLastMonth= date("Y-$mnl-01T00:00:00",strtotime('-1 month'));
                                         $lastDayLastMonth = date("Y-m-tT23:59:59",strtotime('-1 month'));
                                         $t= date('m');
                                         $firstDayThisMonth= date("Y-m-01T00:00:00");
@@ -39,13 +42,13 @@
                                         $cus= \common\models\LbGeneralSettings::find()->where(['month'=>$mn])->one();
                                         $station= \common\models\LbStationOperator::find()->where(['id'=>Yii::$app->session->get('stopid')])->one();
                                         //Today's total collection
-                                        $custod= \common\models\Transaction::find()->where(['station_id' => $station->id,'StartTime'=>date('Y-m-d H:i:s')])->all();
+                                        $custod= \common\models\Transaction::find()->where(['station_id' => $station->id])->andWhere(['between', 'StartTime', $tsrt, $now])->all();
                                         foreach($custod as $custods){
                                             $ql +=$custods->quantity_litre;
                                         }
                                         $alltan=\common\models\LbTanker::find()->where(['station_id' => $station->id])->all();
                                         foreach($alltan as $tan){
-                                        $custodt= \common\models\Transaction::find()->where(['tanker_id' => $tan,'StartTime'=>date('Y-m-d H:i:s')])->all();
+                                        $custodt= \common\models\Transaction::find()->where(['tanker_id' => $tan])->andWhere(['between', 'StartTime', $tsrt, $now])->all();
                                         foreach($custodt as $custodst){
                                             $qlt +=$custodst->quantity_litre;
                                         }
@@ -314,9 +317,8 @@
 
               <div class="row">	
                   <?php
-                  $deps = \common\models\LbDailyStationCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                   $depsp = \common\models\LbDailyTankerCollection::find()->where(['client_id' => Yii::$app->session->get('clid'),'purchase_date'=>date('Y-m-d')])->all();
-                    if(count($deps) >0 || count($depsp) >0){                                                         
+                  $deps = \common\models\Transaction::find()->where(['station_id'=>$station->id,'StartTime'=>date('Y-m-dTH:i:s')])->all();
+                  if(count($deps) >0){                                                         
                   ?>
 			<div class="col-lg-12 col-md-12 mt-30">
                         <div class="card">
@@ -344,11 +346,11 @@
                                             ?>
                                             <tr>                                               
                                                 <td class="name"><?= $i; ?></td>
-                                                <td><?= date('d-m-Y',strtotime($depts->purchase_date)); ?></td>
+                                                <td><?= date('d-m-Y',strtotime($depts->StartTime)); ?></td>
                                                 <td><?php echo \common\models\LbStation::find()->where(['id' => $depts->station_id])->one()->station_name; ?></td>
-                                                <td><?php echo \common\models\LbClientVehicles::find()->where(['id' => $depts->vehicle_id])->one()->vehicle_number; ?></td>
-						<td><?php echo $depts->odometer_reading; ?></td>
-						<td><?php echo $depts->quantity_litre; ?></td>
+                                                <td><?php echo $depts->PlateNo; ?></td>
+						<td><?php echo $depts->Accumulator; ?></td>
+						<td><?php echo $depts->Volume; ?></td>
                                             </tr>
                                             <?php
                                             $i=$i+1;
