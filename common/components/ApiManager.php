@@ -222,9 +222,19 @@ class ApiManager extends \yii\base\Component {
                             } else {
                                 $error_list[] = $model->errors;
                             }
+                        } else {
+
+                            echo "fail 3";
+                            exit;
                         }
+                    } else {
+
+                        echo "fail 2";
+                        exit;
                     }
                 } else {
+                    echo "fail 1";
+                    exit;
                     $result_all[] = $data;
                 }
             }
