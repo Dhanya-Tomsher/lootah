@@ -180,7 +180,7 @@ class ApiManager extends \yii\base\Component {
 
                     $result_selected[] = $data;
                     $check_device_exist = \common\models\Device::find()->where(['device_id' => $data['DeviceId']])->one();
-                    $check_transaction_exist = \common\models\Transaction::find()->where(['transaction_no' => $data->Id])->one();
+                    $check_transaction_exist = \common\models\Transaction::find()->where(['transaction_no' => $data["Id"]])->one();
                     if ($check_device_exist == NULL) {
                         if ($check_transaction_exist == NULL) {
 
