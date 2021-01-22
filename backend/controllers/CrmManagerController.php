@@ -209,9 +209,9 @@ class CrmManagerController extends Controller {
                         }
                     }
                 }
-                echo '<pre/>';
-                print_r($make_call);
-                exit;
+//                echo '<pre/>';
+//                print_r($make_call);
+//                exit;
                 if ($error_list == NULL) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
