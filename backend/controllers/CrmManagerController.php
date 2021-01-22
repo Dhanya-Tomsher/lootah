@@ -193,6 +193,7 @@ class CrmManagerController extends Controller {
                             'reportId' => 1
                         );
                         $make_call = $this->callAPI($method, $url, json_encode($params));
+                        echo '<pre/>';
 //                        print_r($make_call);
 //                        exit;
                         if ($make_call != NULL) {
