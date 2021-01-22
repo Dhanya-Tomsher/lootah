@@ -181,19 +181,20 @@ class CrmManagerController extends Controller {
                 }
             } else if ($model->can_name == "import-transactions") {
                 $get_devices = \common\models\Device::find()->all();
+                date_default_timezone_set('UTC');
 
                 $url = 'FCS/' . $module_key;
                 if ($get_devices != NULL) {
                     foreach ($get_devices as $get_device) {
                         $params = array(
                             'deviceId' => $get_device->device_id,
-                            'start' => $model->last_updated,
-                            'end' => date("Y-m-d h:i:s"),
+                            'start' => date("Y-m-d H:i:s", strtotime($model->last_updated)),
+                            'end' => date("Y-m-d H:i:s"),
                             'reportId' => 1
                         );
                         $make_call = $this->callAPI($method, $url, json_encode($params));
-                        print_r($make_call);
-                        exit;
+//                        print_r($make_call);
+//                        exit;
                         if ($make_call != NULL) {
                             $get_last_item = end($make_call);
                             if (isset($get_last_item['EndTime']) && $get_last_item['EndTime'] != "") {
