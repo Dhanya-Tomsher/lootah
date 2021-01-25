@@ -137,7 +137,8 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <a href="<?= Yii::$app->request->baseUrl . '/transaction' ?>" class="btn btn-default">Reset</button>
     </div>
 
     <?php ActiveForm::end(); ?>
