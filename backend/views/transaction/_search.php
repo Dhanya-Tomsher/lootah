@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
         $get_vehicles = \common\models\LbClientVehicles::find()->where(['client_id' => $model->client_id])->all();
         if ($get_vehicles != NULL) {
             foreach ($get_vehicles as $get_vehicle) {
-                $vehicle_list[$get_client->vehicle_number] = $get_client->vehicle_number;
+                $vehicle_list[$get_vehicle->vehicle_number] = $get_vehicle->vehicle_number;
             }
         }
     }
