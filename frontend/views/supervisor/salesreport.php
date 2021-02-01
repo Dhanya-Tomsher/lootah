@@ -26,7 +26,7 @@ use yii\grid\GridView;
             <div class="col-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4 class="float-left">  Station Transaction Report</h4>
+                        <h4 class="float-left">  Sales  Report</h4>
                         <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
@@ -63,7 +63,7 @@ use yii\grid\GridView;
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
-                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-S'])->label(FALSE) ?>
+                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-T'])->label(FALSE) ?>
 
                             </div>
 

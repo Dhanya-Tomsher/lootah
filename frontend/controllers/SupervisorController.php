@@ -38,27 +38,140 @@ class SupervisorController extends \yii\web\Controller {
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            if ($model->load(Yii::$app->request->post())) {
-                $exmodel = \common\models\LbTankCaliberation::find()->where(['station_id' => $_REQUEST['LbTankCaliberation']['station_id'], 'date_caliberation' => date('Y-m-d')])->one();
-                if (count($exmodel) > 0) {
-                    Yii::$app->session->setFlash('success', "A Report of calibration for the current date and station is already present.");
-                } else {
-                    $model->station_id = $_REQUEST['LbTankCaliberation']['station_id'];
-                    $model->date_caliberation = date('Y-m-d');
-                    $model->physical_quantity_gallon = $_REQUEST['LbTankCaliberation']['physical_quantity_gallon'];
-                    $model->quantity_calculation_gallon = $_REQUEST['LbTankCaliberation']['quantity_calculation_gallon'];
-                    $model->calibrated_quantity_gallon = $_REQUEST['LbTankCaliberation']['calibrated_quantity_gallon'];
-                    $model->supervisor_id = Yii::$app->session->get('supid');
-                    $model->created_by = Yii::$app->session->get('supid');
-                    $model->created_by_type = 5;
-                    $model->save(false);
-                }
-            }
+
             return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,]);
         } else {
             return $this->render('index');
         }
+    }
+
+    public function actionTankerreport() {
+        if (Yii::$app->session->get('supid')) {
+            $model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\TransactionSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('tankerreport', ['model' => $model, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,]);
+        } else {
+            return $this->render('index');
+        }
+    }
+
+    public function actionSalesreport() {
+        if (Yii::$app->session->get('supid')) {
+            $model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\TransactionSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('salesreport', ['model' => $model, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,]);
+        } else {
+            return $this->render('index');
+        }
+    }
+
+    public function actionExport() {
+        $searchModel = new \common\models\TransactionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'transaction_no', 'title' => 'Transaction No'];
+        $fields[] = ['key' => 'DeviceId', 'title' => 'Device'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station'];
+        $fields[] = ['key' => 'dispenser_id', 'title' => 'Dispenser'];
+        $fields[] = ['key' => 'nozle_id', 'title' => 'Nozzle'];
+        $fields[] = ['key' => 'SecondaryTag', 'title' => 'Rfid'];
+        $fields[] = ['key' => 'Operator', 'title' => 'Operator'];
+        $fields[] = ['key' => 'PlateNo', 'title' => 'Plate No'];
+        $fields[] = ['key' => 'Volume', 'title' => 'Volum'];
+        $fields[] = ['key' => 'EndTime', 'title' => 'Date'];
+
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'Transaction No')
+                ->setCellValue('B1', 'Device')
+                ->setCellValue('C1', 'Station')
+                ->setCellValue('D1', 'Dispenser')
+                ->setCellValue('E1', 'Nozzle')
+                ->setCellValue('F1', 'Rfid')
+                ->setCellValue('G1', 'Operator')
+                ->setCellValue('H1', 'Plate No')
+                ->setCellValue('I1', 'Volum')
+                ->setCellValue('J1', 'Date');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $mode->transaction_no)
+                        ->setCellValue('B' . $i, $mode->device->name)
+                        ->setCellValue('C' . $i, $mode->station->station_name)
+                        ->setCellValue('D' . $i, $mode->dispenser->label)
+                        ->setCellValue('E' . $i, $mode->nozzle->label)
+                        ->setCellValue('F' . $i, $mode->SecondaryTag)
+                        ->setCellValue('G' . $i, $mode->Operator)
+                        ->setCellValue('H' . $i, $mode->PlateNo)
+                        ->setCellValue('I' . $i, $mode->Volume)
+                        ->setCellValue('J' . $i, $mode->EndTime);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+
+// Miscellaneous glyphs, UTF-8
+//        $objPHPExcel->setActiveSheetIndex(0)
+//                ->setCellValue('A4', 'Miscellaneous glyphs')
+//                ->setCellValue('A5', 'saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas');
+// Rename worksheet
+            $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . date('Ymd'));
+
+
+// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $objPHPExcel->setActiveSheetIndex(0);
+
+
+// Redirect output to a clientâ€™s web browser (Excel2007)
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+            header('Content-Disposition: attachment;filename="Service_request_' . date('Ymd') . '.xlsx"');
+
+            header('Cache-Control: max-age=0');
+// If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
+
+// If you're serving to IE over SSL, then the following may be needed
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
     }
 
     public function actionChangepwd() {
