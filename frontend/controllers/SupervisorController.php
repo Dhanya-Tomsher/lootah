@@ -34,13 +34,18 @@ class SupervisorController extends \yii\web\Controller {
 
     public function actionStationreport() {
         if (Yii::$app->session->get('supid')) {
-            $model = new \common\models\Transaction();
+            //$model = new \common\models\Transaction();
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
 
-            return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,]);
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }
+            return $this->render('stationreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
         } else {
             return $this->render('index');
         }
@@ -52,9 +57,14 @@ class SupervisorController extends \yii\web\Controller {
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
 
-            return $this->render('tankerreport', ['model' => $model, 'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,]);
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }
+            return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
         } else {
             return $this->render('index');
         }
@@ -66,9 +76,14 @@ class SupervisorController extends \yii\web\Controller {
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
 
-            return $this->render('salesreport', ['model' => $model, 'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,]);
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }
+            return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
         } else {
             return $this->render('index');
         }

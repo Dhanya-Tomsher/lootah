@@ -22,6 +22,13 @@ use yii\grid\GridView;
                 <li> Filter  Station Transaction Report</li>
             </ul>
         </nav>
+        <?php
+        if ($condition != '') {
+            $url = "?" . $condition;
+        } else {
+            $url = "";
+        }
+        ?>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
@@ -32,7 +39,7 @@ use yii\grid\GridView;
                     </div>
                     <div class="card-body">
                         <div class="row">
-
+                            <?php //echo "ashik" . $model->station_id; ?>
                             <?php
                             $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'stationreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
