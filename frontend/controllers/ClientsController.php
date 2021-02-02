@@ -21,6 +21,28 @@ class ClientsController extends \yii\web\Controller
     {
         return $this->render('dashboard');
     }
+    
+    public function actionReport() {
+        if (Yii::$app->session->get('clid')) {
+            //$model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\TransactionSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }else{
+                $condition ="";
+            }
+            return $this->render('salesreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
+        } else {
+            return $this->render('index');
+        }
+    }
+    
     public function actionEditprofile() {    
         return $this->render('edit-profile');
     }
@@ -48,7 +70,7 @@ class ClientsController extends \yii\web\Controller
              return $this->render('index'); exit;
         }
     }
-    public function actionSearch() {  
+    public function actionTransactionSearch() {  
         if ($_REQUEST['Submit']) {
             $id=Yii::$app->session->get('clid');
             $department =$_REQUEST['LbClients']['department'];
@@ -179,10 +201,7 @@ class ClientsController extends \yii\web\Controller
     {
         return $this->render('daily-consumption');
     }
-    public function actionReport()
-    {
-        return $this->render('report');
-    }
+    
     public function actionForgot()
     {
         return $this->render('forgot');
@@ -220,7 +239,7 @@ class ClientsController extends \yii\web\Controller
              return $this->render('index');  
         }
     }
-    public function actionTransactionsearch()
+  /*  public function actionTransactionsearch()
     {
     date_default_timezone_set('Asia/Dubai');
         $searchModel = new TransactionSearch();
@@ -236,7 +255,7 @@ class ClientsController extends \yii\web\Controller
                     'condition'     => $condition,
         ]);
         
-        }
+        }*/
     public function actionGetDept()
     {
         if (!empty($_POST["client_id"])) {
