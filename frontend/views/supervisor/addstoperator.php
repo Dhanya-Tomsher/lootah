@@ -53,6 +53,23 @@ use dosamigos\ckeditor\CKEditor;
                                 <div class="col-xl-4 col-md-4 mb-2">
 				    <?= $form->field($model, 'password')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
+                                    <div class="col-xl-4 col-md-4 mb-2">
+                            <div class="section-headline margin-top-25 margin-bottom-12">
+                                <h5>Select Station</h5>
+                            </div>
+                
+                            <select id="lboperatorstationassignment-station_id" class="selectpicker" name="LbStationOperator[station_id]">
+                                        <option value="">Select Station</option>
+                                        <?php
+                                        $stnz= \common\models\LbStation::find()->where(['status'=>1])->all();
+                                        foreach($stnz as $stnzs){
+                                        ?>
+                                        <option value="<?= $stnzs->id; ?>"><?= $stnzs->station_name; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                            </select> 
+                        </div>
                                 <div class="col-xl-4 col-md-4 mb-2">    
                                         <?= $form->field($model, 'image')->fileInput(['maxlength' => true,'class'=>'form-control']) ?>
                                 </div>
@@ -88,6 +105,9 @@ use dosamigos\ckeditor\CKEditor;
                                     </div> 
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500">Password</p>
+                                    </div> 
+                                    <div class="media-body ml-3">                                       
+                                        <p class="font-weight-semi-bold mb-0 text-500">Station</p>
                                     </div> 
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500">Status</p>
@@ -127,6 +147,9 @@ use dosamigos\ckeditor\CKEditor;
                                     </div> 
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500"><?= $depts->password; ?></p>
+                                    </div> 
+                                    <div class="media-body ml-3">                                       
+                                        <p class="font-weight-semi-bold mb-0 text-500"><?= \common\models\LbStation::find()->where(['id'=>$depts->station])->one()->station_name; ?></p>
                                     </div> 
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500"><?php if($depts->status == 1){echo "Active";}else{echo "Deactive";}; ?></p>
@@ -170,6 +193,19 @@ use dosamigos\ckeditor\CKEditor;
                         </div>  
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
                             <?= $form->field($model, 'password')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->password,'required'=>'required']) ?>                                              
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
+                        <select id="lbstationoperator-station" class="selectpicker" name="LbStationOperator[station]">
+                                        <option value="">Select Station</option>
+                                        <?php
+                                        $stnz= \common\models\LbStation::find()->where(['status'=>1])->all();
+                                        foreach($stnz as $stnzs){
+                                        ?>
+                                        <option value="<?= $stnzs->id; ?>" <?php if($depts->station == $stnzs->id){echo "selected";}else{} ?>><?= $stnzs->station_name; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                            </select>
                         </div>
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
                             <?php

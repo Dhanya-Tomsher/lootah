@@ -99,7 +99,8 @@ class LbTankerOperatorController extends Controller
         $model = new LbTankerOperator();
 
        if ($model->load(Yii::$app->request->post())) {
-
+        $model->tanker=$_REQUEST['LbTankerOperator']['tanker'];
+        $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;                                   
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', "Data created successfully.");
                 return $this->redirect(['index']);
@@ -124,7 +125,8 @@ class LbTankerOperatorController extends Controller
         $model = $this->findModel($id);
 
        if ($model->load(Yii::$app->request->post())) {
-
+           $model->tanker=$_REQUEST['LbTankerOperator']['tanker'];
+           $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;                                           
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
                 return $this->redirect(['index']);

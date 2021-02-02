@@ -449,6 +449,7 @@ class SupervisorController extends \yii\web\Controller {
                     $model->name = $_REQUEST['LbStationOperator']['name'];
                     $model->username = $_REQUEST['LbStationOperator']['username'];
                     $model->password = $_REQUEST['LbStationOperator']['password'];
+                    $model->station = $_REQUEST['LbStationOperator']['station'];
                     $model->created_by = Yii::$app->session->get('supid');
                     $model->created_by_type = 5;
                     if ($model->save(false)) {
@@ -483,6 +484,7 @@ class SupervisorController extends \yii\web\Controller {
                 $model->name = $_REQUEST['LbStationOperator']['name'];
                 $model->username = $_REQUEST['LbStationOperator']['username'];
                 $model->password = $_REQUEST['LbStationOperator']['password'];
+                $model->station = $_REQUEST['LbStationOperator']['station'];
                 $model->updated_by = Yii::$app->session->get('supid');
                 $model->updated_by_type = 5;
                 if ($model->save(false)) {
@@ -516,6 +518,8 @@ class SupervisorController extends \yii\web\Controller {
                     $model->name = $_REQUEST['LbTankerOperator']['name'];
                     $model->username = $_REQUEST['LbTankerOperator']['username'];
                     $model->password = $_REQUEST['LbTankerOperator']['password'];
+                    $model->tanker = $_REQUEST['LbTankerOperator']['tanker'];
+                    $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;                
                     $model->created_by = Yii::$app->session->get('supid');
                     $model->created_by_type = 5;
                     if ($model->save(false)) {
@@ -550,6 +554,8 @@ class SupervisorController extends \yii\web\Controller {
                 $model->name = $_REQUEST['LbTankerOperator']['name'];
                 $model->username = $_REQUEST['LbTankerOperator']['username'];
                 $model->password = $_REQUEST['LbTankerOperator']['password'];
+                $model->tanker = $_REQUEST['LbTankerOperator']['tanker'];
+                $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;
                 $model->updated_by = Yii::$app->session->get('supid');
                 $model->updated_by_type = 5;
                 if ($model->save(false)) {

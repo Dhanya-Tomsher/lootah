@@ -17,6 +17,17 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+     <?php
+            $client_types = \common\models\LbTanker::find()->where(['status' => 1])->all();
+            if ($client_types != NULL) {
+                foreach ($client_types as $client_type) {
+                    $pros[$client_type->id] = $client_type->tanker_number;
+                }
+            } else {
+                $pros = [];
+            }
+            echo $form->field($model, 'tanker')->dropDownList($pros, ['prompt' => 'Tanker', 'class' => 'form-control']);
+            ?>
 
     <?= $form->field($model, 'sort_order')->textInput() ?>
 

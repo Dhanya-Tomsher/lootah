@@ -53,27 +53,22 @@ $url="";
                                 <?php
                                 echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choose a Station', 'class' => 'form-control']);
                                 ?>
-
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2" style="display:none;">
                                 <?php
                                 echo $form->field($model, 'client_id')->dropDownList(ArrayHelper::map(\common\models\LbClients::find()->where(['id' => Yii::$app->session->get('clid')])->all(), 'id', 'name'), ['class' => 'form-control']);
-                                ?>
-
+                                ?> 
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
                                 echo $form->field($model, 'PlateNo')->dropDownList(ArrayHelper::map(\common\models\LbClientVehicles::find()->where(['client_id' => Yii::$app->session->get('clid')])->all(), 'vehicle_number', 'vehicle_number'), ['prompt' => 'Choose Vehicle', 'class' => 'form-control']);
                                 ?>
-
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-
                                 <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
 
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-
                                 <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
                             </div>
 

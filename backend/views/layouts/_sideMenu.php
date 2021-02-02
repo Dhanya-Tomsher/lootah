@@ -48,7 +48,7 @@
                 <a><i class="fa fa-users"></i>Station Operator <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-operator' ?>"><i class="fa fa-user"></i>Station Operator</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-station-assignment' ?>"><i class="fa fa-user"></i>Operator Station Assignment</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-station-assignment' ?>"><i class="fa fa-user"></i>Operator Station Assignment</a></li>-->
                 </ul>
             </li>
             <li>
@@ -63,7 +63,7 @@
                 <a><i class="fa fa-users"></i>Tanker Operator <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-tanker-operator' ?>"><i class="fa fa-user"></i>Tanker Operator</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-tanker-assignment' ?>"><i class="fa fa-user"></i>Operator Tanker Assignment</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-operator-tanker-assignment' ?>"><i class="fa fa-user"></i>Operator Tanker Assignment</a></li>-->
                 </ul>
             </li>
             <li>

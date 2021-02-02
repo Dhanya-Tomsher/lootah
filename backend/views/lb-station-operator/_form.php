@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
             } else {
                 $pros = [];
             }
-            echo $form->field($model, 'station')->dropDownList($pros, ['prompt' => 'Station', 'class' => 'form-control','disabled'=>'true']);
+            echo $form->field($model, 'station')->dropDownList($pros, ['prompt' => 'Station', 'class' => 'form-control']);
             ?>
     <?= $form->field($model, 'sort_order')->textInput() ?>
 

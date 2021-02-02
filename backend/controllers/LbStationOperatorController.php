@@ -97,6 +97,7 @@ class LbStationOperatorController extends Controller {
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save(false)) {
+                $model->station=$_REQUEST['LbStationOperator']['station'];
                 $model->rfid = "LTOPRRFID" . $model->id;
                 $model->save(FALSE);
                 $params = array(
@@ -148,6 +149,7 @@ class LbStationOperatorController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->station=$_REQUEST['LbStationOperator']['station'];
             if ($model->save(false)) {
                 Yii::$app->session->setFlash('success', "Data updated successfully.");
                 return $this->redirect(['index']);
