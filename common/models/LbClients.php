@@ -27,21 +27,19 @@ use Yii;
  * @property int $sort_order
  * @property int $status
  */
-class LbClients extends \yii\db\ActiveRecord
-{
+class LbClients extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'lb_clients';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['current_month_govt_price', 'discount', 'current_month_display_price'], 'number'],
             [['payment_terms'], 'string'],
@@ -51,7 +49,7 @@ class LbClients extends \yii\db\ActiveRecord
         ];
     }
 
-    public function uploadFile($file, $name, $id){
+    public function uploadFile($file, $name, $id) {
 
         $targetFolder = \yii::$app->basePath . '/../uploads/clients/' . $id . '/';
         if (!file_exists($targetFolder)) {
@@ -59,18 +57,15 @@ class LbClients extends \yii\db\ActiveRecord
         }
         if ($file->saveAs($targetFolder . $name . '.' . $file->extension)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
-    
-    
+
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'name' => 'Name',
@@ -93,4 +88,9 @@ class LbClients extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function getClient() {
+        return $this->hasOne(LbClients::className(), ['id' => 'client_id']);
+    }
+
 }

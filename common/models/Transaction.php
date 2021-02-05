@@ -112,4 +112,8 @@ class Transaction extends \yii\db\ActiveRecord {
         return $this->hasOne(Device::className(), ['device_id' => 'DeviceId']);
     }
 
+    public function getClient() {
+        return $this->hasOne(LbClients::className(), ['vehicle_number' => 'PlateNo']);
+    }
+
 }

@@ -189,6 +189,110 @@ class SupervisorController extends \yii\web\Controller {
         exit;
     }
 
+    public function actionExportsales() {
+        $searchModel = new \common\models\TransactionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'transaction_no', 'title' => 'Transaction No'];
+        $fields[] = ['key' => 'PlateNo', 'title' => 'Company Name'];
+//        $fields[] = ['key' => 'station_id', 'title' => 'Station'];
+//        $fields[] = ['key' => 'dispenser_id', 'title' => 'Dispenser'];
+//        $fields[] = ['key' => 'nozle_id', 'title' => 'Nozzle'];
+//        $fields[] = ['key' => 'SecondaryTag', 'title' => 'Rfid'];
+//        $fields[] = ['key' => 'Operator', 'title' => 'Operator'];
+        $fields[] = ['key' => 'PlateNo', 'title' => 'VEHICLE'];
+        $fields[] = ['key' => 'Volume', 'title' => 'QTY IN LTR.'];
+        $fields[] = ['key' => 'EndTime', 'title' => 'Date'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Date')
+                ->setCellValue('C1', 'Company Name')
+                ->setCellValue('D1', 'Station')
+                ->setCellValue('E1', 'VEHICLE')
+                ->setCellValue('F1', 'QTY IN LTR')
+                ->setCellValue('G1', 'Rate/LTR Inclusive VAT ')
+                ->setCellValue('H1', 'Rate/LTR Exclusive VAT')
+                ->setCellValue('I1', 'Value Excluding VAT')
+                ->setCellValue('J1', 'VAT Payable Amount 05 %')
+                ->setCellValue('K1', 'Value Including VAT (AED)');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbClients::find()->where(['vehicle_number' => $mode->PlateNo])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->EndTime)
+                        ->setCellValue('C' . $i, $get_client->client->name != '' ? $get_client->client->name : '')
+                        ->setCellValue('D' . $i, $mode->station->station_name)
+                        ->setCellValue('E' . $i, $mode->PlateNo)
+                        ->setCellValue('F' . $i, $mode->Volume)
+                        ->setCellValue('G' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price + ($get_client->client->current_month_display_price * 5 / 100) : '')
+                        ->setCellValue('H' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price : '')
+                        ->setCellValue('H' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price * $get_client->Volume : '')
+                        ->setCellValue('G' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price * $get_client->Volume * 5 / 100 : '')
+                        ->setCellValue('G' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price * $get_client->Volume + ($get_client->client->current_month_display_price * $get_client->Volume * 5 / 100) : '');
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+
+// Miscellaneous glyphs, UTF-8
+//        $objPHPExcel->setActiveSheetIndex(0)
+//                ->setCellValue('A4', 'Miscellaneous glyphs')
+//                ->setCellValue('A5', 'saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas');
+// Rename worksheet
+            $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . date('Ymd'));
+
+
+// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $objPHPExcel->setActiveSheetIndex(0);
+
+
+// Redirect output to a clientâ€™s web browser (Excel2007)
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+            header('Content-Disposition: attachment;filename="Service_request_' . date('Ymd') . '.xlsx"');
+
+            header('Cache-Control: max-age=0');
+// If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
+
+// If you're serving to IE over SSL, then the following may be needed
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
+
     public function actionChangepwd() {
 
         if (Yii::$app->session->get('supid')) {
@@ -519,7 +623,7 @@ class SupervisorController extends \yii\web\Controller {
                     $model->username = $_REQUEST['LbTankerOperator']['username'];
                     $model->password = $_REQUEST['LbTankerOperator']['password'];
                     $model->tanker = $_REQUEST['LbTankerOperator']['tanker'];
-                    $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;                
+                    $model->station_id = \common\models\LbTanker::find()->where(['id' => $_REQUEST['LbTankerOperator']['tanker']])->one()->station_id;
                     $model->created_by = Yii::$app->session->get('supid');
                     $model->created_by_type = 5;
                     if ($model->save(false)) {
