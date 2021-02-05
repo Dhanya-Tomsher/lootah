@@ -81,7 +81,7 @@ class SupervisorController extends \yii\web\Controller {
             if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
                 $condition = $exp_url_refer[1];
             }
-            return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
+            return $this->render('salesreport', ['model' => $model, 'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
                         'condition' => $condition]);
         } else {
