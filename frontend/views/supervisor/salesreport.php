@@ -38,7 +38,7 @@ use yii\grid\GridView;
                 <div class="card ">
                     <div class="card-header">
                         <h4 class="float-left">  Sales  Report</h4>
-                        <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
+                        <?= Html::a('Export Data', ['exportsales' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
