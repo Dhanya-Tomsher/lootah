@@ -15,11 +15,11 @@ use yii\grid\GridView;
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
-        <h2 class="text-white"> Tank Calibration Report</h2>
+        <h2 class="text-white"> Sales Report</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
                 <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
-                <li> Filter  Station Transaction Report</li>
+                <li> Sales Report</li>
             </ul>
         </nav>
 
