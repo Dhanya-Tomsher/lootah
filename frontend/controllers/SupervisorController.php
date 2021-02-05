@@ -234,7 +234,7 @@ class SupervisorController extends \yii\web\Controller {
         if ($model != NULL) {
             $i = 2;
             foreach ($model as $mode) {
-                $get_client = \common\models\LbClients::find()->where(['vehicle_number' => $mode->PlateNo])->one();
+                $get_client = \common\models\LbClientVehicles::find()->where(['vehicle_number' => $mode->PlateNo])->one();
 
                 $objPHPExcel->getActiveSheet()
                         ->setCellValue('A' . $i, $i - 1)

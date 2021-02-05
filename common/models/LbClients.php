@@ -89,8 +89,7 @@ class LbClients extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function getClient() {
-        return $this->hasOne(LbClients::className(), ['id' => 'client_id']);
-    }
-
+//    public function getClient() {
+//        return $this->hasOne(LbClients::className(), ['id' => 'client_id']);
+//    }
 }
