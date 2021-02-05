@@ -22,6 +22,17 @@ use yii\grid\GridView;
                 <li> Filter  Station Transaction Report</li>
             </ul>
         </nav>
+
+        <?php
+        $station_list = [];
+        $get_stations = common\models\LbSupervisor::find()->where(['id' => yii::$app->user->identity->account_type_id])->one();
+        if ($get_stations != NULL) {
+            if ($get_stations->assigned_stations != "") {
+                $station_list = explode(',', $get_stations->assigned_stations);
+            }
+        }
+//        assigned_stations
+        ?>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
@@ -50,7 +61,7 @@ use yii\grid\GridView;
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
-                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->where(['in', 'id', $station_list])->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
                                 ?>
 
                             </div>
@@ -63,7 +74,6 @@ use yii\grid\GridView;
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
-                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-T'])->label(FALSE) ?>
 
                             </div>
 
