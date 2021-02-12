@@ -101,7 +101,7 @@ use yii\grid\GridView;
                         <?php echo "ashik"; ?>
 
                         <?php print_r($_GET); ?>
-                        <?php if (isset($_GET)) { ?>
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
 
                             <?=
                             GridView::widget([
