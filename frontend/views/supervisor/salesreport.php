@@ -98,9 +98,6 @@ use yii\grid\GridView;
                         <h4> Transaction Report</h4>
                     </div>
                     <div class="card-body pb-0">
-                        <?php echo "ashik"; ?>
-
-                        <?php print_r($_GET); ?>
                         <?php if (isset($_GET) && $_GET != NULL) { ?>
 
                             <?=
