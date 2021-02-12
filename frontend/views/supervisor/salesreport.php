@@ -25,7 +25,7 @@ use yii\grid\GridView;
 
         <?php
         $station_list = [];
-        $get_stations = common\models\LbSupervisor::find()->where(['id' => yii::$app->user->identity->account_type_id])->one();
+        $get_stations = common\models\LbSupervisor::find()->where(['id' => yii::$app->user->identity->id])->one();
         if ($get_stations != NULL) {
             if ($get_stations->assigned_stations != "") {
                 $station_list = explode(',', $get_stations->assigned_stations);
@@ -114,6 +114,7 @@ use yii\grid\GridView;
                                         'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->station->station_name;
                                         },
@@ -125,9 +126,10 @@ use yii\grid\GridView;
                                     [
                                         'attribute' => 'dispenser_id',
                                         'header' => 'Dispenser',
-                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
+//                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->dispenser->label;
                                         },
@@ -136,9 +138,10 @@ use yii\grid\GridView;
                                     [
                                         'attribute' => 'nozle_id',
                                         'header' => 'Nozzle',
-                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
+//                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->nozzle->label;
                                         },
@@ -170,6 +173,7 @@ use yii\grid\GridView;
                                         'value' => function($data) {
                                             return date("Y-m-d H:i:s", strtotime($data->EndTime));
                                         },
+                                        'filter' => false,
                                         'format' => 'html',
                                     ],
                                 // 'Status',
