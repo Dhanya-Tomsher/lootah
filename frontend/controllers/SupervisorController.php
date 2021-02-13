@@ -33,6 +33,7 @@ class SupervisorController extends \yii\web\Controller {
     }
 
     public function actionStationreport() {
+        $condition="";
         if (Yii::$app->session->get('supid')) {
             //$model = new \common\models\Transaction();
             date_default_timezone_set('Asia/Dubai');
@@ -71,6 +72,7 @@ class SupervisorController extends \yii\web\Controller {
     }
 
     public function actionSalesreport() {
+        $condition="";
         if (Yii::$app->session->get('supid')) {
             $model = new \common\models\Transaction();
             date_default_timezone_set('Asia/Dubai');

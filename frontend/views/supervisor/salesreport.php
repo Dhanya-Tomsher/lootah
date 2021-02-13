@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use dosamigos\ckeditor\CKEditor;
 use yii\grid\GridView;
+$url="";
 ?>
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
@@ -25,7 +26,7 @@ use yii\grid\GridView;
 
         <?php
         $station_list = [];
-        $get_stations = common\models\LbSupervisor::find()->where(['id' => yii::$app->user->identity->id])->one();
+        $get_stations = common\models\LbSupervisor::find()->where(['id' => Yii::$app->session->get('supid')])->one();
         if ($get_stations != NULL) {
             if ($get_stations->assigned_stations != "") {
                 $station_list = explode(',', $get_stations->assigned_stations);
