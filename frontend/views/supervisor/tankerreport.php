@@ -12,10 +12,17 @@ use yii\grid\GridView;
 ?>
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
+<?php
+        if ($condition != '') {
+            $url = "?" . $condition;
+        } else {
+            $url = "";
+        }
+        ?>
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
-        <h2 class="text-white"> Tank Calibration Report</h2>
+        <h2 class="text-white"> Tanker Report</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
                 <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
@@ -35,7 +42,7 @@ use yii\grid\GridView;
                         <div class="row">
 
                             <?php
-                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'stationreport', 'options' => ['enctype' => 'multipart/form-data']]);
+                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'tankerreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>
@@ -55,7 +62,12 @@ use yii\grid\GridView;
                                 ?>
 
                             </div>
+<!--                            <div class="col-xl-4 col-md-4 mb-2">
+                                <?php
+                                // echo $form->field($model, 'tanker_id')->dropDownList(ArrayHelper::map(\common\models\LbTanker::find()->all(), 'id', 'tanker_number'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                ?>
 
+                            </div>-->
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>

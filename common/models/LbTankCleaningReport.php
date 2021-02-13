@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "lb_tank_cleaning_report".
  *
@@ -70,4 +71,39 @@ class LbTankCleaningReport extends \yii\db\ActiveRecord
     {
         return $this->hasOne(LbStation::className(), ['id' => 'station_id']);
     }
+    
+    public function search($params) {
+        $query = LbTankCleaningReport::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'status' => 1,
+        ]);
+        
+         if (isset($this->date_cleaning) && $this->date_cleaning != "") {
+            $date_from = date('Y-m-d', strtotime($this->date_cleaning));
+            $query->andWhere("date_cleaning >=  '" . $date_from . "'");
+        }
+        if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d', strtotime($this->created_at));
+            $query->andWhere("date_cleaning <=  '" . $date_to . "'");
+        }
+        
+
+        $query->andFilterWhere([
+            'station_id' => $this->station_id,
+        ]);
+       
+
+        return $dataProvider;
+    }
+    
 }

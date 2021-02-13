@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use dosamigos\ckeditor\CKEditor;
 use yii\grid\GridView;
-$url="";
 ?>
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
@@ -23,7 +22,13 @@ $url="";
                 <li> Sales Report</li>
             </ul>
         </nav>
-
+<?php
+        if ($condition != '') {
+            $url = "?" . $condition;
+        } else {
+            $url = "";
+        }
+        ?>
         <?php
         $station_list = [];
         $get_stations = common\models\LbSupervisor::find()->where(['id' => Yii::$app->session->get('supid')])->one();
@@ -46,7 +51,7 @@ $url="";
                         <div class="row">
 
                             <?php
-                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'stationreport', 'options' => ['enctype' => 'multipart/form-data']]);
+                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'salesreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>

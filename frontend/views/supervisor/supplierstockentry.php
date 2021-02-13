@@ -60,16 +60,18 @@ use dosamigos\ckeditor\CKEditor;
                                                 <td><?php if(!empty($operatrs->assigned_date)){echo "Assigned";}else{echo "Not Assigned";} ?></td>
                                                 <td><?php if($operatrs->supply_date){echo "Supplied";}else{echo "Not Supplied";} ?></td>
                                                 <td>
-                                                     <?php
-                            if(!empty($operatrs->supply_date)){
-                                echo "N/A";
-                            }else{
-                                ?>
+                                        <?php
+                                            if(!empty($operatrs->supply_date)){
+                                                echo "N/A";
+                                            }else if (empty($operatrs->supplier_id)){
+                                                echo "N/A";
+                                            }else{
+                                        ?>
                                                 <a href="#modal-group-<?= $operatrs->id; ?>" uk-toggle  class="btn btn-icon btn-light btn-sm" uk-tooltip="Edit">
                                                 <span class="uil-edit"></span> </a>
-                                                    <?php
-                            }
-                            ?>
+                                        <?php
+                                            }
+                                        ?>
                                                 </td>
                                             </tr>                                                                                        			
 					<?php

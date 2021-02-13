@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * This is the model class for table "lb_booking_to_supplier".
@@ -93,5 +96,73 @@ class LbBookingToSupplier extends \yii\db\ActiveRecord
         else {
             return false;
         }
+    }
+    
+    public function search($params) {
+        $query = LbBookingToSupplier::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'status' => 1,
+        ]);
+        
+         if (isset($this->booking_date) && $this->booking_date != "") {
+            $date_from = date('Y-m-d', strtotime($this->booking_date));
+            //echo $date_from;
+            $query->andWhere("booking_date >=  '" . $date_from . "'");
+        }
+        if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d', strtotime($this->created_at));
+            // echo $date_to;
+            //echo "...";
+            $query->andWhere("booking_date <=  '" . $date_to . "'");
+            //exit;
+        }
+        
+        
+      /*  if (isset($this->booking_date) && $this->booking_date != "") {
+            $date_from = date('Y-m-d', strtotime($this->booking_date));
+          //  $query->andFilterWhere("booking_date =  '" . $date_from . "'");
+            $query->andFilterWhere([
+            'booking_date' => $date_from,
+        ]);
+        }*/
+       /* if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d H:i:s', strtotime($this->created_at));
+            $query->andFilterWhere("booking_date <=  '" . $date_to . "'");
+        }*/
+        $query->andFilterWhere([
+            'supplier_id' => $this->supplier_id,
+        ]);
+       // var_dump($this->created_at);exit;
+      /*  $query->andFilterWhere(['like', 'UUID', $this->UUID])
+                ->andFilterWhere(['like', 'Meter', $this->Meter])
+                ->andFilterWhere(['like', 'device_type', $this->device_type])
+                ->andFilterWhere(['like', 'SecondaryTag', $this->SecondaryTag])
+                ->andFilterWhere(['like', 'Category', $this->Category])
+                ->andFilterWhere(['like', 'Operator', $this->Operator])
+                ->andFilterWhere(['like', 'Asset', $this->Asset])
+                ->andFilterWhere(['like', 'AccumulatorType', $this->AccumulatorType])
+                ->andFilterWhere(['like', 'Sitecode', $this->Sitecode])
+                ->andFilterWhere(['like', 'Project', $this->Project])
+                ->andFilterWhere(['like', 'PlateNo', $this->PlateNo])
+                ->andFilterWhere(['like', 'Master', $this->Master])
+                ->andFilterWhere(['like', 'Allowance', $this->Allowance])
+                ->andFilterWhere(['like', 'Type', $this->Type])
+                ->andFilterWhere(['like', 'StartTime', $this->StartTime])
+//                ->andFilterWhere(['like', 'EndTime', $this->EndTime])
+                ->andFilterWhere(['like', 'Status', $this->Status])
+                ->andFilterWhere(['like', 'ServerTimestamp', $this->ServerTimestamp])
+                ->andFilterWhere(['like', 'UpdateTimestamp', $this->UpdateTimestamp]);*/
+
+        return $dataProvider;
     }
 }

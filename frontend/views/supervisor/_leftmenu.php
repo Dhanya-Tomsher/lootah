@@ -25,7 +25,8 @@
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/stockrequest"><i class="fa fa-male"></i> <span>Stock Request</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/physicalstockentry"><i class="icon-material-outline-description"></i> <span>Physical Stock Entry </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/supplierstockentry"><i class="fa fa-male"></i> <span>Supplier Stock Entry</span> </a></li>
-			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankcleaningreport"><i class="icon-material-outline-description"></i> <span> Tank Cleaning Report </span> </a> </li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankcleaning"><i class="icon-material-outline-description"></i> <span> Tank Cleaning </span> </a> </li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankcleaningreport"><i class="icon-material-outline-description"></i> <span> Tank Cleaning Report </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dispensercalib"><i class="fa fa-male"></i> <span>Dispenser Calibration</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/stockreport"><i class="icon-material-outline-description"></i> <span>Stock Report </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/salesreport"><i class="fa fa-male"></i> <span>Sales Report</span> </a></li>

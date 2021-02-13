@@ -63,7 +63,7 @@ use dosamigos\ckeditor\CKEditor;
                                     <div class="section-headline margin-top-25 margin-bottom-12">
                                         <h5>Supply Needed Date</h5>
                                     </div>                
-                                <input type="text" id="supply_needed_date" name="LbStockRequestManagement[supply_needed_date]">
+                                    <input type="text" id="supply_needed_date" name="LbStockRequestManagement[supply_needed_date]" autocomplete="off">
                                 </div>
                         <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
                             <div class="section-headline margin-top-25 margin-bottom-12">
@@ -94,7 +94,7 @@ use dosamigos\ckeditor\CKEditor;
                                                 <th>Sl.No.</th>
                                                 <th>Station Name</th>
                                                 <th>Date of request</th>
-						                        <th>Quantity</th>
+						<th>Quantity</th>
                                                 <th>Assign Status</th>
                                                 <th>Supply Status</th>
                                             </tr>

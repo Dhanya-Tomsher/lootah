@@ -32,8 +32,28 @@ class SupervisorController extends \yii\web\Controller {
         return $this->render('profile');
     }
 
+    
+    public function actionBookedqtyreport(){
+      if (Yii::$app->session->get('supid')) {
+            //$model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbBookingToSupplier();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition1 = $exp_url_refer[1];
+            }else{
+                $condition1="";
+            }
+            return $this->render('bookedreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition1]);
+        } else {
+            return $this->render('index');
+        }  
+    }
+    
     public function actionStationreport() {
-        $condition="";
         if (Yii::$app->session->get('supid')) {
             //$model = new \common\models\Transaction();
             date_default_timezone_set('Asia/Dubai');
@@ -43,6 +63,8 @@ class SupervisorController extends \yii\web\Controller {
 
             if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
                 $condition = $exp_url_refer[1];
+            }else{
+                $condition="";
             }
             return $this->render('stationreport', ['model' => $searchModel, 'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
@@ -54,7 +76,7 @@ class SupervisorController extends \yii\web\Controller {
 
     public function actionTankerreport() {
         if (Yii::$app->session->get('supid')) {
-            $model = new \common\models\Transaction();
+            //$model = new \common\models\Transaction();
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -62,8 +84,10 @@ class SupervisorController extends \yii\web\Controller {
 
             if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
                 $condition = $exp_url_refer[1];
+            }else{
+                $condition="";
             }
-            return $this->render('stationreport', ['model' => $model, 'searchModel' => $searchModel,
+            return $this->render('tankerreport', ['model' => $searchModel, 'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
                         'condition' => $condition]);
         } else {
@@ -72,18 +96,44 @@ class SupervisorController extends \yii\web\Controller {
     }
 
     public function actionSalesreport() {
-        $condition="";
+        
         if (Yii::$app->session->get('supid')) {
-            $model = new \common\models\Transaction();
-            date_default_timezone_set('Asia/Dubai');
+            //$model = new \common\models\Transaction();
+             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             $exp_url_refer = explode('?', \yii\helpers\Url::current());
 
             if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
                 $condition = $exp_url_refer[1];
+            }else{
+                $condition="";
             }
-            return $this->render('salesreport', ['model' => $model, 'searchModel' => $searchModel,
+            
+            return $this->render('salesreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
+        } else {
+            return $this->render('index');
+        }
+    }
+    
+    public function actionTankcleaningreport() {
+        
+        if (Yii::$app->session->get('supid')) {
+            //$model = new \common\models\Transaction();
+             date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbTankCleaningReport();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }else{
+                $condition="";
+            }
+            
+            return $this->render('tankcleaningreport', ['model' => $searchModel, 'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
                         'condition' => $condition]);
         } else {
@@ -105,8 +155,6 @@ class SupervisorController extends \yii\web\Controller {
         $fields[] = ['key' => 'PlateNo', 'title' => 'Plate No'];
         $fields[] = ['key' => 'Volume', 'title' => 'Volum'];
         $fields[] = ['key' => 'EndTime', 'title' => 'Date'];
-
-
         $objPHPExcel = new \PHPExcel();
         $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
                 ->setLastModifiedBy("Maarten Balliauw")
@@ -115,8 +163,6 @@ class SupervisorController extends \yii\web\Controller {
                 ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
                 ->setKeywords("office 2007 openxml php")
                 ->setCategory("Test result file");
-
-
 // Add some data
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', 'Transaction No')
@@ -129,8 +175,6 @@ class SupervisorController extends \yii\web\Controller {
                 ->setCellValue('H1', 'Plate No')
                 ->setCellValue('I1', 'Volum')
                 ->setCellValue('J1', 'Date');
-
-
         if ($model != NULL) {
             $i = 2;
             foreach ($model as $mode) {
@@ -148,33 +192,13 @@ class SupervisorController extends \yii\web\Controller {
                         ->setCellValue('J' . $i, $mode->EndTime);
                 $i++;
             }
-
-
             $objPHPExcel->setActiveSheetIndex(0);
-
-// Miscellaneous glyphs, UTF-8
-//        $objPHPExcel->setActiveSheetIndex(0)
-//                ->setCellValue('A4', 'Miscellaneous glyphs')
-//                ->setCellValue('A5', 'saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas');
-// Rename worksheet
             $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . date('Ymd'));
-
-
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
             $objPHPExcel->setActiveSheetIndex(0);
-
-
-// Redirect output to a clientâ€™s web browser (Excel2007)
-
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-
             header('Content-Disposition: attachment;filename="Service_request_' . date('Ymd') . '.xlsx"');
-
             header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
             header('Cache-Control: max-age=1');
-
-// If you're serving to IE over SSL, then the following may be needed
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
             header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
             header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
@@ -205,7 +229,6 @@ class SupervisorController extends \yii\web\Controller {
         $fields[] = ['key' => 'PlateNo', 'title' => 'VEHICLE'];
         $fields[] = ['key' => 'Volume', 'title' => 'QTY IN LTR.'];
         $fields[] = ['key' => 'EndTime', 'title' => 'Date'];
-
 //Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
 
         $objPHPExcel = new \PHPExcel();
@@ -216,8 +239,6 @@ class SupervisorController extends \yii\web\Controller {
                 ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
                 ->setKeywords("office 2007 openxml php")
                 ->setCategory("Test result file");
-
-
 // Add some data
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', 'SN.')
@@ -231,8 +252,6 @@ class SupervisorController extends \yii\web\Controller {
                 ->setCellValue('I1', 'Value Excluding VAT')
                 ->setCellValue('J1', 'VAT Payable Amount 05 %')
                 ->setCellValue('K1', 'Value Including VAT (AED)');
-
-
         if ($model != NULL) {
             $i = 2;
             foreach ($model as $mode) {
@@ -252,33 +271,13 @@ class SupervisorController extends \yii\web\Controller {
                         ->setCellValue('G' . $i, $get_client->client->current_month_display_price != '' ? $get_client->client->current_month_display_price * $get_client->Volume + ($get_client->client->current_month_display_price * $get_client->Volume * 5 / 100) : '');
                 $i++;
             }
-
-
             $objPHPExcel->setActiveSheetIndex(0);
-
-// Miscellaneous glyphs, UTF-8
-//        $objPHPExcel->setActiveSheetIndex(0)
-//                ->setCellValue('A4', 'Miscellaneous glyphs')
-//                ->setCellValue('A5', 'saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas');
-// Rename worksheet
-            $objPHPExcel->getActiveSheet()->setTitle('Transaction_report_' . date('Ymd'));
-
-
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $objPHPExcel->getActiveSheet()->setTitle('Sales_report_' . date('Ymd'));
             $objPHPExcel->setActiveSheetIndex(0);
-
-
-// Redirect output to a clientâ€™s web browser (Excel2007)
-
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-
-            header('Content-Disposition: attachment;filename="Service_request_' . date('Ymd') . '.xlsx"');
-
+            header('Content-Disposition: attachment;filename="Sales_report_' . date('Ymd') . '.xlsx"');
             header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
             header('Cache-Control: max-age=1');
-
-// If you're serving to IE over SSL, then the following may be needed
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
             header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
             header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
@@ -295,6 +294,139 @@ class SupervisorController extends \yii\web\Controller {
         exit;
     }
 
+    
+        public function actionExportsupplierbooking() {
+        $searchModel = new \common\models\LbBookingToSupplier();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'supplier_id', 'title' => 'Supplier Name'];
+        $fields[] = ['key' => 'booked_quantity_gallon', 'title' => 'Booked Quantity'];
+        $fields[] = ['key' => 'previous_balance_gallon', 'title' => 'Previous Balance'];
+        $fields[] = ['key' => 'current_balance_gallon', 'title' => 'Current Balance'];
+        $fields[] = ['key' => 'booking_date', 'title' => 'Booking Date'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Booking Date')
+                ->setCellValue('C1', 'Supplier Name')
+                ->setCellValue('D1', 'Booked Quantity')
+                ->setCellValue('E1', 'Previous Balance')
+                ->setCellValue('F1', 'Current Balance');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbSupplier::find()->where(['id' => $mode->supplier_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->booking_date)
+                        ->setCellValue('C' . $i, $mode->supplier->name != '' ? $mode->supplier->name : '')
+                        ->setCellValue('D' . $i, $mode->booked_quantity_gallon)
+                        ->setCellValue('E' . $i, $mode->previous_balance_gallon)
+                        ->setCellValue('F' . $i, $mode->current_balance_gallon);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Supplier_booking' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Supplier_booking_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
+    
+     public function actionExporttankcleaning() {
+        $searchModel = new \common\models\LbTankCleaningReport();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station Name'];
+        $fields[] = ['key' => 'cleaning_date', 'title' => 'Cleaning Date'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('C1', 'Cleaning Date');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbSupplier::find()->where(['id' => $mode->supplier_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
+                        ->setCellValue('C' . $i, $mode->supplier->name != '' ? $mode->supplier->name : '')
+                        ->setCellValue('D' . $i, $mode->date_cleaning);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Tankclening_report_' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Tankclening_report_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
+    
     public function actionChangepwd() {
 
         if (Yii::$app->session->get('supid')) {
@@ -745,7 +877,7 @@ class SupervisorController extends \yii\web\Controller {
         return $this->render('closingdata');
     }
 
-    public function actionTankcleaningreport() {
+    public function actionTankcleaning() {
         if (Yii::$app->session->get('supid')) {
             $model = new \common\models\LbTankCleaningReport();
             if ($model->load(Yii::$app->request->post())) {
