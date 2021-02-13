@@ -13,12 +13,12 @@ use yii\grid\GridView;
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
 <?php
-        if ($condition != '') {
-            $url = "?" . $condition;
-        } else {
-            $url = "";
-        }
-        ?>
+if ($condition != '') {
+    $url = "?" . $condition;
+} else {
+    $url = "";
+}
+?>
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
@@ -62,12 +62,12 @@ use yii\grid\GridView;
                                 ?>
 
                             </div>
-<!--                            <div class="col-xl-4 col-md-4 mb-2">
-                                <?php
-                                // echo $form->field($model, 'tanker_id')->dropDownList(ArrayHelper::map(\common\models\LbTanker::find()->all(), 'id', 'tanker_number'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
-                                ?>
+                            <!--                            <div class="col-xl-4 col-md-4 mb-2">
+                            <?php
+                            // echo $form->field($model, 'tanker_id')->dropDownList(ArrayHelper::map(\common\models\LbTanker::find()->all(), 'id', 'tanker_number'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                            ?>
 
-                            </div>-->
+                                                        </div>-->
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
@@ -102,7 +102,8 @@ use yii\grid\GridView;
                     </div>
                     <div class="card-body pb-0">
 
-                        <?php if (isset($_GET)) { ?>
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
+
 
                             <?=
                             GridView::widget([

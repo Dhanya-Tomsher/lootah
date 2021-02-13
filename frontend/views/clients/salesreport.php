@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use dosamigos\ckeditor\CKEditor;
 use yii\grid\GridView;
-$url="";
+
+$url = "";
 ?>
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
@@ -28,7 +29,7 @@ $url="";
                 <div class="card ">
                     <div class="card-header">
                         <h4 class="float-left">  Report</h4>
-                        <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
+<?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
@@ -38,16 +39,16 @@ $url="";
                             $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'report', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
-                                <?php if (Yii::$app->session->hasFlash('success')): ?>
+                                    <?php if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="alert alert-success alert-dismissable">
-                                        <?= Yii::$app->session->getFlash('success') ?>
+                                    <?= Yii::$app->session->getFlash('success') ?>
                                     </div>
                                 <?php endif; ?>
-                                <?php if (Yii::$app->session->hasFlash('error')): ?>
+                                    <?php if (Yii::$app->session->hasFlash('error')): ?>
                                     <div class="alert alert-danger alert-dismissable">
-                                        <?= Yii::$app->session->getFlash('error') ?>
+                                    <?= Yii::$app->session->getFlash('error') ?>
                                     </div>
-                                <?php endif; ?>
+<?php endif; ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
@@ -57,7 +58,7 @@ $url="";
                             <div class="col-xl-4 col-md-4 mb-2" style="display:none;">
                                 <?php
                                 echo $form->field($model, 'client_id')->dropDownList(ArrayHelper::map(\common\models\LbClients::find()->where(['id' => Yii::$app->session->get('clid')])->all(), 'id', 'name'), ['class' => 'form-control']);
-                                ?> 
+                                ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
@@ -65,11 +66,11 @@ $url="";
                                 ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-                                <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+<?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
 
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-                                <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+<?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
                             </div>
 
                             <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
@@ -80,7 +81,7 @@ $url="";
                             </div>
                         </div>
 
-                        <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
                     </div>
                 </div>
@@ -94,7 +95,8 @@ $url="";
                     </div>
                     <div class="card-body pb-0">
 
-                        <?php if (isset($_GET)) { ?>
+<?php if (isset($_GET) && $_GET != NULL) { ?>
+
 
                             <?=
                             GridView::widget([
@@ -117,33 +119,33 @@ $url="";
                                     'transaction_no',
 //                                'ReferenceId',
 //                                'SequenceId',
-                                   /* [
-                                        'attribute' => 'dispenser_id',
-                                        'header' => 'Dispenser',
-                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'value' => function($data) {
-                                            return $data->dispenser->label;
-                                        },
-                                        'format' => 'html',
-                                    ],
-                                    [
-                                        'attribute' => 'nozle_id',
-                                        'header' => 'Nozzle',
-                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'value' => function($data) {
-                                            return $data->nozzle->label;
-                                        },
-                                        'format' => 'html',
-                                    ],*/
+                                    /* [
+                                      'attribute' => 'dispenser_id',
+                                      'header' => 'Dispenser',
+                                      'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
+                                      //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                      'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                      'value' => function($data) {
+                                      return $data->dispenser->label;
+                                      },
+                                      'format' => 'html',
+                                      ],
+                                      [
+                                      'attribute' => 'nozle_id',
+                                      'header' => 'Nozzle',
+                                      'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
+                                      //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                      'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                      'value' => function($data) {
+                                      return $data->nozzle->label;
+                                      },
+                                      'format' => 'html',
+                                      ], */
 //                                'DeviceId',
 //                                'Meter',
 //                                'SecondaryTag',
 //                                'Category',
-                                 //   'Operator',
+                                    //   'Operator',
                                     // 'Asset',
                                     // 'AccumulatorType',
 //                                 'Sitecode',
@@ -174,7 +176,7 @@ $url="";
                             ]);
                             ?>
 
-                        <?php } ?>
+<?php } ?>
                     </div>
                 </div>
             </div>

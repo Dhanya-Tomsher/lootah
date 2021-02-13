@@ -209,15 +209,86 @@ class CrmManagerController extends Controller {
                         }
                     }
                 }
-//                echo '<pre/>';
-//                print_r($make_call);
-//                exit;
+
                 if ($error_list == NULL) {
                     Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
                     return $this->redirect(['index']);
                 } else {
                     print_r($error_list);
                     exit;
+                }
+            } else if ($model->can_name == "opening-closing") {
+                $get_stations = \common\models\LbStation::find()->where(['status' => 1])->all();
+                date_default_timezone_set('UTC');
+
+                $url = 'FCS/' . $module_key;
+                if ($get_stations != NULL) {
+                    foreach ($get_stations as $get_station) {
+                        $get_devices = \common\models\LbStation::find()->where(['status' => 1, 'station_id' => $get_station->id])->all();
+                        $yesterday = date('Y-m-d', strtotime("-1 days"));
+                        $previous_day_data = \common\models\LbStationDailyDataForVerification::find()->where(['station_id' => $get_station, 'date_entry' => $yesterday])->one();
+                        $opening_balance = 0;
+                        $station_oil_usage = 0;
+                        $station_oil_price = 0;
+
+                        if ($previous_day_data != NULL) {
+                            $opening_balance = $previous_day_data->closing_stock_litre;
+                        }
+                        if ($get_devices != NULL) {
+                            foreach ($get_devices as $get_device) {
+                                $params = array(
+                                    'deviceId' => $get_device->device_id,
+                                    'start' => date("Y-m-d") . " 00:00:00",
+                                    'end' => date("Y-m-d") . " 23:59:59",
+                                    'reportId' => 1
+                                );
+                                $make_call = $this->callAPI($method, $url, json_encode($params));
+
+                                if ($make_call != NULL) {
+
+
+                                    $module_function = $model->module_function;
+                                    $current_day_data = Yii::$app->ApiManager->$module_function($make_call);
+                                    if ($current_day_data['errors'] != null) {
+                                        $error_list[] = $current_day_data['errors'];
+                                    } else {
+                                        $station_oil_usage += $current_day_data['oil_usage'];
+                                        $station_oil_price += $current_day_data['oil_price'];
+                                    }
+                                }
+                            }
+                        }
+                        $check_exist = \common\models\LbStationDailyDataForVerification::find()->where(['station_id' => $get_station->id, 'date_entry' => date('Y-m-d', strtotime("-1 days"))])->one();
+                        if ($check_exist != NULL) {
+                            $openclosemodel = $check_exist;
+                        } else {
+                            $openclosemodel = new \common\models\LbStationDailyDataForVerification();
+                        }
+                        $get_opening_balance_data = \common\models\LbStationDailyDataForVerification::find()->where(['station_id' => $get_station->id, 'date_entry' => date('Y-m-d', strtotime("-2 days"))])->one();
+                        $opening_balance = 0;
+                        if ($get_opening_balance_data != NULL) {
+                            $opening_balance = $get_opening_balance_data->closing_stock_litre;
+                        }
+                        $openclosemodel->station_id = $get_station->id;
+                        $openclosemodel->date_entry = date('Y-m-d', strtotime("-1 days"));
+                        $openclosemodel->unit = 0;
+                        $openclosemodel->stock_by_calculation_gallon = $station_oil_usage * 0.264172;
+                        $openclosemodel->stock_by_calculation_litre = $station_oil_usage;
+                        $openclosemodel->sold_qty = $station_oil_usage;
+                        $openclosemodel->closing_stock_gallon = ($opening_balance - $station_oil_usage) * 0.264172;
+                        $openclosemodel->closing_stock_litre = $opening_balance - $station_oil_usage;
+                        $openclosemodel->card_sales = $station_oil_price;
+                        $openclosemodel->status = 1;
+                        $openclosemodel->save(FALSE);
+                    }
+
+                    if ($error_list == NULL) {
+                        Yii::$app->session->setFlash('success', $module_name . " Data updated successfully.");
+                        return $this->redirect(['index']);
+                    } else {
+                        print_r($error_list);
+                        exit;
+                    }
                 }
             }
         }

@@ -248,6 +248,133 @@ class ApiManager extends \yii\base\Component {
         return $result;
     }
 
+    public function GetOpeningClosing($datas) {
+        $result = [];
+        $error_list = [];
+        if ($datas != NULL) {
+            $oil_usage = 0;
+            $oil_price = 0;
+            foreach ($datas as $data) {
+
+                $device_ref_id = $data['Meter'];
+                $exp_items = explode('-', $device_ref_id);
+                $station = 0;
+                $dispenser = 0;
+                $nozzle = 0;
+                $dispenser_exist = [];
+                $return_data = [];
+                if ($exp_items != NULL) {
+                    if (isset($exp_items[0])) {
+                        $station = $exp_items[0];
+                    }
+                    if (isset($exp_items[1])) {
+
+                        $dispenser = $exp_items[1];
+                    }
+                    if (isset($exp_items[2])) {
+
+                        $nozzle = $exp_items[2];
+                    }
+                }
+
+                if ($dispenser != 0) {
+                    $dispenser_id = str_replace($dispenser, "", "D");
+                    $dispenser_exist = \common\models\Dispenser::find()->where(['id' => $dispenser_id])->one();
+                }
+                $station_exist = \common\models\LbStation::find()->where(['station_name' => $station])->one();
+                $check_nozzle_exist = \common\models\Nozzle::find()->where(['device_ref_no' => $device_ref_id])->one();
+
+//                if ($station_exist != NULL && $dispenser_exist != NULL && $station != 0 && $dispenser != 0 && $nozzle != 0) {
+
+                if ($check_nozzle_exist != NULL) {
+
+                    $result_selected[] = $data;
+                    $check_device_exist = \common\models\Device::find()->where(['device_id' => $data['DeviceId']])->one();
+                    $check_transaction_exist = \common\models\Transaction::find()->where(['transaction_no' => $data["Id"]])->one();
+                    if ($check_device_exist != NULL) {
+                        if ($check_transaction_exist == NULL) {
+
+                            $get_client_vehicle = \common\models\LbClientVehicles::find()->where(['vehicle_number' => $data['PlateNo']])->one();
+                            $cleint_price = 0;
+                            if ($get_client_vehicle != NULL) {
+                                $get_client_price = \common\models\LbClientMonthlyPrice::find()->where(['client_id' => $get_client_vehicle->client_id, 'month' => date('m', strtotime("-1 days")), 'year' => date('Y    ', strtotime("-1 days"))])->one();
+                                if ($get_client_price != NULL) {
+                                    $cleint_price = $get_client_price->customer_price;
+                                } else {
+                                    $get_general_price = \common\models\LbGeneralSettings::find()->where(['month' => date('m', strtotime("-1 days")), 'year' => date('Y', strtotime("-1 days"))])->one();
+                                    if ($get_general_price != NULL) {
+                                        $cleint_price = $get_general_price->customer_price;
+                                    }
+                                }
+                            }
+                            $oil_usage += $data['Volume'];
+                            $oil_price += ($data['Volume'] * $cleint_price);
+                            $model = new \common\models\Transaction();
+                            $model->dispenser_id = $check_nozzle_exist->dispenser_id;
+                            $model->station_id = $check_nozzle_exist->station_id;
+                            $model->nozle_id = $check_nozzle_exist->id;
+                            $model->UUID = uniqid('LOOTAH');
+                            $model->DeviceId = $data['DeviceId'];
+                            $model->DeviceId = $check_device_exist->device_type;
+
+                            $model->transaction_no = $data['Id'];
+                            $model->ReferenceId = $data['ReferenceId'];
+                            $model->SequenceId = $data['SequenceId'];
+
+                            $model->Meter = $data['Meter'];
+                            $model->SecondaryTag = $data['SecondaryTag'];
+                            $model->Category = $data['Category'];
+                            $model->Operator = $data['Operator'];
+                            $model->Asset = $data['Asset'];
+                            $model->AccumulatorType = $data['AccumulatorType'];
+                            $model->Sitecode = $data['Sitecode'];
+                            $model->Project = $data['Project'];
+                            $model->PlateNo = $data['PlateNo'];
+                            $model->Master = $data['Master'];
+                            $model->Accumulator = $data['Accumulator'];
+                            $model->Volume = $data['Volume'];
+                            $model->Allowance = $data['Allowance'];
+                            $model->Type = $data['Type'];
+                            $model->StartTime = $data['StartTime'];
+                            $model->EndTime = $data['EndTime'];
+                            $model->Status = $data['Status'];
+                            $model->ServerTimestamp = $data['ServerTimestamp'];
+                            $model->UpdateTimestamp = $data['UpdateTimestamp'];
+
+
+                            if ($model->save(FALSE)) {
+
+                            } else {
+                                $error_list[] = $model->errors;
+                            }
+                        } else {
+
+                            echo "fail 3";
+                            exit;
+                        }
+                    } else {
+
+                        echo "fail 2";
+                        exit;
+                    }
+                } else {
+                    echo "fail 1";
+                    exit;
+                    $result_all[] = $data;
+                }
+            }
+        }
+        $result['errors'] = $error_list;
+        $result['oil_usage'] = $oil_usage;
+        $result['oil_price'] = $oil_price;
+        $result['result_all'] = $result_all;
+        $result['result_selected'] = $result_selected;
+//        echo "<pre/>";
+//        print_r($result);
+//        exit;
+        return $result;
+    }
+
     public function vehiclemanagement($params, $method) {
         $name = "Manage veichle details-" . $method;
 
