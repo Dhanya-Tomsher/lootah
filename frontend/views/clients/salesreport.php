@@ -29,7 +29,7 @@ $url = "";
                 <div class="card ">
                     <div class="card-header">
                         <h4 class="float-left">  Report</h4>
-<?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
+                        <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
@@ -39,26 +39,39 @@ $url = "";
                             $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'report', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
-                                    <?php if (Yii::$app->session->hasFlash('success')): ?>
+                                <?php if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="alert alert-success alert-dismissable">
-                                    <?= Yii::$app->session->getFlash('success') ?>
+                                        <?= Yii::$app->session->getFlash('success') ?>
                                     </div>
                                 <?php endif; ?>
-                                    <?php if (Yii::$app->session->hasFlash('error')): ?>
+                                <?php if (Yii::$app->session->hasFlash('error')): ?>
                                     <div class="alert alert-danger alert-dismissable">
-                                    <?= Yii::$app->session->getFlash('error') ?>
+                                        <?= Yii::$app->session->getFlash('error') ?>
                                     </div>
-<?php endif; ?>
+                                <?php endif; ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
                                 echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choose a Station', 'class' => 'form-control']);
                                 ?>
                             </div>
-                            <div class="col-xl-4 col-md-4 mb-2" style="display:none;">
-                                <?php
-                                echo $form->field($model, 'client_id')->dropDownList(ArrayHelper::map(\common\models\LbClients::find()->where(['id' => Yii::$app->session->get('clid')])->all(), 'id', 'name'), ['class' => 'form-control']);
-                                ?>
+                            <div class="col-xl-4 col-md-4 mb-2" style="">
+                                <div class="section-headline margin-top-25 margin-bottom-12">
+                                    <h5>Departments</h5>
+                                </div>
+                                <select class="selectpicker" >
+                                    <option value="">Departments</option>
+                                    <?php
+                                    $clients_depts = \common\models\LbClientDepartments::find()->where(['status' => 1])->all();
+                                    if ($clients_depts != NULL) {
+                                        foreach ($clients_depts as $clients_dept) {
+                                            ?>
+                                            <option value="<?= $clients_dept->id; ?>"> <?= $clients_dept->department; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
@@ -66,11 +79,11 @@ $url = "";
                                 ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-<?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+                                <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
 
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-<?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+                                <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
                             </div>
 
                             <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
@@ -81,7 +94,7 @@ $url = "";
                             </div>
                         </div>
 
-<?php ActiveForm::end(); ?>
+                        <?php ActiveForm::end(); ?>
 
                     </div>
                 </div>
@@ -95,7 +108,7 @@ $url = "";
                     </div>
                     <div class="card-body pb-0">
 
-<?php if (isset($_GET) && $_GET != NULL) { ?>
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
 
 
                             <?=
@@ -176,7 +189,7 @@ $url = "";
                             ]);
                             ?>
 
-<?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
