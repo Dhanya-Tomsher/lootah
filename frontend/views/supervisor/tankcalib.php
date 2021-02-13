@@ -14,18 +14,18 @@ use dosamigos\ckeditor\CKEditor;
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
-        <h2 class="text-white"> Tank Calibration Report</h2>
+        <h2 class="text-white"> Tank Calibration</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
                 <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
-                <li> Add Tank Calibration Report</li>
+                <li> Add Tank Calibration</li>
             </ul>
         </nav>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4> Add Tank Calibration Report</h4>
+                        <h4> Add Tank Calibration</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -85,7 +85,7 @@ use dosamigos\ckeditor\CKEditor;
                 <div class="card h-lg-100">
                     <div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
-                        <h4> Tank Calibration Report</h4>
+                        <h4> Tank Calibration</h4>
                     </div>
                     <div class="card-body pb-0">
                         <div class="media align-items-center position-relative bgd">

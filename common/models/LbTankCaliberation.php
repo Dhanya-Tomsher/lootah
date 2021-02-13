@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "lb_tank_caliberation".
  *
@@ -64,4 +65,39 @@ class LbTankCaliberation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(LbStation::className(), ['id' => 'station_id']);
     }
+    
+        public function search($params) {
+        $query = LbTankCaliberation::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'status' => 1,
+        ]);
+        
+         if (isset($this->date_caliberation) && $this->date_caliberation != "") {
+            $date_from = date('Y-m-d', strtotime($this->date_caliberation));
+            $query->andWhere("date_caliberation >=  '" . $date_from . "'");
+        }
+        if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d', strtotime($this->created_at));
+            $query->andWhere("date_caliberation <=  '" . $date_to . "'");
+        }
+        
+
+        $query->andFilterWhere([
+            'station_id' => $this->station_id,
+        ]);
+       
+
+        return $dataProvider;
+    }
+    
 }

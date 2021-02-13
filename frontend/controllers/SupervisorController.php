@@ -140,6 +140,29 @@ class SupervisorController extends \yii\web\Controller {
             return $this->render('index');
         }
     }
+    
+    public function actionCalibreport() {
+        
+        if (Yii::$app->session->get('supid')) {
+            //$model = new \common\models\Transaction();
+             date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbTankCaliberation();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            }else{
+                $condition="";
+            }
+            
+            return $this->render('calibreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
+        } else {
+            return $this->render('index');
+        }
+    }
 
     public function actionExport() {
         $searchModel = new \common\models\TransactionSearch();
@@ -364,7 +387,7 @@ class SupervisorController extends \yii\web\Controller {
         }
         exit;
     }
-    
+
      public function actionExporttankcleaning() {
         $searchModel = new \common\models\LbTankCleaningReport();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -395,7 +418,7 @@ class SupervisorController extends \yii\web\Controller {
         if ($model != NULL) {
             $i = 2;
             foreach ($model as $mode) {
-                $get_client = \common\models\LbSupplier::find()->where(['id' => $mode->supplier_id])->one();
+                $get_client = \common\models\LbStation::find()->where(['id' => $mode->station_id])->one();
 
                 $objPHPExcel->getActiveSheet()
                         ->setCellValue('A' . $i, $i - 1)
@@ -411,6 +434,75 @@ class SupervisorController extends \yii\web\Controller {
             $objPHPExcel->setActiveSheetIndex(0);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment;filename="Tankclening_report_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }    
+     public function actionExportcalibreport() {
+        $searchModel = new \common\models\LbTankCaliberation();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station Name'];
+        $fields[] = ['key' => 'date_caliberation', 'title' => 'Calibration Date'];
+        $fields[] = ['key' => 'physical_quantity_gallon', 'title' => 'Physical Quantity'];
+        $fields[] = ['key' => 'quantity_calculation_gallon', 'title' => 'Calculated Quantity'];
+        $fields[] = ['key' => 'calibrated_quantity_gallon', 'title' => 'Calibrated Quantity'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('C1', 'Calibration Date')
+                ->setCellValue('D1', 'Physical Quantity')
+                ->setCellValue('E1', 'Calculated Quantity')
+                ->setCellValue('F1', 'Caliberated Quantity');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbStation::find()->where(['id' => $mode->station_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
+                        ->setCellValue('C' . $i, $mode->date_caliberation)
+                        ->setCellValue('D' . $i, $mode->physical_quantity_gallon)
+                        ->setCellValue('E' . $i, $mode->quantity_calculation_gallon)
+                        ->setCellValue('F' . $i, $mode->calibrated_quantity_gallon);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Calibration_report_' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Calibration_report_' . date('Ymd') . '.xlsx"');
             header('Cache-Control: max-age=0');
             header('Cache-Control: max-age=1');
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past

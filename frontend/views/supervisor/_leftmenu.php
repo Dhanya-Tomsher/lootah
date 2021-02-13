@@ -28,6 +28,7 @@
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankcleaning"><i class="icon-material-outline-description"></i> <span> Tank Cleaning </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankcleaningreport"><i class="icon-material-outline-description"></i> <span> Tank Cleaning Report </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dispensercalib"><i class="fa fa-male"></i> <span>Dispenser Calibration</span> </a></li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/calibreport"><i class="fa fa-male"></i> <span>Calibration Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/stockreport"><i class="icon-material-outline-description"></i> <span>Stock Report </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/salesreport"><i class="fa fa-male"></i> <span>Sales Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/supplierreport"><i class="icon-material-outline-description"></i> <span> Supplier Report </span> </a> </li>

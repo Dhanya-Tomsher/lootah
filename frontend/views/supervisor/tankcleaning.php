@@ -29,7 +29,7 @@ use dosamigos\ckeditor\CKEditor;
                             <div class="card-body">
                                 <div class="row">                                
                             <?php 
-                            $form = ActiveForm::begin(['enableClientScript' => false,'class'=>'uk-grid-small uk-grid','action'=>'tankcleaningreport','options' => ['enctype' => 'multipart/form-data']]); 
+                            $form = ActiveForm::begin(['enableClientScript' => false,'class'=>'uk-grid-small uk-grid','action'=>'tankcleaning','options' => ['enctype' => 'multipart/form-data']]); 
                             $model= new \common\models\LbTankCleaningReport;
                             ?>
                                     <div class="col-xl-12 col-md-12">
