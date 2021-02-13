@@ -23,7 +23,11 @@ use dosamigos\ckeditor\CKEditor;
                <div class="row">
                     <div class="col-12">
                        
-                   
+                   <?php if (Yii::$app->session->hasFlash('assusuccess')): ?>
+                            <div class="alert alert-success alert-dismissable">
+                            <?= Yii::$app->session->getFlash('assusuccess') ?>
+                            </div>
+                        <?php endif; ?>
                    <div class="col-lg-12 col-xl-12 mb-3">
                         <div class="card h-lg-100">
                             <div

@@ -18,7 +18,7 @@ use yii\grid\GridView;
         <h2 class="text-white"> Station Report</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
-                <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
+                <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/dashboard"> Dashboard </a></li>
                 <li> Filter  Station Transaction Report</li>
             </ul>
         </nav>
@@ -198,7 +198,7 @@ use yii\grid\GridView;
     function getval(val) {
         $.ajax({
             type: "POST",
-            url: "<?= Yii::$app->request->baseUrl; ?>/supervisor/calibdet",
+            url: "<?= Yii::$app->request->baseUrl; ?>/areamanager/calibdet",
             data: 'station_id=' + val,
             success: function (data) {
                 $("#physical_quantity_gallon").html(data);
@@ -208,7 +208,7 @@ use yii\grid\GridView;
     function getval1(val) {
         $.ajax({
             type: "POST",
-            url: "<?= Yii::$app->request->baseUrl; ?>/supervisor/calibdetcal",
+            url: "<?= Yii::$app->request->baseUrl; ?>/areamanager/calibdetcal",
             data: 'station_id=' + val,
             success: function (data) {
                 $("#quantity_calculation_gallon").html(data);

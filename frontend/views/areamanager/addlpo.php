@@ -64,7 +64,7 @@ use dosamigos\ckeditor\CKEditor;
                             ?> 
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'lpo_date')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'lpo_date')->textInput(['maxlength' => true,'class'=>'form-control','autocomplete'=>'off']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
 				    <?= $form->field($model, 'price_per_gallon')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
@@ -119,7 +119,7 @@ use dosamigos\ckeditor\CKEditor;
                                 <hr class="border-200 my-3">
                                 <?php
                                 $i=1;
-                                $deps = \common\models\LbBookingToSupplier::find()->all();
+                                $deps = \common\models\LbBookingToSupplier::find()->orderBy(['id' => SORT_DESC])->all();
                                 foreach($deps as $depts){
                                 ?>
                                 <div class="media align-items-center position-relative">                                    
@@ -130,7 +130,7 @@ use dosamigos\ckeditor\CKEditor;
                                     </div> 
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500">
-                                           <?= common\models\LbSupplier::find()->where(['id' => $depts->supplier])->one()->name; ?>
+                                           <?= common\models\LbSupplier::find()->where(['id' => $depts->supplier_id])->one()->name; ?>
                                         </p>
                                     </div>  
                                     <div class="media-body ml-3">                                       
@@ -142,8 +142,14 @@ use dosamigos\ckeditor\CKEditor;
                                     <div class="media-body ml-3">                                       
                                         <p class="font-weight-semi-bold mb-0 text-500"><?= $depts->booked_quantity_gallon; ?></p>
                                     </div>
-                                    <div class="media-body ml-3">                                       
+                                    <div class="media-body ml-3">
+                                        <?php
+                                        if($depts->lpo){
+                                            ?>                                        
                                         <p class="font-weight-semi-bold mb-0 text-500"><img src="<?= Yii::$app->request->baseUrl . '/uploads/lpo/' . $depts->id . '/' . $depts->lpo; ?>" width="100" height="100"></p>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                     
                                 </div>

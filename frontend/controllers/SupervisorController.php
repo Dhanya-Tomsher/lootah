@@ -519,6 +519,83 @@ class SupervisorController extends \yii\web\Controller {
         exit;
     }
     
+    
+    public function actionExportsupplier() {
+        $searchModel = new \common\models\LbStockRequestManagement();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station Name'];
+        $fields[] = ['key' => 'supplier_id', 'title' => 'Supplier Name'];
+        $fields[] = ['key' => 'requested_quantity_gallon', 'title' => 'Requested Quantity'];
+        $fields[] = ['key' => 'received_quantity_gallon', 'title' => 'Received Quantity'];
+        $fields[] = ['key' => 'receipt_number', 'title' => 'Receipt Number'];
+        $fields[] = ['key' => 'date_request', 'title' => 'Request Date'];
+        $fields[] = ['key' => 'supply_date', 'title' => 'Supply Date'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('B1', 'Supplier')
+                ->setCellValue('C1', 'Requested Quantity')
+                ->setCellValue('D1', 'Received Quantity')
+                ->setCellValue('E1', 'Receipt Number')
+                ->setCellValue('F1', 'Request Date')
+                ->setCellValue('G1', 'Supply Date');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbStation::find()->where(['id' => $mode->station_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
+                        ->setCellValue('B' . $i, $mode->supplier->name != '' ? $mode->supplier->name : '')
+                        ->setCellValue('C' . $i, $mode->requested_quantity_gallon)
+                        ->setCellValue('D' . $i, $mode->received_quantity_gallon)
+                        ->setCellValue('E' . $i, $mode->receipt_number)
+                        ->setCellValue('F' . $i, $mode->date_request)
+                        ->setCellValue('F' . $i, $mode->supply_date);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Supplier_report_' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Supplier_report_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
+    
     public function actionChangepwd() {
 
         if (Yii::$app->session->get('supid')) {
@@ -938,6 +1015,7 @@ class SupervisorController extends \yii\web\Controller {
                 $model->supply_time = $_REQUEST['LbStockRequestManagement']['supply_time'];
                 $model->received_qty_entered_by = Yii::$app->session->get('supid');
                 $model->receipt_number = $_REQUEST['LbStockRequestManagement']['receipt_number'];
+                $model->supply_status=1;
                 $model->save(false);
             }
             return $this->render('supplierstockentry');
@@ -945,7 +1023,24 @@ class SupervisorController extends \yii\web\Controller {
             return $this->render('index');
         }
     }
-
+public function actionSupplierreport() {
+        if (Yii::$app->session->get('supid')) {
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbStockRequestManagement();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition2 = $exp_url_refer[1];
+            } else {
+                $condition2 = "";
+            }
+            return $this->render('supplierreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition2]);
+        } else {
+            return $this->render('index');
+        }
+    }
     public function actionPhysicalstockentry() {
         if (Yii::$app->session->get('supid')) {
             $model = new \common\models\LbStationDailyDataForVerification();
@@ -1041,24 +1136,8 @@ class SupervisorController extends \yii\web\Controller {
 
     public function actionStockreport() {
         if (Yii::$app->session->get('supid')) {
-            $model = new \common\models\LbTankCaliberation();
-            if ($model->load(Yii::$app->request->post())) {
-                $exmodel = \common\models\LbTankCaliberation::find()->where(['station_id' => $_REQUEST['LbTankCaliberation']['station_id'], 'date_caliberation' => date('Y-m-d')])->one();
-                if (count($exmodel) > 0) {
-                    Yii::$app->session->setFlash('success', "A Report of calibration for the current date and station is already present.");
-                } else {
-                    $model->station_id = $_REQUEST['LbTankCaliberation']['station_id'];
-                    $model->date_caliberation = date('Y-m-d');
-                    $model->physical_quantity_gallon = $_REQUEST['LbTankCaliberation']['physical_quantity_gallon'];
-                    $model->quantity_calculation_gallon = $_REQUEST['LbTankCaliberation']['quantity_calculation_gallon'];
-                    $model->calibrated_quantity_gallon = $_REQUEST['LbTankCaliberation']['calibrated_quantity_gallon'];
-                    $model->supervisor_id = Yii::$app->session->get('supid');
-                    $model->created_by = Yii::$app->session->get('supid');
-                    $model->created_by_type = 5;
-                    $model->save(false);
-                }
-            }
-            return $this->render('tankcalib');
+            $model = new \common\models\LbStationStock();            
+            return $this->render('stock');
         } else {
             return $this->render('index');
         }

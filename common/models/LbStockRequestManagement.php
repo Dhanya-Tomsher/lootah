@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "lb_stock_request_management".
  *
@@ -41,7 +42,7 @@ class LbStockRequestManagement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['request_id', 'supplier_id', 'assigned_by', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
+            [['request_id', 'supplier_id','station_id', 'assigned_by', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
             [['quantity_litre', 'quantity_gallon'], 'number'],
             [['date_entry', 'supply_date', 'created_at', 'updated_at'], 'safe'],
             [['supply_time'], 'string', 'max' => 45],
@@ -72,5 +73,49 @@ class LbStockRequestManagement extends \yii\db\ActiveRecord
             'sort_order' => 'Sort Order',
             'status' => 'Status',
         ];
+    }
+    
+    public function search($params) {
+        $query = LbStockRequestManagement::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'supply_status' => 1,
+        ]);
+        
+         if (isset($this->supply_date) && $this->supply_date != "") {
+            $date_from = date('Y-m-d', strtotime($this->supply_date));
+            $query->andWhere("supply_date >=  '" . $date_from . "'");
+        }
+        if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d', strtotime($this->created_at));
+            $query->andWhere("supply_date <=  '" . $date_to . "'");
+        }
+        
+
+        $query->andFilterWhere([
+            'station_id' => $this->station_id,
+        ]);
+       $query->andFilterWhere([
+            'supplier_id' => $this->supplier_id,
+        ]);
+
+        return $dataProvider;
+    }
+    public function getStation()
+    {
+        return $this->hasOne(LbStation::className(), ['id' => 'station_id']);
+    }
+    public function getSupplier()
+    {
+        return $this->hasOne(LbSupplier::className(), ['id' => 'supplier_id']);
     }
 }

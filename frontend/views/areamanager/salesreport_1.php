@@ -15,33 +15,43 @@ use yii\grid\GridView;
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
-        <h2 class="text-white"> Station Report</h2>
+        <h2 class="text-white"> Sales Report</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
                 <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
-                <li> Filter  Station Transaction Report</li>
+                <li> Sales Report</li>
             </ul>
         </nav>
-        <?php
+<?php
         if ($condition != '') {
             $url = "?" . $condition;
         } else {
             $url = "";
         }
         ?>
+        <?php
+        $station_list = [];
+        $get_stations = common\models\LbSupervisor::find()->where(['id' => Yii::$app->session->get('supid')])->one();
+        if ($get_stations != NULL) {
+            if ($get_stations->assigned_stations != "") {
+                $station_list = explode(',', $get_stations->assigned_stations);
+            }
+        }
+//        assigned_stations
+        ?>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4 class="float-left">  Station Transaction Report</h4>
-                        <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
+                        <h4 class="float-left">  Sales  Report</h4>
+                        <?= Html::a('Export Data', ['exportsales' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <?php //echo "ashik" . $model->station_id; ?>
+
                             <?php
-                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'stationreport', 'options' => ['enctype' => 'multipart/form-data']]);
+                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'salesreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>
@@ -57,7 +67,7 @@ use yii\grid\GridView;
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
-                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->where(['in', 'id', $station_list])->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
                                 ?>
 
                             </div>
@@ -70,7 +80,6 @@ use yii\grid\GridView;
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
-                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-S'])->label(FALSE) ?>
 
                             </div>
 
@@ -95,8 +104,7 @@ use yii\grid\GridView;
                         <h4> Transaction Report</h4>
                     </div>
                     <div class="card-body pb-0">
-
-                        <?php if (isset($_GET)) { ?>
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
 
                             <?=
                             GridView::widget([
@@ -111,6 +119,7 @@ use yii\grid\GridView;
                                         'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->station->station_name;
                                         },
@@ -122,9 +131,10 @@ use yii\grid\GridView;
                                     [
                                         'attribute' => 'dispenser_id',
                                         'header' => 'Dispenser',
-                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
+//                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->dispenser->label;
                                         },
@@ -133,9 +143,10 @@ use yii\grid\GridView;
                                     [
                                         'attribute' => 'nozle_id',
                                         'header' => 'Nozzle',
-                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
+//                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->nozzle->label;
                                         },
@@ -167,6 +178,7 @@ use yii\grid\GridView;
                                         'value' => function($data) {
                                             return date("Y-m-d H:i:s", strtotime($data->EndTime));
                                         },
+                                        'filter' => false,
                                         'format' => 'html',
                                     ],
                                 // 'Status',

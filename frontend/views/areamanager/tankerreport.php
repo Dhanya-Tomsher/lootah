@@ -12,36 +12,37 @@ use yii\grid\GridView;
 ?>
 <?= $this->render('_headersection') ?>
 <?= $this->render('_leftmenu') ?>
-<div class="box-gradient-home"></div>
-<div class="page-content">
-    <div class="page-content-inner">
-        <h2 class="text-white"> Station Report</h2>
-        <nav id="breadcrumbs" class="text-white">
-            <ul>
-                <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
-                <li> Filter  Station Transaction Report</li>
-            </ul>
-        </nav>
-        <?php
+<?php
         if ($condition != '') {
             $url = "?" . $condition;
         } else {
             $url = "";
         }
         ?>
+<div class="box-gradient-home"></div>
+<div class="page-content">
+    <div class="page-content-inner">
+        <h2 class="text-white"> Tanker Report</h2>
+        <nav id="breadcrumbs" class="text-white">
+            <ul>
+                <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
+                <li> Filter  Station Transaction Report</li>
+            </ul>
+        </nav>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4 class="float-left">  Station Transaction Report</h4>
+
+                        <h4 class="float-left">  Tanker Transaction Report</h4>
                         <?= Html::a('Export Data', ['export' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <?php //echo "ashik" . $model->station_id; ?>
+
                             <?php
-                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'stationreport', 'options' => ['enctype' => 'multipart/form-data']]);
+                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'tankerreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>
@@ -61,7 +62,12 @@ use yii\grid\GridView;
                                 ?>
 
                             </div>
+<!--                            <div class="col-xl-4 col-md-4 mb-2">
+                                <?php
+                                // echo $form->field($model, 'tanker_id')->dropDownList(ArrayHelper::map(\common\models\LbTanker::find()->all(), 'id', 'tanker_number'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                ?>
 
+                            </div>-->
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
@@ -70,7 +76,7 @@ use yii\grid\GridView;
                             <div class="col-xl-4 col-md-4 mb-2">
 
                                 <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
-                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-S'])->label(FALSE) ?>
+                                <?= $form->field($model, 'device_type')->hiddenInput(['maxlength' => 255, 'class' => 'form-control your class', 'value' => 'Lootah-T'])->label(FALSE) ?>
 
                             </div>
 

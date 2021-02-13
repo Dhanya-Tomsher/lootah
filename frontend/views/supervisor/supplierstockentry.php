@@ -114,7 +114,7 @@ use dosamigos\ckeditor\CKEditor;
                             <?= $form->field($model, 'receipt_number')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->receipt_number]) ?>
                         </div>
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                            <?= $form->field($model, 'supply_date')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->supply_date,'id'=>'supply_date']) ?>
+                            <?= $form->field($model, 'supply_date')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->supply_date]) ?>
                         </div> 
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
                             <?= $form->field($model, 'supply_time')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->supply_time]) ?>

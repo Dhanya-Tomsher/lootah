@@ -243,6 +243,7 @@ return [
                 'site/update-property' => 'site/update-property',
                 'site/create-user' => 'site/create-user',
                 'clients/login' => 'clients/login',
+                'areamanager/calibreport' => 'areamanager/calibreport',
             ]
         ],
         'mailer ' => [

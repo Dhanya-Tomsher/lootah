@@ -15,43 +15,33 @@ use yii\grid\GridView;
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
-        <h2 class="text-white"> Sales Report</h2>
+        <h2 class="text-white"> Supply Report</h2>
         <nav id="breadcrumbs" class="text-white">
             <ul>
-                <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/dashboard"> Dashboard </a></li>
-                <li> Sales Report</li>
+                <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/dashboard"> Dashboard </a></li>
+                <li> Filter  Supply Report</li>
             </ul>
         </nav>
-<?php
+        <?php
         if ($condition != '') {
             $url = "?" . $condition;
         } else {
             $url = "";
         }
         ?>
-        <?php
-        $station_list = [];
-        $get_stations = common\models\LbAreaManager::find()->where(['id' => Yii::$app->session->get('armid')])->one();
-        if ($get_stations != NULL) {
-            if ($get_stations->assigned_stations != "") {
-                $station_list = explode(',', $get_stations->assigned_stations);
-            }
-        }
-//        assigned_stations
-        ?>
         <div class="row">
             <div class="col-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4 class="float-left">  Sales  Report</h4>
-                        <?= Html::a('Export Data', ['exportsales' . $url], ['class' => 'btn btn-success float-right green']) ?>
+                        <h4 class="float-left">  Supply Report</h4>
+                        <?= Html::a('Export Data', ['exportsupplier' . $url], ['class' => 'btn btn-success float-right green']) ?>
 
                     </div>
                     <div class="card-body">
                         <div class="row">
-
+                            <?php //echo "ashik" . $model->station_id; ?>
                             <?php
-                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'salesreport', 'options' => ['enctype' => 'multipart/form-data']]);
+                            $form = ActiveForm::begin(['method' => 'get', 'enableClientScript' => false, 'class' => 'uk-grid-small uk-grid', 'action' => 'supplierreport', 'options' => ['enctype' => 'multipart/form-data']]);
                             ?>
                             <div class="col-xl-12 col-md-12">
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>
@@ -67,20 +57,25 @@ use yii\grid\GridView;
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
-                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->where(['in', 'id', $station_list])->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'), ['prompt' => 'Choose Station', 'class' => 'form-control']);
                                 ?>
 
                             </div>
-
                             <div class="col-xl-4 col-md-4 mb-2">
-
-                                <?= $form->field($model, 'date_from')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+                                <?php
+                                echo $form->field($model, 'supplier_id')->dropDownList(ArrayHelper::map(\common\models\LbSupplier::find()->all(), 'id', 'name'), ['prompt' => 'Choose Supplier', 'class' => 'form-control']);
+                                ?>
 
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
 
-                                <?= $form->field($model, 'date_to')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class']) ?>
+                                <?= $form->field($model, 'supply_date')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class','autocomplete'=>'off'])->label('Supply From') ?>
 
+                            </div>
+                            <div class="col-xl-4 col-md-4 mb-2">
+
+                                <?= $form->field($model, 'created_at')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class'])->label('Supply To') ?>
+                            
                             </div>
 
                             <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
@@ -101,10 +96,11 @@ use yii\grid\GridView;
                 <div class="card h-lg-100">
                     <div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
-                        <h4> Transaction Report</h4>
+                        <h4> Supply Report</h4>
                     </div>
                     <div class="card-body pb-0">
-                        <?php if (isset($_GET) && $_GET != NULL) { ?>
+
+                        <?php if (isset($_GET)) { ?>
 
                             <?=
                             GridView::widget([
@@ -119,68 +115,24 @@ use yii\grid\GridView;
                                         'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'filter' => false,
                                         'value' => function($data) {
                                             return $data->station->station_name;
                                         },
                                         'format' => 'html',
                                     ],
-                                    'transaction_no',
-//                                'ReferenceId',
-//                                'SequenceId',
-                                    [
-                                        'attribute' => 'dispenser_id',
-                                        'header' => 'Dispenser',
-//                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
+                                 
+                                                [
+                                        'attribute' => 'supplier_id',
+                                        'header' => 'Supplier',
+                                        'filter' => ArrayHelper::map(\common\models\LbSupplier::find()->all(), 'id', 'name'),
                                         //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'filter' => false,
+                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'value' => function($data) {
-                                            return $data->dispenser->label;
+                                            return $data->supplier->name;
                                         },
                                         'format' => 'html',
                                     ],
-                                    [
-                                        'attribute' => 'nozle_id',
-                                        'header' => 'Nozzle',
-//                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'filter' => false,
-                                        'value' => function($data) {
-                                            return $data->nozzle->label;
-                                        },
-                                        'format' => 'html',
-                                    ],
-//                                'DeviceId',
-//                                'Meter',
-//                                'SecondaryTag',
-//                                'Category',
-                                    'Operator',
-                                    // 'Asset',
-                                    // 'AccumulatorType',
-//                                 'Sitecode',
-                                    // 'Project',
-                                    'PlateNo',
-//                                'Master',
-                                    // 'Accumulator',
-                                    'Volume',
-                                    // 'Allowance',
-                                    // 'Type',
-//                                'StartTime',
-//                                'EndTime',
-                                    [
-                                        'attribute' => 'EndTime',
-                                        'header' => 'Time',
-//                                    'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'device_id', 'name'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
-                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
-                                        'value' => function($data) {
-                                            return date("Y-m-d H:i:s", strtotime($data->EndTime));
-                                        },
-                                        'filter' => false,
-                                        'format' => 'html',
-                                    ],
+                                                'supply_date',
                                 // 'Status',
 //                                'ServerTimestamp',
                                 // 'UpdateTimestamp',

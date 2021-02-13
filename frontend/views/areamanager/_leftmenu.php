@@ -15,18 +15,19 @@
                 </ul>
                 <ul>                    
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/profile"><i class="fa fa-male"></i> <span>Profile</span> </a></li>
-			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/report"><i class="icon-material-outline-description"></i> <span> Search Report </span> </a> </li>
-                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankerdailycoln"><i class="fa fa-male"></i> <span>Tanker Daily Collection</span> </a></li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankerdailycoln"><i class="fa fa-male"></i> <span>Tanker Daily Collection</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/stationdailycoln"><i class="icon-material-outline-description"></i> <span> Station Daily Collection </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/addsupplier"><i class="fa fa-male"></i> <span>Add Supplier</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/assignsupplier"><i class="icon-material-outline-description"></i> <span> Assign Supplier </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/addlpo"><i class="fa fa-male"></i> <span>Add LPO</span> </a></li>
-			             <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/salesreport"><i class="fa fa-male"></i> <span>Sales Report</span> </a></li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/calibreport"><i class="fa fa-male"></i> <span>Calibration Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/stockreport"><i class="icon-material-outline-description"></i> <span>Stock Report </span> </a> </li>
-                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/requestreport"><i class="fa fa-male"></i> <span>Request Report</span> </a></li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/salesreport"><i class="fa fa-male"></i> <span>Sales Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/supplierreport"><i class="icon-material-outline-description"></i> <span> Supplier Report </span> </a> </li>
-                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankecleaningreport"><i class="fa fa-male"></i> <span>Tank Cleaning Report</span> </a></li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/stationreport"><i class="fa fa-male"></i> <span>Station Report</span> </a></li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankerreport"><i class="fa fa-male"></i> <span>Tanker Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/bookedqtyreport"><i class="icon-material-outline-description"></i> <span> Booked Quantity Report </span> </a> </li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankcleaningreport"><i class="icon-material-outline-description"></i> <span> Tank Cleaning Report </span> </a> </li>
                 </ul>         
             </div>
         </div>

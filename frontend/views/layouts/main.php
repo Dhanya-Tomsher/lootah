@@ -64,6 +64,10 @@ $( "#supply_needed_date" ).datepicker({
         dateFormat: "yy-mm-dd",
 
 });
+        $( "#lbstockrequestmanagement-supply_date" ).datepicker({
+        dateFormat: "yy-mm-dd",
+
+});
         $( "#supply_date" ).datepicker({
         dateFormat: "yy-mm-dd",
 
