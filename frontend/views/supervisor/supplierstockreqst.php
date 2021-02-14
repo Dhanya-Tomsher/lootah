@@ -39,7 +39,7 @@ use dosamigos\ckeditor\CKEditor;
                                     <div class="section-headline margin-top-25 margin-bottom-12">
                                         <h5>Station </h5>
                                     </div>
-                                    <select id="lbstockrequestmanagement-station_id" class="selectpicker" name="LbStockRequestManagement[station_id]">
+                                    <select id="lbstockrequestmanagement-station_id" class="selectpicker" name="LbStockRequestManagement[station_id]" required="required">
                                         <option value="">Select Station</option>
                                         <?php
                                         $stnz= \common\models\LbStation::find()->where(['status'=>1,'supervisor'=>Yii::$app->session->get('supid')])->all();
@@ -57,13 +57,13 @@ use dosamigos\ckeditor\CKEditor;
                                 <div class="section-headline margin-top-25 margin-bottom-12">
                                     <h5>Quantity(gal)</h5>
                                 </div>                
-                                    <input id="lbstockrequestmanagement-quantity" type="text" name="LbStockRequestManagement[requested_quantity_gallon]">
+                                    <input id="lbstockrequestmanagement-quantity" type="text" name="LbStockRequestManagement[requested_quantity_gallon]" required="required">
                             </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
                                     <div class="section-headline margin-top-25 margin-bottom-12">
                                         <h5>Supply Needed Date</h5>
                                     </div>                
-                                    <input type="text" id="supply_needed_date" name="LbStockRequestManagement[supply_needed_date]" autocomplete="off">
+                                    <input type="text" id="supply_needed_date" name="LbStockRequestManagement[supply_needed_date]" autocomplete="off" required="required">
                                 </div>
                         <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
                             <div class="section-headline margin-top-25 margin-bottom-12">
@@ -94,7 +94,7 @@ use dosamigos\ckeditor\CKEditor;
                                                 <th>Sl.No.</th>
                                                 <th>Station Name</th>
                                                 <th>Date of request</th>
-						<th>Quantity</th>
+						<th>Quantity(gal)</th>
                                                 <th>Assign Status</th>
                                                 <th>Supply Status</th>
                                             </tr>
@@ -111,7 +111,7 @@ use dosamigos\ckeditor\CKEditor;
                                                 <td class="name"><?= $i; ?></td>												
                                                 <td><?= \common\models\LbStation::find()->where(['id'=>$operatrs->station_id])->one()->station_name; ?></td>
                                                 <td><?= date('Y-m-d',strtotime($operatrs->date_request)); ?></td>
-                                                <td><?= round($operatrs->requested_quantity_litre,2); ?></td>
+                                                <td><?= round($operatrs->requested_quantity_gallon,2); ?></td>
                                                 <td><?php if(!empty($operatrs->assigned_date)){echo "Assigned";}else{echo "Not Assigned";} ?></td>
                                                 <td><?php if($operatrs->supply_date){echo "Supplied";}else{echo "Not Supplied";} ?></td>
                                             </tr>                                                                                        			

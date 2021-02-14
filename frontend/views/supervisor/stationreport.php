@@ -90,14 +90,15 @@ use yii\grid\GridView;
 
             <div class="col-lg-12 col-xl-12 mb-3">
                 <div class="card h-lg-100">
+                    
+                   
+
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
                     <div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
-                        <h4> Transaction Report</h4>
+                        <h4> Station Report</h4>
                     </div>
-                    <div class="card-body pb-0">
-
-                        <?php if (isset($_GET)) { ?>
-
+ <div class="card-body pb-0">
                             <?=
                             GridView::widget([
                                 'dataProvider' => $dataProvider,
@@ -175,9 +176,9 @@ use yii\grid\GridView;
                                 ],
                             ]);
                             ?>
-
+</div>
                         <?php } ?>
-                    </div>
+                    
                 </div>
             </div>
 

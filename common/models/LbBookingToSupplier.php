@@ -111,7 +111,7 @@ class LbBookingToSupplier extends \yii\db\ActiveRecord
             return $dataProvider;
         }
         $query->FilterWhere([
-            'status' => 1,
+            'transaction_type' => 1,
         ]);
         
          if (isset($this->booking_date) && $this->booking_date != "") {

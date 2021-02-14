@@ -83,13 +83,13 @@ use yii\grid\GridView;
 
             <div class="col-lg-12 col-xl-12 mb-3">
                 <div class="card h-lg-100">
-                    <div
+                    
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
+<div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
                         <h4>Tank Calibration Report</h4>
                     </div>
                     <div class="card-body pb-0">
-                        <?php if (isset($_GET) && $_GET != NULL) { ?>
-
                             <?=
                             GridView::widget([
                                 'dataProvider' => $dataProvider,
@@ -101,7 +101,6 @@ use yii\grid\GridView;
                                         'attribute' => 'station_id',
                                         'header' => 'Station',
                                         'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'filter' => false,
                                         'value' => function($data) {
@@ -116,9 +115,9 @@ use yii\grid\GridView;
                                 ],
                             ]);
                             ?>
-
+</div>
                         <?php } ?>
-                    </div>
+                    
                 </div>
             </div>
 

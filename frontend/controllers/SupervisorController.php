@@ -987,7 +987,7 @@ class SupervisorController extends \yii\web\Controller {
                 $gal = \common\models\LbGallonLitre::find()->where(['id' => 1])->one();
                 $model->station_id = $_REQUEST['LbStockRequestManagement']['station_id'];
                 $model->requested_quantity_gallon = $_REQUEST['LbStockRequestManagement']['requested_quantity_gallon'];
-                $model->requested_quantity_litre = $_REQUEST['LbStockRequestManagement']['requested_quantity_gallon'] / $gal->litre;
+                $model->requested_quantity_litre = $_REQUEST['LbStockRequestManagement']['requested_quantity_gallon'] * $gal->litre;
                 $model->supply_needed_date = date('Y-m-d', strtotime($_REQUEST['LbStockRequestManagement']['supply_needed_date']));
                 $model->requested_by = Yii::$app->session->get('supid');
                 $model->created_by = Yii::$app->session->get('supid');
@@ -1017,6 +1017,26 @@ class SupervisorController extends \yii\web\Controller {
                 $model->receipt_number = $_REQUEST['LbStockRequestManagement']['receipt_number'];
                 $model->supply_status=1;
                 $model->save(false);
+                $prev = \common\models\LbBookingToSupplier::find()->where(['supplier_id' => $model->supplier_id])->orderBy(['id' => SORT_DESC])->one();
+                if(!empty($prev)){
+                    $prebalgal=$prev->current_balance_gallon;
+                    $preballit=$prev->current_balance_litre;
+                }else{
+                    $prebalgal=0;
+                    $preballit=0;
+                }
+                $nmodel= new \common\models\LbBookingToSupplier();
+                $recgal=$model->received_quantity_gallon;
+                $reclit=$model->received_quantity_litre;
+                $nmodel->supplier_id=$model->supplier_id;
+                $nmodel->purchased_quantity_gallon=$recgal;
+                $nmodel->purchased_quantity_litre=$reclit;
+                $nmodel->previous_balance_gallon=$prebalgal;
+                $nmodel->previous_balance_litre=$preballit;
+                $nmodel->current_balance_gallon=$prebalgal - $recgal;
+                $nmodel->current_balance_litre=$preballit - $reclit;
+                $nmodel->transaction_type=2;
+                $nmodel->save(false);
             }
             return $this->render('supplierstockentry');
         } else {

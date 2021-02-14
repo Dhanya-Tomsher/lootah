@@ -60,20 +60,20 @@ use dosamigos\ckeditor\CKEditor;
                                 } else {
                                     $prode = [];
                                 }
-                                    echo $form->field($model, 'supplier_id')->dropDownList($prode, ['prompt' => 'Choose Supplier', 'class' => 'selectpicker']);
+                                    echo $form->field($model, 'supplier_id')->dropDownList($prode, ['prompt' => 'Choose Supplier', 'class' => 'selectpicker','required'=>'required']);
                             ?> 
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'lpo_date')->textInput(['maxlength' => true,'class'=>'form-control','autocomplete'=>'off']) ?>
+				    <?= $form->field($model, 'lpo_date')->textInput(['maxlength' => true,'class'=>'form-control','autocomplete'=>'off','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'price_per_gallon')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'price_per_gallon')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'lpo')->fileInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'lpo')->fileInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'booked_quantity_gallon')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'booked_quantity_gallon')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
 				<div class="section-headline margin-top-25 margin-bottom-12">

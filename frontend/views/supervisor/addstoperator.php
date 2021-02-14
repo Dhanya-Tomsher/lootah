@@ -58,7 +58,7 @@ use dosamigos\ckeditor\CKEditor;
                                 <h5>Select Station</h5>
                             </div>
                 
-                            <select id="lboperatorstationassignment-station_id" class="selectpicker" name="LbStationOperator[station_id]">
+                            <select id="lboperatorstationassignment-station_id" class="selectpicker" name="LbStationOperator[station_id]" required="required">
                                         <option value="">Select Station</option>
                                         <?php
                                         $stnz= \common\models\LbStation::find()->where(['status'=>1])->all();
@@ -195,7 +195,7 @@ use dosamigos\ckeditor\CKEditor;
                             <?= $form->field($model, 'password')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->password,'required'=>'required']) ?>                                              
                         </div>
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                        <select id="lbstationoperator-station" class="selectpicker" name="LbStationOperator[station]">
+                            <select id="lbstationoperator-station" class="selectpicker" name="LbStationOperator[station]" required="required">
                                         <option value="">Select Station</option>
                                         <?php
                                         $stnz= \common\models\LbStation::find()->where(['status'=>1])->all();

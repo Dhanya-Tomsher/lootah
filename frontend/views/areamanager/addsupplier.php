@@ -50,19 +50,19 @@ use dosamigos\ckeditor\CKEditor;
                         <?php endif; ?>
                                         </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'phone')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'phone')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'location')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'location')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-4 col-md-4 mb-2">
-				    <?= $form->field($model, 'address')->textInput(['maxlength' => true,'class'=>'form-control']) ?>
+				    <?= $form->field($model, 'address')->textInput(['maxlength' => true,'class'=>'form-control','required'=>'required']) ?>
                                 </div>
                                 <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
 				<div class="section-headline margin-top-25 margin-bottom-12">
@@ -156,20 +156,20 @@ use dosamigos\ckeditor\CKEditor;
                         ?>
                                         <input type="hidden" name="LbSupplier[id]" id="lbsupplier-id" value="<?= $depts->id; ?>">    
                             <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                            <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->name]) ?>
+                            <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->name,'required'=>'required']) ?>
                                 </div>  
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                            <?= $form->field($model, 'email')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->email]) ?>
+                            <?= $form->field($model, 'email')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->email,'required'=>'required']) ?>
                                 </div>  
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                            <?= $form->field($model, 'phone')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->phone]) ?>
+                            <?= $form->field($model, 'phone')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->phone,'required'=>'required']) ?>
                                               
                         </div>                  
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                                <?= $form->field($model, 'location')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->location]) ?>
+                                <?= $form->field($model, 'location')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->location,'required'=>'required']) ?>
                         </div> 
                         <div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mb-4">
-                                <?= $form->field($model, 'address')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->address]) ?>
+                                <?= $form->field($model, 'address')->textInput(['maxlength' => true,'class'=>'form-control','value'=>$depts->address,'required'=>'required']) ?>
                         </div>                 
 			<div class="col-xl-6 col-md-6 col-sm-6 col-xs-12 mt-4 mb-4">
 				<div class="section-headline margin-top-25 margin-bottom-12">

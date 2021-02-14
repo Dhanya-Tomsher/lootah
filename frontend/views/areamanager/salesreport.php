@@ -99,25 +99,23 @@ use yii\grid\GridView;
 
             <div class="col-lg-12 col-xl-12 mb-3">
                 <div class="card h-lg-100">
-                    <div
+                    
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
+<div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
                         <h4> Transaction Report</h4>
                     </div>
                     <div class="card-body pb-0">
-                        <?php if (isset($_GET) && $_GET != NULL) { ?>
-
                             <?=
                             GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'filterModel' => $searchModel,
                                 'columns' => [
                                     ['class' => 'yii\grid\SerialColumn'],
-//                                'UUID',
                                     [
                                         'attribute' => 'station_id',
                                         'header' => 'Station',
                                         'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'filter' => false,
                                         'value' => function($data) {
@@ -126,13 +124,9 @@ use yii\grid\GridView;
                                         'format' => 'html',
                                     ],
                                     'transaction_no',
-//                                'ReferenceId',
-//                                'SequenceId',
                                     [
                                         'attribute' => 'dispenser_id',
                                         'header' => 'Dispenser',
-//                                        'filter' => ArrayHelper::map(\common\models\Dispenser::find()->all(), 'id', 'label'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Dispenser", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'filter' => false,
                                         'value' => function($data) {
@@ -143,8 +137,6 @@ use yii\grid\GridView;
                                     [
                                         'attribute' => 'nozle_id',
                                         'header' => 'Nozzle',
-//                                        'filter' => ArrayHelper::map(\common\models\Nozzle::find()->all(), 'id', 'label'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Nozzle", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'filter' => false,
                                         'value' => function($data) {
@@ -152,28 +144,12 @@ use yii\grid\GridView;
                                         },
                                         'format' => 'html',
                                     ],
-//                                'DeviceId',
-//                                'Meter',
-//                                'SecondaryTag',
-//                                'Category',
                                     'Operator',
-                                    // 'Asset',
-                                    // 'AccumulatorType',
-//                                 'Sitecode',
-                                    // 'Project',
                                     'PlateNo',
-//                                'Master',
-                                    // 'Accumulator',
                                     'Volume',
-                                    // 'Allowance',
-                                    // 'Type',
-//                                'StartTime',
-//                                'EndTime',
                                     [
                                         'attribute' => 'EndTime',
                                         'header' => 'Time',
-//                                    'filter' => ArrayHelper::map(\common\models\Device::find()->all(), 'device_id', 'name'),
-                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
                                         'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select a Status", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
                                         'value' => function($data) {
                                             return date("Y-m-d H:i:s", strtotime($data->EndTime));
@@ -181,15 +157,12 @@ use yii\grid\GridView;
                                         'filter' => false,
                                         'format' => 'html',
                                     ],
-                                // 'Status',
-//                                'ServerTimestamp',
-                                // 'UpdateTimestamp',
                                 ],
                             ]);
                             ?>
-
+</div>
                         <?php } ?>
-                    </div>
+                    
                 </div>
             </div>
 

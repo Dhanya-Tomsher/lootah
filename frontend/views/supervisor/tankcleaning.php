@@ -76,58 +76,7 @@ use dosamigos\ckeditor\CKEditor;
                             </div>
                         </div>
                    
-                   <div class="col-lg-12 col-xl-12 mb-3">
-                        <div class="card h-lg-100">
-                            <div
-                                class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
-                                <h4> Tank Cleaning Report</h4>                                
-                            </div>
-                            <div class="card-body pb-0">
-                                <div class="media align-items-center position-relative bgd">                                    
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500">Sl.No</p>
-                                    </div>  
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500">Station</p>
-                                    </div> 
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500">Date of Cleaning</p>
-                                    </div> 
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500">Next Date of Cleaning</p>
-                                    </div> 
-                                    
-                                </div>
-                                <hr class="border-200 my-3">
-                                <?php
-                                $i=1;
-                                $deps = \common\models\LbTankCleaningReport::find()->orderBy(['id' => SORT_DESC])->all();
-                                foreach($deps as $depts){
-                                ?>
-                                <div class="media align-items-center position-relative">                                    
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500">
-                                           <?= $i; ?>
-                                        </p>
-                                    </div> 
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500"><?= \common\models\LbStation::find()->where(['id'=>$depts->station_id])->one()->station_name; ?></p>
-                                    </div> 
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500"><?= $depts->date_cleaning; ?></p>
-                                    </div> 
-                                    <div class="media-body ml-3">                                       
-                                        <p class="font-weight-semi-bold mb-0 text-500"><?= $depts->next_date_cleaning; ?></p>
-                                    </div>
-                                </div>
-                                <hr class="border-200 my-3">
-                                <?php
-                                $i=$i+1;
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div> 
+
                    
                     </div>
                 </div>
