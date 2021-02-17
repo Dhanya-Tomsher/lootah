@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\LbTankerFillingSearch */
@@ -61,14 +62,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
-                                        'id',
-            'tanker_id',
-            'station_id',
-            'tanker_operator',
-            'station_operator',
+                                    //    'id',
+            //'tanker_id',
+             [
+                                        'attribute' => 'station_id',
+                                        'header' => 'Station',
+                                        'filter' => ArrayHelper::map(\common\models\LbStation::find()->all(), 'id', 'station_name'),
+                                        //'filter' => ['1' => 'Request Pending', '2' => 'Request Accepted', '3' => 'Unit Visit Done ', '4' => 'Reserved', '5' => 'Booked', '6' => 'Not Interested'],
+                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select Station", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
+                                        'value' => function($data) {
+                                            return $data->station->station_name;
+                                        },
+                                        'format' => 'html',
+                                    ],
+                                                [
+                                        'attribute' => 'tanker_id',
+                                        'header' => 'Tanker',
+                                        'filter' => ArrayHelper::map(\common\models\LbTanker::find()->all(), 'id', 'tanker_number'),
+                                        'filterInputOptions' => ['class' => 'form-control selectpicker', 'id' => null, 'prompt' => 'All', 'data-live-search' => "true", 'title' => "Select Tanker", 'data-hide-disabled' => "true"], // to change 'Todos' instead of the blank option
+                                        'filter' => false,
+                                        'value' => function($data) {
+                                            return $data->tanker->tanker_number;
+                                        },
+                                        'format' => 'html',
+                                    ],
+           // 'tanker_operator',
+            //'station_operator',
             // 'quantity_litre',
-            // 'quantity_gallon',
-            // 'date_entry',
+             'quantity_gallon',
+             'date_entry',
             // 'created_at',
             // 'updated_at',
             // 'created_by',
@@ -81,9 +104,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\ActionColumn',
                             'header' => 'Update',
                             'template' => '{update}'],
-                            ['class' => 'yii\grid\ActionColumn',
-                            'header' => 'View',
-                            'template' => '{view}'],
                             ['class' => 'yii\grid\ActionColumn',
                             'header' => 'Delete',
                             'template' => '{delete}'],

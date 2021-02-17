@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'vehicle_number')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'sort_order')->textInput() ?>
+    <!--<?= $form->field($model, 'sort_order')->textInput() ?>-->
 
      <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
 

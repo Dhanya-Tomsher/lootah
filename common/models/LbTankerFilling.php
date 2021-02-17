@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "lb_tanker_filling".
  *
@@ -69,5 +70,59 @@ class LbTankerFilling extends \yii\db\ActiveRecord
             'sort_order' => 'Sort Order',
             'status' => 'Status',
         ];
+    }
+    
+    public function getStation()
+    {
+        return $this->hasOne(LbStation::className(), ['id' => 'station_id']);
+    }
+    public function getStationoperator()
+    {
+        return $this->hasOne(LbStationOperator::className(), ['id' => 'station_operator']);
+    }
+    public function getTankeroperator()
+    {
+        return $this->hasOne(LbTankerOperator::className(), ['id' => 'tanker_operator']);
+    }
+    public function getTanker()
+    {
+        return $this->hasOne(LbTanker::className(), ['id' => 'tanker_id']);
+    }
+    public function search($params) {
+        $query = LbTankerFilling::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'transaction_type' => 2,
+        ]);
+        $query->andFilterWhere([
+            'status' => 1,
+        ]);
+        
+         if (isset($this->date_entry) && $this->date_entry != "") {
+            $date_from = date('Y-m-d', strtotime($this->date_entry));
+            $query->andWhere("date_entry >=  '" . $date_from . "'");
+        }
+        if (isset($this->created_at) && $this->created_at != "") {
+            $date_to = date('Y-m-d', strtotime($this->created_at));
+            $query->andWhere("date_entry <=  '" . $date_to . "'");
+        }        
+
+        $query->andFilterWhere([
+            'station_id' => $this->station_id,
+        ]);
+       
+        $query->andFilterWhere([
+            'tanker_id' => $this->tanker_id,
+        ]);
+        return $dataProvider;
     }
 }

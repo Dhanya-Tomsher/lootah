@@ -31,7 +31,66 @@ class SupervisorController extends \yii\web\Controller {
     public function actionProfile() {
         return $this->render('profile');
     }
-
+    public function actionTankerfilling() {
+        if (!empty($_REQUEST['LbTankerFilling']['station_id'])) {
+            $model= new \common\models\LbTankerFilling();
+            $model->station_id = $_REQUEST['LbTankerFilling']['station_id'];
+            $model->tanker_id = $_REQUEST['LbTankerFilling']['tanker_id'];
+            $model->date_entry = date('Y-m-d',strtotime($_REQUEST['LbTankerFilling']['date_entry']));
+            $model->quantity_gallon = $_REQUEST['LbTankerFilling']['quantity_gallon'];
+            $gal = \common\models\LbGallonLitre::find()->where(['id' => 1])->one();
+            $model->quantity_litre = $_REQUEST['LbTankerFilling']['quantity_gallon'] * $gal->litre;
+            $model->station_operator = \common\models\LbStationOperator::find()->where(['station'=>$_REQUEST['LbTankerFilling']['station_id']])->one()->id;
+            $model->tanker_operator = \common\models\LbTankerOperator::find()->where(['tanker'=>$_REQUEST['LbTankerFilling']['tanker_id']])->one()->id;
+            $model->transaction_type=2;
+            $prev=\common\models\LbTankerFilling::find()->where(['station_id'=>$_REQUEST['LbTankerFilling']['station_id'],'tanker_id'=>$_REQUEST['LbTankerFilling']['tanker_id']])->all();
+            if(count($prev)>0){
+            $previ=\common\models\LbTankerFilling::find()->where(['station_id'=>$_REQUEST['LbTankerFilling']['station_id'],'tanker_id'=>$_REQUEST['LbTankerFilling']['tanker_id']])->orderBy(['id' => SORT_DESC])->one();
+             $model->previous_balance_gallon=$previ->current_balance_gallon;
+             $model->previous_balance_litre =$previ->current_balance_litre;
+             $model->current_balance_gallon= $previ->current_balance_gallon + $_REQUEST['LbTankerFilling']['quantity_gallon'];
+             $model->current_balance_litre= $previ->current_balance_litre + ($_REQUEST['LbTankerFilling']['quantity_gallon'] * $gal->litre);
+            }else{
+             $model->current_balance_gallon= $_REQUEST['LbTankerFilling']['quantity_gallon'];
+             $model->current_balance_litre= ($_REQUEST['LbTankerFilling']['quantity_gallon'] * $gal->litre);               
+            }
+            $model->save(false);
+        }
+        return $this->render('tankerfilling');
+    }
+    public function actionGetTanker() {
+        if (!empty($_POST["dept_id"])) {
+            $dept = $_POST["dept_id"];
+            $qry = \common\models\LbTanker::find()->where(['station_id' => $dept])->all();
+            ?>
+            <option value disabled selected>Select Tanker</option>
+            <?php
+            foreach ($qry as $city) {
+                ?>
+                <option value="<?php echo $city["id"]; ?>"><?php echo $city["tanker_number"]; ?></option>
+                <?php
+            }
+        }
+    }
+    public function actionTankerfillingreport(){
+      if (Yii::$app->session->get('supid')) {
+            //$model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbTankerFilling();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition1 = $exp_url_refer[1];
+            }else{
+                $condition1="";
+            }
+            return $this->render('tankerfillingreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition1]);
+        } else {
+            return $this->render('index');
+        }  
+    }
     
     public function actionBookedqtyreport(){
       if (Yii::$app->session->get('supid')) {
@@ -519,6 +578,79 @@ class SupervisorController extends \yii\web\Controller {
         exit;
     }
     
+    public function actionExporttankerfilling() {
+        $searchModel = new \common\models\LbTankerfilling();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station Name'];
+        $fields[] = ['key' => 'tanker_id', 'title' => 'Tanker Number'];
+        $fields[] = ['key' => 'quantity_gallon', 'title' => 'Quantity in Gallon'];
+        $fields[] = ['key' => 'quantity_litre', 'title' => 'Quantity in Litre'];
+        $fields[] = ['key' => 'date_entry', 'title' => 'Date of entry'];
+
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('C1', 'Tanker')
+                ->setCellValue('D1', 'Station Operator')
+                ->setCellValue('E1', 'Tanker Operator')
+                ->setCellValue('F1', 'Quantity in Gallon')
+                ->setCellValue('G1', 'Quantity in Litre')
+                ->setCellValue('H1', 'Date of filling');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbStation::find()->where(['id' => $mode->station_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
+                        ->setCellValue('C' . $i, $mode->tanker->tanker_number != '' ? $mode->tanker->tanker_number : '')
+                        ->setCellValue('D' . $i, $mode->stationoperator->name != '' ? $mode->stationoperator->name : '')
+                        ->setCellValue('E' . $i, $mode->tankeroperator->name != '' ? $mode->tankeroperator->name : '')
+                        ->setCellValue('F' . $i, $mode->quantity_gallon)
+                        ->setCellValue('G' . $i, $mode->quantity_litre)
+                        ->setCellValue('H' . $i, $mode->date_entry);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Tankerfilling_report_' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Tankerfilling_report_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
     
     public function actionExportsupplier() {
         $searchModel = new \common\models\LbStockRequestManagement();

@@ -54,21 +54,19 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'contact_person')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'contactperson_position')->textInput(['maxlength' => true]) ?>
      
-    <?= $form->field($model, 'current_month_govt_price')->textInput() ?>
+    <!--<?= $form->field($model, 'current_month_govt_price')->textInput() ?>-->
 
     <?= $form->field($model, 'discount')->textInput() ?>
 
-    <?= $form->field($model, 'current_month_display_price')->textInput() ?>
+    <!--<?= $form->field($model, 'current_month_display_price')->textInput() ?>-->
 
-    <?= $form->field($model, 'payment_terms')->textarea(['rows' => 6]) ?>
+    <!--<?= $form->field($model, 'payment_terms')->textarea(['rows' => 6]) ?>-->
 
-    <?= $form->field($model, 'contract_start')->textInput() ?>
+    <!--<?= $form->field($model, 'contract_start')->textInput() ?>-->
 
-    <?= $form->field($model, 'contract_expiry')->textInput() ?>
+    <!--<?= $form->field($model, 'contract_expiry')->textInput() ?> -->   
 
-    
-
-    <?= $form->field($model, 'sort_order')->textInput() ?>
+    <!--<?= $form->field($model, 'sort_order')->textInput() ?>-->
 
      <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
 

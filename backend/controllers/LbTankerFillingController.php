@@ -76,6 +76,21 @@ class LbTankerFillingController extends Controller
         ]);
     }
 
+    
+    public function actionGetTanker() {
+        if (!empty($_POST["dept_id"])) {
+            $dept = $_POST["dept_id"];
+            $qry = \common\models\LbTanker::find()->where(['station_id' => $dept])->all();
+            ?>
+            <option value disabled selected>Select Tanker</option>
+            <?php
+            foreach ($qry as $city) {
+                ?>
+                <option value="<?php echo $city["id"]; ?>"><?php echo $city["tanker_number"]; ?></option>
+                <?php
+            }
+        }
+    }
     /**
      * Displays a single LbTankerFilling model.
      * @param integer $id

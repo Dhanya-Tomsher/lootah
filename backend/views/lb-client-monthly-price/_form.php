@@ -38,7 +38,7 @@ $y1=date("Y", strtotime("+1 year"));
     <?= $form->field($model, 'year')->dropDownList([$y => $y, $y1 => $y1]) ?>
 
 
-    <?= $form->field($model, 'sort_order')->textInput(['maxlength' => true]) ?>
+    <!--<?= $form->field($model, 'sort_order')->textInput(['maxlength' => true]) ?>-->
 
      <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
     <div class="form-group">

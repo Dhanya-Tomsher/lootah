@@ -20,6 +20,7 @@
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/addsupplier"><i class="fa fa-male"></i> <span>Add Supplier</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/assignsupplier"><i class="icon-material-outline-description"></i> <span> Assign Supplier </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/addlpo"><i class="fa fa-male"></i> <span>Add LPO</span> </a></li>
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/tankerfillingreport"><i class="fa fa-male"></i> <span>Tanker Filling Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/calibreport"><i class="fa fa-male"></i> <span>Calibration Report</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/stockreport"><i class="icon-material-outline-description"></i> <span>Stock Report </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/areamanager/salesreport"><i class="fa fa-male"></i> <span>Sales Report</span> </a></li>

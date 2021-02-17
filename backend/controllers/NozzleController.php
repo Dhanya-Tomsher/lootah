@@ -96,9 +96,15 @@ class NozzleController extends Controller {
         $model = new Nozzle();
 
         if ($model->load(Yii::$app->request->post())) {
-
+                $exp=explode(" ",$_REQUEST['Nozzle']['label']);
+                $nozzlec=$exp[1];
             if ($model->save()) {
+               // $device_ref_id = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $model->id;
+                if(!empty($nozzlec)){
+                  $device_ref_id = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $nozzlec;  
+                }else{
                 $device_ref_id = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $model->id;
+                }
                 $model->device_ref_no = $device_ref_id;
                 $model->save();
                 Yii::$app->session->setFlash('success', "Data created successfully.");
@@ -141,9 +147,15 @@ class NozzleController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-
+                $exp=explode(" ",$_REQUEST['Nozzle']['label']);
+                $nozzlec=$exp[1];
             if ($model->save()) {
+                //$device_ref_no = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $model->id;
+                if(!empty($nozzlec)){
+                    $device_ref_no = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $nozzlec;
+                }else{
                 $device_ref_no = $model->station->station_name . "-D" . $model->dispenser_id . "-N" . $model->id;
+                }
                 $model->device_ref_no = $device_ref_no;
                 $model->save();
                 Yii::$app->session->setFlash('success', "Data updated successfully.");

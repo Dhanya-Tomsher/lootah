@@ -18,16 +18,16 @@
                 <a><i class="fa fa-users"></i>Clients <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-clients' ?>"><i class="fa fa-user"></i>Clients</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-type' ?>"><i class="fa fa-user"></i>Client Type</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-type' ?>"><i class="fa fa-user"></i>Client Type</a></li>-->
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-departments' ?>"><i class="fa fa-user"></i>Client Departments</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-vehicle-type' ?>"><i class="fa fa-user"></i>Vehicle Type</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-vehicles' ?>"><i class="fa fa-user"></i>Client Vehicles</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-monthly-price' ?>"><i class="fa fa-user"></i>Client Monthly Price</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-monthly-details' ?>"><i class="fa fa-user"></i>Client Monthly Purchase Details</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-monthly-details' ?>"><i class="fa fa-user"></i>Client Monthly Purchase Details</a></li>-->
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-vehicle-swap-records' ?>"><i class="fa fa-user"></i>Client Vehicle Swap Records</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-container-type' ?>"><i class="fa fa-user"></i>Container Type</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-container' ?>"><i class="fa fa-user"></i>Client Container</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-payment-type' ?>"><i class="fa fa-user"></i>Client Payment Type</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-container-type' ?>"><i class="fa fa-user"></i>Container Type</a></li>-->
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-container' ?>"><i class="fa fa-user"></i>Client Container</a></li>-->
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-client-payment-type' ?>"><i class="fa fa-user"></i>Client Payment Type</a></li>-->
                 </ul>
             </li>
             <li>
@@ -38,10 +38,10 @@
                     <li><a href="<?= Yii::$app->request->baseUrl . '/nozzle' ?>"><i class="fa fa-user"></i>Nozzle</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/device' ?>"><i class="fa fa-user"></i>Device</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/transaction' ?>"><i class="fa fa-user"></i>Transaction</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-station-collection' ?>"><i class="fa fa-user"></i>Daily Collection</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-monthly-details' ?>"><i class="fa fa-user"></i>Monthly Details</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-daily-data-for-verification' ?>"><i class="fa fa-user"></i>Daily Data Verification</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-filling' ?>"><i class="fa fa-user"></i>Filling</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-station-collection' ?>"><i class="fa fa-user"></i>Daily Collection</a></li>-->
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-monthly-details' ?>"><i class="fa fa-user"></i>Monthly Details</a></li>-->
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-daily-data-for-verification' ?>"><i class="fa fa-user"></i>Daily Data Verification</a></li>-->
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-station-filling' ?>"><i class="fa fa-user"></i>Filling</a></li>-->
                 </ul>
             </li>
             <li>
@@ -55,7 +55,7 @@
                 <a><i class="fa fa-users"></i>Tankers <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-tanker' ?>"><i class="fa fa-user"></i>Tankers</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-tanker-collection' ?>"><i class="fa fa-user"></i>Tanker Daily Collection</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/lb-daily-tanker-collection' ?>"><i class="fa fa-user"></i>Tanker Daily Collection</a></li>-->
                     <li><a href="<?= Yii::$app->request->baseUrl . '/lb-tanker-filling' ?>"><i class="fa fa-user"></i>Tanker Filling</a></li>
                 </ul>
             </li>
@@ -97,9 +97,10 @@
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-users"></i>Report <span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-users"></i>Reports <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/todays' ?>"><i class="fa fa-user"></i>Todays Collection</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/client-report' ?>"><i class="fa fa-user"></i>Client Report</a></li>
+                    <!--<li><a href="<?= Yii::$app->request->baseUrl . '/site/todays' ?>"><i class="fa fa-user"></i>Todays Collection</a></li>-->
                 </ul>
             </li>
 

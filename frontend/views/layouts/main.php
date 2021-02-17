@@ -68,6 +68,10 @@ $( "#supply_needed_date" ).datepicker({
         dateFormat: "yy-mm-dd",
 
 });
+                $( "#lbtankerfilling-date_entry" ).datepicker({
+        dateFormat: "yy-mm-dd",
+
+});
         $( "#supply_date" ).datepicker({
         dateFormat: "yy-mm-dd",
 

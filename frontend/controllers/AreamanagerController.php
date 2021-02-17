@@ -374,7 +374,98 @@ class AreamanagerController extends \yii\web\Controller {
             return $this->render('index');
         }
     }
+    public function actionTankerfillingreport(){
+      if (Yii::$app->session->get('armid')) {
+            //$model = new \common\models\Transaction();
+            date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbTankerFilling();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition1 = $exp_url_refer[1];
+            }else{
+                $condition1="";
+            }
+            return $this->render('tankerfillingreport', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition1]);
+        } else {
+            return $this->render('index');
+        }  
+    }
+    public function actionExporttankerfilling() {
+        $searchModel = new \common\models\LbTankerfilling();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station Name'];
+        $fields[] = ['key' => 'tanker_id', 'title' => 'Tanker Number'];
+        $fields[] = ['key' => 'quantity_gallon', 'title' => 'Quantity in Gallon'];
+        $fields[] = ['key' => 'quantity_litre', 'title' => 'Quantity in Litre'];
+        $fields[] = ['key' => 'date_entry', 'title' => 'Date of entry'];
 
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('C1', 'Tanker')
+                ->setCellValue('D1', 'Station Operator')
+                ->setCellValue('E1', 'Tanker Operator')
+                ->setCellValue('F1', 'Quantity in Gallon')
+                ->setCellValue('G1', 'Quantity in Litre')
+                ->setCellValue('H1', 'Date of filling');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbStation::find()->where(['id' => $mode->station_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
+                        ->setCellValue('C' . $i, $mode->tanker->tanker_number != '' ? $mode->tanker->tanker_number : '')
+                        ->setCellValue('D' . $i, $mode->stationoperator->name != '' ? $mode->stationoperator->name : '')
+                        ->setCellValue('E' . $i, $mode->tankeroperator->name != '' ? $mode->tankeroperator->name : '')
+                        ->setCellValue('F' . $i, $mode->quantity_gallon)
+                        ->setCellValue('G' . $i, $mode->quantity_litre)
+                        ->setCellValue('H' . $i, $mode->date_entry);
+                $i++;
+            }
+
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Tankerfilling_report_' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Tankerfilling_report_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
     public function actionTankcleaningreport() {
 
         if (Yii::$app->session->get('armid')) {

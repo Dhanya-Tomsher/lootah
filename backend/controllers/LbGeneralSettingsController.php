@@ -101,7 +101,7 @@ class LbGeneralSettingsController extends Controller
        if ($model->load(Yii::$app->request->post())) {
             $model->govt_price=$_REQUEST['LbGeneralSettings']['govt_price'];
             $model->discount=$_REQUEST['LbGeneralSettings']['discount'];
-            $model->customer_price=$_REQUEST['LbGeneralSettings']['customer_price'];
+            $model->customer_price=$_REQUEST['LbGeneralSettings']['govt_price'] - $_REQUEST['LbGeneralSettings']['discount'];
             
             if ($model->save(false)) {
             $cl=\common\models\LbClients::find()->where(['status' => 1])->all();
@@ -144,7 +144,12 @@ class LbGeneralSettingsController extends Controller
             if ($model->save(false)) {
              $cl=\common\models\LbClients::find()->where(['status' => 1])->all();
                 foreach($cl as $cls){
+                    $exs=\common\models\LbClientMonthlyPrice::find()->where(['client_id' => $cls->id,'month'=>$model->month,'year'=>$model->year])->all();
+                    if(count($exs) >0){
+                      $lbcp= \common\models\LbClientMonthlyPrice::find()->where(['client_id' => $cls->id,'month'=>$model->month,'year'=>$model->year])->one(); 
+                    }else{
                 $lbcp=new \common\models\LbClientMonthlyPrice();
+                    }
                 $lbcp->client_id        =$cls->id;
                 $lbcp->discount         =$cls->discount;
                 $lbcp->govt_price       =$model->govt_price;

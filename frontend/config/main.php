@@ -244,6 +244,8 @@ return [
                 'site/create-user' => 'site/create-user',
                 'clients/login' => 'clients/login',
                 'areamanager/calibreport' => 'areamanager/calibreport',
+                'supervisor/tankerfilling' => 'supervisor/tankerfilling',    
+                'supervisor/get-tanker' => 'supervisor/get-tanker',    
             ]
         ],
         'mailer ' => [

@@ -67,7 +67,7 @@ use yii\grid\GridView;
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
                                 <?php
-                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->where(['in', 'id', $station_list])->all(), 'id', 'station_name'), ['prompt' => 'Choos a Station', 'class' => 'form-control']);
+                                echo $form->field($model, 'station_id')->dropDownList(ArrayHelper::map(\common\models\LbStation::find()->where(['in', 'id', $station_list])->all(), 'id', 'station_name'), ['prompt' => 'Choose Station', 'class' => 'form-control']);
                                 ?>
 
                             </div>
@@ -99,13 +99,13 @@ use yii\grid\GridView;
 
             <div class="col-lg-12 col-xl-12 mb-3">
                 <div class="card h-lg-100">
-                    <div
+                    
+                        <?php if (isset($_GET) && $_GET != NULL) { ?>
+<div
                         class="card-header bg-light d-flex justify-content-between align-items-center border-bottom-0">
                         <h4> Transaction Report</h4>
                     </div>
                     <div class="card-body pb-0">
-                        <?php if (isset($_GET) && $_GET != NULL) { ?>
-
                             <?=
                             GridView::widget([
                                 'dataProvider' => $dataProvider,
@@ -187,9 +187,9 @@ use yii\grid\GridView;
                                 ],
                             ]);
                             ?>
-
+ </div>
                         <?php } ?>
-                    </div>
+                   
                 </div>
             </div>
 

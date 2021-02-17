@@ -21,7 +21,8 @@
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/addstoperator"><i class="fa fa-male"></i> <span>Add Station Operator</span> </a></li>
 			<!--<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/assignstation"><i class="icon-material-outline-description"></i> <span> Assign Station </span> </a> </li>-->
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/addtnoperator"><i class="fa fa-male"></i> <span>Add Tanker Operator</span> </a></li>
-			<!--<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/assigntanker"><i class="icon-material-outline-description"></i> <span> Assign Tanker </span> </a> </li>-->
+			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankerfilling"><i class="icon-material-outline-description"></i> <span> Tanker Filling </span> </a> </li>
+                        <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/tankerfillingreport"><i class="icon-material-outline-description"></i> <span> Tanker Filling Report</span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/stockrequest"><i class="fa fa-male"></i> <span>Stock Request</span> </a></li>
 			<li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/physicalstockentry"><i class="icon-material-outline-description"></i> <span>Physical Stock Entry </span> </a> </li>
                         <li><a href="<?= Yii::$app->request->baseUrl; ?>/supervisor/supplierstockentry"><i class="fa fa-male"></i> <span>Supplier Stock Entry</span> </a></li>
