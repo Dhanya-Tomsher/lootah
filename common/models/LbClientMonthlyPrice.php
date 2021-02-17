@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "lb_client_monthly_price".
@@ -72,5 +74,28 @@ class LbClientMonthlyPrice extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(LbClients::className(), ['id' => 'client_id']);
+    }
+    public function searchprice($params) {
+        $query = LbClientMonthlyPrice::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'status' => 1,
+        ]);     
+        $query->andFilterWhere([
+            'client_id' => $this->client_id,
+        ]);
+        $query->andFilterWhere([
+            'month' => $this->month,
+        ]);
+        $query->andFilterWhere([
+            'year' => $this->year,
+        ]);
+        return $dataProvider;
     }
 }

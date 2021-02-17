@@ -18,7 +18,7 @@ class LbClientMonthlyPriceSearch extends LbClientMonthlyPrice
     public function rules()
     {
         return [
-            [['id', 'client_id', 'month', 'status'], 'integer'],
+            [['id', 'client_id', 'month','year', 'status'], 'integer'],
             [['govt_price', 'discount', 'customer_price', 'year'], 'number'],
             [['created_at', 'updated_at', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order'], 'safe'],
         ];
