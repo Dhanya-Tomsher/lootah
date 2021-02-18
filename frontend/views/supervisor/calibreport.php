@@ -62,10 +62,10 @@ use yii\grid\GridView;
                                 ?>
                             </div>
                             <div class="col-xl-4 col-md-4 mb-2">
-                                <?= $form->field($model, 'date_caliberation')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class'])->label('Cleaning From'); ?>
+                                <?= $form->field($model, 'date_caliberation')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class'])->label('Calibration From'); ?>
                             </div>
                            <div class="col-xl-4 col-md-4 mb-2">
-                                <?= $form->field($model, 'created_at')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class'])->label('Cleaning To'); ?>
+                                <?= $form->field($model, 'created_at')->textInput(['maxlength' => 255, 'type' => 'datetime-local', 'class' => 'form-control your class'])->label('Calibration To'); ?>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-6 col-xs-12 mt-4 mb-2">
                                 <div class="section-headline margin-top-25 margin-bottom-12">

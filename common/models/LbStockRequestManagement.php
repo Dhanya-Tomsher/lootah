@@ -42,7 +42,7 @@ class LbStockRequestManagement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['request_id', 'supplier_id','station_id', 'assigned_by', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
+            [['request_id', 'supplier_id','station_id', 'assigned_by','supply_month','supply_year', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
             [['quantity_litre', 'quantity_gallon'], 'number'],
             [['date_entry', 'supply_date', 'created_at', 'updated_at'], 'safe'],
             [['supply_time'], 'string', 'max' => 45],
@@ -91,7 +91,42 @@ class LbStockRequestManagement extends \yii\db\ActiveRecord
             'supply_status' => 1,
         ]);
         
-         if (isset($this->supply_date) && $this->supply_date != "") {
+        $query->andFilterWhere([
+            'supply_month' => $this->supply_month,
+        ]);
+        $query->andFilterWhere([
+            'supply_year' => $this->supply_year,
+        ]);
+        
+
+        $query->andFilterWhere([
+            'station_id' => $this->station_id,
+        ]);
+       $query->andFilterWhere([
+            'supplier_id' => $this->supplier_id,
+        ]);
+
+        return $dataProvider;
+    }
+    
+    
+    public function searchsup($params) {
+        $query = LbStockRequestManagement::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->FilterWhere([
+            'supply_status' => 1,
+        ]);
+        
+        if (isset($this->supply_date) && $this->supply_date != "") {
             $date_from = date('Y-m-d', strtotime($this->supply_date));
             $query->andWhere("supply_date >=  '" . $date_from . "'");
         }
@@ -110,6 +145,7 @@ class LbStockRequestManagement extends \yii\db\ActiveRecord
 
         return $dataProvider;
     }
+    
     public function getStation()
     {
         return $this->hasOne(LbStation::className(), ['id' => 'station_id']);

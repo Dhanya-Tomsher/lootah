@@ -64,18 +64,18 @@ use yii\grid\GridView;
                                     </div>
                                 <select name="LbClientMonthlyPrice[month]" value="<?= $model->month;?>" class="form-control" id="lbclientmonthlyprice-month">
                                     <option value="">Select Month</option>
-                                    <option value="1" <?php if($model->month == '1'){echo "Selected";} ?>>January</option>
-                                    <option value="2" <?php if($model->month == '2'){echo "Selected";} ?>>February</option>
-                                    <option value="3" <?php if($model->month == '3'){echo "Selected";} ?>>March</option>
-                                    <option value="4" <?php if($model->month == '4'){echo "Selected";} ?>>April</option>
-                                    <option value="5" <?php if($model->month == '5'){echo "Selected";} ?>>May</option>
-                                    <option value="6" <?php if($model->month == '6'){echo "Selected";} ?>>June</option>
-                                    <option value="7" <?php if($model->month == '7'){echo "Selected";} ?>>July</option>
-                                    <option value="8" <?php if($model->month == '8'){echo "Selected";} ?>>August</option>
-                                    <option value="9" <?php if($model->month == '9'){echo "Selected";} ?>>September</option>
-                                    <option value="10" <?php if($model->month == '10'){echo "Selected";} ?>>October</option>
-                                    <option value="11" <?php if($model->month == '11'){echo "Selected";} ?>>November</option>
-                                    <option value="12" <?php if($model->month == '12'){echo "Selected";} ?>>December</option>
+                                    <option value="1" <?php if($model->month == '1'){echo "selected";} ?>>January</option>
+                                    <option value="2" <?php if($model->month == '2'){echo "selected";} ?>>February</option>
+                                    <option value="3" <?php if($model->month == '3'){echo "selected";} ?>>March</option>
+                                    <option value="4" <?php if($model->month == '4'){echo "selected";} ?>>April</option>
+                                    <option value="5" <?php if($model->month == '5'){echo "selected";} ?>>May</option>
+                                    <option value="6" <?php if($model->month == '6'){echo "selected";} ?>>June</option>
+                                    <option value="7" <?php if($model->month == '7'){echo "selected";} ?>>July</option>
+                                    <option value="8" <?php if($model->month == '8'){echo "selected";} ?>>August</option>
+                                    <option value="9" <?php if($model->month == '9'){echo "selected";} ?>>September</option>
+                                    <option value="10" <?php if($model->month == '10'){echo "selected";} ?>>October</option>
+                                    <option value="11" <?php if($model->month == '11'){echo "selected";} ?>>November</option>
+                                    <option value="12" <?php if($model->month == '12'){echo "selected";} ?>>December</option>
                                     </select>
                                 </div>
                             <div class="col-xl-4 col-md-4 mb-2">

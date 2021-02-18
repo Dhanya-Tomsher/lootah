@@ -482,8 +482,7 @@ class SupervisorController extends \yii\web\Controller {
                 $objPHPExcel->getActiveSheet()
                         ->setCellValue('A' . $i, $i - 1)
                         ->setCellValue('B' . $i, $mode->station->station_name != '' ? $mode->station->station_name : '')
-                        ->setCellValue('C' . $i, $mode->supplier->name != '' ? $mode->supplier->name : '')
-                        ->setCellValue('D' . $i, $mode->date_cleaning);
+                        ->setCellValue('C' . $i, $mode->date_cleaning);
                 $i++;
             }
 
@@ -1168,6 +1167,7 @@ class SupervisorController extends \yii\web\Controller {
                 $nmodel->current_balance_gallon=$prebalgal - $recgal;
                 $nmodel->current_balance_litre=$preballit - $reclit;
                 $nmodel->transaction_type=2;
+                $nmodel->station_id=$model->station_id;
                 $nmodel->save(false);
             }
             return $this->render('supplierstockentry');

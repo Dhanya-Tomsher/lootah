@@ -6,12 +6,18 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\file\FileInput;
-use dosamigos\ckeditor\CKEditor;
 use yii\grid\GridView;
+
 ?>
-<?= $this->render('_headersection') ?>
-<?= $this->render('_leftmenu') ?>
+<?php
+//var_dump($condition);exit;
+        if ($condition != '') {
+            $url = "?" . $condition;
+        } else {
+            $url = "";
+        }
+        ?>
+<div class = "right_col" role = "main" style = "min-height: 675px;">
 <div class="box-gradient-home"></div>
 <div class="page-content">
     <div class="page-content-inner">
@@ -141,6 +147,7 @@ use yii\grid\GridView;
 
 </div>
 
+</div>
 <style>
     .bgd{
         background: #d7b668;
@@ -154,7 +161,7 @@ use yii\grid\GridView;
         var dep = $('#lbtankerfilling-station_id').val();
          $.ajax({
                 type: "POST",
-                url: baseurl + "/supervisor/get-tanker",
+                url: baseurl + "/../supervisor/get-tanker",
                 data: {dept_id: dep}
              }).done(function (data) {
                     $('#lbtankerfilling-tanker_id').html(data);

@@ -18,7 +18,7 @@ class LbStockRequestManagementSearch extends LbStockRequestManagement
     public function rules()
     {
         return [
-            [['id', 'request_id', 'supplier_id', 'assigned_by', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
+            [['id', 'request_id', 'supplier_id', 'assigned_by','supply_month','supply_year', 'created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
             [['quantity_litre', 'quantity_gallon'], 'number'],
             [['date_entry', 'supply_date', 'supply_time', 'created_at', 'updated_at'], 'safe'],
         ];
@@ -67,6 +67,8 @@ class LbStockRequestManagementSearch extends LbStockRequestManagement
             'quantity_gallon' => $this->quantity_gallon,
             'date_entry' => $this->date_entry,
             'supply_date' => $this->supply_date,
+            'supply_month' => $this->supply_month,
+            'supply_year' => $this->supply_year,
             'assigned_by' => $this->assigned_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

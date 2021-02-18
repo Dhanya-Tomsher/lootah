@@ -595,7 +595,7 @@ class AreamanagerController extends \yii\web\Controller {
         if (Yii::$app->session->get('armid')) {
             date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\LbStockRequestManagement();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider = $searchModel->searchsup(Yii::$app->request->queryParams);
             $exp_url_refer = explode('?', \yii\helpers\Url::current());
             if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
                 $condition2 = $exp_url_refer[1];
@@ -609,7 +609,74 @@ class AreamanagerController extends \yii\web\Controller {
             return $this->render('index');
         }
     }
+        public function actionExportsupplierreport() {
+        $searchModel = new \common\models\LbBookingToSupplier();
+        $dataProvider = $searchModel->searchsup(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        $fields[] = ['key' => 'id', 'title' => 'id'];
+        $fields[] = ['key' => 'supplier_id', 'title' => 'Supplier Name'];
+        $fields[] = ['key' => 'booked_quantity_gallon', 'title' => 'Booked Quantity'];
+        $fields[] = ['key' => 'previous_balance_gallon', 'title' => 'Previous Balance'];
+        $fields[] = ['key' => 'current_balance_gallon', 'title' => 'Current Balance'];
+        $fields[] = ['key' => 'booking_date', 'title' => 'Booking Date'];
 
+//Rate/LTR Inclusive VAT 	Rate/LTR Exclusive VAT 	 Value Excluding VAT 	 VAT Payable Amount 05 % 	  Value Including VAT (AED)
+
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'SN.')
+                ->setCellValue('B1', 'Booking Date')
+                ->setCellValue('C1', 'Supplier Name')
+                ->setCellValue('D1', 'Booked Quantity')
+                ->setCellValue('E1', 'Previous Balance')
+                ->setCellValue('F1', 'Current Balance');
+
+
+        if ($model != NULL) {
+            $i = 2;
+            foreach ($model as $mode) {
+                $get_client = \common\models\LbSupplier::find()->where(['id' => $mode->supplier_id])->one();
+
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, $i - 1)
+                        ->setCellValue('B' . $i, $mode->booking_date)
+                        ->setCellValue('C' . $i, $mode->supplier->name != '' ? $mode->supplier->name : '')
+                        ->setCellValue('D' . $i, $mode->booked_quantity_gallon)
+                        ->setCellValue('E' . $i, $mode->previous_balance_gallon)
+                        ->setCellValue('F' . $i, $mode->current_balance_gallon);
+                $i++;
+            }
+            
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle('Supplier_booking' . date('Ymd'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Supplier_booking_' . date('Ymd') . '.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
     public function actionStationreport() {
         if (Yii::$app->session->get('armid')) {
             //$model = new \common\models\Transaction();

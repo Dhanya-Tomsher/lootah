@@ -36,7 +36,7 @@ class LbTankCaliberation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','date_caliberation'], 'safe'],
             [['created_by', 'updated_by', 'created_by_type', 'updated_by_type', 'sort_order', 'status'], 'integer'],
             [['station_id', 'physical_quantity'], 'string', 'max' => 45],
         ];

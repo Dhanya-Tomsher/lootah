@@ -103,11 +103,11 @@
                     <li><a href="<?= Yii::$app->request->baseUrl . '/site/pricelist' ?>"><i class="fa fa-user"></i>Price List</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/site/station-purchase-report' ?>"><i class="fa fa-user"></i>Station Supply Report</a></li>
                     <li><a href="<?= Yii::$app->request->baseUrl . '/site/stock-consumption-report' ?>"><i class="fa fa-user"></i>Stock and Consumption Report</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/booked-quantity-report' ?>"><i class="fa fa-user"></i>Booked Quantity Report</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/supplier-report' ?>"><i class="fa fa-user"></i>Supplier Report</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/tank-cleaning-report' ?>"><i class="fa fa-user"></i>Tank Cleaning Report</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/tank-calibration-report' ?>"><i class="fa fa-user"></i>Tank Calibration Report</a></li>
-                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/tanker-report' ?>"><i class="fa fa-user"></i>Tanker Report</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/bookedqtyreport' ?>"><i class="fa fa-user"></i>Booked Quantity Report</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/supplierreport' ?>"><i class="fa fa-user"></i>Supply Report</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/tankcleaningreport' ?>"><i class="fa fa-user"></i>Tank Cleaning Report</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/calibreport' ?>"><i class="fa fa-user"></i>Tank Calibration Report</a></li>
+                    <li><a href="<?= Yii::$app->request->baseUrl . '/site/tankerfillingreport' ?>"><i class="fa fa-user"></i>Tanker Filling Report</a></li>
                 </ul>
             </li>
 
