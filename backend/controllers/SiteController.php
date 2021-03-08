@@ -18,30 +18,7 @@ class SiteController extends Controller {
     /**
      * @inheritdoc
      */
-  /*  public function behaviors() {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index', 'dashboard'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }*/
+  
     
     public function behaviors() {
     return [
@@ -86,7 +63,8 @@ class SiteController extends Controller {
     public function actionDashboard() {
         return $this->render('dashboard');
     }
-public function actionGetVeh() {
+    
+    public function actionGetVeh() {
         if (!empty($_POST["dept_id"])) {
             $dept = $_POST["dept_id"];
             $qry = \common\models\LbClientVehicles::find()->where(['client_id' => $dept])->all();
@@ -100,6 +78,90 @@ public function actionGetVeh() {
             }
         }
     }
+    public function actionStockConsumptionReport() {
+        date_default_timezone_set('Asia/Dubai');
+            $searchModel = new \common\models\LbStationDailyDataForVerificationSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $exp_url_refer = explode('?', \yii\helpers\Url::current());
+
+            if (isset($exp_url_refer[1]) && $exp_url_refer[1] != '') {
+                $condition = $exp_url_refer[1];
+            } else {
+                $condition = "";
+            }
+            return $this->render('stock_consumption', ['model' => $searchModel, 'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'condition' => $condition]);
+        //return $this->render('client_report');
+    }
+    /////////////////Not Complete
+    public function actionExportstockcon() {
+        $searchModel = new \common\models\LbStationDailyDataForVerificationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = $dataProvider->models;
+        
+        $fields[] = ['key' => 'date_entry', 'title' => 'Date of entry'];
+        $fields[] = ['key' => 'station_id', 'title' => 'Station'];
+        $fields[] = ['key' => 'PlateNo', 'title' => 'Opening Balance'];
+        $fields[] = ['key' => 'Accumulator', 'title' => 'Filling'];
+        $fields[] = ['key' => 'Volume', 'title' => 'Consumption'];
+        $fields[] = ['key' => 'Volume', 'title' => 'Ending Balance'];
+        
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+// Add some data
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'Date of entry')
+                ->setCellValue('B1', 'Station')
+                ->setCellValue('C1', 'Opening Balance')
+                ->setCellValue('D1', 'Filling')
+                ->setCellValue('E1', 'Consumtion')
+                ->setCellValue('F1', 'Ending Balance');
+        if ($model != NULL) {
+            $i = 2;
+            $rt=0;
+            foreach ($model as $mode) {
+                
+                
+                $objPHPExcel->getActiveSheet()
+                        ->setCellValue('A' . $i, date('d-M-Y',strtotime($mode->date_entry)))
+                        ->setCellValue('B' . $i, $mode->stock_by_calculation_gallon)
+                        ->setCellValue('C' . $i, $mode->stock_by_calculation_litre)
+                        ->setCellValue('D' . $i, $mode->cost_per_gallon)
+                        ->setCellValue('E' . $i, $mode->closing_stock_gallon)
+                        ->setCellValue('F' . $i, $mode->closing_stock_litre);
+                $i++;
+            }
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->setTitle($client .'-'. date('M').'-'.date('Y'));
+            $objPHPExcel->setActiveSheetIndex(0);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+           // header('Content-Disposition: attachment;filename="'. $client ."-". date('Ymd') . '.xlsx"');
+            header('Content-Disposition: attachment;filename="' . $client ."-". date('M')."-".date('Y').'.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::PCLZIP);
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+            $objWriter->save('php://output');
+        } else {
+            Yii::$app->session->setFlash('error', "No data available for export.");
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        exit;
+    }
+   
     public function actionClientReport() {
         date_default_timezone_set('Asia/Dubai');
             $searchModel = new \common\models\TransactionSearch();
@@ -116,12 +178,6 @@ public function actionGetVeh() {
                         'condition' => $condition]);
         //return $this->render('client_report');
     }
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    
     
     
     public function actionExportclient() {

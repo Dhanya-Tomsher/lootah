@@ -1215,7 +1215,9 @@ public function actionSupplierreport() {
     public function actionClosingdata() {
         return $this->render('closingdata');
     }
-
+public function actionTankerClosingdata() {
+        return $this->render('tankerclosingdata');
+    }
     public function actionTankcleaning() {
         if (Yii::$app->session->get('supid')) {
             $model = new \common\models\LbTankCleaningReport();
